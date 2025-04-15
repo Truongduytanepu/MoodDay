@@ -17,7 +17,7 @@ pod install
 
 # API:
 
-https://api-...
+https://api-fan-noise.kuemiin.com/api-docs/#/Sound/data-list
 
 # SRS:
 
@@ -27,7 +27,7 @@ https://docs.google.com/...
 
 https://docs.google.com/spreadsheets/d/1S0UFJW07BEe9Ouu5LhjvJFpCPpUClRWllzfoomtI6eA/edit?gid=0#gid=0
 
-# Design application:
+# Design figma:
 
 https://www.figma.com/design/iMLrbG9amZFrb3r9soffh6/Fan-Noises?node-id=0-1&t=4wYJbkvVVmcxKbfX-1
 
