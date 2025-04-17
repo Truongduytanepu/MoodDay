@@ -15,17 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        config()
-        configFirebase()
-        setRootController()
-        configRealm()
-        configMonitorNetwork()
-        
-        SVProgressHUD.setDefaultMaskType(.black)
+        self.configUIView()
+        self.configDI()
+        self.configLogging()
+        self.configFirebase()
+        self.setRootController()
+        self.configRealm()
+        self.configMonitorNetwork()
+        self.configSVProgressHUD()
         return true
     }
     
-    func setRootController() {
+    private func setRootController() {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
         
@@ -37,22 +38,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         coordinator.start()
     }
     
-    func configFirebase() {
+    private func configFirebase() {
         FirebaseApp.configure()
     }
     
-    func config() {
+    private func configUIView() {
         UIView.appearance().isExclusiveTouch = true
-        
+    }
+    
+    private func configLogging() {
         Logging.addLogEngine(ConsoleLogEngine())
         Logging.addLogEngine(CrashlyticsLogEngine())
     }
     
-    func configRealm() {
+    private func configRealm() {
         RealmManager.configRealm()
     }
     
-    func configMonitorNetwork() {
+    private func configMonitorNetwork() {
         MonitorNetwork.shared.configMonitorNetwork()
+    }
+    
+    private func configDI() {
+        DIContainer.shared.register()
+    }
+    
+    private func configSVProgressHUD() {
+        SVProgressHUD.setDefaultMaskType(.black)
     }
 }

@@ -12,10 +12,6 @@ class DIContainer {
     static let shared = DIContainer()
     private let container = Container()
 
-    init() {
-        register()
-    }
-
     func register() {
         PresenterRegisterer.registerDependencyForPresenters(container: container)
         DaoRegisterer.registerDependencyForDaos(container: container)
