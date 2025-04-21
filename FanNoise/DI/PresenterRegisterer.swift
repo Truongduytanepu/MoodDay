@@ -18,5 +18,11 @@ class PresenterRegisterer {
         container.register(HomePresenter.self) { (_, view: HomeView) -> HomePresenter in
             return HomePresenterImpl(view: view)
         }
+        
+        container.register(IntroPresenter.self) { (_, view: IntroView) -> IntroPresenter in
+            return IntroPresenterImpl(view: view)
+        }
+        
+        
     }
 }

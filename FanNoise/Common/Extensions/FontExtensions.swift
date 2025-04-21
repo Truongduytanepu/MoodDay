@@ -40,4 +40,6 @@ extension UIFont {
     private static func semiboldFont(withSize size: CGFloat) -> UIFont {
         return UIFont.init(name: "TitilliumWeb-SemiBold", size: size)!
     }
+    
+    
 }

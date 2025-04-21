@@ -80,16 +80,22 @@
 		71A561952DA8FFB9007E8BE3 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A561902DA8FFB9007E8BE3 /* BaseNavigationController.swift */; };
 		71A561962DA8FFB9007E8BE3 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A561912DA8FFB9007E8BE3 /* BaseView.swift */; };
 		71A561972DA8FFB9007E8BE3 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A561922DA8FFB9007E8BE3 /* Coordinator.swift */; };
-		71A561A02DA8FFF9007E8BE3 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A5619B2DA8FFF9007E8BE3 /* SplashCoordinator.swift */; };
-		71A561A12DA8FFF9007E8BE3 /* SplashVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71A5619C2DA8FFF9007E8BE3 /* SplashVC.xib */; };
-		71A561A22DA8FFF9007E8BE3 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A5619D2DA8FFF9007E8BE3 /* SplashPresenter.swift */; };
-		71A561A32DA8FFF9007E8BE3 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A5619E2DA8FFF9007E8BE3 /* SplashView.swift */; };
-		71A561A42DA8FFF9007E8BE3 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A5619F2DA8FFF9007E8BE3 /* SplashVC.swift */; };
-		71A561AB2DA90005007E8BE3 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A561A62DA90005007E8BE3 /* HomeCoordinator.swift */; };
-		71A561AC2DA90005007E8BE3 /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71A561A72DA90005007E8BE3 /* HomeVC.xib */; };
-		71A561AD2DA90005007E8BE3 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A561A82DA90005007E8BE3 /* HomePresenter.swift */; };
-		71A561AE2DA90005007E8BE3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A561A92DA90005007E8BE3 /* HomeView.swift */; };
-		71A561AF2DA90005007E8BE3 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A561AA2DA90005007E8BE3 /* HomeVC.swift */; };
+		8736A3E42DB5F2B6009A07A2 /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3DF2DB5F2B6009A07A2 /* SplashCoordinator.swift */; };
+		8736A3E52DB5F2B6009A07A2 /* SplashVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8736A3E02DB5F2B6009A07A2 /* SplashVC.xib */; };
+		8736A3E62DB5F2B6009A07A2 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3E12DB5F2B6009A07A2 /* SplashPresenter.swift */; };
+		8736A3E72DB5F2B6009A07A2 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3E22DB5F2B6009A07A2 /* SplashView.swift */; };
+		8736A3E82DB5F2B6009A07A2 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3E32DB5F2B6009A07A2 /* SplashVC.swift */; };
+		8736A3EF2DB5F743009A07A2 /* IntroCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3EA2DB5F743009A07A2 /* IntroCoordinator.swift */; };
+		8736A3F02DB5F743009A07A2 /* IntroVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8736A3EB2DB5F743009A07A2 /* IntroVC.xib */; };
+		8736A3F12DB5F743009A07A2 /* IntroPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3EC2DB5F743009A07A2 /* IntroPresenter.swift */; };
+		8736A3F22DB5F743009A07A2 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3ED2DB5F743009A07A2 /* IntroView.swift */; };
+		8736A3F32DB5F743009A07A2 /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3EE2DB5F743009A07A2 /* IntroVC.swift */; };
+		8736A3FA2DB60039009A07A2 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3F52DB60038009A07A2 /* HomePresenter.swift */; };
+		8736A3FB2DB60039009A07A2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3F62DB60039009A07A2 /* HomeView.swift */; };
+		8736A3FC2DB60039009A07A2 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3F72DB60039009A07A2 /* HomeVC.swift */; };
+		8736A3FD2DB60039009A07A2 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3F82DB60039009A07A2 /* HomeCoordinator.swift */; };
+		8736A3FE2DB60039009A07A2 /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8736A3F92DB60039009A07A2 /* HomeVC.xib */; };
+		8753DA152DB62ABF00D412D0 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8753DA142DB62ABF00D412D0 /* AppFont.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -167,16 +173,22 @@
 		71A561902DA8FFB9007E8BE3 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		71A561912DA8FFB9007E8BE3 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		71A561922DA8FFB9007E8BE3 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		71A5619B2DA8FFF9007E8BE3 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
-		71A5619C2DA8FFF9007E8BE3 /* SplashVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashVC.xib; sourceTree = "<group>"; };
-		71A5619D2DA8FFF9007E8BE3 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
-		71A5619E2DA8FFF9007E8BE3 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
-		71A5619F2DA8FFF9007E8BE3 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
-		71A561A62DA90005007E8BE3 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
-		71A561A72DA90005007E8BE3 /* HomeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeVC.xib; sourceTree = "<group>"; };
-		71A561A82DA90005007E8BE3 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
-		71A561A92DA90005007E8BE3 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		71A561AA2DA90005007E8BE3 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		8736A3DF2DB5F2B6009A07A2 /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
+		8736A3E02DB5F2B6009A07A2 /* SplashVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashVC.xib; sourceTree = "<group>"; };
+		8736A3E12DB5F2B6009A07A2 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
+		8736A3E22DB5F2B6009A07A2 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		8736A3E32DB5F2B6009A07A2 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
+		8736A3EA2DB5F743009A07A2 /* IntroCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroCoordinator.swift; sourceTree = "<group>"; };
+		8736A3EB2DB5F743009A07A2 /* IntroVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntroVC.xib; sourceTree = "<group>"; };
+		8736A3EC2DB5F743009A07A2 /* IntroPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPresenter.swift; sourceTree = "<group>"; };
+		8736A3ED2DB5F743009A07A2 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
+		8736A3EE2DB5F743009A07A2 /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
+		8736A3F52DB60038009A07A2 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		8736A3F62DB60039009A07A2 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		8736A3F72DB60039009A07A2 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		8736A3F82DB60039009A07A2 /* HomeCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		8736A3F92DB60039009A07A2 /* HomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeVC.xib; sourceTree = "<group>"; };
+		8753DA142DB62ABF00D412D0 /* AppFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
 		9E53ED02C5DF51B3FCC2CD77 /* Pods-FanNoise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanNoise.debug.xcconfig"; path = "Target Support Files/Pods-FanNoise/Pods-FanNoise.debug.xcconfig"; sourceTree = "<group>"; };
 		D96D8C7C884D88669CBD62AC /* Pods-FanNoise.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanNoise.release.xcconfig"; path = "Target Support Files/Pods-FanNoise/Pods-FanNoise.release.xcconfig"; sourceTree = "<group>"; };
 		DB40C219C19C92489D6358C5 /* Pods_FanNoise.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanNoise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,6 +242,7 @@
 		71A560D22DA8F89F007E8BE3 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				8753DA142DB62ABF00D412D0 /* AppFont.swift */,
 				71A560BE2DA8F812007E8BE3 /* AppDelegate.swift */,
 				71A560C22DA8F812007E8BE3 /* ViewController.swift */,
 				71A560C72DA8F813007E8BE3 /* Assets.xcassets */,
@@ -387,9 +400,9 @@
 			isa = PBXGroup;
 			children = (
 				71A561732DA8FF09007E8BE3 /* MPLUS2-Bold.ttf */,
-				71A561742DA8FF09007E8BE3 /* MPLUS2-Thin.ttf */,
 				71A561752DA8FF09007E8BE3 /* MPLUS2-ExtraBold.ttf */,
 				71A561762DA8FF09007E8BE3 /* MPLUS2-Regular.ttf */,
+				71A561742DA8FF09007E8BE3 /* MPLUS2-Thin.ttf */,
 				71A561772DA8FF09007E8BE3 /* MPLUS2-Light.ttf */,
 				71A561782DA8FF09007E8BE3 /* MPLUS2-SemiBold.ttf */,
 				71A561792DA8FF09007E8BE3 /* MPLUS2-Black.ttf */,
@@ -432,32 +445,45 @@
 		71A561982DA8FFC5007E8BE3 /* MVP-C */ = {
 			isa = PBXGroup;
 			children = (
-				71A561992DA8FFD2007E8BE3 /* Splash */,
-				71A5619A2DA8FFD6007E8BE3 /* Home */,
+				8736A3F42DB5FFF5009A07A2 /* Home */,
+				8736A3E92DB5F72B009A07A2 /* Intro */,
+				8736A3DE2DB5F2A0009A07A2 /* Splash */,
 			);
 			path = "MVP-C";
 			sourceTree = "<group>";
 		};
-		71A561992DA8FFD2007E8BE3 /* Splash */ = {
+		8736A3DE2DB5F2A0009A07A2 /* Splash */ = {
 			isa = PBXGroup;
 			children = (
-				71A5619B2DA8FFF9007E8BE3 /* SplashCoordinator.swift */,
-				71A5619C2DA8FFF9007E8BE3 /* SplashVC.xib */,
-				71A5619D2DA8FFF9007E8BE3 /* SplashPresenter.swift */,
-				71A5619E2DA8FFF9007E8BE3 /* SplashView.swift */,
-				71A5619F2DA8FFF9007E8BE3 /* SplashVC.swift */,
+				8736A3DF2DB5F2B6009A07A2 /* SplashCoordinator.swift */,
+				8736A3E02DB5F2B6009A07A2 /* SplashVC.xib */,
+				8736A3E12DB5F2B6009A07A2 /* SplashPresenter.swift */,
+				8736A3E22DB5F2B6009A07A2 /* SplashView.swift */,
+				8736A3E32DB5F2B6009A07A2 /* SplashVC.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
 		};
-		71A5619A2DA8FFD6007E8BE3 /* Home */ = {
+		8736A3E92DB5F72B009A07A2 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
-				71A561A62DA90005007E8BE3 /* HomeCoordinator.swift */,
-				71A561A72DA90005007E8BE3 /* HomeVC.xib */,
-				71A561A82DA90005007E8BE3 /* HomePresenter.swift */,
-				71A561A92DA90005007E8BE3 /* HomeView.swift */,
-				71A561AA2DA90005007E8BE3 /* HomeVC.swift */,
+				8736A3EA2DB5F743009A07A2 /* IntroCoordinator.swift */,
+				8736A3EB2DB5F743009A07A2 /* IntroVC.xib */,
+				8736A3EC2DB5F743009A07A2 /* IntroPresenter.swift */,
+				8736A3ED2DB5F743009A07A2 /* IntroView.swift */,
+				8736A3EE2DB5F743009A07A2 /* IntroVC.swift */,
+			);
+			path = Intro;
+			sourceTree = "<group>";
+		};
+		8736A3F42DB5FFF5009A07A2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8736A3F82DB60039009A07A2 /* HomeCoordinator.swift */,
+				8736A3F52DB60038009A07A2 /* HomePresenter.swift */,
+				8736A3F72DB60039009A07A2 /* HomeVC.swift */,
+				8736A3F92DB60039009A07A2 /* HomeVC.xib */,
+				8736A3F62DB60039009A07A2 /* HomeView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -493,6 +519,7 @@
 				B16B68C3A8614AC17FE229B0 /* [CP] Embed Pods Frameworks */,
 				71A560D62DA8FB7B007E8BE3 /* Firebase */,
 				71A560D72DA8FBA6007E8BE3 /* SwiftLint */,
+				87D107102DB22D1200E5E358 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -542,19 +569,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				71A5617F2DA8FF09007E8BE3 /* MPLUS2-Regular.ttf in Resources */,
-				71A561A12DA8FFF9007E8BE3 /* SplashVC.xib in Resources */,
 				71A560CB2DA8F813007E8BE3 /* LaunchScreen.storyboard in Resources */,
 				71A5617E2DA8FF09007E8BE3 /* MPLUS2-ExtraBold.ttf in Resources */,
 				71A560C82DA8F813007E8BE3 /* Assets.xcassets in Resources */,
-				71A561AC2DA90005007E8BE3 /* HomeVC.xib in Resources */,
 				71A560D42DA8FA5E007E8BE3 /* GoogleService-Info.plist in Resources */,
 				71A5617C2DA8FF09007E8BE3 /* MPLUS2-Bold.ttf in Resources */,
 				71A561822DA8FF09007E8BE3 /* MPLUS2-Black.ttf in Resources */,
+				8736A3FE2DB60039009A07A2 /* HomeVC.xib in Resources */,
 				71A561832DA8FF09007E8BE3 /* MPLUS2-ExtraLight.ttf in Resources */,
+				8736A3E52DB5F2B6009A07A2 /* SplashVC.xib in Resources */,
 				71A561802DA8FF09007E8BE3 /* MPLUS2-Light.ttf in Resources */,
 				71A5617D2DA8FF09007E8BE3 /* MPLUS2-Thin.ttf in Resources */,
 				71A561842DA8FF09007E8BE3 /* MPLUS2-Medium.ttf in Resources */,
 				71A561812DA8FF09007E8BE3 /* MPLUS2-SemiBold.ttf in Resources */,
+				8736A3F02DB5F743009A07A2 /* IntroVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,6 +649,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" lint\n";
 		};
+		87D107102DB22D1200E5E358 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/upload-symbols\" -gsp \"${PROJECT_DIR}/#####/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
+		};
 		B16B68C3A8614AC17FE229B0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -658,47 +703,51 @@
 				71A560C32DA8F812007E8BE3 /* ViewController.swift in Sources */,
 				71A561562DA8FE8D007E8BE3 /* URLExtensions.swift in Sources */,
 				71A561932DA8FFB9007E8BE3 /* BaseVC.swift in Sources */,
-				71A561A32DA8FFF9007E8BE3 /* SplashView.swift in Sources */,
 				71A560BF2DA8F812007E8BE3 /* AppDelegate.swift in Sources */,
+				8736A3E42DB5F2B6009A07A2 /* SplashCoordinator.swift in Sources */,
 				71A5618A2DA8FF24007E8BE3 /* DaoRegisterer.swift in Sources */,
+				8736A3E72DB5F2B6009A07A2 /* SplashView.swift in Sources */,
 				71A561702DA8FE8D007E8BE3 /* TriangleView.swift in Sources */,
 				71A561612DA8FE8D007E8BE3 /* CalendarExtensions.swift in Sources */,
 				71A5614E2DA8FE8D007E8BE3 /* PHAssetExtension.swift in Sources */,
 				71A561952DA8FFB9007E8BE3 /* BaseNavigationController.swift in Sources */,
 				71A5613E2DA8FE8D007E8BE3 /* PreviewCameraView.swift in Sources */,
 				71A561322DA8FE8D007E8BE3 /* MonitorNetwork.swift in Sources */,
-				71A561A02DA8FFF9007E8BE3 /* SplashCoordinator.swift in Sources */,
-				71A561AD2DA90005007E8BE3 /* HomePresenter.swift in Sources */,
 				71A561442DA8FE8D007E8BE3 /* CLPlacemarkExtensions.swift in Sources */,
 				71A5614F2DA8FE8D007E8BE3 /* TimeIntervalExtensions.swift in Sources */,
+				8753DA152DB62ABF00D412D0 /* AppFont.swift in Sources */,
 				71A5615E2DA8FE8D007E8BE3 /* NSMutableData.swift in Sources */,
 				71A561362DA8FE8D007E8BE3 /* RealmManager.swift in Sources */,
 				71A5614A2DA8FE8D007E8BE3 /* FontExtensions.swift in Sources */,
-				71A561AB2DA90005007E8BE3 /* HomeCoordinator.swift in Sources */,
+				8736A3F12DB5F743009A07A2 /* IntroPresenter.swift in Sources */,
+				8736A3FD2DB60039009A07A2 /* HomeCoordinator.swift in Sources */,
+				8736A3F22DB5F743009A07A2 /* IntroView.swift in Sources */,
+				8736A3EF2DB5F743009A07A2 /* IntroCoordinator.swift in Sources */,
+				8736A3E82DB5F2B6009A07A2 /* SplashVC.swift in Sources */,
 				71A561962DA8FFB9007E8BE3 /* BaseView.swift in Sources */,
 				71A5612F2DA8FE8D007E8BE3 /* Logging.swift in Sources */,
 				71A5613B2DA8FE8D007E8BE3 /* VideoPlaySession.swift in Sources */,
+				8736A3FC2DB60039009A07A2 /* HomeVC.swift in Sources */,
 				71A560DD2DA8FE69007E8BE3 /* API.swift in Sources */,
 				71A5616A2DA8FE8D007E8BE3 /* DimableView.swift in Sources */,
 				71A5613C2DA8FE8D007E8BE3 /* Validator.swift in Sources */,
 				71A5614D2DA8FE8D007E8BE3 /* StringExtensions.swift in Sources */,
 				71A561492DA8FE8D007E8BE3 /* AVMutableCompositionExtensions.swift in Sources */,
-				71A561A22DA8FFF9007E8BE3 /* SplashPresenter.swift in Sources */,
 				71A561512DA8FE8D007E8BE3 /* ColorExtensions.swift in Sources */,
 				71A561652DA8FE8D007E8BE3 /* ExtendedInteractionView.swift in Sources */,
 				71A561592DA8FE8D007E8BE3 /* UIViewExtensions.swift in Sources */,
+				8736A3FB2DB60039009A07A2 /* HomeView.swift in Sources */,
 				71A561602DA8FE8D007E8BE3 /* CollectionViewExtensions.swift in Sources */,
 				71A560DA2DA8FE47007E8BE3 /* Config.swift in Sources */,
-				71A561AF2DA90005007E8BE3 /* HomeVC.swift in Sources */,
-				71A561AE2DA90005007E8BE3 /* HomeView.swift in Sources */,
 				71A5618C2DA8FF24007E8BE3 /* PresenterRegisterer.swift in Sources */,
 				71A5614B2DA8FE8D007E8BE3 /* CIImageExtensions.swift in Sources */,
 				71A561522DA8FE8D007E8BE3 /* FileManagerExtensions.swift in Sources */,
+				8736A3FA2DB60039009A07A2 /* HomePresenter.swift in Sources */,
 				71A561572DA8FE8D007E8BE3 /* UIViewControllerExtensions.swift in Sources */,
+				8736A3F32DB5F743009A07A2 /* IntroVC.swift in Sources */,
 				71A5618B2DA8FF24007E8BE3 /* DIContainer.swift in Sources */,
 				71A5615B2DA8FE8D007E8BE3 /* DateExtensions.swift in Sources */,
 				71A561312DA8FE8D007E8BE3 /* ConsoleLogEngine.swift in Sources */,
-				71A561A42DA8FFF9007E8BE3 /* SplashVC.swift in Sources */,
 				71A561542DA8FE8D007E8BE3 /* TableViewExtensions.swift in Sources */,
 				71A561422DA8FE8D007E8BE3 /* BezierPathExtensions.swift in Sources */,
 				71A561532DA8FE8D007E8BE3 /* CGImagePropertyOrientationExtension.swift in Sources */,
@@ -707,6 +756,7 @@
 				71A561302DA8FE8D007E8BE3 /* CrashlyticsLogEngine.swift in Sources */,
 				71A561382DA8FE8D007E8BE3 /* RealmDao.swift in Sources */,
 				71A5615A2DA8FE8D007E8BE3 /* IntExtensions.swift in Sources */,
+				8736A3E62DB5F2B6009A07A2 /* SplashPresenter.swift in Sources */,
 				71A5612E2DA8FE8D007E8BE3 /* APIError.swift in Sources */,
 				71A561472DA8FE8D007E8BE3 /* AVAudioFileExtensions.swift in Sources */,
 				71A561432DA8FE8D007E8BE3 /* ArrayExtensions.swift in Sources */,
@@ -863,6 +913,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FanNoise/App/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
@@ -898,6 +949,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FanNoise/App/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;

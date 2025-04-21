@@ -130,8 +130,8 @@ PODS:
   - SVProgressHUD (2.3.1):
     - SVProgressHUD/Core (= 2.3.1)
   - SVProgressHUD/Core (2.3.1)
-  - SwiftLint (0.59.0)
-  - Swinject (2.9.1)
+  - SwiftLint (0.55.1)
+  - Swinject (2.7.1)
   - TLLogging (1.0.4)
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
@@ -145,8 +145,8 @@ DEPENDENCIES:
   - RxSwift (~> 5.1)
   - SDWebImage
   - SVProgressHUD
-  - SwiftLint
-  - Swinject
+  - SwiftLint (~> 0.55.1)
+  - Swinject (~> 2.7.1)
   - TLLogging
   - YYImage
 
@@ -200,11 +200,11 @@ SPEC CHECKSUMS:
   RxSwift: 915abbdfb62214aa89ccd0b194d44fb478019b27
   SDWebImage: f84b0feeb08d2d11e6a9b843cb06d75ebf5b8868
   SVProgressHUD: 4837c74bdfe2e51e8821c397825996a8d7de6e22
-  SwiftLint: bb7ba8326d0d93e60d6d1715fc7d4609dec5c76d
-  Swinject: a827d508c6270da03ec74e558e728917a888fa9b
+  SwiftLint: 3fe909719babe5537c552ee8181c0031392be933
+  Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
   TLLogging: 636a4873bf1aaa9d60c4b938433b17e3ce33cb51
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 7a63af2e9dbee00c69c22c4830ce66a6142039d8
+PODFILE CHECKSUM: bbec40100516a0186357b1b4643b4b8a67bb3b0f
 
 COCOAPODS: 1.15.2

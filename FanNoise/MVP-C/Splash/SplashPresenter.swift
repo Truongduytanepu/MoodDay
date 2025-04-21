@@ -2,7 +2,7 @@
 //  SplashPresenter.swift
 //  FanNoise
 //
-//  Created by Manh Nguyen Ngoc on 11/4/25.
+//  Created by Chiến Nguyễn on 21/04/2025.
 //
 
 import UIKit

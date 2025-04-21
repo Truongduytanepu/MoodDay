@@ -11,6 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashVC" customModule="FanNoise" customModuleProvider="target">
             <connections>
+                <outlet property="descriptionLabel" destination="VwO-gh-ohl" id="m7u-dj-0kg"/>
+                <outlet property="fanLabel" destination="hgn-vr-9do" id="eCB-Zt-dAo"/>
+                <outlet property="loadingLabel" destination="UPL-ed-BBn" id="yhw-tv-r7M"/>
+                <outlet property="progressView" destination="IbQ-cV-b5g" id="POC-8n-og1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,14 +22,84 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_splash_1" translatesAutoresizingMaskIntoConstraints="NO" id="pnP-0F-VaH">
+                    <rect key="frame" x="146.66666666666666" y="329" width="100" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="Y4E-90-2Zv"/>
+                        <constraint firstAttribute="height" constant="100" id="uDj-Jc-m3c"/>
+                    </constraints>
+                </imageView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="m8X-BA-R4E">
+                    <rect key="frame" x="93.666666666666686" y="461" width="206" height="85"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fan Noise" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgn-vr-9do">
+                            <rect key="frame" x="0.0" y="0.0" width="206" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="JVg-9s-SrF"/>
+                                <constraint firstAttribute="width" constant="206" id="hp9-9Y-3EM"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VwO-gh-ohl">
+                            <rect key="frame" x="0.0" y="43" width="206" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="206" id="ac2-zy-oon"/>
+                                <constraint firstAttribute="height" constant="42" id="f6Q-UB-hvG"/>
+                            </constraints>
+                            <string key="text">Sleep deeper, dream better 
+with the soothing sound of fans!</string>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                            <color key="textColor" red="0.1764705882352941" green="0.17254901960784313" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Xa-CP-aou">
+                    <rect key="frame" x="109.66666666666669" y="718" width="174" height="4"/>
+                    <subviews>
+                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IbQ-cV-b5g">
+                            <rect key="frame" x="0.0" y="0.0" width="174" height="4"/>
+                        </progressView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="IbQ-cV-b5g" secondAttribute="bottom" id="0fQ-j7-xSe"/>
+                        <constraint firstItem="IbQ-cV-b5g" firstAttribute="leading" secondItem="7Xa-CP-aou" secondAttribute="leading" id="3JZ-Kf-9gS"/>
+                        <constraint firstAttribute="width" constant="174" id="7rJ-Yk-ohD"/>
+                        <constraint firstAttribute="height" constant="4" id="Kew-6j-AES"/>
+                        <constraint firstItem="IbQ-cV-b5g" firstAttribute="top" secondItem="7Xa-CP-aou" secondAttribute="top" id="XXW-KY-J0S"/>
+                        <constraint firstAttribute="trailing" secondItem="IbQ-cV-b5g" secondAttribute="trailing" id="pY2-mt-31E"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loading 50%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPL-ed-BBn">
+                    <rect key="frame" x="167.66666666666666" y="730" width="57.666666666666657" height="11"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="9"/>
+                    <color key="textColor" red="0.1764705882352941" green="0.17254901960784313" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemPurpleColor"/>
-            <point key="canvasLocation" x="131" y="-11"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="pnP-0F-VaH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0Bc-DZ-Vsj"/>
+                <constraint firstItem="m8X-BA-R4E" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7cH-96-DWe"/>
+                <constraint firstItem="m8X-BA-R4E" firstAttribute="top" secondItem="pnP-0F-VaH" secondAttribute="bottom" constant="32" id="9F3-pD-Cbs"/>
+                <constraint firstItem="UPL-ed-BBn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="K33-Hg-OLT"/>
+                <constraint firstItem="UPL-ed-BBn" firstAttribute="top" secondItem="7Xa-CP-aou" secondAttribute="bottom" constant="8" id="LXE-QV-2he"/>
+                <constraint firstItem="7Xa-CP-aou" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UZG-M0-Mlg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="7Xa-CP-aou" secondAttribute="bottom" constant="96" id="aiC-JX-Ma7"/>
+                <constraint firstItem="pnP-0F-VaH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="270" id="j8j-mu-bPa"/>
+            </constraints>
+            <point key="canvasLocation" x="30" y="-11"/>
         </view>
     </objects>
     <resources>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="ic_splash_1" width="301" height="301"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

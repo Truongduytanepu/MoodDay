@@ -32,11 +32,10 @@ end
 use_frameworks!
 
 target 'FanNoise' do
-
-  pod 'SwiftLint'
+  pod 'SwiftLint','~>0.55.1'
+  pod 'Swinject','~>2.7.1'
   pod 'RxSwift', '~> 5.1'
   pod 'RealmSwift', '~> 10.32.3'
-  pod 'Swinject'
   pod 'TLLogging'
   pod 'YYImage'
   pod 'Firebase/Crashlytics'

@@ -11,6 +11,15 @@
 			<string></string>
 		</dict>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>MPLUS2-Medium.ttf</string>
+		<string>MPLUS2-Black.ttf</string>
+		<string>MPLUS2-SemiBold.ttf</string>
+		<string>MPLUS2-Regular.ttf</string>
+		<string>MPLUS2-ExtraBold.ttf</string>
+		<string>MPLUS2-Bold.ttf</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
