@@ -23,7 +23,7 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_splash_1" translatesAutoresizingMaskIntoConstraints="NO" id="pnP-0F-VaH">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="pnP-0F-VaH">
                     <rect key="frame" x="146.66666666666666" y="329" width="100" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="Y4E-90-2Zv"/>
@@ -97,7 +97,7 @@ with the soothing sound of fans!</string>
         </view>
     </objects>
     <resources>
-        <image name="ic_splash_1" width="301" height="301"/>
+        <image name="ic_splash_logo" width="301" height="301"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -30,10 +30,10 @@ class SplashVC: BaseVC<SplashPresenter, SplashView> {
         self.setupGradient()
         self.customProgressView()
         self.startLoading()
-        self.setUpFont()
+        self.setupFont()
     }
     
-    private func setUpFont() {
+    private func setupFont() {
         self.loadingLabel.font = AppFont.font(.mPLUS2Regular, size: 9)
         self.fanLabel.font = AppFont.font(.mPLUS2Bold, size: 24)
         self.descriptionLabel.font = AppFont.font(.mPLUS2Regular, size: 13)
