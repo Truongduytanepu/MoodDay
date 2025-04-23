@@ -9,6 +9,8 @@ import UIKit
 
 class HomeVC: BaseVC<HomePresenter, HomeView> {
     // MARK: - Lifecycle
+    var coordinator: HomeCoordinator!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.config()

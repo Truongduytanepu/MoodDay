@@ -1,5 +1,5 @@
 //
-//  IntroCoordinator.swift
+//  LanguageCoordinator.swift
 //  FanNoise
 //
 //  Created by Chiến Nguyễn on 22/04/2025.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IntroCoordinator: Coordinator {
+class LanguageCoordinator: Coordinator {
     var started: Bool = false
     private weak var navigation: UINavigationController?
     
@@ -18,13 +18,13 @@ class IntroCoordinator: Coordinator {
     func start() {
         if !started {
             started = true
-            let controller = IntroVC.factory()
+            let controller = LanguageVC.factory()
             controller.coordinator = self
             self.navigation?.pushViewController(controller, animated: true)
         }
     }
     
     func stop() {
-        
+         
     }
 }

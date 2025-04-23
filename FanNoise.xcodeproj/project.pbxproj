@@ -97,6 +97,15 @@
 		8736A3FE2DB60039009A07A2 /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8736A3F92DB60039009A07A2 /* HomeVC.xib */; };
 		8753DA152DB62ABF00D412D0 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8753DA142DB62ABF00D412D0 /* AppFont.swift */; };
 		875588232DB7833700A63106 /* gift_intro_2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 875588222DB7833700A63106 /* gift_intro_2.gif */; };
+		8755882A2DB797BC00A63106 /* LanguageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875588252DB797BC00A63106 /* LanguageCoordinator.swift */; };
+		8755882B2DB797BC00A63106 /* LanguageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 875588262DB797BC00A63106 /* LanguageVC.xib */; };
+		8755882C2DB797BC00A63106 /* LanguagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875588272DB797BC00A63106 /* LanguagePresenter.swift */; };
+		8755882D2DB797BC00A63106 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875588282DB797BC00A63106 /* LanguageView.swift */; };
+		8755882E2DB797BC00A63106 /* LanguageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875588292DB797BC00A63106 /* LanguageVC.swift */; };
+		8757BFE12DB7A06600951211 /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757BFDF2DB7A06600951211 /* LanguageCell.swift */; };
+		8757BFE22DB7A06600951211 /* LanguageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8757BFE02DB7A06600951211 /* LanguageCell.xib */; };
+		8757BFE62DB7CBDA00951211 /* DataLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757BFE52DB7CBDA00951211 /* DataLanguage.swift */; };
+		8757BFE82DB7CBEC00951211 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757BFE72DB7CBEC00951211 /* Language.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -191,6 +200,15 @@
 		8736A3F92DB60039009A07A2 /* HomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeVC.xib; sourceTree = "<group>"; };
 		8753DA142DB62ABF00D412D0 /* AppFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
 		875588222DB7833700A63106 /* gift_intro_2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gift_intro_2.gif; sourceTree = "<group>"; };
+		875588252DB797BC00A63106 /* LanguageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCoordinator.swift; sourceTree = "<group>"; };
+		875588262DB797BC00A63106 /* LanguageVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguageVC.xib; sourceTree = "<group>"; };
+		875588272DB797BC00A63106 /* LanguagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePresenter.swift; sourceTree = "<group>"; };
+		875588282DB797BC00A63106 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
+		875588292DB797BC00A63106 /* LanguageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageVC.swift; sourceTree = "<group>"; };
+		8757BFDF2DB7A06600951211 /* LanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
+		8757BFE02DB7A06600951211 /* LanguageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguageCell.xib; sourceTree = "<group>"; };
+		8757BFE52DB7CBDA00951211 /* DataLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLanguage.swift; sourceTree = "<group>"; };
+		8757BFE72DB7CBEC00951211 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		9E53ED02C5DF51B3FCC2CD77 /* Pods-FanNoise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanNoise.debug.xcconfig"; path = "Target Support Files/Pods-FanNoise/Pods-FanNoise.debug.xcconfig"; sourceTree = "<group>"; };
 		D96D8C7C884D88669CBD62AC /* Pods-FanNoise.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanNoise.release.xcconfig"; path = "Target Support Files/Pods-FanNoise/Pods-FanNoise.release.xcconfig"; sourceTree = "<group>"; };
 		DB40C219C19C92489D6358C5 /* Pods_FanNoise.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanNoise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -448,6 +466,7 @@
 		71A561982DA8FFC5007E8BE3 /* MVP-C */ = {
 			isa = PBXGroup;
 			children = (
+				875588242DB7979100A63106 /* Language */,
 				873365FC2DB7579500DFEC83 /* Intro */,
 				8736A3F42DB5FFF5009A07A2 /* Home */,
 				8736A3DE2DB5F2A0009A07A2 /* Splash */,
@@ -498,6 +517,46 @@
 			);
 			name = Gift;
 			path = "Gìt";
+			sourceTree = "<group>";
+		};
+		875588242DB7979100A63106 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				8757BFE42DB7CBBC00951211 /* Service */,
+				8757BFE32DB7CBAF00951211 /* Model */,
+				8757BFDE2DB7A04900951211 /* Cell */,
+				875588252DB797BC00A63106 /* LanguageCoordinator.swift */,
+				875588262DB797BC00A63106 /* LanguageVC.xib */,
+				875588272DB797BC00A63106 /* LanguagePresenter.swift */,
+				875588282DB797BC00A63106 /* LanguageView.swift */,
+				875588292DB797BC00A63106 /* LanguageVC.swift */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
+		8757BFDE2DB7A04900951211 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8757BFDF2DB7A06600951211 /* LanguageCell.swift */,
+				8757BFE02DB7A06600951211 /* LanguageCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		8757BFE32DB7CBAF00951211 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8757BFE72DB7CBEC00951211 /* Language.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8757BFE42DB7CBBC00951211 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				8757BFE52DB7CBDA00951211 /* DataLanguage.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		B8D1D0B7B9715EE5E7DAB573 /* Pods */ = {
@@ -591,8 +650,10 @@
 				8736A3E52DB5F2B6009A07A2 /* SplashVC.xib in Resources */,
 				875588232DB7833700A63106 /* gift_intro_2.gif in Resources */,
 				71A561802DA8FF09007E8BE3 /* MPLUS2-Light.ttf in Resources */,
+				8755882B2DB797BC00A63106 /* LanguageVC.xib in Resources */,
 				71A5617D2DA8FF09007E8BE3 /* MPLUS2-Thin.ttf in Resources */,
 				71A561842DA8FF09007E8BE3 /* MPLUS2-Medium.ttf in Resources */,
+				8757BFE22DB7A06600951211 /* LanguageCell.xib in Resources */,
 				71A561812DA8FF09007E8BE3 /* MPLUS2-SemiBold.ttf in Resources */,
 				873366042DB757B900DFEC83 /* IntroVC.xib in Resources */,
 			);
@@ -687,8 +748,10 @@
 			files = (
 				71A5614C2DA8FE8D007E8BE3 /* AVAudioPlayerNodeExtensions.swift in Sources */,
 				71A5616C2DA8FE8D007E8BE3 /* OverlayWindow.swift in Sources */,
+				8755882E2DB797BC00A63106 /* LanguageVC.swift in Sources */,
 				71A561552DA8FE8D007E8BE3 /* AVPlayerExtension.swift in Sources */,
 				71A561502DA8FE8D007E8BE3 /* URLRequestExtensions.swift in Sources */,
+				8757BFE62DB7CBDA00951211 /* DataLanguage.swift in Sources */,
 				71A561582DA8FE8D007E8BE3 /* UIImageExtensions.swift in Sources */,
 				71A5616F2DA8FE8D007E8BE3 /* HightlightableButton.swift in Sources */,
 				71A561972DA8FFB9007E8BE3 /* Coordinator.swift in Sources */,
@@ -698,6 +761,7 @@
 				71A560C32DA8F812007E8BE3 /* ViewController.swift in Sources */,
 				71A561562DA8FE8D007E8BE3 /* URLExtensions.swift in Sources */,
 				71A561932DA8FFB9007E8BE3 /* BaseVC.swift in Sources */,
+				8755882C2DB797BC00A63106 /* LanguagePresenter.swift in Sources */,
 				873366032DB757B900DFEC83 /* IntroCoordinator.swift in Sources */,
 				71A560BF2DA8F812007E8BE3 /* AppDelegate.swift in Sources */,
 				8736A3E42DB5F2B6009A07A2 /* SplashCoordinator.swift in Sources */,
@@ -716,7 +780,10 @@
 				71A5615E2DA8FE8D007E8BE3 /* NSMutableData.swift in Sources */,
 				71A561362DA8FE8D007E8BE3 /* RealmManager.swift in Sources */,
 				71A5614A2DA8FE8D007E8BE3 /* FontExtensions.swift in Sources */,
+				8757BFE12DB7A06600951211 /* LanguageCell.swift in Sources */,
+				8755882D2DB797BC00A63106 /* LanguageView.swift in Sources */,
 				8736A3FD2DB60039009A07A2 /* HomeCoordinator.swift in Sources */,
+				8755882A2DB797BC00A63106 /* LanguageCoordinator.swift in Sources */,
 				8736A3E82DB5F2B6009A07A2 /* SplashVC.swift in Sources */,
 				71A561962DA8FFB9007E8BE3 /* BaseView.swift in Sources */,
 				71A5612F2DA8FE8D007E8BE3 /* Logging.swift in Sources */,
@@ -740,6 +807,7 @@
 				71A561522DA8FE8D007E8BE3 /* FileManagerExtensions.swift in Sources */,
 				8736A3FA2DB60039009A07A2 /* HomePresenter.swift in Sources */,
 				71A561572DA8FE8D007E8BE3 /* UIViewControllerExtensions.swift in Sources */,
+				8757BFE82DB7CBEC00951211 /* Language.swift in Sources */,
 				71A5618B2DA8FF24007E8BE3 /* DIContainer.swift in Sources */,
 				71A5615B2DA8FE8D007E8BE3 /* DateExtensions.swift in Sources */,
 				71A561312DA8FE8D007E8BE3 /* ConsoleLogEngine.swift in Sources */,

@@ -8,7 +8,6 @@
 import UIKit
 
 private struct Const {
-    static let progressViewCornerRadius = 4
     static let TimeInterval = 0.02
 }
 
@@ -16,7 +15,7 @@ class SplashVC: BaseVC<SplashPresenter, SplashView> {
     
     @IBOutlet private weak var progressView: UIProgressView!
     @IBOutlet private weak var descriptionLabel: UILabel!
-    @IBOutlet private weak var fanLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var loadingLabel: UILabel!
     
     // MARK: - Lifecycle
@@ -35,7 +34,7 @@ class SplashVC: BaseVC<SplashPresenter, SplashView> {
     
     private func setupFont() {
         self.loadingLabel.font = AppFont.font(.mPLUS2Regular, size: 9)
-        self.fanLabel.font = AppFont.font(.mPLUS2Bold, size: 24)
+        self.titleLabel.font = AppFont.font(.mPLUS2Bold, size: 24)
         self.descriptionLabel.font = AppFont.font(.mPLUS2Regular, size: 13)
     }
     
@@ -53,15 +52,14 @@ class SplashVC: BaseVC<SplashPresenter, SplashView> {
         ]
         
         // Thêm gradient layer vào view
-        view.layer.insertSublayer(gradientLayer, at: 0)
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     private func customProgressView() {
         self.progressView.progressTintColor = UIColor(rgb: 0x2D2C2B)
         self.progressView.trackTintColor = UIColor.lightGray.withAlphaComponent(0.3)
-        self.progressView.layer.cornerRadius = 4
+        self.progressView.layer.cornerRadius = self.progressView.frame.height / 2
         self.progressView.clipsToBounds = true
-        self.progressView.subviews.first?.layer.cornerRadius = CGFloat(Const.progressViewCornerRadius)
         self.progressView.subviews.first?.clipsToBounds = true
     }
     
@@ -76,7 +74,7 @@ class SplashVC: BaseVC<SplashPresenter, SplashView> {
             guard let self = self else { return }
             if progress >= 1.0 {
                 timer.invalidate()
-                self.navigateToNextScreen()
+                self.navigateNextScreen()
             } else {
                 progress += 0.01
                 self.updateProgress(to: progress)
@@ -84,12 +82,21 @@ class SplashVC: BaseVC<SplashPresenter, SplashView> {
         }
     }
     
-    private func navigateToNextScreen() {
-            if let navigationController = self.navigationController {
-                let introCoordinator = IntroCoordinator(navigation: navigationController)
-                introCoordinator.start()
-            }
+    private func navigateNextScreen() {
+        if !UserDefaults.standard.bool(forKey: "isFirstShowIntro") {
+            // Chưa xem intro -> vào intro
+            let introCoordinator = IntroCoordinator(navigation: self.navigationController!)
+            introCoordinator.start()
+        } else if !UserDefaults.standard.bool(forKey: "isFirstShowLanguageScreen") {
+            // Đã xem intro nhưng chưa chọn ngôn ngữ -> vào language
+            let languageCoordinator = LanguageCoordinator(navigation: self.navigationController!)
+            languageCoordinator.start()
+        } else {
+            // Đã xem intro + đã chọn ngôn ngữ -> vào home
+            let homeCoordinator = HomeCoordinator(navigation: self.navigationController!)
+            homeCoordinator.start()
         }
+    }
 }
 extension SplashVC: SplashView {
     

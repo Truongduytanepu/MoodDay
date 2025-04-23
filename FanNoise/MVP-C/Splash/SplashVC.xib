@@ -5,16 +5,15 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashVC" customModule="FanNoise" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionLabel" destination="VwO-gh-ohl" id="m7u-dj-0kg"/>
-                <outlet property="fanLabel" destination="hgn-vr-9do" id="eCB-Zt-dAo"/>
                 <outlet property="loadingLabel" destination="UPL-ed-BBn" id="yhw-tv-r7M"/>
                 <outlet property="progressView" destination="IbQ-cV-b5g" id="POC-8n-og1"/>
+                <outlet property="titleLabel" destination="hgn-vr-9do" id="eCB-Zt-dAo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -64,7 +63,6 @@ with the soothing sound of fans!</string>
                             <rect key="frame" x="0.0" y="0.0" width="174" height="4"/>
                         </progressView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="IbQ-cV-b5g" secondAttribute="bottom" id="0fQ-j7-xSe"/>
                         <constraint firstItem="IbQ-cV-b5g" firstAttribute="leading" secondItem="7Xa-CP-aou" secondAttribute="leading" id="3JZ-Kf-9gS"/>
@@ -98,8 +96,5 @@ with the soothing sound of fans!</string>
     </objects>
     <resources>
         <image name="ic_splash_logo" width="301" height="301"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

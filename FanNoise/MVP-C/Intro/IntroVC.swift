@@ -9,22 +9,24 @@ import UIKit
 import YYImage
 
 private struct Const {
-    static let dotSize = CGSize(width: 6, height: 6)
+    static let dotPageViewSize = CGSize(width: 6, height: 6)
+    static let longBottomConstraintContinue: CGFloat = 70
+    static let shortBottomConstraintContinue: CGFloat  = 27
+    static let longHeightConstraintAds: CGFloat = 188
+    static let shortHeightConstraintAds: CGFloat = 0
 }
 
 class IntroVC: BaseVC<IntroPresenter, IntroView> {
-    // MARK: - Lifecycle
-    
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var continueButton: UIButton!
     @IBOutlet private weak var pageControl: UIPageControl!
-    @IBOutlet private weak var introViewFirst: UIView!
-    @IBOutlet private weak var introViewSecond: UIView!
-    @IBOutlet private weak var introViewThird: UIView!
-    @IBOutlet private weak var introViewLast: UIView!
-    @IBOutlet private weak var adView: UIView!
-    @IBOutlet private weak var swipeGif: YYAnimatedImageView!
+    @IBOutlet private weak var introFirstView: UIView!
+    @IBOutlet private weak var introSecondView: UIView!
+    @IBOutlet private weak var introThirdView: UIView!
+    @IBOutlet private weak var introLastView: UIView!
+    @IBOutlet private weak var bottomConstraintContinue: NSLayoutConstraint!
+    @IBOutlet private weak var heightConstraintAds: NSLayoutConstraint!
     
     var coordinator: IntroCoordinator!
     
@@ -34,7 +36,8 @@ class IntroVC: BaseVC<IntroPresenter, IntroView> {
         "Find the perfect sleep sound",
         "Explore the soothing, sound of fans"
     ]
-    // MARK: - Properties
+    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.config()
@@ -45,7 +48,6 @@ class IntroVC: BaseVC<IntroPresenter, IntroView> {
         self.setupFont()
         self.setupPageControl()
         self.setupScrollView()
-        self.setupGIF()
     }
     
     private func setupFont() {
@@ -58,46 +60,62 @@ class IntroVC: BaseVC<IntroPresenter, IntroView> {
         self.scrollView.showsHorizontalScrollIndicator = false
         
         // Sắp xếp các introView cạnh nhau
-        let introViews = [introViewFirst, introViewSecond, introViewThird, introViewLast]
+        let introViews = [self.introFirstView, self.introSecondView, self.introThirdView, self.introLastView]
         for (index, view) in introViews.enumerated() {
-            view?.frame.origin.x = CGFloat(index) * scrollView.frame.width
+            view?.frame.origin.x = CGFloat(index) * self.scrollView.frame.width
         }
         
         self.scrollView.contentSize = CGSize(
-            width: scrollView.frame.width * CGFloat(introViews.count),
-            height: scrollView.frame.height
+            width: self.scrollView.frame.width * CGFloat(introViews.count),
+            height: self.scrollView.frame.height
         )
     }
     
     private func setupPageControl() {
         self.pageControl.currentPage = 0
-        self.pageControl.addTarget(self, action: #selector(pageControlChanged(_:)), for: .valueChanged)
+        self.pageControl.addTarget(self, action: #selector(self.pageControlChanged(_:)), for: .valueChanged)
         self.pageControl.pageIndicatorTintColor = UIColor(rgb: 0x2D2C2B1A).withAlphaComponent(0.1)
         self.pageControl.currentPageIndicatorTintColor = UIColor(rgb: 0x2D2C2B)
         let dotImage = UIImage(named: "ic_image_currentPageIndicator")
         let currentDotImage = UIImage(named: "ic_image_PageIndicator")
         
-        self.pageControl.preferredIndicatorImage = dotImage?.resize(to: Const.dotSize)
-        self.pageControl.setIndicatorImage(currentDotImage?.resize(to: Const.dotSize), forPage: pageControl.currentPage)
+        let resizedDot = dotImage?.resized(to: Const.dotPageViewSize)
+        let resizedCurrentDot = currentDotImage?.resized(to: Const.dotPageViewSize)
+
+        self.pageControl.preferredIndicatorImage = resizedDot
+        self.pageControl.setIndicatorImage(resizedCurrentDot, forPage: self.pageControl.currentPage)
+
     }
     
-    private func setupGIF() {
-        if let path = Bundle.main.path(forResource: "gift_intro_2", ofType: "gif") {
-            self.swipeGif.image = YYImage.init(contentsOfFile: path)
-            self.swipeGif.startAnimating()
-        }
+    private func applyCollapsedAdLayout() {
+        self.heightConstraintAds.constant = Const.shortHeightConstraintAds
+        self.bottomConstraintContinue.constant = Const.longBottomConstraintContinue
+    }
+    
+    private func applyExpandedAdLayout() {
+        self.heightConstraintAds.constant = Const.longHeightConstraintAds
+        self.bottomConstraintContinue.constant = Const.shortHeightConstraintAds
     }
     
     // Xử lý khi nhấn nút Continue
     @IBAction private func continueButtonDidTap (_ sender: UIButton) {
-        if pageControl.currentPage < pageControl.numberOfPages - 1 {
+        if self.pageControl.currentPage < self.pageControl.numberOfPages - 1 {
             // Chưa ở trang cuối → scroll đến trang tiếp theo
-            let nextPage = pageControl.currentPage + 1
+            let nextPage = self.pageControl.currentPage + 1
             let offsetX = CGFloat(nextPage) * self.scrollView.frame.width
             self.scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
         } else {
             // Đang ở trang cuối → chuyển màn hình 
-            //     coordinator.navigateToHome() // Gọi hàm từ coordinator
+            UserDefaults.standard.set(true, forKey: "isFirstShowIntro")
+
+            self.navigateToNextScreen()
+        }
+    }
+    
+    private func navigateToNextScreen() {
+        if let navigationController = self.navigationController {
+            let languageCoordinator = LanguageCoordinator(navigation: navigationController)
+            languageCoordinator.start()
         }
     }
     
@@ -117,14 +135,18 @@ extension IntroVC: UIScrollViewDelegate {
         let currentPage = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
         self.pageControl.currentPage = currentPage
         
-        if currentPage < titles.count {
-            self.titleLabel.text = titles[currentPage]
+        if currentPage < self.titles.count {
+            self.titleLabel.text = self.titles[currentPage]
         }
         
-        self.adView.isHidden = (currentPage == 1 || currentPage == 3)
-        
+        if currentPage == 1 || currentPage == 3 {
+            self.applyCollapsedAdLayout()
+        } else {
+            self.applyExpandedAdLayout()
+        }
     }
 }
+
 extension IntroVC: IntroView {
     
 }

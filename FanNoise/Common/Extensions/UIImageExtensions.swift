@@ -13,14 +13,14 @@ extension UIImage {
         guard let imageSource = CGImageSourceCreateWithData(data as CFData, nil) else { return [] }
         let frameCount = CGImageSourceGetCount(imageSource)
         var frames = [UIImage]()
-
+        
         for index in 0..<frameCount {
             if let imageRef = CGImageSourceCreateImageAtIndex(imageSource, index, nil) {
                 let image = UIImage(cgImage: imageRef)
                 frames.append(image)
             }
         }
-
+        
         return frames
     }
     
@@ -31,21 +31,21 @@ extension UIImage {
         
         return self.getFirstFrameOfGifData(imageData)
     }
-
+    
     static func getFirstFrameOfGifData(_ data: Data) -> UIImage? {
         guard let imageSource = CGImageSourceCreateWithData(data as CFData, nil) else { return nil }
         let frameCount = CGImageSourceGetCount(imageSource)
         if frameCount == 0 {
             return nil
         }
-
+        
         if let imageRef = CGImageSourceCreateImageAtIndex(imageSource, 0, nil) {
             return UIImage(cgImage: imageRef)
         }
-
+        
         return nil
     }
-
+    
     func resize(to size: CGSize) -> UIImage {
         UIGraphicsBeginImageContext(size)
         draw(in: CGRect(origin: CGPoint.zero, size:size))
@@ -53,7 +53,14 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return newImage ?? UIImage()
     }
-
+    
+    func resized(to size: CGSize) -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { _ in
+            self.draw(in: CGRect(origin: .zero, size: size))
+        }
+    }
+    
     func crop(rect: CGRect) -> UIImage {
         guard let cgImage = self.cgImage else {
             return self
@@ -61,9 +68,9 @@ extension UIImage {
         guard let cropImage = cgImage.cropping(to: rect) else {
             return self
         }
-        return UIImage.init(cgImage: cropImage) 
+        return UIImage.init(cgImage: cropImage)
     }
-
+    
     func fixOrientation() -> UIImage {
         if self.imageOrientation == .up {
             return self
@@ -132,31 +139,31 @@ extension UIImage {
 extension UIImage {
     func merge(in viewSize: CGSize, with imageTuples: [(image: UIImage, viewSize: CGSize, transform: CGAffineTransform)]) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 1)
-
+        
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
-
+        
         context.scaleBy(x: size.width / viewSize.width, y: size.height / viewSize.height)
-
+        
         draw(in: CGRect(origin: .zero, size: viewSize), blendMode: .normal, alpha: 1)
-
+        
         for imageTuple in imageTuples {
             let areaRect = CGRect(origin: .zero, size: imageTuple.viewSize)
-
+            
             context.saveGState()
             context.concatenate(imageTuple.transform)
-
+            
             context.setBlendMode(.color)
             UIColor.clear.setFill()
             context.fill(areaRect)
-
+            
             imageTuple.image.draw(in: areaRect, blendMode: .normal, alpha: 1)
-
+            
             context.restoreGState()
         }
-
+        
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-
+        
         return image
     }
 }
@@ -164,19 +171,19 @@ extension UIImage {
 extension UIImage {
     func maskWithColor(color: UIColor) -> UIImage {
         let maskImage = cgImage!
-
+        
         let width = size.width
         let height = size.height
         let bounds = CGRect(x: 0, y: 0, width: width, height: height)
-
+        
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
         let context = CGContext(data: nil, width: Int(width), height: Int(height), bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)!
-
+        
         context.clip(to: bounds, mask: maskImage)
         context.setFillColor(color.cgColor)
         context.fill(bounds)
-
+        
         if let cgImage = context.makeImage() {
             let coloredImage = UIImage(cgImage: cgImage)
             return coloredImage
@@ -192,21 +199,21 @@ extension UIImage {
         guard (status == kCVReturnSuccess) else {
             return nil
         }
-
+        
         CVPixelBufferLockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
         let pixelData = CVPixelBufferGetBaseAddress(pixelBuffer!)
-
+        
         let rgbColorSpace = CGColorSpaceCreateDeviceRGB()
         let context = CGContext(data: pixelData, width: Int(self.size.width), height: Int(self.size.height), bitsPerComponent: 8, bytesPerRow: CVPixelBufferGetBytesPerRow(pixelBuffer!), space: rgbColorSpace, bitmapInfo: CGImageAlphaInfo.noneSkipFirst.rawValue)
-
+        
         context?.translateBy(x: 0, y: self.size.height)
         context?.scaleBy(x: 1.0, y: -1.0)
-
+        
         UIGraphicsPushContext(context!)
         self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
         UIGraphicsPopContext()
         CVPixelBufferUnlockBaseAddress(pixelBuffer!, CVPixelBufferLockFlags(rawValue: 0))
-
+        
         return pixelBuffer
     }
 }

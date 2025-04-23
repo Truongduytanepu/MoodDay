@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_image_language_ARG.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

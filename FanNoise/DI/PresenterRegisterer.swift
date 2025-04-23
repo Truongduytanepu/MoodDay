@@ -23,6 +23,10 @@ class PresenterRegisterer {
             return IntroPresenterImpl(view: view)
         }
         
+        container.register(LanguagePresenter.self) { (_, view: LanguageView) -> LanguagePresenter in
+            return LanguagePresenterImpl(view: view)
+        }
+        
         
     }
 }
