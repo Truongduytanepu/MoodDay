@@ -48,8 +48,8 @@ class LanguageVC: BaseVC<LanguagePresenter, LanguageView> {
     
     private func navigateToNextScreen() {
             if let navigationController = self.navigationController {
-                let homeCoordinator = HomeCoordinator(navigation: navigationController)
-                homeCoordinator.start()
+                let tabbarCoordinator = TabbarCoordinator(navigation: navigationController)
+                tabbarCoordinator.start()
             }
         }
     

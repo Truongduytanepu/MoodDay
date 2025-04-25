@@ -83,18 +83,19 @@ class SplashVC: BaseVC<SplashPresenter, SplashView> {
     }
     
     private func navigateNextScreen() {
+        guard let navigationController = self.navigationController else {return}
         if !UserDefaults.standard.bool(forKey: "isFirstShowIntro") {
             // Chưa xem intro -> vào intro
-            let introCoordinator = IntroCoordinator(navigation: self.navigationController!)
+            let introCoordinator = IntroCoordinator(navigation: navigationController)
             introCoordinator.start()
         } else if !UserDefaults.standard.bool(forKey: "isFirstShowLanguageScreen") {
             // Đã xem intro nhưng chưa chọn ngôn ngữ -> vào language
-            let languageCoordinator = LanguageCoordinator(navigation: self.navigationController!)
+            let languageCoordinator = LanguageCoordinator(navigation: navigationController)
             languageCoordinator.start()
         } else {
-            // Đã xem intro + đã chọn ngôn ngữ -> vào home
-            let homeCoordinator = HomeCoordinator(navigation: self.navigationController!)
-            homeCoordinator.start()
+            // Đã xem intro + đã chọn ngôn ngữ -> vào Tabbar
+            let tabbarCoordinator = TabbarCoordinator(navigation: navigationController)
+            tabbarCoordinator.start()
         }
     }
 }

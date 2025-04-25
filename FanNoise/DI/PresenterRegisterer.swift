@@ -27,6 +27,14 @@ class PresenterRegisterer {
             return LanguagePresenterImpl(view: view)
         }
         
+        container.register(TabbarPresenter.self) { (_, view: TabbarView) -> TabbarPresenter in
+            return TabbarPresenterImpl(view: view)
+        }
+
+        container.register(TrendingPresenter.self) { (_, view: TrendingView) -> TrendingPresenter in
+            return TrendingPresenterImpl(view: view)
+        }
+        
         container.register(VideoPresenter.self) { (_, view: VideoView) -> VideoPresenter in
             return VideoPresenterImpl(view: view)
         }

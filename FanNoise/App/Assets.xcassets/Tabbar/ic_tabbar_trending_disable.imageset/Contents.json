@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_tabbar_trending_disable.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

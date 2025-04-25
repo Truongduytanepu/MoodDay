@@ -11,60 +11,60 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CategoryCell" customModule="FanNoise" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="367" height="179"/>
+            <rect key="frame" x="0.0" y="0.0" width="269" height="181"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="367" height="179"/>
+                <rect key="frame" x="0.0" y="0.0" width="269" height="181"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZmT-LN-Md6">
-                        <rect key="frame" x="0.0" y="0.0" width="367" height="179"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b5z-on-VQ8">
+                        <rect key="frame" x="0.0" y="0.0" width="269" height="181"/>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="pXL-lj-RbV">
-                        <rect key="frame" x="9" y="45" width="187" height="38.333333333333343"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="tzS-Mc-K6t">
+                        <rect key="frame" x="9" y="50" width="176" height="37.333333333333343"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qvs-Zt-c3e">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GjZ-lM-TNi">
                                 <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="20.333333333333332"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.1764705882352941" green="0.17254901960784313" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A summer breeze, anytime." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRi-XZ-f1j">
-                                <rect key="frame" x="0.0" y="20.333333333333329" width="187" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.1764705882352941" green="0.17254901960784313" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A summer breeze, anytime." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFu-bj-Bn5">
+                                <rect key="frame" x="0.0" y="20.333333333333329" width="176" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                     </stackView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mw0-Au-cdR">
-                        <rect key="frame" x="163" y="151.66666666666666" width="41.333333333333343" height="20.333333333333343"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Awe-Kr-ObE">
+                        <rect key="frame" x="113.99999999999999" y="153.66666666666666" width="41.333333333333329" height="20.333333333333343"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="ZmT-LN-Md6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8LI-PA-aCA"/>
-                <constraint firstAttribute="trailing" secondItem="ZmT-LN-Md6" secondAttribute="trailing" id="BSM-iB-OMs"/>
-                <constraint firstItem="pXL-lj-RbV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="45" id="Pcd-1H-v2D"/>
-                <constraint firstItem="Mw0-Au-cdR" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="bOy-nH-jYC"/>
-                <constraint firstAttribute="bottom" secondItem="Mw0-Au-cdR" secondAttribute="bottom" constant="7" id="pVp-f7-Q57"/>
-                <constraint firstItem="ZmT-LN-Md6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="sqb-2H-3mx"/>
-                <constraint firstAttribute="bottom" secondItem="ZmT-LN-Md6" secondAttribute="bottom" id="ugw-Pg-Mw5"/>
-                <constraint firstItem="pXL-lj-RbV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="9" id="zQy-q7-qRy"/>
+                <constraint firstItem="b5z-on-VQ8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="6vc-CB-HZj"/>
+                <constraint firstItem="tzS-Mc-K6t" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="9" id="Cy5-vV-dsr"/>
+                <constraint firstItem="tzS-Mc-K6t" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="50" id="Dw1-9a-VI2"/>
+                <constraint firstAttribute="trailing" secondItem="b5z-on-VQ8" secondAttribute="trailing" id="QDy-XL-TzR"/>
+                <constraint firstItem="Awe-Kr-ObE" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="SXf-mf-08W"/>
+                <constraint firstItem="b5z-on-VQ8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bqF-IA-Z0O"/>
+                <constraint firstAttribute="bottom" secondItem="Awe-Kr-ObE" secondAttribute="bottom" constant="7" id="ccq-Qe-LlF"/>
+                <constraint firstAttribute="bottom" secondItem="b5z-on-VQ8" secondAttribute="bottom" id="g8a-EP-uOn"/>
             </constraints>
-            <size key="customSize" width="367" height="179"/>
+            <size key="customSize" width="269" height="181"/>
             <connections>
-                <outlet property="bottomTitleLabel" destination="Mw0-Au-cdR" id="cl6-Jg-Ecu"/>
-                <outlet property="categoryImageView" destination="ZmT-LN-Md6" id="Trx-cN-hU1"/>
-                <outlet property="descriptionLabel" destination="JRi-XZ-f1j" id="jYy-sh-zCj"/>
-                <outlet property="leftTitleLabel" destination="Qvs-Zt-c3e" id="yHv-Km-w7I"/>
-                <outlet property="stackView" destination="pXL-lj-RbV" id="O4D-7f-kor"/>
+                <outlet property="bottomTitleLabel" destination="Awe-Kr-ObE" id="3dk-ll-NfJ"/>
+                <outlet property="categoryImageView" destination="b5z-on-VQ8" id="5AU-tn-LdC"/>
+                <outlet property="descriptionLabel" destination="QFu-bj-Bn5" id="2yJ-tX-eJl"/>
+                <outlet property="leftTitleLabel" destination="GjZ-lM-TNi" id="Vsi-0P-NRt"/>
+                <outlet property="stackView" destination="tzS-Mc-K6t" id="INU-B3-iLR"/>
             </connections>
-            <point key="canvasLocation" x="220.61068702290075" y="32.74647887323944"/>
+            <point key="canvasLocation" x="180.91603053435114" y="34.859154929577464"/>
         </collectionViewCell>
     </objects>
 </document>

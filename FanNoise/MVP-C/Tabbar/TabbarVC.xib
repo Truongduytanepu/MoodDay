@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabbarVC" customModule="FanNoise" customModuleProvider="target">
+            <connections>
+                <outlet property="homeImageView" destination="wxA-GQ-JfE" id="7RF-at-Wol"/>
+                <outlet property="homeTabbarView" destination="aG5-w4-Par" id="cJd-q7-6zk"/>
+                <outlet property="mainView" destination="Ovc-WO-ydV" id="gXP-Ra-39u"/>
+                <outlet property="tabbarView" destination="qCD-jL-ONJ" id="ItR-xa-K9O"/>
+                <outlet property="trendingImageView" destination="HMx-Aj-ACh" id="Ha3-FX-GNV"/>
+                <outlet property="trendingTabbarView" destination="Bdo-Mx-71i" id="HiS-FJ-ljs"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ovc-WO-ydV">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                    <color key="backgroundColor" systemColor="systemBrownColor"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qCD-jL-ONJ" userLabel="Tabbar">
+                    <rect key="frame" x="70.666666666666686" y="768" width="252" height="44"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aG5-w4-Par" customClass="DimableView" customModule="FanNoise" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="125" height="44"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_tabbar_home_enable" translatesAutoresizingMaskIntoConstraints="NO" id="wxA-GQ-JfE">
+                                    <rect key="frame" x="1" y="1" width="125" height="42"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="125" id="JC4-Ap-iKk"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="wxA-GQ-JfE" firstAttribute="leading" secondItem="aG5-w4-Par" secondAttribute="leading" constant="1" id="1ju-4z-cFu"/>
+                                <constraint firstAttribute="bottom" secondItem="wxA-GQ-JfE" secondAttribute="bottom" constant="1" id="Hqz-qe-WCZ"/>
+                                <constraint firstAttribute="width" constant="125" id="cUA-qM-sBc"/>
+                                <constraint firstItem="wxA-GQ-JfE" firstAttribute="top" secondItem="aG5-w4-Par" secondAttribute="top" constant="1" id="dzh-sK-OMR"/>
+                            </constraints>
+                            <connections>
+                                <action selector="homeButtonDidTap:" destination="-1" eventType="touchUpInside" id="XJQ-bc-hMh"/>
+                            </connections>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bdo-Mx-71i" customClass="DimableView" customModule="FanNoise" customModuleProvider="target">
+                            <rect key="frame" x="127" y="0.0" width="125" height="44"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_tabbar_trending_disable" translatesAutoresizingMaskIntoConstraints="NO" id="HMx-Aj-ACh">
+                                    <rect key="frame" x="-1" y="1" width="125" height="42"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="125" id="XDG-pO-RbY"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="HMx-Aj-ACh" firstAttribute="top" secondItem="Bdo-Mx-71i" secondAttribute="top" constant="1" id="63a-Hg-5bX"/>
+                                <constraint firstAttribute="width" constant="125" id="E4J-wT-7wI"/>
+                                <constraint firstAttribute="trailing" secondItem="HMx-Aj-ACh" secondAttribute="trailing" constant="1" id="d7S-qm-YxL"/>
+                                <constraint firstAttribute="bottom" secondItem="HMx-Aj-ACh" secondAttribute="bottom" constant="1" id="gG7-8o-V3v"/>
+                            </constraints>
+                            <connections>
+                                <action selector="trendingButtonDidTap:" destination="-1" eventType="touchUpInside" id="hm6-dE-x1h"/>
+                            </connections>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="252" id="01v-PW-dd4"/>
+                        <constraint firstItem="Bdo-Mx-71i" firstAttribute="top" secondItem="qCD-jL-ONJ" secondAttribute="top" id="7mK-95-3Gr"/>
+                        <constraint firstAttribute="height" constant="44" id="Cpf-cm-XR8"/>
+                        <constraint firstAttribute="bottom" secondItem="aG5-w4-Par" secondAttribute="bottom" id="UcL-Oh-qVL"/>
+                        <constraint firstAttribute="bottom" secondItem="Bdo-Mx-71i" secondAttribute="bottom" id="Vnd-x9-G2r"/>
+                        <constraint firstItem="aG5-w4-Par" firstAttribute="top" secondItem="qCD-jL-ONJ" secondAttribute="top" id="h4u-ng-NVK"/>
+                        <constraint firstAttribute="trailing" secondItem="Bdo-Mx-71i" secondAttribute="trailing" id="knW-Lg-lc9"/>
+                        <constraint firstItem="aG5-w4-Par" firstAttribute="leading" secondItem="qCD-jL-ONJ" secondAttribute="leading" id="odK-dM-F2j"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Ovc-WO-ydV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="919-Yy-WWb"/>
+                <constraint firstItem="Ovc-WO-ydV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DKt-wb-Iro"/>
+                <constraint firstAttribute="bottom" secondItem="Ovc-WO-ydV" secondAttribute="bottom" id="T43-N8-n4z"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ovc-WO-ydV" secondAttribute="trailing" id="Ts4-wF-vhy"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qCD-jL-ONJ" secondAttribute="bottom" constant="6" id="ZUm-8y-3Vv"/>
+                <constraint firstItem="qCD-jL-ONJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nei-nC-mvp"/>
+            </constraints>
+            <point key="canvasLocation" x="-8.3969465648854964" y="-12.67605633802817"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_tabbar_home_enable" width="366" height="114"/>
+        <image name="ic_tabbar_trending_disable" width="366" height="114"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
