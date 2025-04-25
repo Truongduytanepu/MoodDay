@@ -9,5 +9,6 @@ import UIKit
 
 @objc protocol HomeView: BaseView {
     func onLoadHomeCategory(_ data: [HomeCategory])
+    func saveDataCategory(_ data: [HomeCategory])
     func onError(_ error: Error)
 }

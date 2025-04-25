@@ -98,12 +98,17 @@ extension HomeVC: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueCell(type: CategoryCell.self, indexPath: indexPath) else {
             return UICollectionViewCell()
         }
-        
-        print("homeCategories", homeCategories[indexPath.item].thumb)
-        
+
         cell.setupTitleLabel(index: indexPath.row)
         cell.configure(homeCategories[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let navigationController = self.navigationController else {return}
+        
+        let videoCoordinator = VideoCoordinator(navigation: navigationController)
+        videoCoordinator.start()
     }
 }
 
@@ -134,6 +139,9 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension HomeVC: HomeView {
+    func saveDataCategory(_ data: [HomeCategory]) {
+        HomeCategoryManager.shared.updateCategories(data)
+    }
     
     func onLoadHomeCategory(_ data: [HomeCategory]) {
         SVProgressHUD.dismiss()

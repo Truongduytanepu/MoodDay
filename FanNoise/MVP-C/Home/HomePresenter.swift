@@ -16,6 +16,7 @@ class HomePresenterImpl: BasePresenter<HomeView>, HomePresenter {
         GetHomeCategory().exe().subscribe { [weak self] data in
             guard let self = self else {return}
             self.view?.onLoadHomeCategory(data)
+            self.view?.saveDataCategory(data)
         } onError: { [weak self] (error) in
             guard let self = self else {return}
             self.view?.onError(error)

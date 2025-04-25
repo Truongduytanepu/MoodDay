@@ -27,6 +27,8 @@ class PresenterRegisterer {
             return LanguagePresenterImpl(view: view)
         }
         
-        
+        container.register(VideoPresenter.self) { (_, view: VideoView) -> VideoPresenter in
+            return VideoPresenterImpl(view: view)
+        }
     }
 }

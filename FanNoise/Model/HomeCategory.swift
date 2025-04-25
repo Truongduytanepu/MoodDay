@@ -14,7 +14,7 @@ import Foundation
     let thumb: String?
     let index: Int?
     let sounds: [Sound]?
-    let videos: [Video]?
+    let videos: [Video]
 }
 
 @objc class Sound: NSObject, Codable {
