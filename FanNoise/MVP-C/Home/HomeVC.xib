@@ -11,6 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeVC" customModule="FanNoise" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="yrS-4C-ibk" id="3wA-B2-l0Y"/>
+                <outlet property="contentView" destination="wsb-HG-ab4" id="gdp-1y-5fT"/>
+                <outlet property="descriptionLabel" destination="xFa-2Z-djH" id="RnK-fo-KvK"/>
+                <outlet property="titleLabel" destination="Wf0-uG-QrG" id="xlz-By-pbP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,14 +22,102 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UtE-yY-lfi" userLabel="TopView">
+                    <rect key="frame" x="0.0" y="74" width="393" height="45"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fan Noise" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wf0-uG-QrG">
+                            <rect key="frame" x="153.33333333333334" y="0.0" width="86.333333333333343" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="29" id="sIW-4J-b8q"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Better sleep starts with soothing fan noise." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFa-2Z-djH">
+                            <rect key="frame" x="84" y="29" width="225" height="14"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="3oP-Z3-eXG"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="xFa-2Z-djH" firstAttribute="top" secondItem="Wf0-uG-QrG" secondAttribute="bottom" id="5Wl-oK-eFf"/>
+                        <constraint firstItem="Wf0-uG-QrG" firstAttribute="top" secondItem="UtE-yY-lfi" secondAttribute="top" id="LCO-qn-6L4"/>
+                        <constraint firstItem="xFa-2Z-djH" firstAttribute="centerX" secondItem="UtE-yY-lfi" secondAttribute="centerX" id="MAk-fE-onA"/>
+                        <constraint firstAttribute="height" constant="45" id="apy-FX-X9M"/>
+                        <constraint firstItem="Wf0-uG-QrG" firstAttribute="centerX" secondItem="UtE-yY-lfi" secondAttribute="centerX" id="hx4-5T-bi4"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wsb-HG-ab4" userLabel="ContentView">
+                    <rect key="frame" x="0.0" y="119" width="393" height="733"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyS-Dv-cfG">
+                    <rect key="frame" x="0.0" y="762" width="393" height="56"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="f9i-fH-eyW"/>
+                    </constraints>
+                </view>
+                <segmentedControl opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="X6I-c8-mTU">
+                    <rect key="frame" x="74.666666666666686" y="722" width="244" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="244" id="Lhk-FU-qAs"/>
+                    </constraints>
+                    <segments>
+                        <segment title="" image="ic_home_segmentoncontrol_home"/>
+                        <segment title="" image="ic_home_segmentoncontrol_trending"/>
+                    </segments>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="25"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </segmentedControl>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="yrS-4C-ibk">
+                    <rect key="frame" x="0.0" y="143" width="393" height="570"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GHS-SA-59D">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemPinkColor"/>
-            <point key="canvasLocation" x="86" y="-11"/>
+            <color key="backgroundColor" systemColor="systemGray6Color"/>
+            <constraints>
+                <constraint firstItem="wsb-HG-ab4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="A8y-Kj-Xob"/>
+                <constraint firstItem="X6I-c8-mTU" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="IGC-Xp-M0g"/>
+                <constraint firstItem="X6I-c8-mTU" firstAttribute="top" secondItem="yrS-4C-ibk" secondAttribute="bottom" constant="9" id="QQ9-Mn-Lwu"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dyS-Dv-cfG" secondAttribute="trailing" id="RQ2-Af-HQm"/>
+                <constraint firstItem="dyS-Dv-cfG" firstAttribute="top" secondItem="X6I-c8-mTU" secondAttribute="bottom" constant="9" id="XPz-zu-hYL"/>
+                <constraint firstItem="UtE-yY-lfi" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="cJL-7O-7XA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="dyS-Dv-cfG" secondAttribute="bottom" id="fhs-o5-qS0"/>
+                <constraint firstItem="yrS-4C-ibk" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="hZK-nE-BHQ"/>
+                <constraint firstItem="wsb-HG-ab4" firstAttribute="top" secondItem="UtE-yY-lfi" secondAttribute="bottom" id="m7U-QZ-kO2"/>
+                <constraint firstItem="UtE-yY-lfi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="oCj-FD-tDU"/>
+                <constraint firstItem="dyS-Dv-cfG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="p6C-xs-cVT"/>
+                <constraint firstItem="UtE-yY-lfi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ppf-AT-J3f"/>
+                <constraint firstItem="yrS-4C-ibk" firstAttribute="top" secondItem="UtE-yY-lfi" secondAttribute="bottom" constant="24" id="qtU-AK-oHs"/>
+                <constraint firstItem="yrS-4C-ibk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="s5N-e6-nTz"/>
+                <constraint firstAttribute="bottom" secondItem="wsb-HG-ab4" secondAttribute="bottom" id="ti3-xy-Q2X"/>
+                <constraint firstItem="wsb-HG-ab4" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="wKQ-Ws-TYs"/>
+            </constraints>
+            <point key="canvasLocation" x="84.732824427480907" y="-11.267605633802818"/>
         </view>
     </objects>
     <resources>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="ic_home_segmentoncontrol_home" width="366" height="114"/>
+        <image name="ic_home_segmentoncontrol_trending" width="366" height="114"/>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

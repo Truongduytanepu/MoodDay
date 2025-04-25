@@ -8,5 +8,5 @@
 import Foundation
 
 struct Config {
-    static let baseURL = "https://"
+    static let baseURL = "https://api-fan-noise.kuemiin.com"
 }

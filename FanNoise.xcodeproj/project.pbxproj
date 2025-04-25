@@ -106,6 +106,10 @@
 		8757BFE22DB7A06600951211 /* LanguageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8757BFE02DB7A06600951211 /* LanguageCell.xib */; };
 		8757BFE62DB7CBDA00951211 /* DataLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757BFE52DB7CBDA00951211 /* DataLanguage.swift */; };
 		8757BFE82DB7CBEC00951211 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757BFE72DB7CBEC00951211 /* Language.swift */; };
+		8757BFF12DB9CE9E00951211 /* HomeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757BFF02DB9CE9E00951211 /* HomeCategory.swift */; };
+		8757BFFE2DB9F14200951211 /* GetCategoryHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757BFFD2DB9F14200951211 /* GetCategoryHome.swift */; };
+		8757C0022DBA169000951211 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757C0002DBA169000951211 /* CategoryCell.swift */; };
+		8757C0032DBA169000951211 /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8757C0012DBA169000951211 /* CategoryCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -209,6 +213,10 @@
 		8757BFE02DB7A06600951211 /* LanguageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguageCell.xib; sourceTree = "<group>"; };
 		8757BFE52DB7CBDA00951211 /* DataLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLanguage.swift; sourceTree = "<group>"; };
 		8757BFE72DB7CBEC00951211 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		8757BFF02DB9CE9E00951211 /* HomeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategory.swift; sourceTree = "<group>"; };
+		8757BFFD2DB9F14200951211 /* GetCategoryHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategoryHome.swift; sourceTree = "<group>"; };
+		8757C0002DBA169000951211 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		8757C0012DBA169000951211 /* CategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
 		9E53ED02C5DF51B3FCC2CD77 /* Pods-FanNoise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanNoise.debug.xcconfig"; path = "Target Support Files/Pods-FanNoise/Pods-FanNoise.debug.xcconfig"; sourceTree = "<group>"; };
 		D96D8C7C884D88669CBD62AC /* Pods-FanNoise.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanNoise.release.xcconfig"; path = "Target Support Files/Pods-FanNoise/Pods-FanNoise.release.xcconfig"; sourceTree = "<group>"; };
 		DB40C219C19C92489D6358C5 /* Pods_FanNoise.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanNoise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -252,6 +260,7 @@
 				71A560DB2DA8FE60007E8BE3 /* API */,
 				71A560DE2DA8FE74007E8BE3 /* Common */,
 				71A561712DA8FEBA007E8BE3 /* Resource */,
+				8757BFEF2DB9CE8500951211 /* Model */,
 				71A561862DA8FF24007E8BE3 /* DI */,
 				71A5618D2DA8FFB9007E8BE3 /* Base */,
 				71A561982DA8FFC5007E8BE3 /* MVP-C */,
@@ -285,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				71A560DC2DA8FE69007E8BE3 /* API.swift */,
+				8757BFFD2DB9F14200951211 /* GetCategoryHome.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -501,11 +511,12 @@
 		8736A3F42DB5FFF5009A07A2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				8757BFFF2DBA167900951211 /* Cell */,
 				8736A3F82DB60039009A07A2 /* HomeCoordinator.swift */,
 				8736A3F52DB60038009A07A2 /* HomePresenter.swift */,
-				8736A3F72DB60039009A07A2 /* HomeVC.swift */,
 				8736A3F92DB60039009A07A2 /* HomeVC.xib */,
 				8736A3F62DB60039009A07A2 /* HomeView.swift */,
+				8736A3F72DB60039009A07A2 /* HomeVC.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -557,6 +568,23 @@
 				8757BFE52DB7CBDA00951211 /* DataLanguage.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		8757BFEF2DB9CE8500951211 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8757BFF02DB9CE9E00951211 /* HomeCategory.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8757BFFF2DBA167900951211 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8757C0002DBA169000951211 /* CategoryCell.swift */,
+				8757C0012DBA169000951211 /* CategoryCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		B8D1D0B7B9715EE5E7DAB573 /* Pods */ = {
@@ -656,6 +684,7 @@
 				8757BFE22DB7A06600951211 /* LanguageCell.xib in Resources */,
 				71A561812DA8FF09007E8BE3 /* MPLUS2-SemiBold.ttf in Resources */,
 				873366042DB757B900DFEC83 /* IntroVC.xib in Resources */,
+				8757C0032DBA169000951211 /* CategoryCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,6 +786,7 @@
 				71A561972DA8FFB9007E8BE3 /* Coordinator.swift in Sources */,
 				71A5615D2DA8FE8D007E8BE3 /* DictionaryExtension.swift in Sources */,
 				71A5612D2DA8FE8D007E8BE3 /* Utils.swift in Sources */,
+				8757BFFE2DB9F14200951211 /* GetCategoryHome.swift in Sources */,
 				71A561452DA8FE8D007E8BE3 /* NotificationName.swift in Sources */,
 				71A560C32DA8F812007E8BE3 /* ViewController.swift in Sources */,
 				71A561562DA8FE8D007E8BE3 /* URLExtensions.swift in Sources */,
@@ -770,6 +800,7 @@
 				71A561702DA8FE8D007E8BE3 /* TriangleView.swift in Sources */,
 				873366052DB757B900DFEC83 /* IntroPresenter.swift in Sources */,
 				71A561612DA8FE8D007E8BE3 /* CalendarExtensions.swift in Sources */,
+				8757C0022DBA169000951211 /* CategoryCell.swift in Sources */,
 				71A5614E2DA8FE8D007E8BE3 /* PHAssetExtension.swift in Sources */,
 				71A561952DA8FFB9007E8BE3 /* BaseNavigationController.swift in Sources */,
 				71A5613E2DA8FE8D007E8BE3 /* PreviewCameraView.swift in Sources */,
@@ -801,6 +832,7 @@
 				8736A3FB2DB60039009A07A2 /* HomeView.swift in Sources */,
 				71A561602DA8FE8D007E8BE3 /* CollectionViewExtensions.swift in Sources */,
 				71A560DA2DA8FE47007E8BE3 /* Config.swift in Sources */,
+				8757BFF12DB9CE9E00951211 /* HomeCategory.swift in Sources */,
 				873366072DB757B900DFEC83 /* IntroVC.swift in Sources */,
 				71A5618C2DA8FF24007E8BE3 /* PresenterRegisterer.swift in Sources */,
 				71A5614B2DA8FE8D007E8BE3 /* CIImageExtensions.swift in Sources */,
