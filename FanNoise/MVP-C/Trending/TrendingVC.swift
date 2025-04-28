@@ -8,17 +8,19 @@
 import UIKit
 
 class TrendingVC: BaseVC<TrendingPresenter, TrendingView> {
-    // MARK: - Lifecycle
+    @IBOutlet private weak var collectionView: UICollectionView!
+    
     var coordinator : TrendingCoordinator!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.config()
     }
 
     // MARK: - Config
-    func config() {
-
+    private func config() {
+        
     }
 }
 

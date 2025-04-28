@@ -24,9 +24,13 @@ class SplashVC: BaseVC<SplashPresenter, SplashView> {
         self.config()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.setupGradient()
+    }
+    
     // MARK: - Config
     private func config() {
-        self.setupGradient()
         self.customProgressView()
         self.startLoading()
         self.setupFont()

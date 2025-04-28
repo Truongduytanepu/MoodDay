@@ -50,10 +50,18 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
         guard let home = self.homeVC else { return }
         
         addChild(home)
-        home.view.frame = self.mainView.bounds
-        home.view.alpha = 0 // Bắt đầu với alpha = 0 để làm fade in
-        
+        home.view.translatesAutoresizingMaskIntoConstraints = false
+        home.view.alpha = 0
         self.mainView.addSubview(home.view)
+        
+        // Auto Layout constraints để fill toàn bộ mainView
+        NSLayoutConstraint.activate([
+            home.view.topAnchor.constraint(equalTo: mainView.topAnchor),
+            home.view.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
+            home.view.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
+            home.view.bottomAnchor.constraint(equalTo: mainView.bottomAnchor)
+        ])
+        
         home.didMove(toParent: self)
         
         UIView.animate(withDuration: Const.durationAnimate) {
@@ -69,10 +77,18 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
         guard let trending = self.trendingVC else { return }
         
         addChild(trending)
-        trending.view.frame = self.mainView.bounds
-        trending.view.alpha = 0 // Bắt đầu với alpha = 0 để làm fade in
-        
+        trending.view.translatesAutoresizingMaskIntoConstraints = false
+        trending.view.alpha = 0
         self.mainView.addSubview(trending.view)
+        
+        // Auto Layout constraints để fill toàn bộ mainView
+        NSLayoutConstraint.activate([
+            trending.view.topAnchor.constraint(equalTo: mainView.topAnchor),
+            trending.view.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
+            trending.view.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
+            trending.view.bottomAnchor.constraint(equalTo: mainView.bottomAnchor)
+        ])
+        
         trending.didMove(toParent: self)
         
         UIView.animate(withDuration: Const.durationAnimate) {
@@ -118,7 +134,7 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
         self.setupHomeViewController()
         self.removeTrendingViewController()
         self.homeImageView.image = UIImage(named: "ic_tabbar_home_enable")
-        self.trendingImageView.image = UIImage(named: "ic_tabbar_trend_disable")
+        self.trendingImageView.image = UIImage(named: "ic_tabbar_trending_disable")
         self.tabbarView.backgroundColor = .white
     }
     

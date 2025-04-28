@@ -38,5 +38,9 @@ class PresenterRegisterer {
         container.register(PreviewVideoPresenter.self) { (_, view: PreviewVideoView) -> PreviewVideoPresenter in
             return PreviewVideoPresenterImpl(view: view)
         }
+        
+        container.register(NaturalSoundWhiteNoisePresenter.self) { (_, view: NaturalSoundWhiteNoiseView) -> NaturalSoundWhiteNoisePresenter in
+            return NaturalSoundWhiteNoisePresenterImpl(view: view)
+        }
     }
 }

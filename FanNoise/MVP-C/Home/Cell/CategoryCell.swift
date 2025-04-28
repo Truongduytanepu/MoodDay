@@ -41,8 +41,7 @@ class CategoryCell: UICollectionViewCell {
         if let thumb = category.thumb,
            let encodedString = thumb.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
            let url = URL(string: encodedString) {
-            
-            self.categoryImageView.sd_setImage(with: url, completed: nil)
+        self.categoryImageView.sd_setImage(with: url, completed: nil)
         }
         
         self.bottomTitleLabel.text = category.name

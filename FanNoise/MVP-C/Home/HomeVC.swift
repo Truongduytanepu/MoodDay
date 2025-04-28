@@ -34,9 +34,13 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
         self.config()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.setupGradient()
+    }
+    
     // MARK: - Config
     private func config() {
-        self.setupGradient()
         self.setupFont()
         self.configNetwork()
         self.configCollectionview()
@@ -83,10 +87,30 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
         self.collectionView.dataSource = self
         self.collectionView.register(UINib(nibName: "CategoryCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCell")
     }
+    
+    private func startNaturalSoundWhiteNoiseCoordinator(navigationController: UINavigationController,
+                                            categoryId: String,
+                                            categoryName: String) {
+        let naturalSoundWhiteNoiseCoordinator = NaturalSoundWhiteNoiseCoordinator(navigation: navigationController,
+                                                          categoryId: categoryId,
+                                                          categoryName: categoryName)
+        naturalSoundWhiteNoiseCoordinator.start()
+    }
 }
 
 extension HomeVC: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // Chỉ xử lý khi chọn cell thứ 2 hoặc 3 (index 1 hoặc 2)
+        
+        if indexPath.row == 1 || indexPath.row == 2 {
+            guard let navigationController = self.navigationController else { return }
+            let homeCategoryName = HomeCategoryManager.shared.getCategories()[indexPath.row].name ?? ""
+            let homeCategoryId = HomeCategoryManager.shared.getCategories()[indexPath.row].id ?? ""
+            self.startNaturalSoundWhiteNoiseCoordinator(navigationController: navigationController,
+                                       categoryId: homeCategoryId,
+                                       categoryName: homeCategoryName)
+        }
+    }
 }
 
 extension HomeVC: UICollectionViewDataSource {
@@ -102,13 +126,6 @@ extension HomeVC: UICollectionViewDataSource {
         cell.setupTitleLabel(index: indexPath.row)
         cell.configure(homeCategories[indexPath.row])
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let navigationController = self.navigationController else {return}
-        
-        let previewVideoCoordinator = PreviewVideoCoordinator(navigation: navigationController)
-        previewVideoCoordinator.start()
     }
 }
 

@@ -4,26 +4,46 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrendingVC" customModule="FanNoise" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="513-HP-sMx" id="jrF-Cb-vRD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="513-HP-sMx">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                    <color key="backgroundColor" systemColor="systemBrownColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LIL-bu-low">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
             <color key="backgroundColor" systemColor="systemOrangeColor"/>
-            <point key="canvasLocation" x="-21" y="-12"/>
+            <constraints>
+                <constraint firstItem="513-HP-sMx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4bB-6z-hcb"/>
+                <constraint firstAttribute="bottom" secondItem="513-HP-sMx" secondAttribute="bottom" id="Hpk-VR-Ifn"/>
+                <constraint firstAttribute="trailing" secondItem="513-HP-sMx" secondAttribute="trailing" id="gkr-hZ-TTB"/>
+                <constraint firstItem="513-HP-sMx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="iH2-nX-QY4"/>
+            </constraints>
+            <point key="canvasLocation" x="-22.137404580152669" y="-12.67605633802817"/>
         </view>
     </objects>
     <resources>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

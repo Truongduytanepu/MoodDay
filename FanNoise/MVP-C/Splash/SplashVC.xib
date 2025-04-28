@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -80,7 +81,7 @@ with the soothing sound of fans!</string>
                 </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" systemColor="systemRedColor"/>
             <constraints>
                 <constraint firstItem="pnP-0F-VaH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0Bc-DZ-Vsj"/>
                 <constraint firstItem="m8X-BA-R4E" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7cH-96-DWe"/>
@@ -96,5 +97,8 @@ with the soothing sound of fans!</string>
     </objects>
     <resources>
         <image name="ic_splash_logo" width="301" height="301"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

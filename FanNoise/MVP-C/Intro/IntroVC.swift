@@ -57,7 +57,6 @@ class IntroVC: BaseVC<IntroPresenter, IntroView> {
     
     private func setupScrollView() {
         self.scrollView.delegate = self
-        self.scrollView.showsHorizontalScrollIndicator = false
         
         // Sắp xếp các introView cạnh nhau
         let introViews = [self.introFirstView, self.introSecondView, self.introThirdView, self.introLastView]

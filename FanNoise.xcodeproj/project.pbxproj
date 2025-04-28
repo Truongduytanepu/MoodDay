@@ -115,6 +115,18 @@
 		874313C72DBB9C2F0042243C /* TrendingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313C22DBB9C2F0042243C /* TrendingPresenter.swift */; };
 		874313C82DBB9C2F0042243C /* TrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313C32DBB9C2F0042243C /* TrendingView.swift */; };
 		874313C92DBB9C2F0042243C /* TrendingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313C42DBB9C2F0042243C /* TrendingVC.swift */; };
+		874313F12DBCE2B20042243C /* ListItemSoundCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313EC2DBCE2B20042243C /* ListItemSoundCoordinator.swift */; };
+		874313F22DBCE2B20042243C /* ListItemSoundVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874313ED2DBCE2B20042243C /* ListItemSoundVC.xib */; };
+		874313F32DBCE2B20042243C /* ListItemSoundPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313EE2DBCE2B20042243C /* ListItemSoundPresenter.swift */; };
+		874313F42DBCE2B20042243C /* ListItemSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313EF2DBCE2B20042243C /* ListItemSoundView.swift */; };
+		874313F52DBCE2B20042243C /* ListItemSoundVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313F02DBCE2B20042243C /* ListItemSoundVC.swift */; };
+		874313FC2DBF7CCE0042243C /* NaturalSoundWhiteNoiseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313F72DBF7CCE0042243C /* NaturalSoundWhiteNoiseCoordinator.swift */; };
+		874313FD2DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874313F82DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.xib */; };
+		874313FE2DBF7CCE0042243C /* NaturalSoundWhiteNoisePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313F92DBF7CCE0042243C /* NaturalSoundWhiteNoisePresenter.swift */; };
+		874313FF2DBF7CCE0042243C /* NaturalSoundWhiteNoiseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313FA2DBF7CCE0042243C /* NaturalSoundWhiteNoiseView.swift */; };
+		874314002DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313FB2DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.swift */; };
+		874314042DBF7D620042243C /* NaturalSoundWhiteNoiseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874314022DBF7D620042243C /* NaturalSoundWhiteNoiseCell.swift */; };
+		874314052DBF7D620042243C /* NaturalSoundWhiteNoiseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874314032DBF7D620042243C /* NaturalSoundWhiteNoiseCell.xib */; };
 		8753DA152DB62ABF00D412D0 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8753DA142DB62ABF00D412D0 /* AppFont.swift */; };
 		875588232DB7833700A63106 /* gift_intro_2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 875588222DB7833700A63106 /* gift_intro_2.gif */; };
 		8755882A2DB797BC00A63106 /* LanguageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875588252DB797BC00A63106 /* LanguageCoordinator.swift */; };
@@ -240,6 +252,18 @@
 		874313C22DBB9C2F0042243C /* TrendingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingPresenter.swift; sourceTree = "<group>"; };
 		874313C32DBB9C2F0042243C /* TrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingView.swift; sourceTree = "<group>"; };
 		874313C42DBB9C2F0042243C /* TrendingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingVC.swift; sourceTree = "<group>"; };
+		874313EC2DBCE2B20042243C /* ListItemSoundCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemSoundCoordinator.swift; sourceTree = "<group>"; };
+		874313ED2DBCE2B20042243C /* ListItemSoundVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListItemSoundVC.xib; sourceTree = "<group>"; };
+		874313EE2DBCE2B20042243C /* ListItemSoundPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemSoundPresenter.swift; sourceTree = "<group>"; };
+		874313EF2DBCE2B20042243C /* ListItemSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemSoundView.swift; sourceTree = "<group>"; };
+		874313F02DBCE2B20042243C /* ListItemSoundVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemSoundVC.swift; sourceTree = "<group>"; };
+		874313F72DBF7CCE0042243C /* NaturalSoundWhiteNoiseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalSoundWhiteNoiseCoordinator.swift; sourceTree = "<group>"; };
+		874313F82DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NaturalSoundWhiteNoiseVC.xib; sourceTree = "<group>"; };
+		874313F92DBF7CCE0042243C /* NaturalSoundWhiteNoisePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalSoundWhiteNoisePresenter.swift; sourceTree = "<group>"; };
+		874313FA2DBF7CCE0042243C /* NaturalSoundWhiteNoiseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalSoundWhiteNoiseView.swift; sourceTree = "<group>"; };
+		874313FB2DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalSoundWhiteNoiseVC.swift; sourceTree = "<group>"; };
+		874314022DBF7D620042243C /* NaturalSoundWhiteNoiseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalSoundWhiteNoiseCell.swift; sourceTree = "<group>"; };
+		874314032DBF7D620042243C /* NaturalSoundWhiteNoiseCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NaturalSoundWhiteNoiseCell.xib; sourceTree = "<group>"; };
 		8753DA142DB62ABF00D412D0 /* AppFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
 		875588222DB7833700A63106 /* gift_intro_2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gift_intro_2.gif; sourceTree = "<group>"; };
 		875588252DB797BC00A63106 /* LanguageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCoordinator.swift; sourceTree = "<group>"; };
@@ -513,6 +537,8 @@
 		71A561982DA8FFC5007E8BE3 /* MVP-C */ = {
 			isa = PBXGroup;
 			children = (
+				874313F62DBF7C870042243C /* NaturalSoundWhiteNoise */,
+				874313EB2DBCE28D0042243C /* ListItemSound */,
 				874313CA2DBB9CB40042243C /* Trending */,
 				874313B02DBB96E20042243C /* Home */,
 				874313972DBB67650042243C /* Tabbar */,
@@ -614,6 +640,40 @@
 				874313C42DBB9C2F0042243C /* TrendingVC.swift */,
 			);
 			path = Trending;
+			sourceTree = "<group>";
+		};
+		874313EB2DBCE28D0042243C /* ListItemSound */ = {
+			isa = PBXGroup;
+			children = (
+				874313EC2DBCE2B20042243C /* ListItemSoundCoordinator.swift */,
+				874313ED2DBCE2B20042243C /* ListItemSoundVC.xib */,
+				874313EE2DBCE2B20042243C /* ListItemSoundPresenter.swift */,
+				874313EF2DBCE2B20042243C /* ListItemSoundView.swift */,
+				874313F02DBCE2B20042243C /* ListItemSoundVC.swift */,
+			);
+			path = ListItemSound;
+			sourceTree = "<group>";
+		};
+		874313F62DBF7C870042243C /* NaturalSoundWhiteNoise */ = {
+			isa = PBXGroup;
+			children = (
+				874314012DBF7D3C0042243C /* Cell */,
+				874313F72DBF7CCE0042243C /* NaturalSoundWhiteNoiseCoordinator.swift */,
+				874313F82DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.xib */,
+				874313F92DBF7CCE0042243C /* NaturalSoundWhiteNoisePresenter.swift */,
+				874313FA2DBF7CCE0042243C /* NaturalSoundWhiteNoiseView.swift */,
+				874313FB2DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.swift */,
+			);
+			path = NaturalSoundWhiteNoise;
+			sourceTree = "<group>";
+		};
+		874314012DBF7D3C0042243C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				874314022DBF7D620042243C /* NaturalSoundWhiteNoiseCell.swift */,
+				874314032DBF7D620042243C /* NaturalSoundWhiteNoiseCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		875588212DB7830100A63106 /* Gift */ = {
@@ -756,6 +816,8 @@
 				71A560CB2DA8F813007E8BE3 /* LaunchScreen.storyboard in Resources */,
 				71A5617E2DA8FF09007E8BE3 /* MPLUS2-ExtraBold.ttf in Resources */,
 				71A560C82DA8F813007E8BE3 /* Assets.xcassets in Resources */,
+				874314052DBF7D620042243C /* NaturalSoundWhiteNoiseCell.xib in Resources */,
+				874313FD2DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.xib in Resources */,
 				71A560D42DA8FA5E007E8BE3 /* GoogleService-Info.plist in Resources */,
 				71A5617C2DA8FF09007E8BE3 /* MPLUS2-Bold.ttf in Resources */,
 				71A561822DA8FF09007E8BE3 /* MPLUS2-Black.ttf in Resources */,
@@ -773,6 +835,7 @@
 				8757BFE22DB7A06600951211 /* LanguageCell.xib in Resources */,
 				874313B72DBB98180042243C /* HomeVC.xib in Resources */,
 				874313C62DBB9C2F0042243C /* TrendingVC.xib in Resources */,
+				874313F22DBCE2B20042243C /* ListItemSoundVC.xib in Resources */,
 				71A561812DA8FF09007E8BE3 /* MPLUS2-SemiBold.ttf in Resources */,
 				873366042DB757B900DFEC83 /* IntroVC.xib in Resources */,
 			);
@@ -849,13 +912,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-FanNoise/Pods-FanNoise-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-FanNoise/Pods-FanNoise-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -873,6 +932,7 @@
 				71A5616C2DA8FE8D007E8BE3 /* OverlayWindow.swift in Sources */,
 				8755882E2DB797BC00A63106 /* LanguageVC.swift in Sources */,
 				71A561552DA8FE8D007E8BE3 /* AVPlayerExtension.swift in Sources */,
+				874314002DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.swift in Sources */,
 				71A561502DA8FE8D007E8BE3 /* URLRequestExtensions.swift in Sources */,
 				8757BFE62DB7CBDA00951211 /* DataLanguage.swift in Sources */,
 				71A561582DA8FE8D007E8BE3 /* UIImageExtensions.swift in Sources */,
@@ -884,17 +944,21 @@
 				874313C92DBB9C2F0042243C /* TrendingVC.swift in Sources */,
 				8757BFFE2DB9F14200951211 /* GetCategoryHome.swift in Sources */,
 				71A561452DA8FE8D007E8BE3 /* NotificationName.swift in Sources */,
+				874314042DBF7D620042243C /* NaturalSoundWhiteNoiseCell.swift in Sources */,
 				71A560C32DA8F812007E8BE3 /* ViewController.swift in Sources */,
 				71A561562DA8FE8D007E8BE3 /* URLExtensions.swift in Sources */,
 				71A561932DA8FFB9007E8BE3 /* BaseVC.swift in Sources */,
 				8755882C2DB797BC00A63106 /* LanguagePresenter.swift in Sources */,
+				874313F52DBCE2B20042243C /* ListItemSoundVC.swift in Sources */,
 				873366032DB757B900DFEC83 /* IntroCoordinator.swift in Sources */,
+				874313FC2DBF7CCE0042243C /* NaturalSoundWhiteNoiseCoordinator.swift in Sources */,
 				71A560BF2DA8F812007E8BE3 /* AppDelegate.swift in Sources */,
 				8736A3E42DB5F2B6009A07A2 /* SplashCoordinator.swift in Sources */,
 				71A5618A2DA8FF24007E8BE3 /* DaoRegisterer.swift in Sources */,
 				8736A3E72DB5F2B6009A07A2 /* SplashView.swift in Sources */,
 				71A561702DA8FE8D007E8BE3 /* TriangleView.swift in Sources */,
 				873366052DB757B900DFEC83 /* IntroPresenter.swift in Sources */,
+				874313FE2DBF7CCE0042243C /* NaturalSoundWhiteNoisePresenter.swift in Sources */,
 				71A561612DA8FE8D007E8BE3 /* CalendarExtensions.swift in Sources */,
 				71A5614E2DA8FE8D007E8BE3 /* PHAssetExtension.swift in Sources */,
 				71A561952DA8FFB9007E8BE3 /* BaseNavigationController.swift in Sources */,
@@ -938,13 +1002,16 @@
 				873366072DB757B900DFEC83 /* IntroVC.swift in Sources */,
 				71A5618C2DA8FF24007E8BE3 /* PresenterRegisterer.swift in Sources */,
 				71A5614B2DA8FE8D007E8BE3 /* CIImageExtensions.swift in Sources */,
+				874313F42DBCE2B20042243C /* ListItemSoundView.swift in Sources */,
 				71A561522DA8FE8D007E8BE3 /* FileManagerExtensions.swift in Sources */,
+				874313FF2DBF7CCE0042243C /* NaturalSoundWhiteNoiseView.swift in Sources */,
 				874313C82DBB9C2F0042243C /* TrendingView.swift in Sources */,
 				71A561572DA8FE8D007E8BE3 /* UIViewControllerExtensions.swift in Sources */,
 				874313B82DBB98180042243C /* HomePresenter.swift in Sources */,
 				8757BFE82DB7CBEC00951211 /* Language.swift in Sources */,
 				874313BA2DBB98180042243C /* HomeVC.swift in Sources */,
 				874313C72DBB9C2F0042243C /* TrendingPresenter.swift in Sources */,
+				874313F12DBCE2B20042243C /* ListItemSoundCoordinator.swift in Sources */,
 				71A5618B2DA8FF24007E8BE3 /* DIContainer.swift in Sources */,
 				71A5615B2DA8FE8D007E8BE3 /* DateExtensions.swift in Sources */,
 				71A561312DA8FE8D007E8BE3 /* ConsoleLogEngine.swift in Sources */,
@@ -954,6 +1021,7 @@
 				71A561532DA8FE8D007E8BE3 /* CGImagePropertyOrientationExtension.swift in Sources */,
 				71A561482DA8FE8D007E8BE3 /* FloatExtensions.swift in Sources */,
 				874313BD2DBB98C30042243C /* CategoryCell.swift in Sources */,
+				874313F32DBCE2B20042243C /* ListItemSoundPresenter.swift in Sources */,
 				874313B92DBB98180042243C /* HomeView.swift in Sources */,
 				71A561462DA8FE8D007E8BE3 /* AVAssetExtension.swift in Sources */,
 				71A561302DA8FE8D007E8BE3 /* CrashlyticsLogEngine.swift in Sources */,

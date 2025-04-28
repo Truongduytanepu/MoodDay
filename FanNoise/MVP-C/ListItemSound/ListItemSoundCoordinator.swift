@@ -1,14 +1,13 @@
 //
-//  VideoCoordinator.swift
+//  ListItemSoundCoordinator.swift
 //  FanNoise
 //
-//  Created by ADMIN on 4/25/25.
+//  Created by Chiến Nguyễn on 26/04/2025.
 //
 
 import UIKit
 
-class PreviewVideoCoordinator: Coordinator {
-    
+class ListItemSoundCoordinator: Coordinator {
     var started: Bool = false
     private weak var navigation: UINavigationController?
     
@@ -19,15 +18,16 @@ class PreviewVideoCoordinator: Coordinator {
     func start() {
         if !started {
             started = true
-            let controller = PreviewVideoVC.factory()
+            let controller = ListItemSoundVC.factory()
             controller.coordinator = self
-            self.navigation?.pushViewController(controller, animated: true)
+            navigation?.pushViewController(controller, animated: true)
         }
     }
     
     func stop() {
         if started {
             started = false
+            self.navigation?.popViewController(animated: true)
         }
     }
 }
