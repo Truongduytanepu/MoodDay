@@ -29,4 +29,9 @@ extension UICollectionView {
         let name = String(describing: type)
         return self.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: name, for: indexPath) as? T
     }
+    
+    func getCurrentCell<T: UICollectionViewCell>() -> T? {
+        guard let indexPath = self.indexPathsForVisibleItems.first else { return nil }
+        return self.cellForItem(at: indexPath) as? T
+    }
 }

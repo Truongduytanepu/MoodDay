@@ -35,8 +35,8 @@ class PresenterRegisterer {
             return TrendingPresenterImpl(view: view)
         }
         
-        container.register(VideoPresenter.self) { (_, view: VideoView) -> VideoPresenter in
-            return VideoPresenterImpl(view: view)
+        container.register(PreviewVideoPresenter.self) { (_, view: PreviewVideoView) -> PreviewVideoPresenter in
+            return PreviewVideoPresenterImpl(view: view)
         }
     }
 }

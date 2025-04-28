@@ -48,4 +48,15 @@ import Foundation
     let source: String?
     let thumb: String?
     let isPremium: Bool?
+    var isPlay: Bool = false
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case index
+        case name
+        case category
+        case source
+        case thumb
+        case isPremium
+    }
 }

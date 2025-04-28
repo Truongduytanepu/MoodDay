@@ -107,8 +107,8 @@ extension HomeVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let navigationController = self.navigationController else {return}
         
-        let videoCoordinator = VideoCoordinator(navigation: navigationController)
-        videoCoordinator.start()
+        let previewVideoCoordinator = PreviewVideoCoordinator(navigation: navigationController)
+        previewVideoCoordinator.start()
     }
 }
 

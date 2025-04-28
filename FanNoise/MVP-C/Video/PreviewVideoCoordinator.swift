@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VideoCoordinator: Coordinator {
+class PreviewVideoCoordinator: Coordinator {
     
     var started: Bool = false
     private weak var navigation: UINavigationController?
@@ -19,7 +19,7 @@ class VideoCoordinator: Coordinator {
     func start() {
         if !started {
             started = true
-            let controller = VideoVC.factory()
+            let controller = PreviewVideoVC.factory()
             controller.coordinator = self
             self.navigation?.pushViewController(controller, animated: true)
         }
@@ -35,4 +35,3 @@ class VideoCoordinator: Coordinator {
         
     }
 }
-

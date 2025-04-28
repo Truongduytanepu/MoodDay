@@ -7,6 +7,5 @@
 
 import UIKit
 
-@objc protocol VideoView: BaseView {
-    
+@objc protocol PreviewVideoView: BaseView {
 }
