@@ -4,18 +4,27 @@
 //
 //  Created by ADMIN on 4/25/25.
 //
-
 import UIKit
 import AVKit
 
 private struct Const {
     static let lineSpace: CGFloat = 0
     static let interitemSpace: CGFloat = 0
+    static let swipeCountToShowTopic: Int = 5
+}
+
+enum VideoCategoryType {
+    case trending
+    case filtered(idCategory: String)
 }
 
 class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     
+    @IBOutlet private weak var navigationView: UIView!
     @IBOutlet private weak var collectionView: UICollectionView!
+    
+    var videoCategoryType: VideoCategoryType = .trending
+    var idCategory: String = ""
     
     var coordinator: PreviewVideoCoordinator!
     
@@ -29,9 +38,28 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     }
     
     private func config() {
-        self.presenter.loadData()
+        self.setUpData()
         self.setupCollectionView()
         self.setUpNotification()
+    }
+    
+    private func setUpData() {
+        switch self.videoCategoryType {
+        case .trending:
+            self.navigationView.isHidden = true
+            self.presenter.getAllVideo()
+        case .filtered(let idCategory):
+            self.navigationView.isHidden = false
+            self.presenter.loadData(idCategory: self.idCategory)
+        }
+    }
+    
+    private func setupCollectionView() {
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.registerCell(type: ItemVideoCell.self)
+        self.collectionView.registerCell(type: TopicSuggestVideoCell.self)
+        self.collectionView.contentInsetAdjustmentBehavior = .never
     }
     
     private func setUpNotification() {
@@ -50,17 +78,20 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         )
     }
     
-    private func setupCollectionView() {
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-        self.collectionView.registerCell(type: ItemVideoCell.self)
-        self.collectionView.contentInsetAdjustmentBehavior = .never
-    }
-    
-    @objc private func appMovedToBackground() {
+    func stopVideo() {
         if let cell = collectionView.getCurrentCell() as? ItemVideoCell {
             cell.stopVideo()
         }
+    }
+    
+    private func startVideo() {
+        if let cell = collectionView.getCurrentCell() as? ItemVideoCell {
+            cell.startVideo()
+        }
+    }
+
+    @objc private func appMovedToBackground() {
+        self.stopVideo()
     }
     
     @objc private func appInterrupted(notification: Notification) {
@@ -70,22 +101,18 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         
         switch type {
         case .began:
-            if let cell = collectionView.getCurrentCell() as? ItemVideoCell {
-                cell.stopVideo()
-            }
+            self.stopVideo()
             
         case .ended:
-            if let optionsValue = info[AVAudioSessionInterruptionOptionKey] as? UInt {
-                let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
-                if options.contains(.shouldResume) {
-                    if let cell = collectionView.getCurrentCell() as? ItemVideoCell {
-                        cell.startVideo()
-                    }
-                }
-            }
+            break
+            
         @unknown default:
             break
         }
+    }
+    
+    @IBAction func closeBtnTapped(_ sender: Any) {
+        self.coordinator.stop()
     }
 }
 
@@ -110,29 +137,68 @@ extension PreviewVideoVC: UICollectionViewDelegate {
 extension PreviewVideoVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return self.presenter.getNumberOfItems()
+        let totalItems = self.presenter.getNumberOfItems()
+        let topicCells = totalItems / Const.swipeCountToShowTopic
+        
+        return totalItems + topicCells
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let video = self.presenter.getVideo(at: indexPath.row)
-        guard let cell = collectionView.getCurrentCell() as? ItemVideoCell else { return }
-        if video.isPlay {
-            cell.stopVideo()
-        } else {
-            cell.startVideo()
-        }
-    }
-    
+
     func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueCell(type: ItemVideoCell.self, indexPath: indexPath) else {
-            return UICollectionViewCell()
+                        didSelectItemAt indexPath: IndexPath) {
+        let video = self.presenter.getVideo(at: indexPath.row)
+        if video.isPlay {
+            self.stopVideo()
+        } else {
+            self.startVideo()
         }
-        
-        let video = presenter.getVideo(at: indexPath.row)
-        cell.configure(with: video.source ?? "", video: video)
-        
-        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch self.videoCategoryType {
+        case .trending:
+            if (indexPath.row % Const.swipeCountToShowTopic == 0) && indexPath.row > 0 {
+                guard let cell = collectionView.dequeueCell(type: TopicSuggestVideoCell.self,
+                                                            indexPath: indexPath) else {
+                    return UICollectionViewCell()
+                }
+                
+                let videoCategory = self.presenter.getVideocategory()
+                
+                cell.cofigData(videoCategories: videoCategory)
+                
+                cell.callBackUpdateData = { [weak self] name in
+                    guard let self = self else { return }
+                    self.presenter.updateData(name: name)
+                }
+                
+                return cell
+            } else {
+                let adjustedIndex = indexPath.row - (indexPath.row / Const.swipeCountToShowTopic)
+                
+                guard let cell = collectionView.dequeueCell(type: ItemVideoCell.self,
+                                                            indexPath: indexPath) else {
+                    return UICollectionViewCell()
+                }
+                
+                let video = self.presenter.getVideo(at: adjustedIndex)
+                
+                cell.configure(with: video.source ?? "", video: video)
+                cell.setUpCategoryType(videoCategoryType: self.videoCategoryType)
+                return cell
+            }
+            
+        case .filtered(let idCategory):
+            guard let cell = collectionView.dequeueCell(type: ItemVideoCell.self,
+                                                        indexPath: indexPath) else {
+                return UICollectionViewCell()
+            }
+            
+            let video = self.presenter.getVideo(at: indexPath.row)
+            
+            cell.configure(with: video.source ?? "", video: video)
+            cell.setUpCategoryType(videoCategoryType: self.videoCategoryType)
+            return cell
+        }
     }
 }
 
@@ -162,4 +228,11 @@ extension PreviewVideoVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension PreviewVideoVC: PreviewVideoView {}
+extension PreviewVideoVC: PreviewVideoView {
+    func updateUI() {
+        let firstItemIndexPath = IndexPath(row: 0, section: 0)
+        
+        self.collectionView.scrollToItem(at: firstItemIndexPath, at: .top, animated: true)
+        self.collectionView.reloadData()
+    }
+}

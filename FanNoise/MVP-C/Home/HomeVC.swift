@@ -26,6 +26,7 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
     @IBOutlet private weak var contentView: UIView!
     
     var coordinator: HomeCoordinator!
+    var idCategory: String = ""
     private var homeCategories: [HomeCategory] = []
     // MARK: - Lifecycle
     

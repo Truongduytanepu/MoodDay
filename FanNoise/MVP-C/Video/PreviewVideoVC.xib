@@ -4,12 +4,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoVC" customModule="FanNoise" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="dN6-I0-jFk" id="nV8-S8-oaW"/>
+                <outlet property="navigationView" destination="1PO-QD-e4b" id="qLS-F8-ohY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,15 +30,47 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1PO-QD-e4b">
+                    <rect key="frame" x="0.0" y="59" width="393" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WE7-PM-K55">
+                            <rect key="frame" x="12" y="3" width="24" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="24" id="6sp-Wn-kBW"/>
+                                <constraint firstAttribute="width" secondItem="WE7-PM-K55" secondAttribute="height" id="NZL-nh-fCq"/>
+                            </constraints>
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="" image="ic_close"/>
+                            <connections>
+                                <action selector="closeBtnTapped:" destination="-2" eventType="touchUpInside" id="XKq-Dw-wuu"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="nlC-Ov-sRa"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Bxr-J8-ZBQ"/>
+                        <constraint firstItem="WE7-PM-K55" firstAttribute="centerY" secondItem="nlC-Ov-sRa" secondAttribute="centerY" id="lbb-cs-NVU"/>
+                        <constraint firstItem="WE7-PM-K55" firstAttribute="leading" secondItem="nlC-Ov-sRa" secondAttribute="leading" constant="12" id="o1n-GU-4bq"/>
+                    </constraints>
+                </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="c2O-tg-A2x"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="dN6-I0-jFk" secondAttribute="trailing" id="6C7-0n-KsP"/>
-                <constraint firstItem="dN6-I0-jFk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Bp7-mS-q06"/>
-                <constraint firstItem="dN6-I0-jFk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="u6p-Sb-WT9"/>
-                <constraint firstAttribute="bottom" secondItem="dN6-I0-jFk" secondAttribute="bottom" id="wNt-Mk-UCm"/>
+                <constraint firstItem="1PO-QD-e4b" firstAttribute="top" secondItem="c2O-tg-A2x" secondAttribute="top" id="378-vI-tXL"/>
+                <constraint firstItem="1PO-QD-e4b" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7Pq-2u-GiJ"/>
+                <constraint firstItem="dN6-I0-jFk" firstAttribute="leading" secondItem="c2O-tg-A2x" secondAttribute="leading" id="Diz-ql-hsP"/>
+                <constraint firstItem="dN6-I0-jFk" firstAttribute="trailing" secondItem="c2O-tg-A2x" secondAttribute="trailing" id="NwM-ay-f0I"/>
+                <constraint firstItem="dN6-I0-jFk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="W4r-ti-n5c"/>
+                <constraint firstAttribute="bottom" secondItem="dN6-I0-jFk" secondAttribute="bottom" id="tYQ-8G-ap8"/>
+                <constraint firstAttribute="trailing" secondItem="1PO-QD-e4b" secondAttribute="trailing" id="wBz-vx-8jN"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-11.267605633802818"/>
         </view>
     </objects>
+    <resources>
+        <image name="ic_close" width="73" height="72"/>
+    </resources>
 </document>

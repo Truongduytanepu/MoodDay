@@ -48,6 +48,15 @@ class ItemVideoCell: UICollectionViewCell {
         self.stateVideoImg.image = self.video?.isPlay == true ? UIImage(named: "ic_video_play") : UIImage(named: "ic_video_pause")
     }
     
+    func setUpCategoryType(videoCategoryType: VideoCategoryType) {
+        switch videoCategoryType {
+        case .trending:
+            self.stateVideoImg.isHidden = true
+        case .filtered(let idCategory):
+            self.stateVideoImg.isHidden = false
+        }
+    }
+    
     func configure(with videoURLString: String, video: Video) {
         guard let encodedURLString = videoURLString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let videoURL = URL(string: encodedURLString) else {

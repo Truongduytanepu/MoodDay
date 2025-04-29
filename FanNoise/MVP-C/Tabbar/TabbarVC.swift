@@ -22,7 +22,7 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
     
     var coordinator : TabbarCoordinator!
     private var homeVC: HomeVC?
-    private var trendingVC: TrendingVC?
+    private var previewVideoVC: PreviewVideoVC?
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,18 +50,10 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
         guard let home = self.homeVC else { return }
         
         addChild(home)
-        home.view.translatesAutoresizingMaskIntoConstraints = false
-        home.view.alpha = 0
+        home.view.frame = self.mainView.bounds
+        home.view.alpha = 0 // Bắt đầu với alpha = 0 để làm fade in
+        
         self.mainView.addSubview(home.view)
-        
-        // Auto Layout constraints để fill toàn bộ mainView
-        NSLayoutConstraint.activate([
-            home.view.topAnchor.constraint(equalTo: mainView.topAnchor),
-            home.view.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
-            home.view.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
-            home.view.bottomAnchor.constraint(equalTo: mainView.bottomAnchor)
-        ])
-        
         home.didMove(toParent: self)
         
         UIView.animate(withDuration: Const.durationAnimate) {
@@ -70,29 +62,22 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
     }
     
     private func setupTrendingViewController() {
-        if self.trendingVC == nil {
-            self.trendingVC = TrendingVC.factory()
+        if self.previewVideoVC == nil {
+            self.previewVideoVC = PreviewVideoVC.factory()
         }
         
-        guard let trending = self.trendingVC else { return }
+        guard let previewVideoVC = self.previewVideoVC else { return }
         
-        addChild(trending)
-        trending.view.translatesAutoresizingMaskIntoConstraints = false
-        trending.view.alpha = 0
-        self.mainView.addSubview(trending.view)
+        addChild(previewVideoVC)
+        previewVideoVC.view.frame = self.mainView.bounds
+        previewVideoVC.view.alpha = 0 // Bắt đầu với alpha = 0 để làm fade in
+        previewVideoVC.videoCategoryType = .trending
         
-        // Auto Layout constraints để fill toàn bộ mainView
-        NSLayoutConstraint.activate([
-            trending.view.topAnchor.constraint(equalTo: mainView.topAnchor),
-            trending.view.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
-            trending.view.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
-            trending.view.bottomAnchor.constraint(equalTo: mainView.bottomAnchor)
-        ])
-        
-        trending.didMove(toParent: self)
+        self.mainView.addSubview(previewVideoVC.view)
+        previewVideoVC.didMove(toParent: self)
         
         UIView.animate(withDuration: Const.durationAnimate) {
-            trending.view.alpha = 1
+            previewVideoVC.view.alpha = 1
         }
     }
     
@@ -114,25 +99,26 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
     }
     
     private func removeTrendingViewController() {
-        guard let trending = self.trendingVC else { return }
+        guard let previewVideoVC = self.previewVideoVC else { return }
         
         UIView.animate(
             withDuration: 0.2,
             animations: {
-                trending.view.alpha = 0
+                previewVideoVC.view.alpha = 0
             },
             completion: { [weak self] _ in
-                trending.willMove(toParent: nil)
-                trending.view.removeFromSuperview()
-                trending.removeFromParent()
+                previewVideoVC.stopVideo()
+                previewVideoVC.willMove(toParent: nil)
+                previewVideoVC.view.removeFromSuperview()
+                previewVideoVC.removeFromParent()
                 self?.homeVC = nil
             }
         )
     }
     
     @IBAction private func homeButtonDidTap(_ sender: Any) {
-        self.setupHomeViewController()
         self.removeTrendingViewController()
+        self.setupHomeViewController()
         self.homeImageView.image = UIImage(named: "ic_tabbar_home_enable")
         self.trendingImageView.image = UIImage(named: "ic_tabbar_trending_disable")
         self.tabbarView.backgroundColor = .white

@@ -8,4 +8,5 @@
 import UIKit
 
 @objc protocol PreviewVideoView: BaseView {
+    func updateUI()
 }

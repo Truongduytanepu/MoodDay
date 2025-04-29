@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,9 +25,8 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ovc-WO-ydV">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ovc-WO-ydV">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" systemColor="systemBrownColor"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qCD-jL-ONJ" userLabel="Tabbar">
@@ -96,9 +95,13 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="Ovc-WO-ydV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4Bv-Oi-hrd"/>
                 <constraint firstItem="qCD-jL-ONJ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="dYw-J5-hQD"/>
+                <constraint firstItem="Ovc-WO-ydV" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="f6Q-l1-NBD"/>
                 <constraint firstItem="qCD-jL-ONJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="55" id="gBg-6q-EUL"/>
+                <constraint firstItem="Ovc-WO-ydV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gG8-cL-UQj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qCD-jL-ONJ" secondAttribute="bottom" constant="6" id="lDl-fl-KQ1"/>
+                <constraint firstAttribute="bottom" secondItem="Ovc-WO-ydV" secondAttribute="bottom" id="owX-bI-bfk"/>
                 <constraint firstAttribute="trailing" secondItem="qCD-jL-ONJ" secondAttribute="trailing" constant="55" id="zfd-IR-lGz"/>
             </constraints>
             <point key="canvasLocation" x="-8.3969465648854964" y="-12.67605633802817"/>
@@ -111,7 +114,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
