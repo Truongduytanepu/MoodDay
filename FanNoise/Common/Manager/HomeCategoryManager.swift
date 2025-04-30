@@ -90,4 +90,11 @@ class HomeCategoryManager {
         
         return result
     }
+  
+    func getSoundCategory(_ idCategory: String) -> [Sound] {
+        if let categorySound = categories.first(where: { $0.id == idCategory }) {
+            return categorySound.sounds ?? []
+        }
+        
+        return []
 }

@@ -42,5 +42,9 @@ class PresenterRegisterer {
         container.register(NaturalSoundWhiteNoisePresenter.self) { (_, view: NaturalSoundWhiteNoiseView) -> NaturalSoundWhiteNoisePresenter in
             return NaturalSoundWhiteNoisePresenterImpl(view: view)
         }
+        
+        container.register(ListItemSoundPresenter.self) { (_, view: ListItemSoundView) -> ListItemSoundPresenter in
+            return ListItemSoundPresenterImpl(view: view)
+        }
     }
 }

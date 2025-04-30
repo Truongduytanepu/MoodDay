@@ -10,9 +10,10 @@ import UIKit
 class ListItemSoundCoordinator: Coordinator {
     var started: Bool = false
     private weak var navigation: UINavigationController?
-    
-    init(navigation: UINavigationController) {
+    private var homeCategory : HomeCategory
+    init(navigation: UINavigationController,homeCategory: HomeCategory) {
         self.navigation = navigation
+        self.homeCategory = homeCategory
     }
     
     func start() {
@@ -20,6 +21,7 @@ class ListItemSoundCoordinator: Coordinator {
             started = true
             let controller = ListItemSoundVC.factory()
             controller.coordinator = self
+            controller.categoryId = homeCategory.id ?? "" // Truyền categoryId sang DetailVC
             navigation?.pushViewController(controller, animated: true)
         }
     }
@@ -27,7 +29,7 @@ class ListItemSoundCoordinator: Coordinator {
     func stop() {
         if started {
             started = false
-            self.navigation?.popViewController(animated: true)
+            navigation?.popViewController(animated: true)
         }
     }
 }

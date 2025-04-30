@@ -5,7 +5,7 @@
 //  Copyright © 2020 Solar. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public extension String {
   subscript(value: Int) -> Character {
@@ -105,5 +105,33 @@ extension String {
     
     var htmlToString: String {
         return htmlToAttributedString?.string ?? ""
+    }
+    
+    func toColor(alpha: CGFloat = 1.0) -> UIColor? {
+        var formattedString = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        formattedString = formattedString.replacingOccurrences(of: "#", with: "")
+        
+        guard formattedString.count == 6 || formattedString.count == 8 else {
+            return nil
+        }
+        
+        var rgbValue: UInt64 = 0
+        Scanner(string: formattedString).scanHexInt64(&rgbValue)
+        
+        if formattedString.count == 6 {
+            return UIColor(
+                red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+                green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+                blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+                alpha: alpha
+            )
+        } else {
+            return UIColor(
+                red: CGFloat((rgbValue & 0xFF000000) >> 24) / 255.0,
+                green: CGFloat((rgbValue & 0x00FF0000) >> 16) / 255.0,
+                blue: CGFloat((rgbValue & 0x0000FF00) >> 8) / 255.0,
+                alpha: CGFloat(rgbValue & 0x000000FF) / 255.0
+            )
+        }
     }
 }

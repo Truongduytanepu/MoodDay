@@ -9,13 +9,11 @@ import UIKit
 import SVProgressHUD
 
 private struct Const {
-    static let insetLeft: CGFloat = 12
-    static let insetRigtht: CGFloat = 12
+    static let insetLeftRight: CGFloat = 12
     static let cellSpacing: CGFloat = 12
     static let insetForSectionAt = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 12)
     static let numberOfColumns: CGFloat = 2
     static let ratioCellFirst: CGFloat = 336 / 180
-
 }
 
 class HomeVC: BaseVC<HomePresenter, HomeView> {
@@ -44,7 +42,7 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
     private func config() {
         self.setupFont()
         self.configNetwork()
-        self.configCollectionview()
+        self.setupCollectionview()
     }
     
     private func configNetwork() {
@@ -83,19 +81,21 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
         self.view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
-    private func configCollectionview() {
+    private func setupCollectionview() {
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.register(UINib(nibName: "CategoryCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCell")
     }
     
-    private func startNaturalSoundWhiteNoiseCoordinator(navigationController: UINavigationController,
-                                            categoryId: String,
-                                            categoryName: String) {
-        let naturalSoundWhiteNoiseCoordinator = NaturalSoundWhiteNoiseCoordinator(navigation: navigationController,
-                                                          categoryId: categoryId,
-                                                          categoryName: categoryName)
+    private func startNaturalSoundWhiteNoiseCoordinator(navigationController: UINavigationController,homeCategory: HomeCategory) {
+        let naturalSoundWhiteNoiseCoordinator = NaturalSoundWhiteNoiseCoordinator(navigation: navigationController, homeCategory: homeCategory)
         naturalSoundWhiteNoiseCoordinator.start()
+    }
+    
+    private func startListItemSound(navigationController: UINavigationController,
+                                    homeCategory: HomeCategory) {
+        let listItemSoundCoordinator = ListItemSoundCoordinator(navigation: navigationController, homeCategory: homeCategory)
+        listItemSoundCoordinator.start()
     }
 }
 
@@ -105,11 +105,11 @@ extension HomeVC: UICollectionViewDelegate {
         
         if indexPath.row == 1 || indexPath.row == 2 {
             guard let navigationController = self.navigationController else { return }
-            let homeCategoryName = HomeCategoryManager.shared.getCategories()[indexPath.row].name ?? ""
-            let homeCategoryId = HomeCategoryManager.shared.getCategories()[indexPath.row].id ?? ""
-            self.startNaturalSoundWhiteNoiseCoordinator(navigationController: navigationController,
-                                       categoryId: homeCategoryId,
-                                       categoryName: homeCategoryName)
+            self.startNaturalSoundWhiteNoiseCoordinator(navigationController: navigationController,homeCategory: homeCategories[indexPath.row])
+        } else {
+            guard let navigationController = self.navigationController else { return }
+            self.startListItemSound(navigationController: navigationController,homeCategory: homeCategories[indexPath.row])
+            
         }
     }
 }
@@ -123,7 +123,7 @@ extension HomeVC: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueCell(type: CategoryCell.self, indexPath: indexPath) else {
             return UICollectionViewCell()
         }
-
+        
         cell.setupTitleLabel(index: indexPath.row)
         cell.configure(homeCategories[indexPath.row])
         return cell
@@ -133,12 +133,12 @@ extension HomeVC: UICollectionViewDataSource {
 extension HomeVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0 {
-            let width = collectionView.bounds.width - Const.insetLeft - Const.insetRigtht
+            let width = collectionView.bounds.width - 2 * Const.insetLeftRight
             let height = width / Const.ratioCellFirst
             return CGSize(width: width, height: height)
-
+            
         } else {
-            let width = (collectionView.bounds.width - Const.cellSpacing * (Const.numberOfColumns - 1) - Const.insetLeft - Const.insetRigtht) / Const.numberOfColumns
+            let width = (collectionView.bounds.width - Const.cellSpacing * (Const.numberOfColumns - 1) - Const.insetLeftRight) / Const.numberOfColumns
             return CGSize(width: width, height: width)
         }
     }
@@ -146,14 +146,14 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return Const.cellSpacing
     }
-  
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return Const.cellSpacing
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return Const.insetForSectionAt
-        }
+    }
 }
 
 extension HomeVC: HomeView {

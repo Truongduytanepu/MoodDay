@@ -10,13 +10,10 @@ import UIKit
 class NaturalSoundWhiteNoiseCoordinator: Coordinator {
     var started: Bool = false
     private weak var navigation: UINavigationController?
-    private var categoryId : String
-    private var categoryName : String
-    
-    init(navigation: UINavigationController,categoryId: String,categoryName: String) {
+    private var homeCategory : HomeCategory
+    init(navigation: UINavigationController,homeCategory: HomeCategory) {
         self.navigation = navigation
-        self.categoryId = categoryId
-        self.categoryName = categoryName
+        self.homeCategory = homeCategory
     }
     
     func start() {
@@ -24,8 +21,8 @@ class NaturalSoundWhiteNoiseCoordinator: Coordinator {
             started = true
             let controller = NaturalSoundWhiteNoiseVC.factory()
             controller.coordinator = self
-            controller.categoryId = categoryId // Truyền categoryId sang DetailVC
-            controller.categoryName = categoryName
+            controller.categoryId = homeCategory.id ?? "" 
+            controller.categoryName = homeCategory.name ?? ""
             navigation?.pushViewController(controller, animated: true)
         }
     }
