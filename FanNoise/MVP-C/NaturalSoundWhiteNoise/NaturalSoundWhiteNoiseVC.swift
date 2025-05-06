@@ -50,12 +50,25 @@ class NaturalSoundWhiteNoiseVC: BaseVC<NaturalSoundWhiteNoisePresenter, NaturalS
         self.titleLabel.font = AppFont.font(.mPLUS2Black, size: 16)
         self.titleLabel.text = self.categoryName
     }
+    
+    private func startListItemSound(navigationController: UINavigationController, sound: [Sound],video: [Video]) {
+        let listItemSoundCoordinator = ListItemSoundCoordinator(navigation: navigationController,sound: sound,video: video)
+          listItemSoundCoordinator.start()
+    }
+    
     @IBAction private func backButtonDidTap(_ sender: Any) {
         self.coordinator.stop()
     }
 }
 
 extension NaturalSoundWhiteNoiseVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let navigationController = self.navigationController else { return }
+        let sounds = self.soundData[indexPath.row]
+        let soundByName = self.presenter.getSoundByCategoryName(nameCategory: sounds.name ?? "")
+        let videoByName = self.presenter.getVideoByCategoryName(nameCategory: sounds.name ?? "")
+        self.startListItemSound(navigationController: navigationController, sound: soundByName, video: videoByName)
+    }
 }
 
 extension NaturalSoundWhiteNoiseVC: UICollectionViewDataSource {

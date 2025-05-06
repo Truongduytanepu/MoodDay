@@ -9,12 +9,12 @@ class HomeCategoryManager {
     static let shared = HomeCategoryManager()
     
     private var categories: [HomeCategory] = []
-    
     private init() { }
     
     func getCategories() -> [HomeCategory] {
         return categories
     }
+    
     
     func updateCategories(_ categories: [HomeCategory]) {
         self.categories = categories
@@ -75,7 +75,6 @@ class HomeCategoryManager {
         return result
     }
     
-    
     func getVideosWithCategoryName(targetName: String) -> [Video] {
         var result: [Video] = []
         
@@ -90,11 +89,64 @@ class HomeCategoryManager {
         
         return result
     }
-  
+    
     func getSoundCategory(_ idCategory: String) -> [Sound] {
         if let categorySound = categories.first(where: { $0.id == idCategory }) {
             return categorySound.sounds ?? []
         }
         
         return []
+    }
+    
+    func getSoundsByHashtag(_ nameHashtag: String) -> [Sound] {
+        let targetHashtag = "#\(nameHashtag.lowercased())"
+        var result: [Sound] = []
+        
+        for category in categories {
+            let matchedSounds = category.sounds?.filter { sound in
+                guard let hashtagString = sound.hashtag else { return false }
+                
+                let hashtags = hashtagString
+                    .lowercased()
+                    .split(separator: " ")
+                    .map { String($0) }
+                
+                return hashtags.contains(targetHashtag)
+            } ?? []
+            
+            result.append(contentsOf: matchedSounds)
+        }
+        
+        return result
+    }
+    
+    func getSoundByCategory(_ nameCategory: String) -> [Sound] {
+        var result: [Sound] = []
+        
+        for category in categories {
+            if let sounds = category.sounds {
+                let matchedSounds = sounds.filter { sound in
+                    sound.category?.name?.lowercased() == nameCategory.lowercased()
+                }
+                
+                result.append(contentsOf: matchedSounds)
+            }
+        }
+        
+        return result
+    }
+ 
+    func getVideoByCategory(_ nameCategory: String) -> [Video] {
+        var result: [Video] = []
+        
+        for category in categories {
+            let matchedVideos = category.videos.filter { video in
+                video.category?.name?.lowercased() == nameCategory.lowercased()
+            }
+            
+            result.append(contentsOf: matchedVideos)
+        }
+        
+        return result
+    }
 }

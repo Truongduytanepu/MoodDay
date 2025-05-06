@@ -87,14 +87,13 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
         self.collectionView.register(UINib(nibName: "CategoryCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCell")
     }
     
-    private func startNaturalSoundWhiteNoiseCoordinator(navigationController: UINavigationController,homeCategory: HomeCategory) {
+    private func startNaturalSoundWhiteNoiseCoordinator(navigationController: UINavigationController, homeCategory: HomeCategory) {
         let naturalSoundWhiteNoiseCoordinator = NaturalSoundWhiteNoiseCoordinator(navigation: navigationController, homeCategory: homeCategory)
         naturalSoundWhiteNoiseCoordinator.start()
     }
     
-    private func startListItemSound(navigationController: UINavigationController,
-                                    homeCategory: HomeCategory) {
-        let listItemSoundCoordinator = ListItemSoundCoordinator(navigation: navigationController, homeCategory: homeCategory)
+    private func startListItemSound(navigationController: UINavigationController, sound: [Sound],video: [Video]) {
+        let listItemSoundCoordinator = ListItemSoundCoordinator(navigation: navigationController,sound: sound,video: video)
         listItemSoundCoordinator.start()
     }
 }
@@ -108,8 +107,10 @@ extension HomeVC: UICollectionViewDelegate {
             self.startNaturalSoundWhiteNoiseCoordinator(navigationController: navigationController,homeCategory: homeCategories[indexPath.row])
         } else {
             guard let navigationController = self.navigationController else { return }
-            self.startListItemSound(navigationController: navigationController,homeCategory: homeCategories[indexPath.row])
-            
+            let categoryID = self.homeCategories[indexPath.row].id ?? ""
+            let sound = self.presenter.getSoundByCategoryId(categoryId: categoryID)
+            let video = self.presenter.getVideoByCategoryId(categoryId: categoryID)
+            self.startListItemSound(navigationController: navigationController,sound: sound,video: video)
         }
     }
 }
@@ -138,7 +139,7 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
             return CGSize(width: width, height: height)
             
         } else {
-            let width = (collectionView.bounds.width - Const.cellSpacing * (Const.numberOfColumns - 1) - Const.insetLeftRight) / Const.numberOfColumns
+            let width = (collectionView.bounds.width - Const.cellSpacing * (Const.numberOfColumns - 1) - 2 * Const.insetLeftRight) / Const.numberOfColumns
             return CGSize(width: width, height: width)
         }
     }

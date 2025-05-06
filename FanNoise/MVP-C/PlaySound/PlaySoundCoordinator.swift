@@ -1,30 +1,27 @@
 //
-//  ListItemSoundCoordinator.swift
+//  PlaySoundCoordinator.swift
 //  FanNoise
 //
-//  Created by Chiến Nguyễn on 26/04/2025.
+//  Created by Chiến Nguyễn on 02/05/2025.
 //
 
 import UIKit
 
-class ListItemSoundCoordinator: Coordinator {
+class PlaySoundCoordinator: Coordinator {
     var started: Bool = false
     private weak var navigation: UINavigationController?
-    private var sound: [Sound]
-    private var video: [Video]
-    init(navigation: UINavigationController,sound: [Sound],video: [Video]) {
+    private var sound : Sound
+    init(navigation: UINavigationController,sound: Sound) {
         self.navigation = navigation
         self.sound = sound
-        self.video = video
     }
     
     func start() {
         if !started {
             started = true
-            let controller = ListItemSoundVC.factory()
+            let controller = PlaySoundVC.factory()
             controller.coordinator = self
-            controller.sounds = self.sound
-            controller.videos = self.video 
+            controller.soundItem = self.sound
             navigation?.pushViewController(controller, animated: true)
         }
     }

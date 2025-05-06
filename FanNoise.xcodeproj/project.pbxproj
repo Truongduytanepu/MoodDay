@@ -94,6 +94,12 @@
 		84A847262DC0B452007B1950 /* SetTimmerDialogVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A847242DC0B452007B1950 /* SetTimmerDialogVC.xib */; };
 		84D4F74B2DBF2B2D00328766 /* ItemTopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D4F74A2DBF2B2D00328766 /* ItemTopicCell.xib */; };
 		84D4F74C2DBF2B2D00328766 /* ItemTopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D4F7492DBF2B2D00328766 /* ItemTopicCell.swift */; };
+		8727B79B2DC7B8EC00F0B2CE /* ItemLikeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727B7992DC7B8EC00F0B2CE /* ItemLikeCell.swift */; };
+		8727B79C2DC7B8EC00F0B2CE /* ItemLikeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8727B79A2DC7B8EC00F0B2CE /* ItemLikeCell.xib */; };
+		8727B79F2DC7B91000F0B2CE /* ItemFunnyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727B79D2DC7B91000F0B2CE /* ItemFunnyCell.swift */; };
+		8727B7A02DC7B91000F0B2CE /* ItemFunnyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8727B79E2DC7B91000F0B2CE /* ItemFunnyCell.xib */; };
+		8727B7A32DC7B92100F0B2CE /* ItemOthersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727B7A12DC7B92100F0B2CE /* ItemOthersCell.swift */; };
+		8727B7A42DC7B92100F0B2CE /* ItemOthersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8727B7A22DC7B92100F0B2CE /* ItemOthersCell.xib */; };
 		84DDB8B52DC99B9E00CAC590 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDB8B42DC99B9600CAC590 /* LanguageManager.swift */; };
 		84DDB8B72DC9B00100CAC590 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDB8B62DC9AFFC00CAC590 /* AppManager.swift */; };
 		873366032DB757B900DFEC83 /* IntroCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873365FE2DB757B900DFEC83 /* IntroCoordinator.swift */; };
@@ -106,6 +112,8 @@
 		8736A3E62DB5F2B6009A07A2 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3E12DB5F2B6009A07A2 /* SplashPresenter.swift */; };
 		8736A3E72DB5F2B6009A07A2 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3E22DB5F2B6009A07A2 /* SplashView.swift */; };
 		8736A3E82DB5F2B6009A07A2 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736A3E32DB5F2B6009A07A2 /* SplashVC.swift */; };
+		8741D5852DC9BE8A00CECB62 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8741D5832DC9BE8A00CECB62 /* VideoCell.swift */; };
+		8741D5862DC9BE8A00CECB62 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8741D5842DC9BE8A00CECB62 /* VideoCell.xib */; };
 		8743139E2DBB67800042243C /* TabbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313992DBB67800042243C /* TabbarCoordinator.swift */; };
 		8743139F2DBB67800042243C /* TabbarVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8743139A2DBB67800042243C /* TabbarVC.xib */; };
 		874313A02DBB67800042243C /* TabbarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743139B2DBB67800042243C /* TabbarPresenter.swift */; };
@@ -118,11 +126,6 @@
 		874313BA2DBB98180042243C /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313B52DBB98180042243C /* HomeVC.swift */; };
 		874313BD2DBB98C30042243C /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313BB2DBB98C30042243C /* CategoryCell.swift */; };
 		874313BE2DBB98C30042243C /* CategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874313BC2DBB98C30042243C /* CategoryCell.xib */; };
-		874313C52DBB9C2F0042243C /* TrendingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313C02DBB9C2F0042243C /* TrendingCoordinator.swift */; };
-		874313C62DBB9C2F0042243C /* TrendingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874313C12DBB9C2F0042243C /* TrendingVC.xib */; };
-		874313C72DBB9C2F0042243C /* TrendingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313C22DBB9C2F0042243C /* TrendingPresenter.swift */; };
-		874313C82DBB9C2F0042243C /* TrendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313C32DBB9C2F0042243C /* TrendingView.swift */; };
-		874313C92DBB9C2F0042243C /* TrendingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313C42DBB9C2F0042243C /* TrendingVC.swift */; };
 		874313F12DBCE2B20042243C /* ListItemSoundCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313EC2DBCE2B20042243C /* ListItemSoundCoordinator.swift */; };
 		874313F22DBCE2B20042243C /* ListItemSoundVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874313ED2DBCE2B20042243C /* ListItemSoundVC.xib */; };
 		874313F32DBCE2B20042243C /* ListItemSoundPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313EE2DBCE2B20042243C /* ListItemSoundPresenter.swift */; };
@@ -135,10 +138,12 @@
 		874314002DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874313FB2DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.swift */; };
 		874314042DBF7D620042243C /* NaturalSoundWhiteNoiseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874314022DBF7D620042243C /* NaturalSoundWhiteNoiseCell.swift */; };
 		874314052DBF7D620042243C /* NaturalSoundWhiteNoiseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874314032DBF7D620042243C /* NaturalSoundWhiteNoiseCell.xib */; };
-		874314092DBFC99E0042243C /* HashtagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874314072DBFC99E0042243C /* HashtagCell.swift */; };
-		8743140A2DBFC99E0042243C /* HashtagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874314082DBFC99E0042243C /* HashtagCell.xib */; };
-		8743140D2DBFC9B10042243C /* SoundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743140B2DBFC9B10042243C /* SoundCell.swift */; };
-		8743140E2DBFC9B10042243C /* SoundCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8743140C2DBFC9B10042243C /* SoundCell.xib */; };
+		874314092DBFC99E0042243C /* ItemHashtagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874314072DBFC99E0042243C /* ItemHashtagCell.swift */; };
+		8743140A2DBFC99E0042243C /* ItemHashtagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 874314082DBFC99E0042243C /* ItemHashtagCell.xib */; };
+		8743140D2DBFC9B10042243C /* ItemSoundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743140B2DBFC9B10042243C /* ItemSoundCell.swift */; };
+		8743140E2DBFC9B10042243C /* ItemSoundCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8743140C2DBFC9B10042243C /* ItemSoundCell.xib */; };
+		8749787E2DC9B454002EF040 /* ItemHashtagVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8749787C2DC9B454002EF040 /* ItemHashtagVideoCell.swift */; };
+		8749787F2DC9B454002EF040 /* ItemHashtagVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8749787D2DC9B454002EF040 /* ItemHashtagVideoCell.xib */; };
 		8753DA152DB62ABF00D412D0 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8753DA142DB62ABF00D412D0 /* AppFont.swift */; };
 		875588232DB7833700A63106 /* gift_intro_2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 875588222DB7833700A63106 /* gift_intro_2.gif */; };
 		8755882A2DB797BC00A63106 /* LanguageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875588252DB797BC00A63106 /* LanguageCoordinator.swift */; };
@@ -152,6 +157,18 @@
 		8757BFE82DB7CBEC00951211 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757BFE72DB7CBEC00951211 /* Language.swift */; };
 		8757BFF12DB9CE9E00951211 /* HomeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757BFF02DB9CE9E00951211 /* HomeCategory.swift */; };
 		8757BFFE2DB9F14200951211 /* GetCategoryHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757BFFD2DB9F14200951211 /* GetCategoryHome.swift */; };
+		8761EFC02DC4C83C00AB4F8D /* PlaySoundCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EFBB2DC4C83C00AB4F8D /* PlaySoundCoordinator.swift */; };
+		8761EFC12DC4C83C00AB4F8D /* PlaySoundVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8761EFBC2DC4C83C00AB4F8D /* PlaySoundVC.xib */; };
+		8761EFC22DC4C83C00AB4F8D /* PlaySoundPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EFBD2DC4C83C00AB4F8D /* PlaySoundPresenter.swift */; };
+		8761EFC32DC4C83C00AB4F8D /* PlaySoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EFBE2DC4C83C00AB4F8D /* PlaySoundView.swift */; };
+		8761EFC42DC4C83C00AB4F8D /* PlaySoundVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EFBF2DC4C83C00AB4F8D /* PlaySoundVC.swift */; };
+		8761EFCB2DC4C8EF00AB4F8D /* ListItemSoundByHashtagCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EFC62DC4C8EF00AB4F8D /* ListItemSoundByHashtagCoordinator.swift */; };
+		8761EFCC2DC4C8EF00AB4F8D /* ListItemSoundByHashtagVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8761EFC72DC4C8EF00AB4F8D /* ListItemSoundByHashtagVC.xib */; };
+		8761EFCD2DC4C8EF00AB4F8D /* ListItemSoundByHashtagPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EFC82DC4C8EF00AB4F8D /* ListItemSoundByHashtagPresenter.swift */; };
+		8761EFCE2DC4C8EF00AB4F8D /* ListItemSoundByHashtagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EFC92DC4C8EF00AB4F8D /* ListItemSoundByHashtagView.swift */; };
+		8761EFCF2DC4C8EF00AB4F8D /* ListItemSoundByHashtagVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EFCA2DC4C8EF00AB4F8D /* ListItemSoundByHashtagVC.swift */; };
+		8761EFE32DC4CBA700AB4F8D /* ListItemSoundByHashtagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761EFE12DC4CBA700AB4F8D /* ListItemSoundByHashtagCell.swift */; };
+		8761EFE42DC4CBA700AB4F8D /* ListItemSoundByHashtagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8761EFE22DC4CBA700AB4F8D /* ListItemSoundByHashtagCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -243,6 +260,12 @@
 		84A847242DC0B452007B1950 /* SetTimmerDialogVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetTimmerDialogVC.xib; sourceTree = "<group>"; };
 		84D4F7492DBF2B2D00328766 /* ItemTopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTopicCell.swift; sourceTree = "<group>"; };
 		84D4F74A2DBF2B2D00328766 /* ItemTopicCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemTopicCell.xib; sourceTree = "<group>"; };
+		8727B7992DC7B8EC00F0B2CE /* ItemLikeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLikeCell.swift; sourceTree = "<group>"; };
+		8727B79A2DC7B8EC00F0B2CE /* ItemLikeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemLikeCell.xib; sourceTree = "<group>"; };
+		8727B79D2DC7B91000F0B2CE /* ItemFunnyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFunnyCell.swift; sourceTree = "<group>"; };
+		8727B79E2DC7B91000F0B2CE /* ItemFunnyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemFunnyCell.xib; sourceTree = "<group>"; };
+		8727B7A12DC7B92100F0B2CE /* ItemOthersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemOthersCell.swift; sourceTree = "<group>"; };
+		8727B7A22DC7B92100F0B2CE /* ItemOthersCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemOthersCell.xib; sourceTree = "<group>"; };
 		84DDB8B42DC99B9600CAC590 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		84DDB8B62DC9AFFC00CAC590 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		873365FE2DB757B900DFEC83 /* IntroCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroCoordinator.swift; sourceTree = "<group>"; };
@@ -255,6 +278,8 @@
 		8736A3E12DB5F2B6009A07A2 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
 		8736A3E22DB5F2B6009A07A2 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		8736A3E32DB5F2B6009A07A2 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
+		8741D5832DC9BE8A00CECB62 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		8741D5842DC9BE8A00CECB62 /* VideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		874313992DBB67800042243C /* TabbarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarCoordinator.swift; sourceTree = "<group>"; };
 		8743139A2DBB67800042243C /* TabbarVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabbarVC.xib; sourceTree = "<group>"; };
 		8743139B2DBB67800042243C /* TabbarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarPresenter.swift; sourceTree = "<group>"; };
@@ -267,11 +292,6 @@
 		874313B52DBB98180042243C /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		874313BB2DBB98C30042243C /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		874313BC2DBB98C30042243C /* CategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCell.xib; sourceTree = "<group>"; };
-		874313C02DBB9C2F0042243C /* TrendingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCoordinator.swift; sourceTree = "<group>"; };
-		874313C12DBB9C2F0042243C /* TrendingVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrendingVC.xib; sourceTree = "<group>"; };
-		874313C22DBB9C2F0042243C /* TrendingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingPresenter.swift; sourceTree = "<group>"; };
-		874313C32DBB9C2F0042243C /* TrendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingView.swift; sourceTree = "<group>"; };
-		874313C42DBB9C2F0042243C /* TrendingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingVC.swift; sourceTree = "<group>"; };
 		874313EC2DBCE2B20042243C /* ListItemSoundCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemSoundCoordinator.swift; sourceTree = "<group>"; };
 		874313ED2DBCE2B20042243C /* ListItemSoundVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListItemSoundVC.xib; sourceTree = "<group>"; };
 		874313EE2DBCE2B20042243C /* ListItemSoundPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemSoundPresenter.swift; sourceTree = "<group>"; };
@@ -284,6 +304,12 @@
 		874313FB2DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalSoundWhiteNoiseVC.swift; sourceTree = "<group>"; };
 		874314022DBF7D620042243C /* NaturalSoundWhiteNoiseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaturalSoundWhiteNoiseCell.swift; sourceTree = "<group>"; };
 		874314032DBF7D620042243C /* NaturalSoundWhiteNoiseCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NaturalSoundWhiteNoiseCell.xib; sourceTree = "<group>"; };
+		874314072DBFC99E0042243C /* ItemHashtagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemHashtagCell.swift; sourceTree = "<group>"; };
+		874314082DBFC99E0042243C /* ItemHashtagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemHashtagCell.xib; sourceTree = "<group>"; };
+		8743140B2DBFC9B10042243C /* ItemSoundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSoundCell.swift; sourceTree = "<group>"; };
+		8743140C2DBFC9B10042243C /* ItemSoundCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemSoundCell.xib; sourceTree = "<group>"; };
+		8749787C2DC9B454002EF040 /* ItemHashtagVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemHashtagVideoCell.swift; sourceTree = "<group>"; };
+		8749787D2DC9B454002EF040 /* ItemHashtagVideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemHashtagVideoCell.xib; sourceTree = "<group>"; };
 		8753DA142DB62ABF00D412D0 /* AppFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
 		875588222DB7833700A63106 /* gift_intro_2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gift_intro_2.gif; sourceTree = "<group>"; };
 		875588252DB797BC00A63106 /* LanguageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCoordinator.swift; sourceTree = "<group>"; };
@@ -297,6 +323,18 @@
 		8757BFE72DB7CBEC00951211 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		8757BFF02DB9CE9E00951211 /* HomeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategory.swift; sourceTree = "<group>"; };
 		8757BFFD2DB9F14200951211 /* GetCategoryHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCategoryHome.swift; sourceTree = "<group>"; };
+		8761EFBB2DC4C83C00AB4F8D /* PlaySoundCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundCoordinator.swift; sourceTree = "<group>"; };
+		8761EFBC2DC4C83C00AB4F8D /* PlaySoundVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaySoundVC.xib; sourceTree = "<group>"; };
+		8761EFBD2DC4C83C00AB4F8D /* PlaySoundPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundPresenter.swift; sourceTree = "<group>"; };
+		8761EFBE2DC4C83C00AB4F8D /* PlaySoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundView.swift; sourceTree = "<group>"; };
+		8761EFBF2DC4C83C00AB4F8D /* PlaySoundVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundVC.swift; sourceTree = "<group>"; };
+		8761EFC62DC4C8EF00AB4F8D /* ListItemSoundByHashtagCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemSoundByHashtagCoordinator.swift; sourceTree = "<group>"; };
+		8761EFC72DC4C8EF00AB4F8D /* ListItemSoundByHashtagVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListItemSoundByHashtagVC.xib; sourceTree = "<group>"; };
+		8761EFC82DC4C8EF00AB4F8D /* ListItemSoundByHashtagPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemSoundByHashtagPresenter.swift; sourceTree = "<group>"; };
+		8761EFC92DC4C8EF00AB4F8D /* ListItemSoundByHashtagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemSoundByHashtagView.swift; sourceTree = "<group>"; };
+		8761EFCA2DC4C8EF00AB4F8D /* ListItemSoundByHashtagVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemSoundByHashtagVC.swift; sourceTree = "<group>"; };
+		8761EFE12DC4CBA700AB4F8D /* ListItemSoundByHashtagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemSoundByHashtagCell.swift; sourceTree = "<group>"; };
+		8761EFE22DC4CBA700AB4F8D /* ListItemSoundByHashtagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListItemSoundByHashtagCell.xib; sourceTree = "<group>"; };
 		9E53ED02C5DF51B3FCC2CD77 /* Pods-FanNoise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanNoise.debug.xcconfig"; path = "Target Support Files/Pods-FanNoise/Pods-FanNoise.debug.xcconfig"; sourceTree = "<group>"; };
 		D96D8C7C884D88669CBD62AC /* Pods-FanNoise.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FanNoise.release.xcconfig"; path = "Target Support Files/Pods-FanNoise/Pods-FanNoise.release.xcconfig"; sourceTree = "<group>"; };
 		DB40C219C19C92489D6358C5 /* Pods_FanNoise.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FanNoise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -560,10 +598,11 @@
 		71A561982DA8FFC5007E8BE3 /* MVP-C */ = {
 			isa = PBXGroup;
 			children = (
+				8761EFC52DC4C8BC00AB4F8D /* ListItemSoundByHashtag */,
+				8761EFBA2DC4C82100AB4F8D /* PlaySound */,
 				84A847222DC0B41A007B1950 /* SetTimerDialog */,
-				874313F62DBF7C870042243C /* NaturalSoundWhiteNoise */,
+                874313F62DBF7C870042243C /* NaturalSoundWhiteNoise */,
 				874313EB2DBCE28D0042243C /* ListItemSound */,
-				874313CA2DBB9CB40042243C /* Trending */,
 				874313B02DBB96E20042243C /* Home */,
 				874313972DBB67650042243C /* Tabbar */,
 				844AB8F02DBB65C200A82556 /* Video */,
@@ -617,13 +656,28 @@
 			path = TopicCell;
 			sourceTree = "<group>";
 		};
-		84DDB8AD2DC99A9600CAC590 /* Languages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Languages;
-			sourceTree = "<group>";
-		};
+        8727B7982DC7B8C800F0B2CE /* Cell */ = {
+            isa = PBXGroup;
+            children = (
+                8727B7992DC7B8EC00F0B2CE /* ItemLikeCell.swift */,
+                8727B79A2DC7B8EC00F0B2CE /* ItemLikeCell.xib */,
+                8727B79D2DC7B91000F0B2CE /* ItemFunnyCell.swift */,
+                8727B79E2DC7B91000F0B2CE /* ItemFunnyCell.xib */,
+                8727B7A12DC7B92100F0B2CE /* ItemOthersCell.swift */,
+                8727B7A22DC7B92100F0B2CE /* ItemOthersCell.xib */,
+            );
+            path = Cell;
+            sourceTree = "<group>";
+        };
+
+        84DDB8AD2DC99A9600CAC590 /* Languages */ = {
+            isa = PBXGroup;
+            children = (
+            );
+            path = Languages;
+            sourceTree = "<group>";
+        };
+
 		873365FC2DB7579500DFEC83 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
@@ -664,8 +718,8 @@
 			isa = PBXGroup;
 			children = (
 				874313BF2DBB98C80042243C /* Cell */,
-				874313B12DBB98180042243C /* HomeCoordinator.swift */,
 				874313B22DBB98180042243C /* HomeVC.xib */,
+				874313B12DBB98180042243C /* HomeCoordinator.swift */,
 				874313B32DBB98180042243C /* HomePresenter.swift */,
 				874313B42DBB98180042243C /* HomeView.swift */,
 				874313B52DBB98180042243C /* HomeVC.swift */,
@@ -680,18 +734,6 @@
 				874313BC2DBB98C30042243C /* CategoryCell.xib */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		874313CA2DBB9CB40042243C /* Trending */ = {
-			isa = PBXGroup;
-			children = (
-				874313C02DBB9C2F0042243C /* TrendingCoordinator.swift */,
-				874313C12DBB9C2F0042243C /* TrendingVC.xib */,
-				874313C22DBB9C2F0042243C /* TrendingPresenter.swift */,
-				874313C32DBB9C2F0042243C /* TrendingView.swift */,
-				874313C42DBB9C2F0042243C /* TrendingVC.swift */,
-			);
-			path = Trending;
 			sourceTree = "<group>";
 		};
 		874313EB2DBCE28D0042243C /* ListItemSound */ = {
@@ -732,12 +774,24 @@
 		874314062DBFC9800042243C /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				874314072DBFC99E0042243C /* HashtagCell.swift */,
-				874314082DBFC99E0042243C /* HashtagCell.xib */,
-				8743140B2DBFC9B10042243C /* SoundCell.swift */,
-				8743140C2DBFC9B10042243C /* SoundCell.xib */,
+				8749787B2DC9B427002EF040 /* HashtagVideoCell */,
+				874314072DBFC99E0042243C /* ItemHashtagCell.swift */,
+				874314082DBFC99E0042243C /* ItemHashtagCell.xib */,
+				8743140B2DBFC9B10042243C /* ItemSoundCell.swift */,
+				8743140C2DBFC9B10042243C /* ItemSoundCell.xib */,
+				8741D5832DC9BE8A00CECB62 /* VideoCell.swift */,
+				8741D5842DC9BE8A00CECB62 /* VideoCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		8749787B2DC9B427002EF040 /* HashtagVideoCell */ = {
+			isa = PBXGroup;
+			children = (
+				8749787C2DC9B454002EF040 /* ItemHashtagVideoCell.swift */,
+				8749787D2DC9B454002EF040 /* ItemHashtagVideoCell.xib */,
+			);
+			path = HashtagVideoCell;
 			sourceTree = "<group>";
 		};
 		875588212DB7830100A63106 /* Gift */ = {
@@ -795,6 +849,41 @@
 				8757BFF02DB9CE9E00951211 /* HomeCategory.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		8761EFBA2DC4C82100AB4F8D /* PlaySound */ = {
+			isa = PBXGroup;
+			children = (
+				8727B7982DC7B8C800F0B2CE /* Cell */,
+				8761EFBB2DC4C83C00AB4F8D /* PlaySoundCoordinator.swift */,
+				8761EFBC2DC4C83C00AB4F8D /* PlaySoundVC.xib */,
+				8761EFBD2DC4C83C00AB4F8D /* PlaySoundPresenter.swift */,
+				8761EFBE2DC4C83C00AB4F8D /* PlaySoundView.swift */,
+				8761EFBF2DC4C83C00AB4F8D /* PlaySoundVC.swift */,
+			);
+			path = PlaySound;
+			sourceTree = "<group>";
+		};
+		8761EFC52DC4C8BC00AB4F8D /* ListItemSoundByHashtag */ = {
+			isa = PBXGroup;
+			children = (
+				8761EFD52DC4CAF000AB4F8D /* Cell */,
+				8761EFC62DC4C8EF00AB4F8D /* ListItemSoundByHashtagCoordinator.swift */,
+				8761EFC72DC4C8EF00AB4F8D /* ListItemSoundByHashtagVC.xib */,
+				8761EFC82DC4C8EF00AB4F8D /* ListItemSoundByHashtagPresenter.swift */,
+				8761EFC92DC4C8EF00AB4F8D /* ListItemSoundByHashtagView.swift */,
+				8761EFCA2DC4C8EF00AB4F8D /* ListItemSoundByHashtagVC.swift */,
+			);
+			path = ListItemSoundByHashtag;
+			sourceTree = "<group>";
+		};
+		8761EFD52DC4CAF000AB4F8D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8761EFE12DC4CBA700AB4F8D /* ListItemSoundByHashtagCell.swift */,
+				8761EFE22DC4CBA700AB4F8D /* ListItemSoundByHashtagCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		B8D1D0B7B9715EE5E7DAB573 /* Pods */ = {
@@ -892,26 +981,33 @@
 				874314052DBF7D620042243C /* NaturalSoundWhiteNoiseCell.xib in Resources */,
 				874313FD2DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.xib in Resources */,
 				71A560D42DA8FA5E007E8BE3 /* GoogleService-Info.plist in Resources */,
-				8743140E2DBFC9B10042243C /* SoundCell.xib in Resources */,
+				8743140E2DBFC9B10042243C /* ItemSoundCell.xib in Resources */,
 				71A5617C2DA8FF09007E8BE3 /* MPLUS2-Bold.ttf in Resources */,
+				8741D5862DC9BE8A00CECB62 /* VideoCell.xib in Resources */,
 				71A561822DA8FF09007E8BE3 /* MPLUS2-Black.ttf in Resources */,
 				844AB8FA2DBB660000A82556 /* PreviewVideoVC.xib in Resources */,
+				8727B7A42DC7B92100F0B2CE /* ItemOthersCell.xib in Resources */,
 				84A847262DC0B452007B1950 /* SetTimmerDialogVC.xib in Resources */,
-				844AB8FF2DBB675500A82556 /* ItemVideoCell.xib in Resources */,
-				8743140A2DBFC99E0042243C /* HashtagCell.xib in Resources */,
+                844AB8FF2DBB675500A82556 /* ItemVideoCell.xib in Resources */,
+				8761EFC12DC4C83C00AB4F8D /* PlaySoundVC.xib in Resources */,
+				8727B7A02DC7B91000F0B2CE /* ItemFunnyCell.xib in Resources */,
+				8743140A2DBFC99E0042243C /* ItemHashtagCell.xib in Resources */,
 				71A561832DA8FF09007E8BE3 /* MPLUS2-ExtraLight.ttf in Resources */,
 				8736A3E52DB5F2B6009A07A2 /* SplashVC.xib in Resources */,
 				875588232DB7833700A63106 /* gift_intro_2.gif in Resources */,
 				71A561802DA8FF09007E8BE3 /* MPLUS2-Light.ttf in Resources */,
 				8755882B2DB797BC00A63106 /* LanguageVC.xib in Resources */,
+				8761EFCC2DC4C8EF00AB4F8D /* ListItemSoundByHashtagVC.xib in Resources */,
 				71A5617D2DA8FF09007E8BE3 /* MPLUS2-Thin.ttf in Resources */,
+				8761EFE42DC4CBA700AB4F8D /* ListItemSoundByHashtagCell.xib in Resources */,
 				8743139F2DBB67800042243C /* TabbarVC.xib in Resources */,
 				71A561842DA8FF09007E8BE3 /* MPLUS2-Medium.ttf in Resources */,
 				874313BE2DBB98C30042243C /* CategoryCell.xib in Resources */,
 				8757BFE22DB7A06600951211 /* LanguageCell.xib in Resources */,
 				874313B72DBB98180042243C /* HomeVC.xib in Resources */,
-				874313C62DBB9C2F0042243C /* TrendingVC.xib in Resources */,
+				8727B79C2DC7B8EC00F0B2CE /* ItemLikeCell.xib in Resources */,
 				874313F22DBCE2B20042243C /* ListItemSoundVC.xib in Resources */,
+				8749787F2DC9B454002EF040 /* ItemHashtagVideoCell.xib in Resources */,
 				71A561812DA8FF09007E8BE3 /* MPLUS2-SemiBold.ttf in Resources */,
 				873366042DB757B900DFEC83 /* IntroVC.xib in Resources */,
 			);
@@ -1006,8 +1102,10 @@
 			files = (
 				71A5614C2DA8FE8D007E8BE3 /* AVAudioPlayerNodeExtensions.swift in Sources */,
 				71A5616C2DA8FE8D007E8BE3 /* OverlayWindow.swift in Sources */,
+				8727B79B2DC7B8EC00F0B2CE /* ItemLikeCell.swift in Sources */,
 				8755882E2DB797BC00A63106 /* LanguageVC.swift in Sources */,
-				8743140D2DBFC9B10042243C /* SoundCell.swift in Sources */,
+				8743140D2DBFC9B10042243C /* ItemSoundCell.swift in Sources */,
+				8761EFC42DC4C83C00AB4F8D /* PlaySoundVC.swift in Sources */,
 				71A561552DA8FE8D007E8BE3 /* AVPlayerExtension.swift in Sources */,
 				874314002DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.swift in Sources */,
 				71A561502DA8FE8D007E8BE3 /* URLRequestExtensions.swift in Sources */,
@@ -1019,13 +1117,16 @@
 				71A5615D2DA8FE8D007E8BE3 /* DictionaryExtension.swift in Sources */,
 				71A5612D2DA8FE8D007E8BE3 /* Utils.swift in Sources */,
 				874313A22DBB67800042243C /* TabbarVC.swift in Sources */,
-				874313C92DBB9C2F0042243C /* TrendingVC.swift in Sources */,
+				8761EFCD2DC4C8EF00AB4F8D /* ListItemSoundByHashtagPresenter.swift in Sources */,
+				8727B79F2DC7B91000F0B2CE /* ItemFunnyCell.swift in Sources */,
+				8749787E2DC9B454002EF040 /* ItemHashtagVideoCell.swift in Sources */,
 				8757BFFE2DB9F14200951211 /* GetCategoryHome.swift in Sources */,
 				71A561452DA8FE8D007E8BE3 /* NotificationName.swift in Sources */,
 				874314042DBF7D620042243C /* NaturalSoundWhiteNoiseCell.swift in Sources */,
 				71A560C32DA8F812007E8BE3 /* ViewController.swift in Sources */,
 				71A561562DA8FE8D007E8BE3 /* URLExtensions.swift in Sources */,
 				71A561932DA8FFB9007E8BE3 /* BaseVC.swift in Sources */,
+				8761EFC32DC4C83C00AB4F8D /* PlaySoundView.swift in Sources */,
 				8755882C2DB797BC00A63106 /* LanguagePresenter.swift in Sources */,
 				874313F52DBCE2B20042243C /* ListItemSoundVC.swift in Sources */,
 				84DDB8B52DC99B9E00CAC590 /* LanguageManager.swift in Sources */,
@@ -1044,13 +1145,14 @@
 				71A561952DA8FFB9007E8BE3 /* BaseNavigationController.swift in Sources */,
 				71A5613E2DA8FE8D007E8BE3 /* PreviewCameraView.swift in Sources */,
 				71A561322DA8FE8D007E8BE3 /* MonitorNetwork.swift in Sources */,
-				874314092DBFC99E0042243C /* HashtagCell.swift in Sources */,
+				874314092DBFC99E0042243C /* ItemHashtagCell.swift in Sources */,
+				8761EFE32DC4CBA700AB4F8D /* ListItemSoundByHashtagCell.swift in Sources */,
 				71A561442DA8FE8D007E8BE3 /* CLPlacemarkExtensions.swift in Sources */,
 				71A5614F2DA8FE8D007E8BE3 /* TimeIntervalExtensions.swift in Sources */,
 				8753DA152DB62ABF00D412D0 /* AppFont.swift in Sources */,
 				71A5615E2DA8FE8D007E8BE3 /* NSMutableData.swift in Sources */,
+				8761EFCE2DC4C8EF00AB4F8D /* ListItemSoundByHashtagView.swift in Sources */,
 				71A561362DA8FE8D007E8BE3 /* RealmManager.swift in Sources */,
-				874313C52DBB9C2F0042243C /* TrendingCoordinator.swift in Sources */,
 				71A5614A2DA8FE8D007E8BE3 /* FontExtensions.swift in Sources */,
 				8757BFE12DB7A06600951211 /* LanguageCell.swift in Sources */,
 				874313A02DBB67800042243C /* TabbarPresenter.swift in Sources */,
@@ -1059,12 +1161,14 @@
 				8736A3E82DB5F2B6009A07A2 /* SplashVC.swift in Sources */,
 				71A561962DA8FFB9007E8BE3 /* BaseView.swift in Sources */,
 				71A5612F2DA8FE8D007E8BE3 /* Logging.swift in Sources */,
+				8761EFC02DC4C83C00AB4F8D /* PlaySoundCoordinator.swift in Sources */,
 				844AB9012DBB6A8E00A82556 /* HomeCategoryManager.swift in Sources */,
 				71A5613B2DA8FE8D007E8BE3 /* VideoPlaySession.swift in Sources */,
 				71A560DD2DA8FE69007E8BE3 /* API.swift in Sources */,
 				71A5616A2DA8FE8D007E8BE3 /* DimableView.swift in Sources */,
 				844AB8FE2DBB675500A82556 /* ItemVideoCell.swift in Sources */,
 				71A5613C2DA8FE8D007E8BE3 /* Validator.swift in Sources */,
+				8741D5852DC9BE8A00CECB62 /* VideoCell.swift in Sources */,
 				71A5614D2DA8FE8D007E8BE3 /* StringExtensions.swift in Sources */,
 				873366062DB757B900DFEC83 /* IntroView.swift in Sources */,
 				71A561492DA8FE8D007E8BE3 /* AVMutableCompositionExtensions.swift in Sources */,
@@ -1080,6 +1184,7 @@
 				844AB8F62DBB660000A82556 /* PreviewVideoVC.swift in Sources */,
 				844AB8F72DBB660000A82556 /* PreviewVideoCoordinator.swift in Sources */,
 				844AB8F82DBB660000A82556 /* PreviewVideoPresenter.swift in Sources */,
+				8761EFC22DC4C83C00AB4F8D /* PlaySoundPresenter.swift in Sources */,
 				844AB8F92DBB660000A82556 /* PreviewVideoView.swift in Sources */,
 				873366072DB757B900DFEC83 /* IntroVC.swift in Sources */,
 				71A5618C2DA8FF24007E8BE3 /* PresenterRegisterer.swift in Sources */,
@@ -1087,12 +1192,11 @@
 				874313F42DBCE2B20042243C /* ListItemSoundView.swift in Sources */,
 				71A561522DA8FE8D007E8BE3 /* FileManagerExtensions.swift in Sources */,
 				874313FF2DBF7CCE0042243C /* NaturalSoundWhiteNoiseView.swift in Sources */,
-				874313C82DBB9C2F0042243C /* TrendingView.swift in Sources */,
 				71A561572DA8FE8D007E8BE3 /* UIViewControllerExtensions.swift in Sources */,
 				874313B82DBB98180042243C /* HomePresenter.swift in Sources */,
 				8757BFE82DB7CBEC00951211 /* Language.swift in Sources */,
 				874313BA2DBB98180042243C /* HomeVC.swift in Sources */,
-				874313C72DBB9C2F0042243C /* TrendingPresenter.swift in Sources */,
+				8761EFCF2DC4C8EF00AB4F8D /* ListItemSoundByHashtagVC.swift in Sources */,
 				874313F12DBCE2B20042243C /* ListItemSoundCoordinator.swift in Sources */,
 				71A5618B2DA8FF24007E8BE3 /* DIContainer.swift in Sources */,
 				71A5615B2DA8FE8D007E8BE3 /* DateExtensions.swift in Sources */,
@@ -1113,6 +1217,8 @@
 				71A5612E2DA8FE8D007E8BE3 /* APIError.swift in Sources */,
 				849FCAC12DBF26680006817F /* TopicSuggestVideoCell.swift in Sources */,
 				71A561472DA8FE8D007E8BE3 /* AVAudioFileExtensions.swift in Sources */,
+				8761EFCB2DC4C8EF00AB4F8D /* ListItemSoundByHashtagCoordinator.swift in Sources */,
+				8727B7A32DC7B92100F0B2CE /* ItemOthersCell.swift in Sources */,
 				71A561432DA8FE8D007E8BE3 /* ArrayExtensions.swift in Sources */,
 				71A5615C2DA8FE8D007E8BE3 /* String+Mime.swift in Sources */,
 				71A5615F2DA8FE8D007E8BE3 /* UIImageViewExtensions.swift in Sources */,

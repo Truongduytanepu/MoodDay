@@ -1,30 +1,27 @@
 //
-//  ListItemSoundCoordinator.swift
+//  ListItemSoundByHashtagCoordinator.swift
 //  FanNoise
 //
-//  Created by Chiến Nguyễn on 26/04/2025.
+//  Created by Chiến Nguyễn on 02/05/2025.
 //
 
 import UIKit
 
-class ListItemSoundCoordinator: Coordinator {
+class ListItemSoundByHashtagCoordinator: Coordinator {
     var started: Bool = false
     private weak var navigation: UINavigationController?
-    private var sound: [Sound]
-    private var video: [Video]
-    init(navigation: UINavigationController,sound: [Sound],video: [Video]) {
+    private var nameHashtag : String
+    init(navigation: UINavigationController,nameHashtag: String) {
         self.navigation = navigation
-        self.sound = sound
-        self.video = video
+        self.nameHashtag = nameHashtag
     }
     
     func start() {
         if !started {
             started = true
-            let controller = ListItemSoundVC.factory()
+            let controller = ListItemSoundByHashtagVC.factory()
             controller.coordinator = self
-            controller.sounds = self.sound
-            controller.videos = self.video 
+            controller.nameHashtag = nameHashtag
             navigation?.pushViewController(controller, animated: true)
         }
     }

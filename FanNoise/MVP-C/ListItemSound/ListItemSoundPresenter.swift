@@ -8,24 +8,14 @@
 import UIKit
 
 protocol ListItemSoundPresenter {
-    func loadData(categoryId: String) -> [Sound]
-    func getNumberOfItems(categoryId: String) -> Int
-    func getHashtag(categoryId: String) -> [String]
+    func getHashtag(sound: [Sound]) -> [String]
 }
 
 class ListItemSoundPresenterImpl: BasePresenter<ListItemSoundView>, ListItemSoundPresenter {
     
-    func loadData(categoryId: String) -> [Sound] {
-        return HomeCategoryManager.shared.getSoundCategory(categoryId)
-    }
-    
-    func getNumberOfItems(categoryId: String) -> Int {
-        return HomeCategoryManager.shared.getSoundCategory(categoryId).count
-    }
-    
-    func getHashtag(categoryId: String) -> [String] {
+    func getHashtag(sound: [Sound]) -> [String] {
         var hashtags: [String] = []
-        let soundData = HomeCategoryManager.shared.getSoundCategory(categoryId)
+        let soundData = sound
         
         // Bước 1: Thu thập và tách hashtag
         for sound in soundData {

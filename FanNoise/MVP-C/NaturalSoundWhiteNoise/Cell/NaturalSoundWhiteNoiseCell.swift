@@ -19,12 +19,8 @@ class NaturalSoundWhiteNoiseCell: UICollectionViewCell {
     
     private func setupFont() {
         self.titleLabel.font = AppFont.font(.mPLUS2SemiBold, size: 16)
-        self.setupCell()
     }
-    
-    private func setupCell() {
-        self.contentView.cornerRadius = 16
-    }
+  
     
     func configure(soundCategory: SoundCategory) {
         // Xử lý hình ảnh

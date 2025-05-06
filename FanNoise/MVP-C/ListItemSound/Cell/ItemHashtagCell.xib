@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HashtagCell" customModule="FanNoise" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ItemHashtagCell" customModule="FanNoise" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="81" height="27"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -45,6 +45,11 @@
                 <constraint firstAttribute="trailing" secondItem="MiY-11-x4z" secondAttribute="trailing" id="srO-gz-fG1"/>
             </constraints>
             <size key="customSize" width="81" height="27"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="5"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="hashTagLabel" destination="Mht-HW-mWf" id="7Qy-0G-oye"/>
             </connections>

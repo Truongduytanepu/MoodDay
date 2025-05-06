@@ -21,14 +21,18 @@ private struct Const {
 
 class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     
-    @IBOutlet private weak var videoButton: DimableView!
-    @IBOutlet private weak var soundButton: DimableView!
+    @IBOutlet private weak var videoCollectionView: UICollectionView!
+    @IBOutlet private weak var videoButton: UIButton!
+    @IBOutlet private weak var soundButton: UIButton!
     @IBOutlet private weak var tabbarView: UIView!
     @IBOutlet private weak var hashtagCollectionView: UICollectionView!
     @IBOutlet private weak var soundCollectionView: UICollectionView!
+    @IBOutlet private weak var videoView: UIView!
+    @IBOutlet private weak var soundView: UIView!
     
-    var categoryId : String = ""
     var coordinator : ListItemSoundCoordinator!
+    var sounds: [Sound] = []
+    var videos: [Video] = []
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,24 +40,38 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     }
     
     // MARK: - Config
-    func config() {
+    private func config() {
         self.setupHashTagCollectionView()
         self.setupSoundCollectionView()
+        self.setupVideoCollectionView()
         self.setupTabbar()
+        self.setupFont()
+    }
+    
+    private func setupFont() {
+        self.videoButton.titleLabel?.font = AppFont.font(.mPLUS2Bold, size: 10)
+        self.soundButton.titleLabel?.font = AppFont.font(.mPLUS2Bold, size: 10)
     }
     
     private func setupHashTagCollectionView() {
-        self.hashtagCollectionView.registerCell(type: HashtagCell.self)
+        self.hashtagCollectionView.registerCell(type: ItemHashtagCell.self)
         self.hashtagCollectionView.delegate = self
         self.hashtagCollectionView.dataSource = self
         self.hashtagCollectionView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupSoundCollectionView() {
-        self.soundCollectionView.registerCell(type: SoundCell.self)
+        self.soundCollectionView.registerCell(type: ItemSoundCell.self)
         self.soundCollectionView.delegate = self
         self.soundCollectionView.dataSource = self
         self.soundCollectionView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func setupVideoCollectionView() {
+        self.videoCollectionView.registerCell(type: VideoCell.self)
+        self.videoCollectionView.delegate = self
+        self.videoCollectionView.dataSource = self
+        self.videoCollectionView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupTabbar() {
@@ -62,57 +80,100 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
         self.tabbarView.cornerRadius = self.tabbarView.frame.height / 2
     }
     
+    private func startListItemSoundByHashtag (navigationController: UINavigationController,nameHastag: String) {
+        let listItemSoundByHashtagCoordinator =  ListItemSoundByHashtagCoordinator(navigation: navigationController, nameHashtag: nameHastag)
+        listItemSoundByHashtagCoordinator.start()
+    }
+    
+    private func startPlaySound(navigationController: UINavigationController,
+                                sound: Sound) {
+        let playSound = PlaySoundCoordinator(navigation: navigationController, sound: sound)
+        playSound.start()
+    }
+    
     @IBAction private func backButtonDidTap(_ sender: Any) {
         self.coordinator.stop()
     }
     
     @IBAction private func soundButonDidTap(_ sender: Any) {
+        self.videoButton.backgroundColor = .clear
+        self.soundButton.backgroundColor = .black
+        self.soundButton.titleLabel?.textColor = .white
+        self.videoButton.titleLabel?.textColor = .black
+        self.videoView.isHidden = true
+        self.soundView.isHidden = false
     }
     
     @IBAction private func videoButtonDidTap(_ sender: Any) {
+        self.videoButton.backgroundColor = .black
+        self.soundButton.backgroundColor = .clear
+        self.soundButton.titleLabel?.textColor = .black
+        self.videoButton.titleLabel?.textColor = .white
+        self.videoView.isHidden = false
+        self.soundView.isHidden = true
     }
 }
 
 extension ListItemSoundVC: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == self.hashtagCollectionView {
+            guard let navigationController = self.navigationController else { return }
+            let nameHashtag = self.presenter.getHashtag(sound: sounds)[indexPath.row]
+            self.startListItemSoundByHashtag(navigationController: navigationController, nameHastag: nameHashtag)
+            
+        } else {
+            guard let navigationController = self.navigationController else { return }
+            self.startPlaySound(navigationController: navigationController, sound: sounds[indexPath.row])
+        }
+    }
 }
 
 extension ListItemSoundVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.hashtagCollectionView {
-            return self.presenter.getHashtag(categoryId: categoryId).count
-        } else if collectionView == soundCollectionView {
-            return self.presenter.getNumberOfItems(categoryId: categoryId)
+            if collectionView == self.hashtagCollectionView {
+                return self.presenter.getHashtag(sound: sounds).count
+            } else if collectionView == self.soundCollectionView {
+                return self.sounds.count
+            } else if collectionView == self.videoCollectionView {
+                return self.videos.count
+            } else {
+                return 0
+            }
         }
-        
-        return 0
-    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.hashtagCollectionView {
-            guard let cell = collectionView.dequeueCell(type: HashtagCell.self, indexPath: indexPath) else {
+            guard let cell = collectionView.dequeueCell(type: ItemHashtagCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
             
-            let hashtagString = self.presenter.getHashtag(categoryId: categoryId)[indexPath.row]
-            cell.configureHashtag(hashtag: hashtagString)
+            let hashtagString = self.presenter.getHashtag(sound: sounds)
+            cell.configure(hashtag: hashtagString[indexPath.row])
             return cell
-        } else { // soundCollectionView
-            guard let cell = collectionView.dequeueCell(type: SoundCell.self, indexPath: indexPath) else {
+        } else if collectionView == self.soundCollectionView {
+            guard let cell = collectionView.dequeueCell(type: ItemSoundCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
             
-            let sound = self.presenter.loadData(categoryId: categoryId)[indexPath.row]
-            cell.configureSound(sound: sound)
+            cell.configure(sound: sounds[indexPath.row])
             return cell
+            
+        } else if collectionView == self.videoCollectionView {
+            guard let cell = collectionView.dequeueCell(type: VideoCell.self, indexPath: indexPath) else {
+                return UICollectionViewCell()
+            }
+
+            cell.configure(video: videos[indexPath.row])
+            return cell
+        } else {
+            return UICollectionViewCell()
         }
     }
 }
-
 extension ListItemSoundVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.hashtagCollectionView {
-            let text = self.presenter.getHashtag(categoryId: categoryId)[indexPath.row]
+            let text = self.presenter.getHashtag(sound: sounds)[indexPath.row]
             let sizingLabel = UILabel()
             sizingLabel.font = AppFont.font(.mPLUS2Medium, size: 10)
             sizingLabel.text = text

@@ -30,10 +30,6 @@ class PresenterRegisterer {
         container.register(TabbarPresenter.self) { (_, view: TabbarView) -> TabbarPresenter in
             return TabbarPresenterImpl(view: view)
         }
-
-        container.register(TrendingPresenter.self) { (_, view: TrendingView) -> TrendingPresenter in
-            return TrendingPresenterImpl(view: view)
-        }
         
         container.register(PreviewVideoPresenter.self) { (_, view: PreviewVideoView) -> PreviewVideoPresenter in
             return PreviewVideoPresenterImpl(view: view)
@@ -45,6 +41,14 @@ class PresenterRegisterer {
         
         container.register(ListItemSoundPresenter.self) { (_, view: ListItemSoundView) -> ListItemSoundPresenter in
             return ListItemSoundPresenterImpl(view: view)
+        }
+        
+        container.register(ListItemSoundByHashtagPresenter.self) { (_, view: ListItemSoundByHashtagView) -> ListItemSoundByHashtagPresenter in
+            return ListItemSoundByHashtagPresenterImpl(view: view)
+        }
+        
+        container.register(PlaySoundPresenter.self) { (_, view: PlaySoundView) -> PlaySoundPresenter in
+            return PlaySoundPresenterImpl(view: view)
         }
     }
 }

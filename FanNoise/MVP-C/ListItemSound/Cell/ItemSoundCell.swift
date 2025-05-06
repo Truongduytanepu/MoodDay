@@ -7,14 +7,13 @@
 
 import UIKit
 
-class SoundCell: UICollectionViewCell {
+class ItemSoundCell: UICollectionViewCell {
     
     @IBOutlet private weak var parentView: UIView!
     @IBOutlet private weak var childView: UIView!
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var hashtagLabel: UILabel!
-
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -28,11 +27,10 @@ class SoundCell: UICollectionViewCell {
     }
     
     private func setupUI() {
-        self.childView.cornerRadius = self.childView.bounds.width / 2
-        self.parentView.cornerRadius = 20
+        self.childView.cornerRadius = self.childView.frame.width / 2
     }
     
-    func configureSound(sound: Sound) {
+    func configure(sound: Sound) {
         self.titleLabel.text = sound.name
         self.hashtagLabel.text = sound.hashtag
         self.parentView.backgroundColor = sound.bgColor0?.toColor()
