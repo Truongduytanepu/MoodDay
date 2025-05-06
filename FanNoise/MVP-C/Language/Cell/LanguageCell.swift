@@ -38,17 +38,18 @@ class LanguageCell: UICollectionViewCell {
         self.checkImageView.isHidden = true
     }
     
-    func configure(with item: Language) {
-        self.nationalFlagImageView.image = UIImage(named: item.imageName)
-        self.languageNameLabel.text = item.languageName
-        
-        if item.isSelectLanguage {
-            self.checkImageView.isHidden = false
-            self.contentView.borderColor = UIColor(rgb: 0x2D2C2B)
-
-        } else {
-            self.checkImageView.isHidden = true
-            self.contentView.layer.borderColor = UIColor.clear.cgColor
-        }
+    func config(language: Language) {
+        self.nationalFlagImageView.image = UIImage(named: language.ensign)
+        self.languageNameLabel.text = language.name
+    }
+    
+    func select() {
+        self.checkImageView.isHidden = false
+        self.contentView.borderColor = UIColor(rgb: 0x2D2C2B)
+    }
+    
+    func deselect() {
+        self.checkImageView.isHidden = true
+        self.contentView.layer.borderColor = UIColor.clear.cgColor
     }
 }

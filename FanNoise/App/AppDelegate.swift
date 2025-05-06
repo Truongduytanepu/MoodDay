@@ -23,7 +23,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.configRealm()
         self.configMonitorNetwork()
         self.configSVProgressHUD()
+        self.fetch()
         return true
+    }
+    
+    private func fetch() {
+        LanguageManager.shared.fetchChoseLanguage()
     }
     
     private func setRootController() {

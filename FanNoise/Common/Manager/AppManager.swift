@@ -18,4 +18,13 @@ class AppManager {
     func setHasSeenIntroGif() {
         UserDefaults.standard.set(true, forKey: "hasSeenIntroGif")
     }
+    
+    func getChoseLanguage() -> Language {
+        let rawValue = UserDefaults.standard.integer(forKey: "CHOSE_LANGUAGE")
+        return Language(rawValue: rawValue) ?? .usa
+    }
+    
+    func setChoseLanguage(_ newValue: Language) {
+        UserDefaults.standard.set(newValue.rawValue, forKey: "CHOSE_LANGUAGE")
+    }
 }

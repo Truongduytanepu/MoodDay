@@ -134,4 +134,8 @@ extension String {
             )
         }
     }
+    
+    func localized() -> String {
+      return LanguageManager.localized(key: self) ?? String()
+    }
 }
