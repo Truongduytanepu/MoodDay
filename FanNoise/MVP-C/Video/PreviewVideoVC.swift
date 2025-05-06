@@ -6,11 +6,14 @@
 //
 import UIKit
 import AVKit
+import YYImage
 
 private struct Const {
     static let lineSpace: CGFloat = 0
     static let interitemSpace: CGFloat = 0
     static let swipeCountToShowTopic: Int = 5
+    static let gifSize: CGFloat = 200
+    static let timeOutGif = 3.0
 }
 
 enum VideoCategoryType {
@@ -23,6 +26,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     @IBOutlet private weak var navigationView: UIView!
     @IBOutlet private weak var collectionView: UICollectionView!
     
+    private var introGIFView: YYAnimatedImageView?
     var videoCategoryType: VideoCategoryType = .trending
     var idCategory: String = ""
     
@@ -38,6 +42,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     }
     
     private func config() {
+        self.showIntroGIF()
         self.setUpData()
         self.setupCollectionView()
         self.setUpNotification()
@@ -50,7 +55,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
             self.presenter.getAllVideo()
         case .filtered(let idCategory):
             self.navigationView.isHidden = false
-            self.presenter.loadData(idCategory: self.idCategory)
+            self.presenter.loadData(idCategory: idCategory)
         }
     }
     
@@ -87,6 +92,35 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     private func startVideo() {
         if let cell = collectionView.getCurrentCell() as? ItemVideoCell {
             cell.startVideo()
+        }
+    }
+    
+    private func showIntroGIF() {
+        if !AppManager.shared.hasSeenIntroGif() {
+            guard let path = Bundle.main.path(forResource: "gift_intro_2", ofType: "gif"),
+                  let image = YYImage(contentsOfFile: path) else {
+                return
+            }
+            
+            let gifView = YYAnimatedImageView(image: image)
+            gifView.contentMode = .scaleAspectFit
+            gifView.translatesAutoresizingMaskIntoConstraints = false
+            
+            self.view.addSubview(gifView)
+            NSLayoutConstraint.activate([
+                gifView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+                gifView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+                gifView.widthAnchor.constraint(equalToConstant: Const.gifSize),
+                gifView.heightAnchor.constraint(equalToConstant: Const.gifSize)
+            ])
+            self.view.bringSubviewToFront(gifView)
+            self.introGIFView = gifView
+            
+            AppManager.shared.setHasSeenIntroGif()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + Const.timeOutGif) { [weak self] in
+                self?.introGIFView?.removeFromSuperview()
+            }
         }
     }
 
@@ -153,7 +187,8 @@ extension PreviewVideoVC: UICollectionViewDataSource {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch self.videoCategoryType {
         case .trending:
             if (indexPath.row % Const.swipeCountToShowTopic == 0) && indexPath.row > 0 {

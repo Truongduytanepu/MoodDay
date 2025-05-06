@@ -7,3 +7,6 @@ fastlane/report.xml
 *.dsym.zip
 Pods/
 xcuserdata
+build/
+.build/
+

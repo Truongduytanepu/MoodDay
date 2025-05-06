@@ -43,5 +43,6 @@ target 'FanNoise' do
   pod 'Alamofire', '4.9.1'
   pod 'SDWebImage'
   pod 'SVProgressHUD'
+  pod 'WheelPicker'
 
 end
