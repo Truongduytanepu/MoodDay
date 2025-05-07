@@ -37,6 +37,8 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     private var rotationTimer: Timer?
     var coordinator: PlaySoundCoordinator!
     var soundItem: Sound!
+    var listSound: [Sound] = []
+    var listVideo: [Video] = []
     private var audioPlayer: AVPlayer?
     
     // MARK: - Lifecycle
@@ -55,6 +57,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         self.setupFirtCollectionView()
         self.setupSecondCollectionView()
         self.setupLastCollectionView()
+        self.loadData()
     }
     
     private func startRotatingSmoothly(imageView: UIImageView) {
@@ -97,6 +100,12 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
                 imageView.layer.speed = speed
             }
         }
+    }
+    
+    private func loadData() {
+        self.presenter.loadData(sounds: self.listSound)
+        self.presenter.getRandomSounds(sound: self.listSound)
+        self.presenter.getRandomVideos(videos: self.listVideo)
     }
     
     private func stopRotating(imageView: UIImageView) {
@@ -230,11 +239,11 @@ extension PlaySoundVC: UICollectionViewDelegate {
 extension PlaySoundVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.likeCollectionView {
-            return self.presenter.numberOfItem(nameCategory: self.soundItem.name ?? "")
+            return self.presenter.getLikeSound().count
         } else if collectionView == self.funnyCollectionView {
-            return 1
+            return self.presenter.getFunVideo().count
         } else if collectionView == self.othersCollectionView {
-            return 1
+            return self.presenter.getOtherSound().count
         } else {
             return 0
         }
@@ -246,20 +255,21 @@ extension PlaySoundVC: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
-            let nameCategory = self.soundItem.name ?? ""
-            let sound = self.presenter.getSoundByCatogory(nameCategory: nameCategory)[indexPath.row]
-            cell.configure(sound: sound)
+            cell.configure(sound: self.presenter.getLikeSound()[indexPath.row])
             return cell
         } else if collectionView == self.funnyCollectionView {
             guard let cell = collectionView.dequeueCell(type: ItemFunnyCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
             
+            cell.configure(video: self.presenter.getFunVideo()[indexPath.row])
             return cell
         } else if collectionView == self.othersCollectionView {
             guard let cell = collectionView.dequeueCell(type: ItemOthersCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
+            
+            cell.configure(sound: self.presenter.getOtherSound()[indexPath.row])
             
             return cell
         } else {

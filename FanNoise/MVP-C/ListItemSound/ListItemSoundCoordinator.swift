@@ -8,14 +8,18 @@
 import UIKit
 
 class ListItemSoundCoordinator: Coordinator {
+    
     var started: Bool = false
     private weak var navigation: UINavigationController?
     private var sound: [Sound]
     private var video: [Video]
-    init(navigation: UINavigationController,sound: [Sound],video: [Video]) {
+    private var categoryID: String = ""
+    
+    init(navigation: UINavigationController,sound: [Sound],video: [Video], categoryID: String) {
         self.navigation = navigation
         self.sound = sound
         self.video = video
+        self.categoryID = categoryID
     }
     
     func start() {
@@ -24,7 +28,8 @@ class ListItemSoundCoordinator: Coordinator {
             let controller = ListItemSoundVC.factory()
             controller.coordinator = self
             controller.sounds = self.sound
-            controller.videos = self.video 
+            controller.videos = self.video
+            controller.categoryID = self.categoryID
             navigation?.pushViewController(controller, animated: true)
         }
     }

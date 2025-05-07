@@ -11,6 +11,7 @@ class PreviewVideoCoordinator: Coordinator {
     
     var started: Bool = false
     var videoCategoryType: VideoCategoryType
+    var targetIndexPath: IndexPath?
     private weak var navigation: UINavigationController?
     
     init(navigation: UINavigationController, videoCategoryType: VideoCategoryType) {
@@ -24,6 +25,7 @@ class PreviewVideoCoordinator: Coordinator {
             let controller = PreviewVideoVC.factory()
             controller.coordinator = self
             controller.videoCategoryType = self.videoCategoryType
+            controller.targetIndexPath = self.targetIndexPath
             self.navigation?.pushViewController(controller, animated: true)
         }
     }

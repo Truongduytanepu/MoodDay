@@ -11,7 +11,7 @@ private struct Const {
     static let insetLeftRightSound: CGFloat = 13
     static let minimumInteritemSpacingSound: CGFloat = 14
     static let minimumLineSpacingSound: CGFloat = 16
-    static let ratioCellSound: CGFloat = 160 / 255
+    static let ratioCellSound: CGFloat = 160 / 215
     static let numberColumsSound: CGFloat = 2
     static let insetForSectionAt = UIEdgeInsets(top: 0, left: 13, bottom: 0, right: 13)
 }
@@ -22,6 +22,7 @@ class ListItemSoundByHashtagVC: BaseVC<ListItemSoundByHashtagPresenter, ListItem
     
     var coordinator: ListItemSoundByHashtagCoordinator!
     var nameHashtag : String = ""
+    var videos: [Video] = []
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -47,8 +48,14 @@ class ListItemSoundByHashtagVC: BaseVC<ListItemSoundByHashtagPresenter, ListItem
         self.hashtagLabel.font = AppFont.font(.mPLUS2Bold, size: 16)
     }
     
-    private func startPlaySound(navigationController: UINavigationController, sound: Sound) {
-        let playSound = PlaySoundCoordinator(navigation: navigationController, sound: sound)
+    private func startPlaySound(navigationController: UINavigationController,
+                                sound: Sound,
+                                sounds: [Sound],
+                                videos: [Video]) {
+        let playSound = PlaySoundCoordinator(navigation: navigationController,
+                                             sound: sound,
+                                             sounds: sounds,
+                                             videos: videos)
         playSound.start()
     }
     
@@ -60,8 +67,12 @@ class ListItemSoundByHashtagVC: BaseVC<ListItemSoundByHashtagPresenter, ListItem
 extension ListItemSoundByHashtagVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let navigationController = self.navigationController else { return }
+        let sounds = self.presenter.loadSoundByHashtag(nameHashtag: nameHashtag)
         let sound = self.presenter.loadSoundByHashtag(nameHashtag: nameHashtag)[indexPath.row]
-        self.startPlaySound(navigationController: navigationController, sound: sound)
+        self.startPlaySound(navigationController: navigationController,
+                            sound: sound,
+                            sounds: sounds,
+                            videos: self.videos)
     }
 }
 

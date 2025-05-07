@@ -15,7 +15,6 @@ class HomeCategoryManager {
         return categories
     }
     
-    
     func updateCategories(_ categories: [HomeCategory]) {
         self.categories = categories
     }
@@ -51,6 +50,10 @@ class HomeCategoryManager {
         return categories.flatMap { $0.videos }
     }
     
+    func getAllSound() -> [Sound] {
+        return categories.flatMap{$0.sounds}
+    }
+    
     func getSoundNameAndThumb(_ idCategory: String) -> [SoundCategory] {
         var result: [SoundCategory] = []
         var uniqueNames: Set<String> = Set()
@@ -59,11 +62,7 @@ class HomeCategoryManager {
             return result
         }
         
-        guard let sounds = category.sounds else {
-            return result
-        }
-        
-        for sound in sounds {
+        for sound in category.sounds  {
             if let soundCategory = sound.category, let name = soundCategory.name {
                 if !uniqueNames.contains(name) {
                     uniqueNames.insert(name)
@@ -92,7 +91,7 @@ class HomeCategoryManager {
     
     func getSoundCategory(_ idCategory: String) -> [Sound] {
         if let categorySound = categories.first(where: { $0.id == idCategory }) {
-            return categorySound.sounds ?? []
+            return categorySound.sounds
         }
         
         return []
@@ -103,7 +102,7 @@ class HomeCategoryManager {
         var result: [Sound] = []
         
         for category in categories {
-            let matchedSounds = category.sounds?.filter { sound in
+            let matchedSounds = category.sounds.filter { sound in
                 guard let hashtagString = sound.hashtag else { return false }
                 
                 let hashtags = hashtagString
@@ -112,7 +111,7 @@ class HomeCategoryManager {
                     .map { String($0) }
                 
                 return hashtags.contains(targetHashtag)
-            } ?? []
+            }
             
             result.append(contentsOf: matchedSounds)
         }
@@ -124,18 +123,17 @@ class HomeCategoryManager {
         var result: [Sound] = []
         
         for category in categories {
-            if let sounds = category.sounds {
-                let matchedSounds = sounds.filter { sound in
-                    sound.category?.name?.lowercased() == nameCategory.lowercased()
-                }
-                
-                result.append(contentsOf: matchedSounds)
+            let sounds = category.sounds
+            let matchedSounds = sounds.filter { sound in
+                sound.category?.name?.lowercased() == nameCategory.lowercased()
             }
+            
+            result.append(contentsOf: matchedSounds)
         }
         
         return result
     }
- 
+    
     func getVideoByCategory(_ nameCategory: String) -> [Video] {
         var result: [Video] = []
         
@@ -148,5 +146,14 @@ class HomeCategoryManager {
         }
         
         return result
+    }
+    
+    func getFilteredAndRandomSounds(soundsToExclude: [Sound]) -> [Sound] {
+        let allSounds = self.getAllSound()
+        let filteredSounds = allSounds.filter { sound in
+            !soundsToExclude.contains(where: { $0.id == sound.id })
+        }
+        
+        return Array(filteredSounds.shuffled().prefix(10))
     }
 }

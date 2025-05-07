@@ -51,8 +51,14 @@ class NaturalSoundWhiteNoiseVC: BaseVC<NaturalSoundWhiteNoisePresenter, NaturalS
         self.titleLabel.text = self.categoryName
     }
     
-    private func startListItemSound(navigationController: UINavigationController, sound: [Sound],video: [Video]) {
-        let listItemSoundCoordinator = ListItemSoundCoordinator(navigation: navigationController,sound: sound,video: video)
+    private func startListItemSound(navigationController: UINavigationController,
+                                    sound: [Sound],
+                                    video: [Video],
+                                    categoryID: String) {
+        let listItemSoundCoordinator = ListItemSoundCoordinator(navigation: navigationController,
+                                                                sound: sound,
+                                                                video: video,
+                                                                categoryID: categoryID)
           listItemSoundCoordinator.start()
     }
     
@@ -67,7 +73,10 @@ extension NaturalSoundWhiteNoiseVC: UICollectionViewDelegate {
         let sounds = self.soundData[indexPath.row]
         let soundByName = self.presenter.getSoundByCategoryName(nameCategory: sounds.name ?? "")
         let videoByName = self.presenter.getVideoByCategoryName(nameCategory: sounds.name ?? "")
-        self.startListItemSound(navigationController: navigationController, sound: soundByName, video: videoByName)
+        self.startListItemSound(navigationController: navigationController,
+                                sound: soundByName,
+                                video: videoByName,
+                                categoryID: self.categoryId)
     }
 }
 

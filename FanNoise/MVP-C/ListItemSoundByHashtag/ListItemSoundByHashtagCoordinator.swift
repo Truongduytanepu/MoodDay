@@ -8,12 +8,16 @@
 import UIKit
 
 class ListItemSoundByHashtagCoordinator: Coordinator {
+    
     var started: Bool = false
     private weak var navigation: UINavigationController?
     private var nameHashtag : String
-    init(navigation: UINavigationController,nameHashtag: String) {
+    private var videos: [Video] = []
+    
+    init(navigation: UINavigationController,nameHashtag: String, videos: [Video]) {
         self.navigation = navigation
         self.nameHashtag = nameHashtag
+        self.videos = videos
     }
     
     func start() {
@@ -22,6 +26,7 @@ class ListItemSoundByHashtagCoordinator: Coordinator {
             let controller = ListItemSoundByHashtagVC.factory()
             controller.coordinator = self
             controller.nameHashtag = nameHashtag
+            controller.videos = self.videos
             navigation?.pushViewController(controller, animated: true)
         }
     }

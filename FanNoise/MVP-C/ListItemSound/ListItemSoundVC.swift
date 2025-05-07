@@ -13,10 +13,15 @@ private struct Const {
     static let minimumInteritemSpacingHashtag: CGFloat = 8
     static let minimumLineSpacingSound: CGFloat = 16
     static let minimumLineSpacingHashtag: CGFloat = 0
-    static let ratioCellSound: CGFloat = 160 / 255
+    static let ratioCellSound: CGFloat = 160 / 215
     static let numberColumsSound: CGFloat = 2
     static let insetForSectionAt = UIEdgeInsets(top: 0, left: 13, bottom: 0, right: 13)
     static let spacingTopLeft : CGFloat = 8
+}
+
+enum MediaType {
+    case sound
+    case video
 }
 
 class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
@@ -33,6 +38,9 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     var coordinator : ListItemSoundCoordinator!
     var sounds: [Sound] = []
     var videos: [Video] = []
+    var categoryID: String = ""
+    private var mediaType: MediaType = .sound
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,15 +88,27 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
         self.tabbarView.cornerRadius = self.tabbarView.frame.height / 2
     }
     
-    private func startListItemSoundByHashtag (navigationController: UINavigationController,nameHastag: String) {
-        let listItemSoundByHashtagCoordinator =  ListItemSoundByHashtagCoordinator(navigation: navigationController, nameHashtag: nameHastag)
+    private func startListItemSoundByHashtag (navigationController: UINavigationController,nameHastag: String, videos: [Video]) {
+        let listItemSoundByHashtagCoordinator =  ListItemSoundByHashtagCoordinator(navigation: navigationController, nameHashtag: nameHastag, videos: videos)
         listItemSoundByHashtagCoordinator.start()
     }
     
     private func startPlaySound(navigationController: UINavigationController,
-                                sound: Sound) {
-        let playSound = PlaySoundCoordinator(navigation: navigationController, sound: sound)
+                                sound: Sound,
+                                sounds: [Sound],
+                                videos: [Video]) {
+        let playSound = PlaySoundCoordinator(navigation: navigationController,
+                                             sound: sound,
+                                             sounds: sounds,
+                                             videos: videos)
         playSound.start()
+    }
+    
+    private func startPlayVideo(navigationController: UINavigationController, categoryID: String, targetIndexPath: IndexPath) {
+        let playVideo = PreviewVideoCoordinator(navigation: navigationController,
+                                                videoCategoryType: .filtered(idCategory: categoryID))
+        playVideo.targetIndexPath = targetIndexPath
+        playVideo.start()
     }
     
     @IBAction private func backButtonDidTap(_ sender: Any) {
@@ -102,6 +122,7 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
         self.videoButton.titleLabel?.textColor = .black
         self.videoView.isHidden = true
         self.soundView.isHidden = false
+        self.mediaType = .sound
     }
     
     @IBAction private func videoButtonDidTap(_ sender: Any) {
@@ -111,6 +132,7 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
         self.videoButton.titleLabel?.textColor = .white
         self.videoView.isHidden = false
         self.soundView.isHidden = true
+        self.mediaType = .video
     }
 }
 
@@ -119,27 +141,41 @@ extension ListItemSoundVC: UICollectionViewDelegate {
         if collectionView == self.hashtagCollectionView {
             guard let navigationController = self.navigationController else { return }
             let nameHashtag = self.presenter.getHashtag(sound: sounds)[indexPath.row]
-            self.startListItemSoundByHashtag(navigationController: navigationController, nameHastag: nameHashtag)
+            self.startListItemSoundByHashtag(navigationController: navigationController,
+                                             nameHastag: nameHashtag,
+                                             videos: self.videos)
             
         } else {
-            guard let navigationController = self.navigationController else { return }
-            self.startPlaySound(navigationController: navigationController, sound: sounds[indexPath.row])
+            switch self.mediaType {
+            case .sound:
+                guard let navigationController = self.navigationController else { return }
+                
+                self.startPlaySound(navigationController: navigationController,
+                                    sound: sounds[indexPath.row],
+                                    sounds: sounds,
+                                    videos: videos)
+            case .video:
+                guard let navigationController = self.navigationController else { return }
+                self.startPlayVideo(navigationController: navigationController,
+                                    categoryID: self.categoryID,
+                                    targetIndexPath: indexPath)
+            }
         }
     }
 }
 
 extension ListItemSoundVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            if collectionView == self.hashtagCollectionView {
-                return self.presenter.getHashtag(sound: sounds).count
-            } else if collectionView == self.soundCollectionView {
-                return self.sounds.count
-            } else if collectionView == self.videoCollectionView {
-                return self.videos.count
-            } else {
-                return 0
-            }
+        if collectionView == self.hashtagCollectionView {
+            return self.presenter.getHashtag(sound: sounds).count
+        } else if collectionView == self.soundCollectionView {
+            return self.sounds.count
+        } else if collectionView == self.videoCollectionView {
+            return self.videos.count
+        } else {
+            return 0
         }
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.hashtagCollectionView {
@@ -155,6 +191,8 @@ extension ListItemSoundVC: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
+            self.sounds[indexPath.row].assignRandomColorsIfNeeded()
+            
             cell.configure(sound: sounds[indexPath.row])
             return cell
             
@@ -162,7 +200,7 @@ extension ListItemSoundVC: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueCell(type: VideoCell.self, indexPath: indexPath) else {
                 return UICollectionViewCell()
             }
-
+            
             cell.configure(video: videos[indexPath.row])
             return cell
         } else {

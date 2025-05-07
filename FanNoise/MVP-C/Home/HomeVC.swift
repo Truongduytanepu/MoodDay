@@ -92,8 +92,14 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
         naturalSoundWhiteNoiseCoordinator.start()
     }
     
-    private func startListItemSound(navigationController: UINavigationController, sound: [Sound],video: [Video]) {
-        let listItemSoundCoordinator = ListItemSoundCoordinator(navigation: navigationController,sound: sound,video: video)
+    private func startListItemSound(navigationController: UINavigationController,
+                                    sound: [Sound],
+                                    video: [Video],
+                                    categoryID: String) {
+        let listItemSoundCoordinator = ListItemSoundCoordinator(navigation: navigationController,
+                                                                sound: sound,
+                                                                video: video,
+                                                                categoryID: categoryID)
         listItemSoundCoordinator.start()
     }
 }
@@ -110,7 +116,10 @@ extension HomeVC: UICollectionViewDelegate {
             let categoryID = self.homeCategories[indexPath.row].id ?? ""
             let sound = self.presenter.getSoundByCategoryId(categoryId: categoryID)
             let video = self.presenter.getVideoByCategoryId(categoryId: categoryID)
-            self.startListItemSound(navigationController: navigationController,sound: sound,video: video)
+            self.startListItemSound(navigationController: navigationController,
+                                    sound: sound,
+                                    video: video,
+                                    categoryID: categoryID)
         }
     }
 }

@@ -29,6 +29,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     private var introGIFView: YYAnimatedImageView?
     var videoCategoryType: VideoCategoryType = .trending
     var idCategory: String = ""
+    var targetIndexPath: IndexPath?
     
     var coordinator: PreviewVideoCoordinator!
     
@@ -39,6 +40,11 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.config()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.scrollToIndexPath()
     }
     
     private func config() {
@@ -81,6 +87,15 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
             name: AVAudioSession.interruptionNotification,
             object: AVAudioSession.sharedInstance()
         )
+    }
+    
+    private func scrollToIndexPath() {
+        if let indexPath = targetIndexPath {
+            self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+        } else {
+            let firstItemIndexPath = IndexPath(row: 0, section: 0)
+            self.collectionView.scrollToItem(at: firstItemIndexPath, at: .top, animated: false)
+        }
     }
     
     func stopVideo() {
@@ -172,8 +187,15 @@ extension PreviewVideoVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         let totalItems = self.presenter.getNumberOfItems()
-        let topicCells = totalItems / Const.swipeCountToShowTopic
+        var topicCells = 0
         
+        switch self.videoCategoryType {
+        case .trending:
+            topicCells = totalItems / Const.swipeCountToShowTopic
+        case .filtered(idCategory: let idCategory):
+            topicCells = 0
+        }
+         
         return totalItems + topicCells
     }
 
