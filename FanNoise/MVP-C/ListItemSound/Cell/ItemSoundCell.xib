@@ -24,17 +24,22 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSp-IF-2T7">
                                 <rect key="frame" x="15" y="12" width="193" height="193"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6A6-Bm-AYd">
-                                        <rect key="frame" x="20" y="20" width="153" height="153"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6A6-Bm-AYd">
+                                        <rect key="frame" x="30" y="30" width="133" height="133"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBrownColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="6A6-Bm-AYd" secondAttribute="trailing" constant="20" id="EMl-5T-8c8"/>
+                                    <constraint firstAttribute="trailing" secondItem="6A6-Bm-AYd" secondAttribute="trailing" constant="30" id="EMl-5T-8c8"/>
                                     <constraint firstAttribute="width" secondItem="dSp-IF-2T7" secondAttribute="height" id="F0J-RQ-1qD"/>
-                                    <constraint firstItem="6A6-Bm-AYd" firstAttribute="top" secondItem="dSp-IF-2T7" secondAttribute="top" constant="20" id="PSd-eb-vBl"/>
-                                    <constraint firstAttribute="bottom" secondItem="6A6-Bm-AYd" secondAttribute="bottom" constant="20" id="Vvu-d3-4PN"/>
-                                    <constraint firstItem="6A6-Bm-AYd" firstAttribute="leading" secondItem="dSp-IF-2T7" secondAttribute="leading" constant="20" id="v6e-oF-W8W"/>
+                                    <constraint firstItem="6A6-Bm-AYd" firstAttribute="top" secondItem="dSp-IF-2T7" secondAttribute="top" constant="30" id="PSd-eb-vBl"/>
+                                    <constraint firstAttribute="bottom" secondItem="6A6-Bm-AYd" secondAttribute="bottom" constant="30" id="Vvu-d3-4PN"/>
+                                    <constraint firstItem="6A6-Bm-AYd" firstAttribute="leading" secondItem="dSp-IF-2T7" secondAttribute="leading" constant="30" id="v6e-oF-W8W"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1X-vO-L9m">
@@ -92,7 +97,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

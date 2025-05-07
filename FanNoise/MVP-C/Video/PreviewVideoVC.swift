@@ -238,7 +238,6 @@ extension PreviewVideoVC: UICollectionViewDataSource {
                 }
                 
                 let video = self.presenter.getVideo(at: adjustedIndex)
-                
                 cell.configure(with: video.source ?? "", video: video)
                 cell.setUpCategoryType(videoCategoryType: self.videoCategoryType)
                 return cell
@@ -251,9 +250,8 @@ extension PreviewVideoVC: UICollectionViewDataSource {
             }
             
             let video = self.presenter.getVideo(at: indexPath.row)
-            
-            cell.configure(with: video.source ?? "", video: video)
             cell.setUpCategoryType(videoCategoryType: self.videoCategoryType)
+            cell.configure(with: video.source ?? "", video: video)
             return cell
         }
     }

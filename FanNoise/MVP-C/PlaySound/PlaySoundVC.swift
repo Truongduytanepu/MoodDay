@@ -48,9 +48,13 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     }
     
     override func viewDidLayoutSubviews() {
-        self.setupUI()
+        self.setupUI(with: soundItem)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     // MARK: - Config
     private func config() {
         self.setupFont()
@@ -58,47 +62,84 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         self.setupSecondCollectionView()
         self.setupLastCollectionView()
         self.loadData()
+        self.setupObservers()
+        self.setupAudioInterruptionObserver()
+    }
+    
+    private func setupObservers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(appWillResignActive),
+                                               name: UIApplication.willResignActiveNotification,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(appWillTerminate),
+                                               name: UIApplication.willTerminateNotification,
+                                               object: nil)
+    }
+    
+    private func setupAudioInterruptionObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleAudioInterruption),
+                                               name: AVAudioSession.interruptionNotification,
+                                               object: AVAudioSession.sharedInstance())
+    }
+    
+    @objc private func handleAudioInterruption(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+              let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+            return
+        }
+        
+        if type == .began {
+            // Gián đoạn bắt đầu (cuộc gọi đến, báo thức...)
+            self.stopSoundIfNeed()
+        } else if type == .ended {
+            // Gián đoạn kết thúc, bạn có thể phát lại nếu cần
+            // Ví dụ:
+            // try? AVAudioSession.sharedInstance().setActive(true)
+            // self.audioPlayer?.play()
+        }
+    }
+
+    @objc private func appWillResignActive() {
+        self.stopSoundIfNeed()
+    }
+
+    @objc private func appWillTerminate() {
+        self.stopSoundIfNeed()
     }
     
     private func startRotatingSmoothly(imageView: UIImageView) {
         // Xoá animation cũ nếu có
         imageView.layer.removeAnimation(forKey: "rotation")
-        
-        // Reset layer state đầy đủ
-        imageView.layer.speed = 0.05  //  tốc độ cực chậm ban đầu
-        imageView.layer.timeOffset = 0
-        imageView.layer.beginTime = 0
-        
-        // Thêm lại animation
-        let rotation = CABasicAnimation(keyPath: "transform.rotation")
-        rotation.fromValue = 0
-        rotation.toValue = Double.pi * 2
-        rotation.duration = 1.0
-        rotation.repeatCount = .infinity
-        rotation.isRemovedOnCompletion = false
-        rotation.fillMode = .forwards
-        
-        imageView.layer.add(rotation, forKey: "rotation")
-        
-        //  Đặt lại tốc độ quay ban đầu
-        imageView.layer.speed = 0.05  // tốc độ cực chậm ban đầu
-        imageView.layer.timeOffset = 0
-        imageView.layer.beginTime = CACurrentMediaTime()
-        
-        // Tăng tốc mượt
-        self.accelerateRotation(imageView: imageView)
-    }
-    
-    private func accelerateRotation(imageView: UIImageView) {
-        var speed: Float = 0.1
-        
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            if speed >= 1.0 {
-                timer.invalidate()
-            } else {
-                speed += 0.05
-                imageView.layer.speed = speed
-            }
+
+        // Bước 1: Tạo animation quay nhanh dần (ease-in)
+        let accelerateRotation = CABasicAnimation(keyPath: "transform.rotation")
+        accelerateRotation.fromValue = 0
+        accelerateRotation.toValue = Double.pi * 2
+        accelerateRotation.duration = 1.0
+        accelerateRotation.timingFunction = CAMediaTimingFunction(name: .easeIn)
+        accelerateRotation.fillMode = .forwards
+        accelerateRotation.isRemovedOnCompletion = false
+
+        // Gán animation tăng tốc ban đầu
+        imageView.layer.add(accelerateRotation, forKey: "acceleration")
+
+        // Bước 2: Sau khi tăng tốc xong, chuyển sang quay đều
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            let steadyRotation = CABasicAnimation(keyPath: "transform.rotation")
+            steadyRotation.fromValue = 0
+            steadyRotation.toValue = Double.pi * 2
+            steadyRotation.duration = 0.6  // tốc độ quay ổn định
+            steadyRotation.repeatCount = .infinity
+            steadyRotation.isRemovedOnCompletion = false
+            steadyRotation.fillMode = .forwards
+            steadyRotation.timingFunction = CAMediaTimingFunction(name: .linear)
+
+            imageView.layer.removeAnimation(forKey: "acceleration") // Xoá animation cũ
+            imageView.layer.add(steadyRotation, forKey: "rotation")
         }
     }
     
@@ -108,25 +149,66 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         self.presenter.getRandomVideos(videos: self.listVideo)
     }
     
-    private func stopRotating(imageView: UIImageView) {
-        // Stop animation cleanly
-        imageView.layer.removeAnimation(forKey: "rotation")
-        imageView.layer.speed = 1.0
-        imageView.layer.timeOffset = 0
-        imageView.layer.beginTime = 0
+    private func stopRotatingSmoothly(imageView: UIImageView) {
+        guard imageView.layer.animation(forKey: "rotation") != nil else { return }
+
+        // Lấy góc xoay hiện tại từ presentation layer
+        guard let presentationLayer = imageView.layer.presentation() else { return }
+        let currentTransform = presentationLayer.transform
+        let currentRotation = atan2(currentTransform.m12, currentTransform.m11)
+
+        // Xoá animation hiện tại
+        imageView.layer.removeAllAnimations()
+        imageView.layer.transform = CATransform3DMakeRotation(currentRotation, 0, 0, 1)
+
+        // Tạo animation quay chậm dần thêm 90 độ rồi dừng
+        let slowDown = CABasicAnimation(keyPath: "transform.rotation.z")
+        slowDown.fromValue = currentRotation
+        slowDown.toValue = currentRotation + .pi / 2  // quay thêm 90 độ
+        slowDown.duration = 1.0
+        slowDown.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        slowDown.fillMode = .forwards
+        slowDown.isRemovedOnCompletion = false
+
+        imageView.layer.add(slowDown, forKey: "slowStop")
+
+        // Sau khi animation kết thúc, cố định lại transform
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            imageView.layer.removeAllAnimations()
+            imageView.layer.transform = CATransform3DMakeRotation(currentRotation + .pi / 2, 0, 0, 1)
+        }
     }
-    
+
     private func playAudio(from urlString: String) {
-        guard let url = URL(string: urlString) else {
-            print("❌ Invalid URL")
+        // 1. Reset player cũ nếu có
+        self.audioPlayer?.pause()
+        self.audioPlayer = nil
+        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
+
+        // 2. Mã hoá URL
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let url = URL(string: encodedString) else {
+            print("❌ Invalid or improperly encoded URL")
             return
         }
-        
+
+        // 3. Tạo player mới
         let playerItem = AVPlayerItem(url: url)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(audioDidFinish),
+                                               name: .AVPlayerItemDidPlayToEndTime,
+                                               object: playerItem)
+        
         self.audioPlayer = AVPlayer(playerItem: playerItem)
         self.audioPlayer?.play()
     }
-    
+
+    @objc private func audioDidFinish(notification: Notification) {
+        print("🔁 Replaying audio...")
+        self.audioPlayer?.seek(to: .zero)
+        self.audioPlayer?.play()
+    }
+
     private func setupFont() {
         self.nameSoundLabel.font = AppFont.font(.mPLUS2Bold, size: 20)
         self.hashtagLabel.font = AppFont.font(.mPLUS2Regular, size: 10)
@@ -156,11 +238,11 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         self.othersCollectionView.registerCell(type: ItemOthersCell.self)
     }
     
-    private func setupUI() {
-        if self.soundItem.isRotate == true {
+    private func setupUI(with sound: Sound) {
+        if sound.isRotate == true {
             let imageViews = [firstFanImageView, secondFanImageView, lastFanImageView]
             
-            if let frames = self.soundItem.frames {
+            if let frames = sound.frames {
                 for (index, imageView) in imageViews.enumerated() {
                     if frames.indices.contains(index),
                        let encodedString = frames[index].addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
@@ -173,39 +255,59 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
                 }
             }
         } else {
-            if let thumb = soundItem.thumb,
+            if let thumb = sound.thumb,
                let encodedString = thumb.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
                let url = URL(string: encodedString) {
                 self.firstFanImageView.sd_setImage(with: url, completed: nil)
             }
         }
         
-        self.nameSoundLabel.text = self.soundItem.name
-        self.hashtagLabel.text = self.soundItem.hashtag
+        self.nameSoundLabel.text = sound.name
+        self.hashtagLabel.text = sound.hashtag
         self.fanView.cornerRadius = self.fanView.frame.height / 2
-        self.fanView.backgroundColor = self.soundItem.bgColor1?.toColor()
+        self.fanView.backgroundColor = sound.bgColor1?.toColor()
         self.setTimeButton.cornerRadius = self.setTimeButton.frame.height / 2
     }
     
-    private func startRoting() {
-        if self.soundItem.isRotate == true {
-            self.startRotatingSmoothly(imageView: firstFanImageView)
-            if self.soundItem.rotateFrame == 3 {
-                self.startRotatingSmoothly(imageView: firstFanImageView)
-            } else {
-                self.startRotatingSmoothly(imageView: firstFanImageView)
-            }
+    private func stopSoundIfNeed() {
+        // Dừng player
+        self.audioPlayer?.pause()
+        
+        // Dừng tất cả animation ngay lập tức
+        [self.firstFanImageView, self.secondFanImageView, self.lastFanImageView].forEach { imageView in
+            imageView?.layer.removeAllAnimations()
+            imageView?.layer.transform = CATransform3DIdentity
         }
+        
+        // Cập nhật UI
+        self.playButton.setImage(UIImage(named: "ic_playsound_pause"), for: .normal)
+        self.isRotating = false
     }
     
-    private func stopRotating() {
+    private func stopSoundSmoothlyIfNeed() {
+        self.playButton.setImage(UIImage(named: "ic_playsound_pause"), for: .normal)
+        [self.firstFanImageView, self.secondFanImageView, self.lastFanImageView].forEach {
+            guard let imageView = $0 else { return }
+            self.stopRotatingSmoothly(imageView: imageView)
+        }
+        
+        self.audioPlayer?.pause()
+    }
+    
+    private func startSoundSmoothlyIfNeed() {
+        self.stopSoundIfNeed()
+
+        let soundLink = self.soundItem.source
+        self.playButton.setImage(UIImage(named: "ic_playsound_play"), for: .normal)
         if self.soundItem.isRotate == true {
-            if self.soundItem.rotateFrame == 3 {
-                self.stopRotating(imageView: secondFanImageView)
+            if self.soundItem.rotateFrame == 2 {
+                self.startRotatingSmoothly(imageView: self.secondFanImageView)
             } else {
-                self.stopRotating(imageView: firstFanImageView)
+                self.startRotatingSmoothly(imageView: self.firstFanImageView)
             }
         }
+        
+        self.playAudio(from: soundLink ?? "")
     }
     
     @IBAction private func backButtonDidTap(_ sender: Any) {
@@ -218,14 +320,9 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     
     @IBAction private func playButtonDidTap(_ sender: Any) {
         if self.isRotating {
-            self.audioPlayer?.pause()
-            self.playButton.setImage(UIImage(named: "ic_playsound_pause"), for: .normal)
-            self.stopRotating()
+            self.stopSoundSmoothlyIfNeed()
         } else {
-            let soundLink = self.soundItem.source
-            self.playAudio(from: soundLink ?? "")
-            self.playButton.setImage(UIImage(named: "ic_playsound_play"), for: .normal)
-            self.startRoting()
+            self.startSoundSmoothlyIfNeed()
         }
         
         self.isRotating.toggle()
@@ -233,7 +330,21 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
 }
 
 extension PlaySoundVC: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.stopSoundIfNeed()
+        if collectionView == self.likeCollectionView {
+            let soundSelected = self.presenter.getLikeSound()[indexPath.row]
+            self.soundItem = soundSelected
+            self.setupUI(with: soundSelected)
+        } else if collectionView == self.funnyCollectionView {
+            
+            
+        } else {
+            let soundSelected = self.presenter.getOtherSound()[indexPath.row]
+            self.soundItem = soundSelected
+            self.setupUI(with: soundSelected)
+        }
+    }
 }
 
 extension PlaySoundVC: UICollectionViewDataSource {
@@ -269,6 +380,7 @@ extension PlaySoundVC: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
+            self.presenter.getOtherSound()[indexPath.row].assignRandomColorsIfNeeded()
             cell.configure(sound: self.presenter.getOtherSound()[indexPath.row])
             
             return cell

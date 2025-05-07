@@ -15,6 +15,18 @@ let colorPairs: [(String, String)] = [
     ("ACE7FF", "DEF5FF")
 ]
 
+let hashtagPairs: [String] = [
+    "#FanSound",
+    "#SleepWithFan",
+    "#WhiteNoise",
+    "#FanNoise",
+    "#RelaxingSound",
+    "#SleepAid",
+    "#CalmNoise",
+    "#WhiteNoiseForSleep",
+    "#FanVibes",
+    "#DeepSleepSounds"
+]
 // MARK: - Category Model
 @objc class HomeCategory: NSObject, Codable {
     let id: String?
@@ -65,6 +77,7 @@ let colorPairs: [(String, String)] = [
     let thumb: String?
     let isPremium: Bool?
     var isPlay: Bool = false
+    var hashtag: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -74,5 +87,17 @@ let colorPairs: [(String, String)] = [
         case source
         case thumb
         case isPremium
+        case hashtag
+    }
+    
+    func assignRandomHashtagIfNeeded() {
+        if hashtag == nil {
+            // Lấy 3 hashtag ngẫu nhiên không trùng nhau
+            let shuffled = hashtagPairs.shuffled()
+            let selectedHashtags = shuffled.prefix(3)
+            
+            // Ghép thành chuỗi, mỗi hashtag cách nhau bởi dấu cách
+            hashtag = selectedHashtags.joined(separator: " ")
+        }
     }
 }

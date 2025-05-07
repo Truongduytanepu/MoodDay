@@ -201,6 +201,7 @@ extension ListItemSoundVC: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
+            self.videos[indexPath.row].assignRandomHashtagIfNeeded()
             cell.configure(video: videos[indexPath.row])
             return cell
         } else {

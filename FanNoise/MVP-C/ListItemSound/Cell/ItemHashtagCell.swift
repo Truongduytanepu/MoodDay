@@ -18,7 +18,7 @@ class ItemHashtagCell: UICollectionViewCell {
     private func setupFont() {
         self.hashTagLabel.font = AppFont.font(.mPLUS2Medium, size: 10)
     }
-
+    
     func configure(hashtag: String) {
         self.hashTagLabel.text = "#\(hashtag)"
     }

@@ -13,7 +13,7 @@ class PreviewVideoCoordinator: Coordinator {
     var videoCategoryType: VideoCategoryType
     var targetIndexPath: IndexPath?
     private weak var navigation: UINavigationController?
-    
+
     init(navigation: UINavigationController, videoCategoryType: VideoCategoryType) {
         self.navigation = navigation
         self.videoCategoryType = videoCategoryType

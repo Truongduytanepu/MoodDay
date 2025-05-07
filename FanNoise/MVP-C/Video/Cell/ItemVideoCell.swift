@@ -12,6 +12,7 @@ class ItemVideoCell: UICollectionViewCell {
     
     @IBOutlet private weak var videoView: UIView!
     @IBOutlet private weak var stateVideoImg: UIImageView!
+    @IBOutlet private weak var hashtagVideoLabel: UILabel!
     
     private var player: AVPlayer?
     private var playerLayer: AVPlayerLayer?
@@ -52,8 +53,10 @@ class ItemVideoCell: UICollectionViewCell {
         switch videoCategoryType {
         case .trending:
             self.stateVideoImg.isHidden = true
+            self.hashtagVideoLabel.isHidden = true
         case .filtered(let idCategory):
             self.stateVideoImg.isHidden = false
+            self.hashtagVideoLabel.isHidden = false
         }
     }
     
@@ -67,6 +70,8 @@ class ItemVideoCell: UICollectionViewCell {
         self.video = video
         self.playerItem = AVPlayerItem(url: videoURL)
         self.player = AVPlayer(playerItem: self.playerItem)
+        self.hashtagVideoLabel.text = video.hashtag
+        self.hashtagVideoLabel.font = AppFont.font(.mPLUS2SemiBold, size: 14)
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(playerDidFinishPlaying),

@@ -17,6 +17,7 @@ class ItemLikeCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.setupFont()
+        self.setupUI()
     }
     
     private func setupFont() {

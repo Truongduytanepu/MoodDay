@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wyu-Na-XAG">
                         <rect key="frame" x="0.0" y="0.0" width="185" height="201"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L50-hY-rfa">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L50-hY-rfa">
                                 <rect key="frame" x="0.0" y="0.0" width="185" height="201"/>
                             </imageView>
                         </subviews>
@@ -32,6 +32,11 @@
                             <constraint firstAttribute="bottom" secondItem="L50-hY-rfa" secondAttribute="bottom" id="YdP-or-pSa"/>
                             <constraint firstAttribute="trailing" secondItem="L50-hY-rfa" secondAttribute="trailing" id="ujt-fR-7t2"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
             </view>

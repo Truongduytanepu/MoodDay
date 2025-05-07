@@ -27,7 +27,7 @@ class ListItemSoundByHashtagCell: UICollectionViewCell {
     }
     
     private func setupUI() {
-        self.childView.cornerRadius = self.childView.bounds.width / 2
+        self.childView.cornerRadius = self.childView.frame.width / 2
     }
     
     func configureSound(sound: Sound) {
@@ -42,4 +42,3 @@ class ListItemSoundByHashtagCell: UICollectionViewCell {
         }
     }
 }
-

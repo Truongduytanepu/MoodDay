@@ -87,6 +87,7 @@ extension ListItemSoundByHashtagVC: UICollectionViewDataSource {
         }
         
         let sound = self.presenter.loadSoundByHashtag(nameHashtag: nameHashtag)[indexPath.row]
+        sound.assignRandomColorsIfNeeded()
         cell.configureSound(sound: sound)
         return cell
     }
