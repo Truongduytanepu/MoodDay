@@ -53,6 +53,8 @@ class LanguageVC: BaseVC<LanguagePresenter, LanguageView> {
     
     // MARK: - Action
     @IBAction private func acceptButtonDidTap(_ sender: Any) {
+        UserDefaults.standard.set(true, forKey: "isFirstShowLanguageScreen")
+        
         if let choseLanguage = choseLanguage {
             LanguageManager.shared.setChoseLanguage(choseLanguage)
         }

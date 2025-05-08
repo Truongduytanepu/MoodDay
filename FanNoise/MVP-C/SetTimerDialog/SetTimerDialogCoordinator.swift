@@ -23,12 +23,12 @@ class SetTimerDialogCoordinator: Coordinator {
         }
     }
     
-    func presentSetTimerDialog(completion: @escaping (Int, Int) -> Void) {
+    func presentSetTimerDialog(completion: @escaping (Int, Int, Bool) -> Void) {
         let setTimerDialogVC = SetTimerDialogVC.factory()
         setTimerDialogVC.modalPresentationStyle = .overCurrentContext
         
-        setTimerDialogVC.onTimeSelected = { minute, second in
-            completion(minute, second)
+        setTimerDialogVC.onTimeSelected = { minute, second, isOn in
+            completion(minute, second, isOn)
         }
         
         self.navigation?.present(setTimerDialogVC, animated: true, completion: nil)

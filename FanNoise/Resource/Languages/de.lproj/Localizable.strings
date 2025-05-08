@@ -1,0 +1,12 @@
+fanNoiseSplash = "Fan-Geräusch";
+descriptionSplash = "Schlafe tiefer, träume besser mit dem beruhigenden Geräusch von Ventilatoren!";
+chooseLanguage = "Sprache wählen";
+fanNoiseHome = "Fan-Geräusch";
+descriptionHome = "Besserer Schlaf beginnt mit beruhigendem Fan-Geräusch.";
+labelHomeCell = "Ein Sommerbrise, jederzeit.";
+setTimer = "Timer einstellen";
+likeTitle = "Das könnten dir auch gefallen";
+funnyTitle = "Lustiges Fan-Video";
+otherTitle = "Andere Geräusche";
+sound = "Ton";
+video = "Video";

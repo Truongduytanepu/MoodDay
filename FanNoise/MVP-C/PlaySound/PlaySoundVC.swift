@@ -24,11 +24,12 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     @IBOutlet private weak var playButton: UIButton!
     @IBOutlet private weak var fanView: UIView!
     @IBOutlet private weak var nameSoundLabel: UILabel!
-    @IBOutlet private weak var setTimeButton: UIButton!
     @IBOutlet private weak var hashtagLabel: UILabel!
     @IBOutlet private weak var likeTitleLabel: UILabel!
     @IBOutlet private weak var funnyTitleLabel: UILabel!
+    @IBOutlet private weak var setTimerView: UIView!
     @IBOutlet private weak var otherTitleLabel: UILabel!
+    @IBOutlet private weak var timeDialogLbl: UILabel!
     @IBOutlet private weak var likeCollectionView: UICollectionView!
     @IBOutlet private weak var funnyCollectionView: UICollectionView!
     @IBOutlet private weak var othersCollectionView: UICollectionView!
@@ -40,7 +41,11 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     var soundItem: Sound?
     var listSound: [Sound] = []
     var listVideo: [Video] = []
+    private var minute: Int = 0
+    private var second: Int = 0
+    private var isOn: Bool = false
     private var audioPlayer: AVPlayer?
+    private var timer: Timer?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -229,6 +234,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         self.likeTitleLabel.font = AppFont.font(.mPLUS2SemiBold, size: 14)
         self.funnyTitleLabel.font = AppFont.font(.mPLUS2SemiBold, size: 14)
         self.otherTitleLabel.font = AppFont.font(.mPLUS2SemiBold, size: 14)
+        self.timeDialogLbl.font = AppFont.font(.lexendSemiBold, size: 11)
     }
     
     private func setupFirtCollectionView() {
@@ -276,17 +282,19 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
             }
         }
         
+        self.setTimerView.layoutIfNeeded()
+        self.fanView.layoutIfNeeded()
         self.nameSoundLabel.text = sound.name
         self.hashtagLabel.text = sound.hashtag
         self.fanView.cornerRadius = self.fanView.frame.height / 2
         self.fanView.backgroundColor = sound.bgColor1?.toColor()
-        self.setTimeButton.cornerRadius = self.setTimeButton.frame.height / 2
+        self.setTimerView.cornerRadius = self.setTimerView.frame.height / 2
     }
     
     private func stopSoundIfNeed() {
         // Dừng player
         self.audioPlayer?.pause()
-        
+        self.timer?.invalidate()
         // Dừng tất cả animation ngay lập tức
         [self.firstFanImageView, self.secondFanImageView, self.lastFanImageView].forEach { imageView in
             imageView?.layer.removeAllAnimations()
@@ -310,7 +318,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     
     private func stopSoundSmoothlyIfNeed() {
         self.audioPlayer?.pause()
-
+        self.timer?.invalidate()
         // Dừng quạt từ từ
         [self.firstFanImageView, self.secondFanImageView, self.lastFanImageView].forEach {
             guard let imageView = $0 else { return }
@@ -343,7 +351,38 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
             }
         }
         
+        let totalTimeInSeconds = (self.minute * 60) + self.second
+        if totalTimeInSeconds > 0 && self.isOn {
+            self.startTimer(duration: totalTimeInSeconds)
+        }
+        
         self.playAudio(from: soundLink ?? "")
+    }
+    
+    private func startTimer(duration: Int) {
+        self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+    }
+
+    @objc private func updateTime() {
+        if self.minute == 0 && self.second == 0 {
+            self.stopSoundAndUpdateUI()
+        } else {
+            if self.second == 0 {
+                self.minute -= 1
+                self.second = 59
+            } else {
+                self.second -= 1
+            }
+
+            self.timeDialogLbl.text = "\(self.minute):\(String(format: "%02d", self.second))"
+            self.setTimerView.backgroundColor = UIColor(rgb: 0xFFC300)
+        }
+    }
+
+    @objc private func stopSoundAndUpdateUI() {
+        self.stopSoundSmoothlyIfNeed()
+        self.timeDialogLbl.text = "Set timer"
+        self.setTimerView.backgroundColor = .clear
     }
     
     private func startPreviewVideo(navigationController: UINavigationController, videos: [Video], targetIndexPath: IndexPath) {
@@ -355,15 +394,17 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     
     private func startSetTimerDialog(navigationController: UINavigationController) {
         let setTimmerDialog = SetTimerDialogCoordinator(navigation: navigationController)
-        setTimmerDialog.presentSetTimerDialog { minute, second in
-            let soundLink = self.soundItem?.source
+        
+        setTimmerDialog.presentSetTimerDialog { [weak self] minute, second, isOn in
+            guard let self = self else {
+                return
+            }
             
-            self.startRoting(minute: minute, second: second)
-            
-            self.playAudio(from: soundLink ?? "")
-            self.playButton.setImage(UIImage(named: "ic_playsound_play"), for: .normal)
-            
-            self.isRotating.toggle()
+            self.timeDialogLbl.text = "\(minute):\(second)"
+            self.setTimerView.backgroundColor = UIColor(rgb: 0xFFC300)
+            self.minute = minute
+            self.second = second
+            self.isOn = isOn
             navigationController.dismiss(animated: true)
         }
     }

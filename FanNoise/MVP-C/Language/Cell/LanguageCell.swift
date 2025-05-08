@@ -25,7 +25,6 @@ class LanguageCell: UICollectionViewCell {
     }
     
     private func setupCell() {
-        self.contentView.layer.cornerRadius = 12
         self.contentView.layer.masksToBounds = true
         self.contentView.borderWidth = 1
     }

@@ -29,13 +29,22 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
         self.config()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.setupTabbar()
+    }
+    
     // MARK: - Config
     private func config() {
-        self.setupTabbar()
         self.setupHomeViewController()
     }
     
     private func setupTabbar() {
+        self.tabbarView.layoutIfNeeded()
+        self.homeTabbarView.layoutIfNeeded()
+        self.trendingTabbarView.layoutIfNeeded()
+        
         self.tabbarView.cornerRadius = self.tabbarView.frame.height / 2
         self.homeTabbarView.cornerRadius = self.homeTabbarView.frame.height / 2
         self.trendingTabbarView.cornerRadius = self.trendingTabbarView.frame.height / 2
@@ -127,7 +136,7 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
     @IBAction private func trendingButtonDidTap(_ sender: Any) {
         self.removeHomeViewController()
         self.setupTrendingViewController()
-
+        
         self.homeImageView.image = UIImage(named: "ic_tabbar_home_disable")
         self.trendingImageView.image = UIImage(named: "ic_tabbar_trending_enable")
         self.tabbarView.backgroundColor = .black

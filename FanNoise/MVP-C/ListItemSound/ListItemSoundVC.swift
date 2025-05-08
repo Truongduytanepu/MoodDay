@@ -47,12 +47,17 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
         self.config()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.setupTabbar()
+    }
+    
     // MARK: - Config
     private func config() {
         self.setupHashTagCollectionView()
         self.setupSoundCollectionView()
         self.setupVideoCollectionView()
-        self.setupTabbar()
         self.setupFont()
     }
     
@@ -83,6 +88,10 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     }
     
     private func setupTabbar() {
+        self.soundButton.layoutIfNeeded()
+        self.videoButton.layoutIfNeeded()
+        self.tabbarView.layoutIfNeeded()
+        
         self.soundButton.cornerRadius = self.soundButton.frame.height / 2
         self.videoButton.cornerRadius = self.videoButton.frame.height / 2
         self.tabbarView.cornerRadius = self.tabbarView.frame.height / 2

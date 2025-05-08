@@ -1,1 +1,12 @@
-
+fanNoiseSplash = "Tiếng quạt";
+descriptionSplash = "Ngủ sâu hơn, mơ đẹp hơn với âm thanh dịu êm của quạt!";
+chooseLanguage = "Chọn ngôn ngữ";
+fanNoiseHome = "Tiếng quạt";
+descriptionHome = "Giấc ngủ tốt hơn bắt đầu với tiếng quạt dịu nhẹ.";
+labelHomeCell = "Một làn gió mùa hè, mọi lúc.";
+setTimer = "Đặt hẹn giờ";
+likeTitle = "Bạn cũng thích";
+funnyTitle = "Video Quạt Hài Hước";
+otherTitle = "Âm Thanh Khác";
+sound = "Âm thanh";
+video = "Video";

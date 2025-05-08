@@ -29,9 +29,14 @@ class SplashVC: BaseVC<SplashPresenter, SplashView> {
         self.setupGradient()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.customProgressView()
+    }
+    
     // MARK: - Config
     private func config() {
-        self.customProgressView()
         self.startLoading()
         self.setupFont()
     }
@@ -60,6 +65,7 @@ class SplashVC: BaseVC<SplashPresenter, SplashView> {
     }
     
     private func customProgressView() {
+        self.progressView.layoutIfNeeded()
         self.progressView.progressTintColor = UIColor(rgb: 0x2D2C2B)
         self.progressView.trackTintColor = UIColor.lightGray.withAlphaComponent(0.3)
         self.progressView.layer.cornerRadius = self.progressView.frame.height / 2

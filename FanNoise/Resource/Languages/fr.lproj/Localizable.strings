@@ -1,0 +1,12 @@
+fanNoiseSplash = "Bruit du ventilateur";
+descriptionSplash = "Dormez plus profondément, rêvez mieux avec le bruit apaisant des ventilateurs !";
+chooseLanguage = "Choisir la langue";
+fanNoiseHome = "Bruit du ventilateur";
+descriptionHome = "Un meilleur sommeil commence avec le bruit apaisant des ventilateurs.";
+labelHomeCell = "Une brise d'été, à tout moment.";
+setTimer = "Réglage du minuteur";
+likeTitle = "Vous pourriez aussi aimer";
+funnyTitle = "Vidéo drôle de ventilateur";
+otherTitle = "Autres sons";
+sound = "Son";
+video = "Vidéo";

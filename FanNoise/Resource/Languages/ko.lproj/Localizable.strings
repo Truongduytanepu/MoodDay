@@ -1,0 +1,12 @@
+fanNoiseSplash = "팬 노이즈";
+descriptionSplash = "선풍기의 부드러운 소리로 더 깊은 잠을 자고, 더 나은 꿈을 꾸세요!";
+chooseLanguage = "언어 선택";
+fanNoiseHome = "팬 노이즈";
+descriptionHome = "편안한 선풍기 소리로 더 나은 잠을 시작하세요.";
+labelHomeCell = "언제든지 여름 바람을 느껴보세요.";
+setTimer = "타이머 설정";
+likeTitle = "이것도 좋아하실 거예요";
+funnyTitle = "웃긴 팬 비디오";
+otherTitle = "기타 소리";
+sound = "소리";
+video = "비디오";

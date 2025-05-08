@@ -44,17 +44,21 @@ class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
     private let secLabel = UILabel()
     private var isSwitchOn: Bool = true
     
-    var onTimeSelected: ((Int, Int) -> Void)?
+    var onTimeSelected: ((Int, Int, Bool) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.config()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.setupUI()
+    }
+    
     private func config() {
         self.setupTimerData()
         self.setupPickerView()
-        self.setupUI()
         self.scrollToValue(minute: Const.minuteDefault,
                            second: Const.secondDefault)
         self.setupUnitLabels()
@@ -74,6 +78,9 @@ class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
     }
     
     private func setupUI() {
+        self.circleView.layoutIfNeeded()
+        self.switchView.layoutIfNeeded()
+        
         self.circleView.layer.cornerRadius = self.circleView.frame.height / 2
         self.circleView.frame.origin.x = self.circleContainerView.bounds.width - self.circleView.frame.width - 2
         self.circleView.clipsToBounds = true
@@ -150,14 +157,14 @@ class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
     }
     
     @IBAction private func cancelBtnTapped(_ sender: Any) {
-        
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction private func doneBtnTapped(_ sender: Any) {
         let selectedMinute = self.minutesData[self.timePickerView.selectedRow(inComponent: 0)]
         let selectedSecond = self.secondsData[self.timePickerView.selectedRow(inComponent: 1)]
         
-        onTimeSelected?(selectedMinute, selectedSecond)
+        self.onTimeSelected?(selectedMinute, selectedSecond, self.isSwitchOn)
     }
     
     @IBAction private func switchBtnTapped(_ sender: Any) {

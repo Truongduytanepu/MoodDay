@@ -8,7 +8,6 @@
 import Foundation
 
 enum Language: Int, CaseIterable {
-  case argentina
   case brazil
   case china
   case croatia
@@ -21,8 +20,6 @@ enum Language: Int, CaseIterable {
   
   var code: String {
     switch self {
-    case .argentina:
-      return "es-AR"
     case .brazil:
       return "pt-BR"
     case .china:
@@ -46,8 +43,6 @@ enum Language: Int, CaseIterable {
   
   var name: String {
     switch self {
-    case .argentina:
-      return "Argentina"
     case .brazil:
       return "Brazil"
     case .china:
@@ -71,8 +66,6 @@ enum Language: Int, CaseIterable {
   
   var ensign: String {
     switch self {
-    case .argentina:
-      return "ic_language_ARG"
     case .brazil:
       return "ic_language_BRA"
     case .china:

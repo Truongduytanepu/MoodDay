@@ -15,6 +15,7 @@ class AppFont {
         case mPLUS2SemiBold = "MPLUS2-SemiBold"
         case mPLUS2Black = "MPLUS2-Black"
         case mPLUS2Medium = "MPLUS2-Medium"
+        case lexendSemiBold = "Lexend-SemiBold"
     }
     
     class func font(_ name: FontName, size: CGFloat) -> UIFont {
