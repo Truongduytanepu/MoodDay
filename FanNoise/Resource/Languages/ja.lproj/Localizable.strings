@@ -10,3 +10,7 @@ funnyTitle = "おもしろいファンビデオ";
 otherTitle = "その他の音";
 sound = "音";
 video = "ビデオ";
+cancel = "キャンセル";
+done = "完了";
+on = "オン";
+off = "オフ";

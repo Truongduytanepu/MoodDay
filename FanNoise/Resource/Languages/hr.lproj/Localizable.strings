@@ -10,3 +10,7 @@ funnyTitle = "Smiješan video ventilatora";
 otherTitle = "Ostali zvukovi";
 sound = "Zvuk";
 video = "Video";
+cancel = "Otkaži";
+done = "Završeno";
+on = "Uključeno";
+off = "Isključeno";

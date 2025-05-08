@@ -10,3 +10,7 @@ funnyTitle = "Vídeo Engraçado com Ventilador";
 otherTitle = "Outro Som";
 sound = "Som";
 video = "Vídeo";
+cancel = "Cancelar";
+done = "Concluído";
+on = "Ligado";
+off = "Desligado";

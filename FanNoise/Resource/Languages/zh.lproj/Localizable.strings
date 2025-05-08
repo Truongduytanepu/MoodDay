@@ -10,3 +10,7 @@ funnyTitle = "有趣的风扇视频";
 otherTitle = "其他声音";
 sound = "声音";
 video = "视频";
+cancel = "取消";
+done = "完成";
+on = "开启";
+off = "关闭";

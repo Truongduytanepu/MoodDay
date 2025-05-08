@@ -485,6 +485,7 @@ extension PlaySoundVC: UICollectionViewDataSource {
                 return UICollectionViewCell()
             }
             
+            self.presenter.getLikeSound()[indexPath.row].assignRandomColorsIfNeeded()
             cell.configure(sound: self.presenter.getLikeSound()[indexPath.row])
             return cell
         } else if collectionView == self.funnyCollectionView {

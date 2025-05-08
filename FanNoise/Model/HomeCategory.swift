@@ -12,7 +12,8 @@ let colorPairs: [(String, String)] = [
     ("C3B1E1", "E6DDF6"),
     ("E6E6FA", "DADAFF"),
     ("D4F1BE", "EBFFDC"),
-    ("ACE7FF", "DEF5FF")
+    ("ACE7FF", "DEF5FF"),
+    ("FFDEE9", "FFF0F5")
 ]
 
 let hashtagPairs: [String] = [

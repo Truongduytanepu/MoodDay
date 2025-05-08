@@ -127,8 +127,8 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     @IBAction private func soundButonDidTap(_ sender: Any) {
         self.videoButton.backgroundColor = .clear
         self.soundButton.backgroundColor = .black
-        self.soundButton.titleLabel?.textColor = .white
-        self.videoButton.titleLabel?.textColor = .black
+        self.videoButton.setTitleColor(.black, for: .normal)
+        self.soundButton.setTitleColor(.white, for: .normal)
         self.videoView.isHidden = true
         self.soundView.isHidden = false
         self.mediaType = .sound
@@ -137,8 +137,8 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     @IBAction private func videoButtonDidTap(_ sender: Any) {
         self.videoButton.backgroundColor = .black
         self.soundButton.backgroundColor = .clear
-        self.soundButton.titleLabel?.textColor = .black
-        self.videoButton.titleLabel?.textColor = .white
+        self.videoButton.setTitleColor(.white, for: .normal)
+        self.soundButton.setTitleColor(.black, for: .normal)
         self.videoView.isHidden = false
         self.soundView.isHidden = true
         self.mediaType = .video

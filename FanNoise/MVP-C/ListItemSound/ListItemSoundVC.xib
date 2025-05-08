@@ -15,7 +15,7 @@
                 <outlet property="soundCollectionView" destination="nFv-dV-XdH" id="Bku-9b-ZBZ"/>
                 <outlet property="soundView" destination="6II-hB-tqu" id="DRL-2F-G2C"/>
                 <outlet property="tabbarView" destination="noJ-25-Vh2" id="r63-PB-UCB"/>
-                <outlet property="videoButton" destination="Fjk-mB-vAv" id="tZQ-sQ-e8h"/>
+                <outlet property="videoButton" destination="qOF-Li-UMJ" id="qp8-hV-4Sk"/>
                 <outlet property="videoCollectionView" destination="jko-eb-ZFV" id="pc8-V4-Nbw"/>
                 <outlet property="videoView" destination="xsr-OF-t3s" id="D0D-zI-AbX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -61,7 +61,7 @@
                                                 <action selector="soundButonDidTap:" destination="-1" eventType="touchUpInside" id="6pn-lZ-QtU"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fjk-mB-vAv">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qOF-Li-UMJ">
                                             <rect key="frame" x="99.333333333333314" y="0.0" width="99" height="30"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -72,7 +72,8 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="video"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
-                                                <action selector="videoButtonDidTap:" destination="-1" eventType="touchUpInside" id="Cw1-If-hAg"/>
+                                                <action selector="soundButonDidTap:" destination="-1" eventType="touchUpInside" id="JMg-zs-Prd"/>
+                                                <action selector="videoButtonDidTap:" destination="-1" eventType="touchUpInside" id="XoB-af-ApU"/>
                                             </connections>
                                         </button>
                                     </subviews>

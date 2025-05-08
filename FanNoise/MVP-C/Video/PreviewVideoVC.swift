@@ -78,19 +78,26 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     }
     
     private func setUpNotification() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(appMovedToBackground),
-            name: UIApplication.willResignActiveNotification,
-            object: nil
-        )
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(appInterrupted),
-            name: AVAudioSession.interruptionNotification,
-            object: AVAudioSession.sharedInstance()
-        )
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: .mixWithOthers)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(appInterrupted),
+                name: AVAudioSession.interruptionNotification,
+                object: nil)
+            
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(appMovedToBackground),
+                name: UIApplication.willResignActiveNotification,
+                object: nil
+            )
+            
+        } catch {
+            print("Failed to set up audio session: \(error)")
+        }
     }
     
     private func scrollToIndexPath() {

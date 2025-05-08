@@ -11,3 +11,7 @@ funnyTitle = "Funny Fan Video";
 otherTitle = "Orther Sound";
 sound = "Sound";
 video = "Video";
+cancel = "Cancel";
+done = "Done";
+on = "On";
+off = "Off";

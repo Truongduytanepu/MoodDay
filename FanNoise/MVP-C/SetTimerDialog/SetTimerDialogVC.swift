@@ -54,6 +54,7 @@ class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.setupUI()
+        self.setUpFont()
     }
     
     private func config() {
@@ -62,7 +63,7 @@ class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
         self.scrollToValue(minute: Const.minuteDefault,
                            second: Const.secondDefault)
         self.setupUnitLabels()
-        self.setUpFont()
+        self.setupOnSwitch()
     }
     
     private func setupTimerData() {
@@ -86,8 +87,6 @@ class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
         self.circleView.clipsToBounds = true
         
         self.switchView.layer.cornerRadius = self.switchView.frame.height / 2
-        
-        self.setupOnSwitch()
     }
     
     private func setupOnSwitch() {

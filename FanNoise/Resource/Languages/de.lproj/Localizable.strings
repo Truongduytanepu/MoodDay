@@ -10,3 +10,7 @@ funnyTitle = "Lustiges Fan-Video";
 otherTitle = "Andere Geräusche";
 sound = "Ton";
 video = "Video";
+cancel = "Abbrechen";
+done = "Fertig";
+on = "Ein";
+off = "Aus";

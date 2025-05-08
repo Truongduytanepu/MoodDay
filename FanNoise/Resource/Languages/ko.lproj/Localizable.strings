@@ -10,3 +10,7 @@ funnyTitle = "웃긴 팬 비디오";
 otherTitle = "기타 소리";
 sound = "소리";
 video = "비디오";
+cancel = "취소";
+done = "완료";
+on = "켜짐";
+off = "꺼짐";
