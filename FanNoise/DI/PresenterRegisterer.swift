@@ -50,5 +50,9 @@ class PresenterRegisterer {
         container.register(PlaySoundPresenter.self) { (_, view: PlaySoundView) -> PlaySoundPresenter in
             return PlaySoundPresenterImpl(view: view)
         }
+        
+        container.register(SetTimerDialogPresenter.self) { (_, view: SetTimerDialogView) -> SetTimerDialogPresenter in
+            return SetTimerDialogPresenterImpl(view: view)
+        }
     }
 }

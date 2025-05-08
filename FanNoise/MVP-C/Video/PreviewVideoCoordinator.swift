@@ -10,13 +10,16 @@ import UIKit
 class PreviewVideoCoordinator: Coordinator {
     
     var started: Bool = false
-    var videoCategoryType: VideoCategoryType
-    var targetIndexPath: IndexPath?
+    private var videoCategoryType: VideoCategoryType
+    private var targetIndexPath: IndexPath?
     private weak var navigation: UINavigationController?
 
-    init(navigation: UINavigationController, videoCategoryType: VideoCategoryType) {
+    init(navigation: UINavigationController,
+         videoCategoryType: VideoCategoryType,
+         targetIndexPath: IndexPath) {
         self.navigation = navigation
         self.videoCategoryType = videoCategoryType
+        self.targetIndexPath = targetIndexPath
     }
     
     func start() {

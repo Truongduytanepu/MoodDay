@@ -19,6 +19,7 @@ private struct Const {
 enum VideoCategoryType {
     case trending
     case filtered(idCategory: String)
+    case listVideo(videos: [Video])
 }
 
 class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
@@ -42,8 +43,8 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         self.config()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.scrollToIndexPath()
     }
     
@@ -62,6 +63,9 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         case .filtered(let idCategory):
             self.navigationView.isHidden = false
             self.presenter.loadData(idCategory: idCategory)
+        case .listVideo(videos: let videos):
+            self.navigationView.isHidden = false
+            self.presenter.updateDataListVideo(videos: videos)
         }
     }
     
@@ -90,11 +94,8 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     }
     
     private func scrollToIndexPath() {
-        if let indexPath = targetIndexPath {
+        if let indexPath = self.targetIndexPath {
             self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-        } else {
-            let firstItemIndexPath = IndexPath(row: 0, section: 0)
-            self.collectionView.scrollToItem(at: firstItemIndexPath, at: .top, animated: false)
         }
     }
     
@@ -192,7 +193,9 @@ extension PreviewVideoVC: UICollectionViewDataSource {
         switch self.videoCategoryType {
         case .trending:
             topicCells = totalItems / Const.swipeCountToShowTopic
-        case .filtered(idCategory: let idCategory):
+        case .filtered(idCategory: _):
+            topicCells = 0
+        case .listVideo(videos: _):
             topicCells = 0
         }
          
@@ -243,7 +246,7 @@ extension PreviewVideoVC: UICollectionViewDataSource {
                 return cell
             }
             
-        case .filtered(let idCategory):
+        case .filtered(_), .listVideo(videos: _):
             guard let cell = collectionView.dequeueCell(type: ItemVideoCell.self,
                                                         indexPath: indexPath) else {
                 return UICollectionViewCell()
@@ -287,7 +290,7 @@ extension PreviewVideoVC: PreviewVideoView {
     func updateUI() {
         let firstItemIndexPath = IndexPath(row: 0, section: 0)
         
-        self.collectionView.scrollToItem(at: firstItemIndexPath, at: .top, animated: true)
+        self.collectionView.scrollToItem(at: firstItemIndexPath, at: .top, animated: false)
         self.collectionView.reloadData()
     }
 }

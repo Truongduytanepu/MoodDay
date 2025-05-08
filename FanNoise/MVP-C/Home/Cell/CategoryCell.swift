@@ -23,7 +23,6 @@ class CategoryCell: UICollectionViewCell {
     }
     
     private func config() {
-        self.setupCell()
         self.setupFont()
     }
     
@@ -33,9 +32,6 @@ class CategoryCell: UICollectionViewCell {
         self.descriptionLabel.font = AppFont.font(.mPLUS2Regular, size: 15)
     }
     
-    private func setupCell() {
-        self.contentView.cornerRadius = 20
-    }
     
     func configure(_ category: HomeCategory) {
         if let thumb = category.thumb,

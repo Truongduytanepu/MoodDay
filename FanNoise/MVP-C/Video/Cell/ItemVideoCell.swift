@@ -54,7 +54,7 @@ class ItemVideoCell: UICollectionViewCell {
         case .trending:
             self.stateVideoImg.isHidden = true
             self.hashtagVideoLabel.isHidden = true
-        case .filtered(let idCategory):
+        case .filtered(_), .listVideo(videos: _):
             self.stateVideoImg.isHidden = false
             self.hashtagVideoLabel.isHidden = false
         }

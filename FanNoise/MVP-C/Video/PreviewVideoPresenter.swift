@@ -14,6 +14,7 @@ protocol PreviewVideoPresenter {
     func updateData(name: String)
     func getAllVideo()
     func getVideocategory() -> [SoundCategory]
+    func updateDataListVideo(videos: [Video])
 }
 
 class PreviewVideoPresenterImpl: BasePresenter<PreviewVideoView>, PreviewVideoPresenter {
@@ -43,5 +44,9 @@ class PreviewVideoPresenterImpl: BasePresenter<PreviewVideoView>, PreviewVideoPr
     
     func getVideocategory() -> [SoundCategory] {
         return HomeCategoryManager.shared.getVideoCategory()
+    }
+    
+    func updateDataListVideo(videos: [Video]) {
+        self.videoCategoryList = videos
     }
 }

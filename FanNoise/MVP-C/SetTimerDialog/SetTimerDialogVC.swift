@@ -1,8 +1,8 @@
 //
-//  SetTimmerDialogVC.swift
+//  SetTimerDialogVC.swift
 //  FanNoise
 //
-//  Created by ADMIN on 4/29/25.
+//  Created by ADMIN on 5/7/25.
 //
 
 import UIKit
@@ -12,14 +12,15 @@ private struct Const {
     static let minuteDefault = 5
     static let secondDefault = 30
     static let marginMinute: CGFloat = 20
-    static let marginSecond: CGFloat = 15
+    static let marginSecond: CGFloat = 25
     static let widthMinuteAndSecond: CGFloat = 40
     static let numberOfComponents = 2
     static let rowHeight: CGFloat = 51
 }
 
-class SetTimmerDialogVC: UIViewController {
-    
+class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
+    // MARK: - Lifecycle
+
     @IBOutlet private weak var switchView: UIView!
     @IBOutlet private weak var offLbl: UILabel!
     @IBOutlet private weak var onLbl: UILabel!
@@ -30,6 +31,8 @@ class SetTimmerDialogVC: UIViewController {
     @IBOutlet private weak var timePickerView: UIPickerView!
     @IBOutlet private weak var doneBtn: UIButton!
     @IBOutlet private weak var cancelBtn: UIButton!
+    @IBOutlet private weak var offView: UIView!
+    @IBOutlet private weak var onView: UIView!
     
     let baseMinutes = Array(0...10)
     let baseSeconds = Array(0...59)
@@ -41,8 +44,14 @@ class SetTimmerDialogVC: UIViewController {
     private let secLabel = UILabel()
     private var isSwitchOn: Bool = true
     
+    var onTimeSelected: ((Int, Int) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.config()
+    }
+    
+    private func config() {
         self.setupTimerData()
         self.setupPickerView()
         self.setupUI()
@@ -75,13 +84,13 @@ class SetTimmerDialogVC: UIViewController {
     }
     
     private func setupOnSwitch() {
-        self.offLbl.isHidden = true
-        self.onLbl.isHidden = false
+        self.offView.isHidden = true
+        self.onView.isHidden = false
     }
     
     private func setupOffSwitch() {
-        self.onLbl.isHidden = true
-        self.offLbl.isHidden = false
+        self.onView.isHidden = true
+        self.offView.isHidden = false
     }
     
     private func setUpFont() {
@@ -96,26 +105,32 @@ class SetTimmerDialogVC: UIViewController {
         let rowHeight = self.timePickerView.rowSize(forComponent: 0).height
         let pickerFrame = self.timePickerView.frame
         let selectedRowY = pickerFrame.midY - (rowHeight / 2)
-        
-        self.minLabel.frame = CGRect(x: pickerFrame.origin.x + pickerFrame.width * 0.25 + Const.marginMinute,
-                                y: selectedRowY,
-                                width: Const.widthMinuteAndSecond,
-                                height: rowHeight)
+
+        // Cập nhật vị trí của nhãn "min"
+        self.minLabel.frame = CGRect(
+            x: pickerFrame.origin.x + pickerFrame.width * 0.25 + Const.marginMinute,
+            y: selectedRowY,
+            width: Const.widthMinuteAndSecond,
+            height: rowHeight
+        )
         self.minLabel.text = "min"
         self.minLabel.font = AppFont.font(.mPLUS2Medium, size: 13)
         self.minLabel.textAlignment = .left
         self.dialogView.addSubview(self.minLabel)
         
-        self.secLabel.frame = CGRect(x: pickerFrame.origin.x + pickerFrame.width * 0.75 + Const.marginSecond,
-                                y: selectedRowY,
-                                width: Const.widthMinuteAndSecond,
-                                height: rowHeight)
+        // Cập nhật vị trí của nhãn "sec"
+        self.secLabel.frame = CGRect(
+            x: pickerFrame.origin.x + pickerFrame.width * 0.75 + Const.marginSecond,
+            y: selectedRowY,
+            width: Const.widthMinuteAndSecond,
+            height: rowHeight
+        )
         self.secLabel.text = "sec"
         self.secLabel.font = AppFont.font(.mPLUS2Medium, size: 13)
         self.secLabel.textAlignment = .left
         self.dialogView.addSubview(self.secLabel)
     }
-    
+
     private func scrollToValue(minute: Int, second: Int) {
         let minuteRow = self.centerRow(for: minute,
                                        in: self.baseMinutes,
@@ -134,7 +149,18 @@ class SetTimmerDialogVC: UIViewController {
         return middle + (value % baseCount)
     }
     
-    @IBAction func switchBtnTapped(_ sender: Any) {
+    @IBAction private func cancelBtnTapped(_ sender: Any) {
+        
+    }
+    
+    @IBAction private func doneBtnTapped(_ sender: Any) {
+        let selectedMinute = self.minutesData[self.timePickerView.selectedRow(inComponent: 0)]
+        let selectedSecond = self.secondsData[self.timePickerView.selectedRow(inComponent: 1)]
+        
+        onTimeSelected?(selectedMinute, selectedSecond)
+    }
+    
+    @IBAction private func switchBtnTapped(_ sender: Any) {
         self.isSwitchOn.toggle()
         
         self.isSwitchOn ? self.setupOnSwitch() : self.setupOffSwitch()
@@ -151,7 +177,7 @@ class SetTimmerDialogVC: UIViewController {
     }
 }
 
-extension SetTimmerDialogVC: UIPickerViewDelegate, UIPickerViewDataSource {
+extension SetTimerDialogVC: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return Const.numberOfComponents
     }
@@ -214,4 +240,8 @@ extension SetTimmerDialogVC: UIPickerViewDelegate, UIPickerViewDataSource {
 
         pickerView.reloadComponent(component)
     }
+}
+
+extension SetTimerDialogVC: SetTimerDialogView {
+    
 }

@@ -106,8 +106,8 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     
     private func startPlayVideo(navigationController: UINavigationController, categoryID: String, targetIndexPath: IndexPath) {
         let playVideo = PreviewVideoCoordinator(navigation: navigationController,
-                                                videoCategoryType: .filtered(idCategory: categoryID))
-        playVideo.targetIndexPath = targetIndexPath
+                                                videoCategoryType: .filtered(idCategory: categoryID),
+                                                targetIndexPath: targetIndexPath)
         playVideo.start()
     }
     

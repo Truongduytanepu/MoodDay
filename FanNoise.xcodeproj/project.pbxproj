@@ -90,13 +90,16 @@
 		844AB9012DBB6A8E00A82556 /* HomeCategoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844AB9002DBB6A6F00A82556 /* HomeCategoryManager.swift */; };
 		849FCAC02DBF26680006817F /* TopicSuggestVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849FCABF2DBF26680006817F /* TopicSuggestVideoCell.xib */; };
 		849FCAC12DBF26680006817F /* TopicSuggestVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849FCABE2DBF26680006817F /* TopicSuggestVideoCell.swift */; };
-		84A847252DC0B452007B1950 /* SetTimmerDialogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A847232DC0B452007B1950 /* SetTimmerDialogVC.swift */; };
-		84A847262DC0B452007B1950 /* SetTimmerDialogVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A847242DC0B452007B1950 /* SetTimmerDialogVC.xib */; };
 		84D4F74B2DBF2B2D00328766 /* ItemTopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D4F74A2DBF2B2D00328766 /* ItemTopicCell.xib */; };
 		84D4F74C2DBF2B2D00328766 /* ItemTopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D4F7492DBF2B2D00328766 /* ItemTopicCell.swift */; };
 		84DDB8B52DC99B9E00CAC590 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDB8B42DC99B9600CAC590 /* LanguageManager.swift */; };
 		84DDB8B72DC9B00100CAC590 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDB8B62DC9AFFC00CAC590 /* AppManager.swift */; };
 		84DDB8D12DC9F68E00CAC590 /* LabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DDB8D02DC9F68400CAC590 /* LabelExtension.swift */; };
+		84EDED212DCB088100EF672D /* SetTimerDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EDED202DCB088100EF672D /* SetTimerDialogView.swift */; };
+		84EDED222DCB088100EF672D /* SetTimerDialogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EDED1E2DCB088100EF672D /* SetTimerDialogVC.swift */; };
+		84EDED232DCB088100EF672D /* SetTimerDialogCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EDED1C2DCB088100EF672D /* SetTimerDialogCoordinator.swift */; };
+		84EDED242DCB088100EF672D /* SetTimerDialogPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EDED1D2DCB088100EF672D /* SetTimerDialogPresenter.swift */; };
+		84EDED252DCB088100EF672D /* SetTimerDialogVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EDED1F2DCB088100EF672D /* SetTimerDialogVC.xib */; };
 		8727B79B2DC7B8EC00F0B2CE /* ItemLikeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727B7992DC7B8EC00F0B2CE /* ItemLikeCell.swift */; };
 		8727B79C2DC7B8EC00F0B2CE /* ItemLikeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8727B79A2DC7B8EC00F0B2CE /* ItemLikeCell.xib */; };
 		8727B79F2DC7B91000F0B2CE /* ItemFunnyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727B79D2DC7B91000F0B2CE /* ItemFunnyCell.swift */; };
@@ -254,13 +257,16 @@
 		844AB9002DBB6A6F00A82556 /* HomeCategoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCategoryManager.swift; sourceTree = "<group>"; };
 		849FCABE2DBF26680006817F /* TopicSuggestVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSuggestVideoCell.swift; sourceTree = "<group>"; };
 		849FCABF2DBF26680006817F /* TopicSuggestVideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicSuggestVideoCell.xib; sourceTree = "<group>"; };
-		84A847232DC0B452007B1950 /* SetTimmerDialogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimmerDialogVC.swift; sourceTree = "<group>"; };
-		84A847242DC0B452007B1950 /* SetTimmerDialogVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetTimmerDialogVC.xib; sourceTree = "<group>"; };
 		84D4F7492DBF2B2D00328766 /* ItemTopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTopicCell.swift; sourceTree = "<group>"; };
 		84D4F74A2DBF2B2D00328766 /* ItemTopicCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemTopicCell.xib; sourceTree = "<group>"; };
 		84DDB8B42DC99B9600CAC590 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		84DDB8B62DC9AFFC00CAC590 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		84DDB8D02DC9F68400CAC590 /* LabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtension.swift; sourceTree = "<group>"; };
+		84EDED1C2DCB088100EF672D /* SetTimerDialogCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimerDialogCoordinator.swift; sourceTree = "<group>"; };
+		84EDED1D2DCB088100EF672D /* SetTimerDialogPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimerDialogPresenter.swift; sourceTree = "<group>"; };
+		84EDED1E2DCB088100EF672D /* SetTimerDialogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimerDialogVC.swift; sourceTree = "<group>"; };
+		84EDED1F2DCB088100EF672D /* SetTimerDialogVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetTimerDialogVC.xib; sourceTree = "<group>"; };
+		84EDED202DCB088100EF672D /* SetTimerDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimerDialogView.swift; sourceTree = "<group>"; };
 		8727B7992DC7B8EC00F0B2CE /* ItemLikeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLikeCell.swift; sourceTree = "<group>"; };
 		8727B79A2DC7B8EC00F0B2CE /* ItemLikeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemLikeCell.xib; sourceTree = "<group>"; };
 		8727B79D2DC7B91000F0B2CE /* ItemFunnyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFunnyCell.swift; sourceTree = "<group>"; };
@@ -637,8 +643,11 @@
 		84A847222DC0B41A007B1950 /* SetTimerDialog */ = {
 			isa = PBXGroup;
 			children = (
-				84A847232DC0B452007B1950 /* SetTimmerDialogVC.swift */,
-				84A847242DC0B452007B1950 /* SetTimmerDialogVC.xib */,
+				84EDED1C2DCB088100EF672D /* SetTimerDialogCoordinator.swift */,
+				84EDED1D2DCB088100EF672D /* SetTimerDialogPresenter.swift */,
+				84EDED1E2DCB088100EF672D /* SetTimerDialogVC.swift */,
+				84EDED1F2DCB088100EF672D /* SetTimerDialogVC.xib */,
+				84EDED202DCB088100EF672D /* SetTimerDialogView.swift */,
 			);
 			path = SetTimerDialog;
 			sourceTree = "<group>";
@@ -971,13 +980,13 @@
 				71A561822DA8FF09007E8BE3 /* MPLUS2-Black.ttf in Resources */,
 				844AB8FA2DBB660000A82556 /* PreviewVideoVC.xib in Resources */,
 				8727B7A42DC7B92100F0B2CE /* ItemOthersCell.xib in Resources */,
-				84A847262DC0B452007B1950 /* SetTimmerDialogVC.xib in Resources */,
 				844AB8FF2DBB675500A82556 /* ItemVideoCell.xib in Resources */,
 				844AB8FF2DBB675500A82556 /* ItemVideoCell.xib in Resources */,
 				8761EFC12DC4C83C00AB4F8D /* PlaySoundVC.xib in Resources */,
 				8727B7A02DC7B91000F0B2CE /* ItemFunnyCell.xib in Resources */,
 				71A561832DA8FF09007E8BE3 /* MPLUS2-ExtraLight.ttf in Resources */,
 				8736A3E52DB5F2B6009A07A2 /* SplashVC.xib in Resources */,
+				84EDED252DCB088100EF672D /* SetTimerDialogVC.xib in Resources */,
 				875588232DB7833700A63106 /* gift_intro_2.gif in Resources */,
 				71A561802DA8FF09007E8BE3 /* MPLUS2-Light.ttf in Resources */,
 				8755882B2DB797BC00A63106 /* LanguageVC.xib in Resources */,
@@ -1093,7 +1102,6 @@
 				874314002DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.swift in Sources */,
 				71A561502DA8FE8D007E8BE3 /* URLRequestExtensions.swift in Sources */,
 				71A561582DA8FE8D007E8BE3 /* UIImageExtensions.swift in Sources */,
-				84A847252DC0B452007B1950 /* SetTimmerDialogVC.swift in Sources */,
 				71A5616F2DA8FE8D007E8BE3 /* HightlightableButton.swift in Sources */,
 				71A561972DA8FFB9007E8BE3 /* Coordinator.swift in Sources */,
 				71A5615D2DA8FE8D007E8BE3 /* DictionaryExtension.swift in Sources */,
@@ -1197,6 +1205,10 @@
 				71A561382DA8FE8D007E8BE3 /* RealmDao.swift in Sources */,
 				71A5615A2DA8FE8D007E8BE3 /* IntExtensions.swift in Sources */,
 				8736A3E62DB5F2B6009A07A2 /* SplashPresenter.swift in Sources */,
+				84EDED212DCB088100EF672D /* SetTimerDialogView.swift in Sources */,
+				84EDED222DCB088100EF672D /* SetTimerDialogVC.swift in Sources */,
+				84EDED232DCB088100EF672D /* SetTimerDialogCoordinator.swift in Sources */,
+				84EDED242DCB088100EF672D /* SetTimerDialogPresenter.swift in Sources */,
 				71A5612E2DA8FE8D007E8BE3 /* APIError.swift in Sources */,
 				849FCAC12DBF26680006817F /* TopicSuggestVideoCell.swift in Sources */,
 				71A561472DA8FE8D007E8BE3 /* AVAudioFileExtensions.swift in Sources */,
