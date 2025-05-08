@@ -14,7 +14,7 @@ class ListItemSoundByHashtagCell: UICollectionViewCell {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var hashtagLabel: UILabel!
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         self.setupFont()
@@ -27,6 +27,7 @@ class ListItemSoundByHashtagCell: UICollectionViewCell {
     }
     
     private func setupUI() {
+        self.childView.layoutIfNeeded()
         self.childView.cornerRadius = self.childView.frame.width / 2
     }
     

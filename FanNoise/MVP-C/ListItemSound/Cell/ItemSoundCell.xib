@@ -25,7 +25,7 @@
                                 <rect key="frame" x="15" y="12" width="193" height="193"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6A6-Bm-AYd">
-                                        <rect key="frame" x="30" y="30" width="133" height="133"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="193" height="193"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="10"/>
@@ -35,11 +35,11 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBrownColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="6A6-Bm-AYd" secondAttribute="trailing" constant="30" id="EMl-5T-8c8"/>
+                                    <constraint firstAttribute="trailing" secondItem="6A6-Bm-AYd" secondAttribute="trailing" id="EMl-5T-8c8"/>
                                     <constraint firstAttribute="width" secondItem="dSp-IF-2T7" secondAttribute="height" id="F0J-RQ-1qD"/>
-                                    <constraint firstItem="6A6-Bm-AYd" firstAttribute="top" secondItem="dSp-IF-2T7" secondAttribute="top" constant="30" id="PSd-eb-vBl"/>
-                                    <constraint firstAttribute="bottom" secondItem="6A6-Bm-AYd" secondAttribute="bottom" constant="30" id="Vvu-d3-4PN"/>
-                                    <constraint firstItem="6A6-Bm-AYd" firstAttribute="leading" secondItem="dSp-IF-2T7" secondAttribute="leading" constant="30" id="v6e-oF-W8W"/>
+                                    <constraint firstItem="6A6-Bm-AYd" firstAttribute="top" secondItem="dSp-IF-2T7" secondAttribute="top" id="PSd-eb-vBl"/>
+                                    <constraint firstAttribute="bottom" secondItem="6A6-Bm-AYd" secondAttribute="bottom" id="Vvu-d3-4PN"/>
+                                    <constraint firstItem="6A6-Bm-AYd" firstAttribute="leading" secondItem="dSp-IF-2T7" secondAttribute="leading" id="v6e-oF-W8W"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1X-vO-L9m">

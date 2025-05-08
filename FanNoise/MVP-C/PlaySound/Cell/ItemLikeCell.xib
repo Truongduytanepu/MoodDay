@@ -31,16 +31,16 @@
                                 <rect key="frame" x="8" y="8" width="183" height="183"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hs2-nj-0RJ">
-                                        <rect key="frame" x="8" y="8" width="167" height="167"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="183" height="183"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Hs2-nj-0RJ" secondAttribute="trailing" constant="8" id="HET-RJ-cd3"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hs2-nj-0RJ" secondAttribute="trailing" id="HET-RJ-cd3"/>
                                     <constraint firstAttribute="width" secondItem="LKi-D7-HU8" secondAttribute="height" id="Ibv-Fy-Kf7"/>
-                                    <constraint firstAttribute="bottom" secondItem="Hs2-nj-0RJ" secondAttribute="bottom" constant="8" id="aeI-1c-cRs"/>
-                                    <constraint firstItem="Hs2-nj-0RJ" firstAttribute="top" secondItem="LKi-D7-HU8" secondAttribute="top" constant="8" id="pXN-X1-a7c"/>
-                                    <constraint firstItem="Hs2-nj-0RJ" firstAttribute="leading" secondItem="LKi-D7-HU8" secondAttribute="leading" constant="8" id="sD4-pU-Dc4"/>
+                                    <constraint firstAttribute="bottom" secondItem="Hs2-nj-0RJ" secondAttribute="bottom" id="aeI-1c-cRs"/>
+                                    <constraint firstItem="Hs2-nj-0RJ" firstAttribute="top" secondItem="LKi-D7-HU8" secondAttribute="top" id="pXN-X1-a7c"/>
+                                    <constraint firstItem="Hs2-nj-0RJ" firstAttribute="leading" secondItem="LKi-D7-HU8" secondAttribute="leading" id="sD4-pU-Dc4"/>
                                 </constraints>
                             </view>
                         </subviews>

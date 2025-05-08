@@ -27,6 +27,7 @@ class ItemSoundCell: UICollectionViewCell {
     }
     
     private func setupUI() {
+        self.childView.layoutIfNeeded()
         self.childView.cornerRadius = self.childView.frame.width / 2
     }
     

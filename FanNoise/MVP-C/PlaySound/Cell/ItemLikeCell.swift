@@ -25,6 +25,7 @@ class ItemLikeCell: UICollectionViewCell {
     }
     
     private func setupUI() {
+        self.childView.layoutIfNeeded()
         self.childView.cornerRadius = self.childView.frame.height / 2
     }
     
@@ -38,5 +39,6 @@ class ItemLikeCell: UICollectionViewCell {
         self.itemNameLabel.text = sound.name
         self.parentView.backgroundColor = sound.bgColor0?.toColor()
         self.childView.backgroundColor = sound.bgColor1?.toColor()
+
     }
 }

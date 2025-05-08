@@ -31,13 +31,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFp-J1-1ZS">
-                            <rect key="frame" x="12" y="7" width="12" height="12"/>
+                            <rect key="frame" x="12" y="1" width="24" height="24"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="12" id="Nhk-03-cnd"/>
-                                <constraint firstAttribute="height" constant="12" id="VUE-gI-7Ii"/>
+                                <constraint firstAttribute="width" constant="24" id="Nhk-03-cnd"/>
+                                <constraint firstAttribute="width" secondItem="EFp-J1-1ZS" secondAttribute="height" id="W7o-0V-fUy"/>
                             </constraints>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="Button" image="ic_ListItemSoundByHashtag_back"/>
+                            <state key="normal" title="Button" image="ic_close"/>
                             <connections>
                                 <action selector="backButtonDidTap:" destination="-1" eventType="touchUpInside" id="Dr6-JY-n9l"/>
                             </connections>
@@ -78,7 +78,7 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_ListItemSoundByHashtag_back" width="40" height="40"/>
+        <image name="ic_close" width="73" height="72"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

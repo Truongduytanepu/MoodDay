@@ -34,9 +34,10 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     @IBOutlet private weak var othersCollectionView: UICollectionView!
     
     private var isRotating = false
-    private var rotationTimer: Timer?
+    private var isButtonDisabled = false
+    
     var coordinator: PlaySoundCoordinator!
-    var soundItem: Sound!
+    var soundItem: Sound?
     var listSound: [Sound] = []
     var listVideo: [Video] = []
     private var audioPlayer: AVPlayer?
@@ -48,6 +49,11 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     }
     
     override func viewDidLayoutSubviews() {
+        guard let soundItem = self.soundItem else {
+            print("soundItem is nil")
+            return
+        }
+        
         self.setupUI(with: soundItem)
     }
     
@@ -113,8 +119,8 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     
     private func startRotatingSmoothly(imageView: UIImageView, minute: Int? = nil, second: Int? = nil) {
         // Xoá animation cũ nếu có
-        imageView.layer.removeAnimation(forKey: "rotation")
-        
+        imageView.layer.removeAllAnimations()
+                
         // Tính tổng thời gian quay nếu có (minute và second)
         var totalTimeInSeconds = 0
         if let minute = minute, let second = second {
@@ -180,7 +186,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         slowDown.fillMode = .forwards
         slowDown.isRemovedOnCompletion = false
         imageView.layer.add(slowDown, forKey: "slowStop")
-        
+        // Sau khi animation kết thúc, cố định lại transform
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             imageView.layer.removeAllAnimations()
             imageView.layer.transform = CATransform3DMakeRotation(currentRotation + .pi / 2, 0, 0, 1)
@@ -293,8 +299,8 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     }
     
     private func startRoting(minute: Int? = nil, second: Int? = nil) {
-        if self.soundItem.isRotate == true {
-            if self.soundItem.rotateFrame == 2 {
+        if self.soundItem?.isRotate == true {
+            if self.soundItem?.rotateFrame == 2 {
                 self.startRotatingSmoothly(imageView: secondFanImageView,minute: minute, second: second)
             } else {
                 self.startRotatingSmoothly(imageView: firstFanImageView,minute: minute, second: second)
@@ -303,25 +309,37 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     }
     
     private func stopSoundSmoothlyIfNeed() {
-        self.playButton.setImage(UIImage(named: "ic_playsound_pause"), for: .normal)
+        self.audioPlayer?.pause()
+
+        // Dừng quạt từ từ
         [self.firstFanImageView, self.secondFanImageView, self.lastFanImageView].forEach {
             guard let imageView = $0 else { return }
             self.stopRotatingSmoothly(imageView: imageView)
         }
         
-        self.audioPlayer?.pause()
+        // Cập nhật UI sau khi hoàn thành animation
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.playButton.setImage(UIImage(named: "ic_playsound_pause"), for: .normal)
+            self.audioPlayer?.pause()
+            self.audioPlayer?.seek(to: .zero)
+        }
     }
     
     private func startSoundSmoothlyIfNeed() {
-        self.stopSoundIfNeed()
-        
-        let soundLink = self.soundItem.source
+        let soundLink = self.soundItem?.source
+
         self.playButton.setImage(UIImage(named: "ic_playsound_play"), for: .normal)
-        if self.soundItem.isRotate == true {
-            if self.soundItem.rotateFrame == 2 {
+        if self.soundItem?.isRotate == true {
+            if self.soundItem?.rotateFrame == 2 {
                 self.startRotatingSmoothly(imageView: self.secondFanImageView)
             } else {
                 self.startRotatingSmoothly(imageView: self.firstFanImageView)
+
+            }
+        } else {
+            [self.firstFanImageView, self.secondFanImageView, self.lastFanImageView].forEach {
+                guard let imageView = $0 else { return }
+                self.stopRotatingSmoothly(imageView: imageView)
             }
         }
         
@@ -338,7 +356,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     private func startSetTimerDialog(navigationController: UINavigationController) {
         let setTimmerDialog = SetTimerDialogCoordinator(navigation: navigationController)
         setTimmerDialog.presentSetTimerDialog { minute, second in
-            let soundLink = self.soundItem.source
+            let soundLink = self.soundItem?.source
             
             self.startRoting(minute: minute, second: second)
             
@@ -363,19 +381,30 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     }
     
     @IBAction private func playButtonDidTap(_ sender: Any) {
+        guard !isButtonDisabled else { return }
+            
+        self.playButton.isEnabled = false
+
         if self.isRotating {
             self.stopSoundSmoothlyIfNeed()
-        } else {
-            self.startSoundSmoothlyIfNeed()
-        }
-        
+            } else {
+                self.startSoundSmoothlyIfNeed()
+            }
+            
+            // Toggle trạng thái sau khi thực hiện hành động
         self.isRotating.toggle()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.playButton.isEnabled = true
+            }
     }
 }
 
 extension PlaySoundVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.stopSoundIfNeed()
+        self.isRotating = false
+
         if collectionView == self.likeCollectionView {
             let soundSelected = self.presenter.getLikeSound()[indexPath.row]
             self.soundItem = soundSelected
@@ -384,7 +413,7 @@ extension PlaySoundVC: UICollectionViewDelegate {
             guard let navigationController = self.navigationController else {
                 return
             }
-            
+
             self.startPreviewVideo(navigationController: navigationController,
                                 videos: self.presenter.getFunVideo(),
                                 targetIndexPath: indexPath)
