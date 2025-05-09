@@ -62,7 +62,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         if MonitorNetwork.shared.isConnectedNetwork() {
             self.collectionView.reloadData()
         } else {
-            self.postAlert("Notification", message: "No Interner") { [weak self] in
+            self.postAlert("Notification", message: "No Interner", titleButton: "Try again") { [weak self] in
                 guard let self = self else {
                     return
                 }

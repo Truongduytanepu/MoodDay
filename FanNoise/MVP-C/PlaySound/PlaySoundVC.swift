@@ -130,7 +130,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
             self.funnyCollectionView.reloadData()
             self.othersCollectionView.reloadData()
         } else {
-            self.postAlert("Notification", message: "No Interner") { [weak self] in
+            self.postAlert("Notification", message: "No Interner", titleButton: "Try again") { [weak self] in
                 guard let self = self else {
                     return
                 }

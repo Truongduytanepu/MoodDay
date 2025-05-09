@@ -22,10 +22,10 @@ extension UIViewController {
         return self
     }
     
-    func postAlert(_ title: String, message: String, completion: (() -> Void)? = nil) {
+    func postAlert(_ title: String, message: String, titleButton: String = "OK", completion: (() -> Void)? = nil) {
         DispatchQueue.main.async(execute: { () -> Void in
             let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { _ in
+            alert.addAction(UIAlertAction(title: titleButton, style: UIAlertAction.Style.default, handler: { _ in
                 completion?()
             }))
             
