@@ -51,6 +51,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     private func config() {
         self.setUpHiddenCollectionView()
         self.showIntroGIF()
+        self.setUpData()
         self.setupCollectionView()
         self.setUpNotification()
         self.configNetwork()
