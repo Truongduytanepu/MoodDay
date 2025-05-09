@@ -34,6 +34,13 @@ class ListItemSoundByHashtagVC: BaseVC<ListItemSoundByHashtagPresenter, ListItem
     private func config() {
         self.setupCollectionView()
         self.setupUI()
+        self.configNetwork()
+    }
+    
+    private func configNetwork() {
+        if !MonitorNetwork.shared.isConnectedNetwork() {
+            self.postAlert("Notification", message: "No Interner")
+        }
     }
     
     private func setupCollectionView() {

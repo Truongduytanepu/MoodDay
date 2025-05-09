@@ -22,6 +22,13 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
     
     var coordinator : TabbarCoordinator!
     private var homeVC: HomeVC?
+    private var currentTab: TabType = .home
+
+    enum TabType {
+        case home
+        case trending
+    }
+    
     private var previewVideoVC: PreviewVideoVC?
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -126,6 +133,9 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
     }
     
     @IBAction private func homeButtonDidTap(_ sender: Any) {
+        guard self.currentTab != .home else { return }
+        self.currentTab = .home
+        
         self.removeTrendingViewController()
         self.setupHomeViewController()
         self.homeImageView.image = UIImage(named: "ic_tabbar_home_enable")
@@ -134,6 +144,9 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
     }
     
     @IBAction private func trendingButtonDidTap(_ sender: Any) {
+        guard self.currentTab != .trending else { return }
+        self.currentTab = .trending
+        
         self.removeHomeViewController()
         self.setupTrendingViewController()
         

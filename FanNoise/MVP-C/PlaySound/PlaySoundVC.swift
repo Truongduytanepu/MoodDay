@@ -75,6 +75,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         self.loadData()
         self.setupObservers()
         self.setupAudioInterruptionObserver()
+        self.configNetwork()
     }
     
     private func setupObservers() {
@@ -114,7 +115,13 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
             // Gián đoạn bắt đầu (cuộc gọi đến, báo thức...)
             self.stopSoundIfNeed()
             self.isRotating = false
-        } 
+        }
+    }
+    
+    private func configNetwork() {
+        if !MonitorNetwork.shared.isConnectedNetwork() {
+            self.postAlert("Notification", message: "No Interner")
+        }
     }
     
     @objc private func appWillResignActive() {
@@ -316,14 +323,13 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     
     private func startSoundSmoothlyIfNeed() {
         let soundLink = self.soundItem?.source
-
+        
         self.playButton.setImage(UIImage(named: "ic_playsound_play"), for: .normal)
         if self.soundItem?.isRotate == true {
             if self.soundItem?.rotateFrame == 2 {
                 self.startRotatingSmoothly(imageView: self.secondFanImageView)
             } else {
                 self.startRotatingSmoothly(imageView: self.firstFanImageView)
-
             }
         } else {
             [self.firstFanImageView, self.secondFanImageView, self.lastFanImageView].forEach {
@@ -350,7 +356,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         self.minute = 0
         self.second = 0
     }
-
+    
     @objc private func updateTime() {
         if self.minute == 0 && self.second == 0 {
             self.stopSoundAndUpdateUI()
@@ -361,12 +367,12 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
             } else {
                 self.second -= 1
             }
-
+            
             self.timeDialogLbl.text = "\(self.minute):\(String(format: "%02d", self.second))"
             self.setTimerView.backgroundColor = UIColor(rgb: 0xFFC300)
         }
     }
-
+    
     @objc private func stopSoundAndUpdateUI() {
         self.stopSoundSmoothlyIfNeed()
         self.isRotating.toggle()
@@ -374,7 +380,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         self.resetTimer()
         self.setTimerView.backgroundColor = .clear
     }
-
+    
     private func startPreviewVideo(navigationController: UINavigationController, videos: [Video], targetIndexPath: IndexPath) {
         let previewVideo = PreviewVideoCoordinator(navigation: navigationController,
                                                    videoCategoryType: .listVideo(videos: videos),
@@ -441,25 +447,33 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
 
 extension PlaySoundVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.stopSoundIfNeed()
         self.isRotating = false
-
         if collectionView == self.likeCollectionView {
+            // 1. Reset item âm thanh hiện tại
+            self.stopSoundIfNeed()
+            self.soundItem = nil
+            
+            // 2. Lấy âm thanh được chọn từ danh sách like
             let soundSelected = self.presenter.getLikeSound()[indexPath.row]
+            
+            // 3. Gán âm thanh mới và cập nhật giao diện
             self.soundItem = soundSelected
             self.setupUI(with: soundSelected)
+            self.startSoundSmoothlyIfNeed()
         } else if collectionView == self.funnyCollectionView {
             guard let navigationController = self.navigationController else {
                 return
             }
-
+            
             self.startPreviewVideo(navigationController: navigationController,
-                                videos: self.presenter.getFunVideo(),
-                                targetIndexPath: indexPath)
+                                   videos: self.presenter.getFunVideo(),
+                                   targetIndexPath: indexPath)
         } else {
+            self.stopSoundIfNeed()
             let soundSelected = self.presenter.getOtherSound()[indexPath.row]
             self.soundItem = soundSelected
             self.setupUI(with: soundSelected)
+            self.startSoundSmoothlyIfNeed()
         }
     }
 }
@@ -484,6 +498,7 @@ extension PlaySoundVC: UICollectionViewDataSource {
             }
             
             self.presenter.getLikeSound()[indexPath.row].assignRandomColorsIfNeeded()
+            
             cell.configure(sound: self.presenter.getLikeSound()[indexPath.row])
             return cell
         } else if collectionView == self.funnyCollectionView {

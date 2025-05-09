@@ -59,6 +59,14 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
         self.setupSoundCollectionView()
         self.setupVideoCollectionView()
         self.setupFont()
+        self.configNetwork()
+    }
+    
+    
+    private func configNetwork() {
+        if !MonitorNetwork.shared.isConnectedNetwork() {
+            self.postAlert("Notification", message: "No Interner")
+        }
     }
     
     private func setupFont() {

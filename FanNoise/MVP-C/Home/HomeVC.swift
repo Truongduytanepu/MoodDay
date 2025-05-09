@@ -51,6 +51,7 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
             self.contentView.isHidden = false
         } else {
             self.contentView.isHidden = true
+            self.postAlert("Notification", message: "No Interner")
         }
     }
     

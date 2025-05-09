@@ -51,9 +51,15 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     private func config() {
         self.setUpHiddenCollectionView()
         self.showIntroGIF()
-        self.setUpData()
         self.setupCollectionView()
         self.setUpNotification()
+        self.configNetwork()
+    }
+    
+    private func configNetwork() {
+        if !MonitorNetwork.shared.isConnectedNetwork() {
+            self.postAlert("Notification", message: "No Interner")
+        }
     }
     
     private func setUpData() {
