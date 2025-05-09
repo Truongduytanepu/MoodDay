@@ -38,6 +38,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     private var isRotating = false
     private var isButtonDisabled = false
     private var rotationWorkItem: DispatchWorkItem? // Biến lưu trữ work item để hủy khi cần
+    private var isTimerRunning = false
     var coordinator: PlaySoundCoordinator!
     var soundItem: Sound?
     var listSound: [Sound] = []
@@ -369,7 +370,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         }
         
         let totalTimeInSeconds = (self.minute * 60) + self.second
-        if totalTimeInSeconds > 0 && self.isOn {
+        if totalTimeInSeconds > 0 && self.isOn && !isTimerRunning {
             self.startTimer(duration: totalTimeInSeconds)
         }
         
@@ -377,6 +378,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     }
     
     private func startTimer(duration: Int) {
+        self.isTimerRunning = true
         self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     
@@ -385,6 +387,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         self.timer = nil
         self.minute = 0
         self.second = 0
+        self.isTimerRunning = false
     }
     
     @objc private func updateTime() {
@@ -482,7 +485,6 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
 
 extension PlaySoundVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.isRotating = false
         if collectionView == self.likeCollectionView {
             // 1. Reset item âm thanh hiện tại
             self.stopSoundIfNeed()
