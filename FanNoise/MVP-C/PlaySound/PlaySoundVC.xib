@@ -24,6 +24,7 @@
                 <outlet property="othersCollectionView" destination="kva-Bi-sRV" id="S9V-Vh-ZO5"/>
                 <outlet property="playButton" destination="147-eh-gUG" id="vZL-he-Adu"/>
                 <outlet property="secondFanImageView" destination="Stc-p9-8yy" id="7Pp-vL-mOz"/>
+                <outlet property="setTimerBtn" destination="5Vf-yN-G7h" id="02A-U8-nSr"/>
                 <outlet property="setTimerView" destination="N7U-6L-TOw" id="grz-dM-mQF"/>
                 <outlet property="timeDialogLbl" destination="lz9-Mk-jCX" id="DsJ-WR-1f4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -42,27 +43,10 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hro-ur-dH2" userLabel="Topview">
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="28"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hb8-FM-7ua">
-                                            <rect key="frame" x="18" y="2" width="24" height="24"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="24" id="uMl-bW-DBx"/>
-                                                <constraint firstAttribute="width" secondItem="hb8-FM-7ua" secondAttribute="height" id="wMH-6e-UQT"/>
-                                            </constraints>
-                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                            <state key="normal" title="Button" image="ic_close"/>
-                                            <connections>
-                                                <action selector="backButtonDidTap:" destination="-1" eventType="touchUpInside" id="XfD-N1-4Pw"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="hb8-FM-7ua" firstAttribute="centerY" secondItem="hro-ur-dH2" secondAttribute="centerY" id="D95-Lg-aZP"/>
                                         <constraint firstAttribute="width" secondItem="hro-ur-dH2" secondAttribute="height" multiplier="335:24" id="c4H-X9-I16"/>
-                                        <constraint firstItem="hb8-FM-7ua" firstAttribute="leading" secondItem="hro-ur-dH2" secondAttribute="leading" constant="18" id="enb-aB-MKl"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DfM-Bc-sem" userLabel="FanView">
@@ -362,11 +346,38 @@
                         <constraint firstItem="DxL-ox-xZ8" firstAttribute="top" secondItem="QyT-8s-YvP" secondAttribute="top" id="zol-xl-0Ts"/>
                     </constraints>
                 </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBU-9V-rVY">
+                    <rect key="frame" x="0.0" y="59" width="393" height="28"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hb8-FM-7ua">
+                            <rect key="frame" x="16" y="2" width="24" height="24"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="24" id="uMl-bW-DBx"/>
+                                <constraint firstAttribute="width" secondItem="hb8-FM-7ua" secondAttribute="height" id="wMH-6e-UQT"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Button" image="ic_close"/>
+                            <connections>
+                                <action selector="backButtonDidTap:" destination="-1" eventType="touchUpInside" id="XfD-N1-4Pw"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.9882352941176471" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="hb8-FM-7ua" firstAttribute="centerY" secondItem="UBU-9V-rVY" secondAttribute="centerY" id="Ldd-ZG-tIN"/>
+                        <constraint firstAttribute="width" secondItem="UBU-9V-rVY" secondAttribute="height" multiplier="335:24" id="QRK-qj-ikX"/>
+                        <constraint firstItem="hb8-FM-7ua" firstAttribute="leading" secondItem="UBU-9V-rVY" secondAttribute="leading" constant="16" id="oQL-vg-Z4l"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="0.9882352941176471" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="UBU-9V-rVY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2ut-ZJ-s1X"/>
                 <constraint firstItem="QyT-8s-YvP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="F9O-ls-RNS"/>
+                <constraint firstItem="UBU-9V-rVY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="I8U-ss-jok"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="UBU-9V-rVY" secondAttribute="trailing" id="OgX-KR-ORf"/>
                 <constraint firstAttribute="bottom" secondItem="QyT-8s-YvP" secondAttribute="bottom" id="e15-wW-9sK"/>
                 <constraint firstItem="QyT-8s-YvP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="u5c-8J-nV4"/>
                 <constraint firstItem="DxL-ox-xZ8" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="vQK-iz-2vk"/>
@@ -381,7 +392,7 @@
         <image name="ic_dialogTimer_clock" width="45" height="47"/>
         <image name="ic_playsound_pause" width="132" height="133"/>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -36,22 +36,26 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.setupGradient()
+        self.configNetwork()
     }
     
     // MARK: - Config
     private func config() {
         self.setupFont()
-        self.configNetwork()
         self.setupCollectionview()
     }
     
     private func configNetwork() {
         if MonitorNetwork.shared.isConnectedNetwork() {
             self.loadCategory()
-            self.contentView.isHidden = false
         } else {
-            self.contentView.isHidden = true
-            self.postAlert("Notification", message: "No Interner")
+            self.postAlert("Notification", message: "No Interner") { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                self.configNetwork()
+            }
         }
     }
     
@@ -183,3 +187,4 @@ extension HomeVC: HomeView {
         self.postAlert("Notification", message: "No Internet")
     }
 }
+

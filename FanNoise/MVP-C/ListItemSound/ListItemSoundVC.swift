@@ -53,19 +53,33 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
         self.setupTabbar()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.configNetwork()
+    }
+    
     // MARK: - Config
     private func config() {
         self.setupHashTagCollectionView()
         self.setupSoundCollectionView()
         self.setupVideoCollectionView()
         self.setupFont()
-        self.configNetwork()
     }
     
     
     private func configNetwork() {
-        if !MonitorNetwork.shared.isConnectedNetwork() {
-            self.postAlert("Notification", message: "No Interner")
+        if MonitorNetwork.shared.isConnectedNetwork() {
+            self.hashtagCollectionView.reloadData()
+            self.soundCollectionView.reloadData()
+            self.videoCollectionView.reloadData()
+        } else {
+            self.postAlert("Notification", message: "No Interner") { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                self.configNetwork()
+            }
         }
     }
     

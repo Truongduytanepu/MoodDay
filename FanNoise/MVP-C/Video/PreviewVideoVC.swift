@@ -47,6 +47,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         super.viewDidAppear(animated)
         self.scrollToIndexPath()
         self.autoPlayVideo()
+        self.configNetwork()
     }
     
     private func config() {
@@ -55,12 +56,19 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         self.setUpData()
         self.setupCollectionView()
         self.setUpNotification()
-        self.configNetwork()
     }
     
     private func configNetwork() {
-        if !MonitorNetwork.shared.isConnectedNetwork() {
-            self.postAlert("Notification", message: "No Interner")
+        if MonitorNetwork.shared.isConnectedNetwork() {
+            self.collectionView.reloadData()
+        } else {
+            self.postAlert("Notification", message: "No Interner") { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                self.configNetwork()
+            }
         }
     }
     
