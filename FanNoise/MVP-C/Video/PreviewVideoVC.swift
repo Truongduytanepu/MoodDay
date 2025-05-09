@@ -46,6 +46,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.scrollToIndexPath()
+        self.autoPlayVideo()
     }
     
     private func config() {
@@ -74,6 +75,15 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         case .listVideo(videos: let videos):
             self.navigationView.isHidden = false
             self.presenter.updateDataListVideo(videos: videos)
+        }
+    }
+    
+    private func autoPlayVideo() {
+        switch self.videoCategoryType {
+        case .trending:
+            self.startVideo()
+        case .filtered(_), .listVideo(_):
+            break
         }
     }
     

@@ -422,6 +422,8 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
             return
         }
         
+        self.stopSoundSmoothlyIfNeed()
+        self.isRotating = false
         self.startSetTimerDialog(navigationController: navigationController)
     }
     
