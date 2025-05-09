@@ -21,12 +21,6 @@ class LanguageCell: UICollectionViewCell {
     private func config() {
         self.setupFont()
         self.setupCheckImageView()
-        self.setupCell()
-    }
-    
-    private func setupCell() {
-        self.contentView.layer.masksToBounds = true
-        self.contentView.borderWidth = 1
     }
     
     private func setupFont() {
