@@ -90,10 +90,17 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     }
     
     private func setupAudioInterruptionObserver() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handleAudioInterruption),
-                                               name: AVAudioSession.interruptionNotification,
-                                               object: AVAudioSession.sharedInstance())
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: .mixWithOthers)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(handleAudioInterruption),
+                                                   name: AVAudioSession.interruptionNotification,
+                                                   object: AVAudioSession.sharedInstance())
+        } catch {
+            print("Failed to set up audio session: \(error)")
+        }
     }
     
     @objc private func handleAudioInterruption(notification: Notification) {
@@ -106,31 +113,24 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         if type == .began {
             // Gián đoạn bắt đầu (cuộc gọi đến, báo thức...)
             self.stopSoundIfNeed()
-        } else if type == .ended {
-            // Gián đoạn kết thúc, bạn có thể phát lại nếu cần
-            // Ví dụ:
-            // try? AVAudioSession.sharedInstance().setActive(true)
-            // self.audioPlayer?.play()
-        }
+            self.isRotating = false
+        } 
     }
     
     @objc private func appWillResignActive() {
         self.stopSoundIfNeed()
+        self.isRotating = false
     }
     
     @objc private func appWillTerminate() {
         self.stopSoundIfNeed()
+        self.isRotating = false
     }
     
-    private func startRotatingSmoothly(imageView: UIImageView, minute: Int? = nil, second: Int? = nil) {
+    private func startRotatingSmoothly(imageView: UIImageView) {
         // Xoá animation cũ nếu có
         imageView.layer.removeAllAnimations()
-                
-        // Tính tổng thời gian quay nếu có (minute và second)
-        var totalTimeInSeconds = 0
-        if let minute = minute, let second = second {
-            totalTimeInSeconds = (minute * 60) + second
-        }
+        
         // Bước 1: Tạo animation quay nhanh dần (ease-in)
         let accelerateRotation = CABasicAnimation(keyPath: "transform.rotation")
         accelerateRotation.fromValue = 0
@@ -155,13 +155,6 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
             steadyRotation.timingFunction = CAMediaTimingFunction(name: .linear)
             imageView.layer.removeAnimation(forKey: "acceleration") // Xoá animation cũ
             imageView.layer.add(steadyRotation, forKey: "rotation")
-            if totalTimeInSeconds > 0 {
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + Double(totalTimeInSeconds)) {
-                    self.stopRotatingSmoothly(imageView: imageView)
-                    self.isRotating.toggle()
-                }
-            }
         }
     }
     
@@ -294,7 +287,6 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     private func stopSoundIfNeed() {
         // Dừng player
         self.audioPlayer?.pause()
-        self.timer?.invalidate()
         // Dừng tất cả animation ngay lập tức
         [self.firstFanImageView, self.secondFanImageView, self.lastFanImageView].forEach { imageView in
             imageView?.layer.removeAllAnimations()
@@ -306,19 +298,8 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         }
     }
     
-    private func startRoting(minute: Int? = nil, second: Int? = nil) {
-        if self.soundItem?.isRotate == true {
-            if self.soundItem?.rotateFrame == 2 {
-                self.startRotatingSmoothly(imageView: secondFanImageView,minute: minute, second: second)
-            } else {
-                self.startRotatingSmoothly(imageView: firstFanImageView,minute: minute, second: second)
-            }
-        }
-    }
-    
     private func stopSoundSmoothlyIfNeed() {
         self.audioPlayer?.pause()
-        self.timer?.invalidate()
         // Dừng quạt từ từ
         [self.firstFanImageView, self.secondFanImageView, self.lastFanImageView].forEach {
             guard let imageView = $0 else { return }
@@ -362,6 +343,13 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     private func startTimer(duration: Int) {
         self.timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
+    
+    private func resetTimer() {
+        self.timer?.invalidate()
+        self.timer = nil
+        self.minute = 0
+        self.second = 0
+    }
 
     @objc private func updateTime() {
         if self.minute == 0 && self.second == 0 {
@@ -381,10 +369,12 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
 
     @objc private func stopSoundAndUpdateUI() {
         self.stopSoundSmoothlyIfNeed()
+        self.isRotating.toggle()
         self.timeDialogLbl.text = "Set timer"
+        self.resetTimer()
         self.setTimerView.backgroundColor = .clear
     }
-    
+
     private func startPreviewVideo(navigationController: UINavigationController, videos: [Video], targetIndexPath: IndexPath) {
         let previewVideo = PreviewVideoCoordinator(navigation: navigationController,
                                                    videoCategoryType: .listVideo(videos: videos),
@@ -400,17 +390,25 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
                 return
             }
             
+            self.resetTimer()
             self.timeDialogLbl.text = "\(minute):\(second)"
             self.setTimerView.backgroundColor = UIColor(rgb: 0xFFC300)
             self.minute = minute
             self.second = second
             self.isOn = isOn
+            
+            if !isOn {
+                self.stopSoundSmoothlyIfNeed()
+                self.stopSoundAndUpdateUI()
+            }
+            
             navigationController.dismiss(animated: true)
         }
     }
     
     @IBAction private func backButtonDidTap(_ sender: Any) {
         self.coordinator.stop()
+        self.stopSoundSmoothlyIfNeed()
     }
     
     @IBAction private func setTimeButtonDidTap(_ sender: Any) {
@@ -423,21 +421,21 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     
     @IBAction private func playButtonDidTap(_ sender: Any) {
         guard !isButtonDisabled else { return }
-            
+        
         self.playButton.isEnabled = false
-
+        
         if self.isRotating {
             self.stopSoundSmoothlyIfNeed()
-            } else {
-                self.startSoundSmoothlyIfNeed()
-            }
-            
-            // Toggle trạng thái sau khi thực hiện hành động
+        } else {
+            self.startSoundSmoothlyIfNeed()
+        }
+        
+        // Toggle trạng thái sau khi thực hiện hành động
         self.isRotating.toggle()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                self.playButton.isEnabled = true
-            }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.playButton.isEnabled = true
+        }
     }
 }
 

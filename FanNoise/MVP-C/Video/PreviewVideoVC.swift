@@ -49,6 +49,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     }
     
     private func config() {
+        self.setUpHiddenCollectionView()
         self.showIntroGIF()
         self.setUpData()
         self.setupCollectionView()
@@ -66,6 +67,15 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         case .listVideo(videos: let videos):
             self.navigationView.isHidden = false
             self.presenter.updateDataListVideo(videos: videos)
+        }
+    }
+    
+    private func setUpHiddenCollectionView() {
+        switch videoCategoryType {
+        case .trending:
+            self.collectionView.isHidden = false
+        case .filtered(_), .listVideo(_):
+            self.collectionView.isHidden = true
         }
     }
     
@@ -103,6 +113,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     private func scrollToIndexPath() {
         if let indexPath = self.targetIndexPath {
             self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+            self.collectionView.isHidden = false
         }
     }
     
