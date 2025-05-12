@@ -153,7 +153,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     private func startRotatingSmoothly(imageView: UIImageView) {
         // 1. Hủy mọi animation và work item cũ
         imageView.layer.removeAllAnimations()
-        rotationWorkItem?.cancel()
+        self.rotationWorkItem?.cancel()
         
         // 2. Kiểm tra nếu app đang trong background thì không chạy animation
         guard UIApplication.shared.applicationState != .background else {
@@ -310,6 +310,9 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
                let encodedString = thumb.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
                let url = URL(string: encodedString) {
                 self.firstFanImageView.sd_setImage(with: url, completed: nil)
+                self.secondFanImageView.isHidden = true
+                self.lastFanImageView.isHidden = true
+                self.isRotating = false
             }
         }
         
@@ -363,9 +366,9 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
                 self.startRotatingSmoothly(imageView: self.firstFanImageView)
             }
         } else {
-            [self.firstFanImageView, self.secondFanImageView, self.lastFanImageView].forEach {
-                guard let imageView = $0 else { return }
-                self.stopRotatingSmoothly(imageView: imageView)
+            [self.firstFanImageView, self.secondFanImageView, self.lastFanImageView].forEach { imageView in
+                imageView?.layer.removeAllAnimations()
+                imageView?.layer.transform = CATransform3DIdentity
             }
         }
         
@@ -490,7 +493,6 @@ extension PlaySoundVC: UICollectionViewDelegate {
             self.stopSoundIfNeed()
             self.setupObservers()
 
-            self.soundItem = nil
             // 2. Lấy âm thanh được chọn từ danh sách like
             let soundSelected = self.presenter.getLikeSound()[indexPath.row]
             
@@ -503,6 +505,8 @@ extension PlaySoundVC: UICollectionViewDelegate {
                 return
             }
             
+            self.stopSoundIfNeed()
+
             self.startPreviewVideo(navigationController: navigationController,
                                    videos: self.presenter.getFunVideo(),
                                    targetIndexPath: indexPath)

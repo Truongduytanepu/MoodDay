@@ -30,6 +30,11 @@ class ItemLikeCell: UICollectionViewCell {
     }
     
     func configure(sound: Sound) {
+        self.itemImageView.image = nil
+        self.itemNameLabel.text = nil
+        self.childView.backgroundColor = .clear
+        self.parentView.backgroundColor = .clear
+        
         if let thumb = sound.thumb,
            let encodedString = thumb.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
            let url = URL(string: encodedString) {

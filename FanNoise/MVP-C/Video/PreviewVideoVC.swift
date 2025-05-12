@@ -260,8 +260,7 @@ extension PreviewVideoVC: UICollectionViewDataSource {
         switch self.videoCategoryType {
         case .trending:
             if (indexPath.row % Const.swipeCountToShowTopic == 0) && indexPath.row > 0 {
-                guard let cell = collectionView.dequeueCell(type: TopicSuggestVideoCell.self,
-                                                            indexPath: indexPath) else {
+                guard let cell = collectionView.dequeueCell(type: TopicSuggestVideoCell.self, indexPath: indexPath) else {
                     return UICollectionViewCell()
                 }
                 
@@ -278,8 +277,7 @@ extension PreviewVideoVC: UICollectionViewDataSource {
             } else {
                 let adjustedIndex = indexPath.row - (indexPath.row / Const.swipeCountToShowTopic)
                 
-                guard let cell = collectionView.dequeueCell(type: ItemVideoCell.self,
-                                                            indexPath: indexPath) else {
+                guard let cell = collectionView.dequeueCell(type: ItemVideoCell.self, indexPath: indexPath) else {
                     return UICollectionViewCell()
                 }
                 
