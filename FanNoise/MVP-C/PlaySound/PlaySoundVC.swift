@@ -334,6 +334,8 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
             imageView?.layer.transform = CATransform3DIdentity
         }
         
+        self.rotationWorkItem?.cancel()
+        self.rotationWorkItem = nil
         // Cập nhật UI đồng bộ
         self.playButton.setImage(UIImage(named: "ic_playsound_pause"), for: .normal)
     }
@@ -497,18 +499,11 @@ extension PlaySoundVC: UICollectionViewDelegate {
             return
         }
         
-        let group = DispatchGroup()
-        
         if collectionView == self.likeCollectionView {
             self.stopSoundIfNeed()
-            // 1. Reset item âm thanh hiện tại
             self.setupObservers()
             
-            // 2. Lấy âm thanh được chọn từ danh sách like
             let soundSelected = self.presenter.getLikeSound()[indexPath.row]
-            
-            // 3. Gán âm thanh mới và cập nhật giao diện
-            // Cập nhật item mới và bắt đầu animation
             self.soundItem = soundSelected
             self.setupUI(with: soundSelected)
             self.startSoundSmoothlyIfNeed()
@@ -526,18 +521,13 @@ extension PlaySoundVC: UICollectionViewDelegate {
                                    targetIndexPath: indexPath)
         } else {
             self.stopSoundIfNeed()
-            
             self.setupObservers()
-            // 2. Lấy âm thanh được chọn từ danh sách like
+            
             let soundSelected = self.presenter.getOtherSound()[indexPath.row]
-            group.notify(queue: .main) {
-                
-                // 3. Gán âm thanh mới và cập nhật giao diện
-                self.soundItem = soundSelected
-                self.setupUI(with: soundSelected)
-                self.startSoundSmoothlyIfNeed()
-                self.isRotating = true
-            }
+            self.soundItem = soundSelected
+            self.setupUI(with: soundSelected)
+            self.startSoundSmoothlyIfNeed()
+            self.isRotating = true
         }
     }
 }
