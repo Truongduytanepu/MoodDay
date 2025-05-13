@@ -24,8 +24,8 @@
                     <rect key="frame" x="0.0" y="59" width="393" height="26"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4Z-M6-LS1">
-                            <rect key="frame" x="175.66666666666666" y="2.6666666666666643" width="42" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <rect key="frame" x="181" y="5.3333333333333277" width="31" height="15.666666666666664"/>
+                            <fontDescription key="fontDescription" name="AppleSymbols" family="Apple Symbols" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>

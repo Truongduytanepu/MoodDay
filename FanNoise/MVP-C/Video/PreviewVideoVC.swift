@@ -34,10 +34,6 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     
     var coordinator: PreviewVideoCoordinator!
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.config()
@@ -47,8 +43,12 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         super.viewDidAppear(animated)
         self.scrollToIndexPath()
         self.autoPlayVideo()
-        self.configNetwork()
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.didChangeConnectNetworkActivity, object: nil)
+    }
+    
     
     private func config() {
         self.setUpHiddenCollectionView()
@@ -56,20 +56,22 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         self.setUpData()
         self.setupCollectionView()
         self.setUpNotification()
+        self.configNetwork()
     }
     
     private func configNetwork() {
-        if MonitorNetwork.shared.isConnectedNetwork() {
-            self.collectionView.reloadData()
-        } else {
-            self.postAlert("Notification", message: "No Interner", titleButton: "Try again") { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                
-                self.configNetwork()
-            }
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationNetwork), name: Notification.Name.didChangeConnectNetworkActivity, object: nil)
+    }
+    
+    @objc private func notificationNetwork() {
+        if !self.isShow { return }
+        
+        if !MonitorNetwork.shared.isConnectedNetwork() {
+            self.postAlert("Notification", message: "No Interner")
+            return
         }
+        
+        self.collectionView.reloadData()
     }
     
     private func setUpData() {
@@ -182,7 +184,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
             }
         }
     }
-
+    
     @objc private func appMovedToBackground() {
         self.stopVideo()
     }
@@ -241,10 +243,10 @@ extension PreviewVideoVC: UICollectionViewDataSource {
         case .listVideo(videos: _):
             topicCells = 0
         }
-         
+        
         return totalItems + topicCells
     }
-
+    
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         let video = self.presenter.getVideo(at: indexPath.row)

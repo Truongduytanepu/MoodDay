@@ -55,7 +55,6 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.configNetwork()
     }
     
     // MARK: - Config
@@ -64,23 +63,6 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
         self.setupSoundCollectionView()
         self.setupVideoCollectionView()
         self.setupFont()
-    }
-    
-    
-    private func configNetwork() {
-        if MonitorNetwork.shared.isConnectedNetwork() {
-            self.hashtagCollectionView.reloadData()
-            self.soundCollectionView.reloadData()
-            self.videoCollectionView.reloadData()
-        } else {
-            self.postAlert("Notification", message: "No Interner", titleButton: "Try again") { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                
-                self.configNetwork()
-            }
-        }
     }
     
     private func setupFont() {

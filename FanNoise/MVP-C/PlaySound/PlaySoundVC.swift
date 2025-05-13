@@ -38,6 +38,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     private var isRotating = false
     private var isButtonDisabled = false
     private var rotationWorkItem: DispatchWorkItem? // Biến lưu trữ work item để hủy khi cần
+    
     private var isTimerRunning = false
     var coordinator: PlaySoundCoordinator!
     var soundItem: Sound?
@@ -64,13 +65,8 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         self.setupUI(with: soundItem)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.configNetwork()
-    }
-    
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.didChangeConnectNetworkActivity, object: nil)
     }
     
     // MARK: - Config
@@ -82,6 +78,23 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         self.loadData()
         self.setupObservers()
         self.setupAudioInterruptionObserver()
+        self.configNetwork()
+    }
+    
+    private func configNetwork() {
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationNetwork), name: Notification.Name.didChangeConnectNetworkActivity, object: nil)
+    }
+    
+    @objc private func notificationNetwork() {
+        if !self.isShow { return }
+        
+        if !MonitorNetwork.shared.isConnectedNetwork() {
+            self.stopSoundIfNeed()
+            self.postAlert("Notification", message: "No Interner")
+            return
+        }
+        
+        self.startSoundSmoothlyIfNeed()
     }
     
     private func setupObservers() {
@@ -124,22 +137,6 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         }
     }
     
-    private func configNetwork() {
-        if MonitorNetwork.shared.isConnectedNetwork() {
-            self.likeCollectionView.reloadData()
-            self.funnyCollectionView.reloadData()
-            self.othersCollectionView.reloadData()
-        } else {
-            self.postAlert("Notification", message: "No Interner", titleButton: "Try again") { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                
-                self.configNetwork()
-            }
-        }
-    }
-
     @objc private func appWillResignActive() {
         self.stopSoundIfNeed()
         self.isRotating = false
@@ -150,10 +147,18 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         self.isRotating = false
     }
     
+    private func loadData() {
+        self.presenter.loadData(sounds: self.listSound)
+        self.presenter.getRandomSounds(sound: self.listSound)
+        self.presenter.getRandomVideos(videos: self.listVideo)
+    }
+    
     private func startRotatingSmoothly(imageView: UIImageView) {
         // 1. Hủy mọi animation và work item cũ
         imageView.layer.removeAllAnimations()
         self.rotationWorkItem?.cancel()
+        self.rotationWorkItem = nil
+        imageView.layer.transform = CATransform3DIdentity  // Reset transform
         
         // 2. Kiểm tra nếu app đang trong background thì không chạy animation
         guard UIApplication.shared.applicationState != .background else {
@@ -193,13 +198,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         }
         
         self.rotationWorkItem = newWorkItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: newWorkItem)
-    }
-    
-    private func loadData() {
-        self.presenter.loadData(sounds: self.listSound)
-        self.presenter.getRandomSounds(sound: self.listSound)
-        self.presenter.getRandomVideos(videos: self.listVideo)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: newWorkItem)
     }
     
     private func stopRotatingSmoothly(imageView: UIImageView) {
@@ -292,7 +291,6 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     private func setupUI(with sound: Sound) {
         if sound.isRotate == true {
             let imageViews = [firstFanImageView, secondFanImageView, lastFanImageView]
-            
             if let frames = sound.frames {
                 for (index, imageView) in imageViews.enumerated() {
                     if frames.indices.contains(index),
@@ -328,15 +326,17 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     private func stopSoundIfNeed() {
         // Dừng player
         self.audioPlayer?.pause()
+        // Reset trạng thái
+        self.isRotating = false
+        
         // Dừng tất cả animation ngay lập tức
         [self.firstFanImageView, self.secondFanImageView, self.lastFanImageView].forEach { imageView in
             imageView?.layer.removeAllAnimations()
             imageView?.layer.transform = CATransform3DIdentity
-            
-            // Cập nhật UI
-            self.playButton.setImage(UIImage(named: "ic_playsound_pause"), for: .normal)
-            self.isRotating = false
         }
+        
+        // Cập nhật UI đồng bộ
+        self.playButton.setImage(UIImage(named: "ic_playsound_pause"), for: .normal)
     }
     
     private func stopSoundSmoothlyIfNeed() {
@@ -362,10 +362,10 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         if self.soundItem?.isRotate == true {
             if self.soundItem?.rotateFrame == 2 {
                 self.startRotatingSmoothly(imageView: self.secondFanImageView)
-            } else {
+            } else if self.soundItem?.rotateFrame == 1 {
                 self.startRotatingSmoothly(imageView: self.firstFanImageView)
             }
-        } else {
+        } else if self.soundItem?.isRotate == false {
             [self.firstFanImageView, self.secondFanImageView, self.lastFanImageView].forEach { imageView in
                 imageView?.layer.removeAllAnimations()
                 imageView?.layer.transform = CATransform3DIdentity
@@ -449,8 +449,8 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     }
     
     @IBAction private func backButtonDidTap(_ sender: Any) {
+        self.stopSoundIfNeed()
         self.coordinator.stop()
-        self.stopSoundSmoothlyIfNeed()
     }
     
     @IBAction private func setTimeButtonDidTap(_ sender: Any) {
@@ -464,7 +464,6 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     }
     
     @IBAction private func playButtonDidTap(_ sender: Any) {
-        self.configNetwork()
         guard !isButtonDisabled else { return }
         
         self.playButton.isEnabled = false
@@ -479,7 +478,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         // Toggle trạng thái sau khi thực hiện hành động
         self.isRotating.toggle()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.playButton.isEnabled = true
             self.setTimerBtn.isEnabled = true
         }
@@ -488,15 +487,24 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
 
 extension PlaySoundVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.likeCollectionView {
-            // 1. Reset item âm thanh hiện tại
+        if !MonitorNetwork.shared.isConnectedNetwork() {
             self.stopSoundIfNeed()
+            self.postAlert("Notification", message: "No Interner")
+            return
+        }
+        
+        let group = DispatchGroup()
+        
+        if collectionView == self.likeCollectionView {
+            self.stopSoundIfNeed()
+            // 1. Reset item âm thanh hiện tại
             self.setupObservers()
-
+            
             // 2. Lấy âm thanh được chọn từ danh sách like
             let soundSelected = self.presenter.getLikeSound()[indexPath.row]
             
             // 3. Gán âm thanh mới và cập nhật giao diện
+            // Cập nhật item mới và bắt đầu animation
             self.soundItem = soundSelected
             self.setupUI(with: soundSelected)
             self.startSoundSmoothlyIfNeed()
@@ -506,22 +514,24 @@ extension PlaySoundVC: UICollectionViewDelegate {
             }
             
             self.stopSoundIfNeed()
-
+            self.setupObservers()
+            
             self.startPreviewVideo(navigationController: navigationController,
                                    videos: self.presenter.getFunVideo(),
                                    targetIndexPath: indexPath)
         } else {
             self.stopSoundIfNeed()
+            
             self.setupObservers()
-
-            self.soundItem = nil
             // 2. Lấy âm thanh được chọn từ danh sách like
             let soundSelected = self.presenter.getOtherSound()[indexPath.row]
-            
-            // 3. Gán âm thanh mới và cập nhật giao diện
-            self.soundItem = soundSelected
-            self.setupUI(with: soundSelected)
-            self.startSoundSmoothlyIfNeed()
+            group.notify(queue: .main) {
+                
+                // 3. Gán âm thanh mới và cập nhật giao diện
+                self.soundItem = soundSelected
+                self.setupUI(with: soundSelected)
+                self.startSoundSmoothlyIfNeed()
+            }
         }
     }
 }

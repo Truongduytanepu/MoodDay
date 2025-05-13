@@ -36,27 +36,33 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.setupGradient()
-        self.configNetwork()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.didChangeConnectNetworkActivity, object: nil)
     }
     
     // MARK: - Config
     private func config() {
         self.setupFont()
         self.setupCollectionview()
+        self.loadCategory()
+        self.configNetwork()
+    }
+    
+    @objc private func notificationNetwork() {
+        if !self.isShow { return }
+        
+        if !MonitorNetwork.shared.isConnectedNetwork() {
+            self.postAlert("Notification", message: "No Internet")
+            return
+        }
+        
+        self.loadCategory()
     }
     
     private func configNetwork() {
-        if MonitorNetwork.shared.isConnectedNetwork() {
-            self.loadCategory()
-        } else {
-            self.postAlert("Notification", message: "No Interner", titleButton: "Try again") { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                
-                self.configNetwork()
-            }
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationNetwork), name: Notification.Name.didChangeConnectNetworkActivity, object: nil)
     }
     
     private func setupFont() {
@@ -187,4 +193,3 @@ extension HomeVC: HomeView {
         self.postAlert("Notification", message: "No Internet")
     }
 }
-

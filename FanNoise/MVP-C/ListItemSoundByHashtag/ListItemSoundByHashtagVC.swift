@@ -38,21 +38,6 @@ class ListItemSoundByHashtagVC: BaseVC<ListItemSoundByHashtagPresenter, ListItem
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.configNetwork()
-    }
-    
-    private func configNetwork() {
-        if MonitorNetwork.shared.isConnectedNetwork() {
-            self.collectionView.reloadData()
-        } else {
-            self.postAlert("Notification", message: "No Interner", titleButton: "Try again") { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                
-                self.configNetwork()
-            }
-        }
     }
     
     private func setupCollectionView() {
