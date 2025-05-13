@@ -310,7 +310,6 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
                 self.firstFanImageView.sd_setImage(with: url, completed: nil)
                 self.secondFanImageView.isHidden = true
                 self.lastFanImageView.isHidden = true
-                self.isRotating = false
             }
         }
         
@@ -340,18 +339,17 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     }
     
     private func stopSoundSmoothlyIfNeed() {
-        self.audioPlayer?.pause()
-        // Dừng quạt từ từ
+        // Dừng hoạt ảnh quay của quạt từ từ
         [self.firstFanImageView, self.secondFanImageView, self.lastFanImageView].forEach {
             guard let imageView = $0 else { return }
             self.stopRotatingSmoothly(imageView: imageView)
         }
         
-        // Cập nhật UI sau khi hoàn thành animation
+        // Sau khi hoạt ảnh hoàn tất, dừng nhạc và cập nhật UI
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.playButton.setImage(UIImage(named: "ic_playsound_pause"), for: .normal)
             self.audioPlayer?.pause()
             self.audioPlayer?.seek(to: .zero)
+            self.playButton.setImage(UIImage(named: "ic_playsound_pause"), for: .normal)
         }
     }
     
@@ -464,6 +462,12 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     }
     
     @IBAction private func playButtonDidTap(_ sender: Any) {
+        if !MonitorNetwork.shared.isConnectedNetwork() {
+            self.stopSoundIfNeed()
+            self.postAlert("Notification", message: "No Interner")
+            return
+        }
+        
         guard !isButtonDisabled else { return }
         
         self.playButton.isEnabled = false
@@ -508,6 +512,7 @@ extension PlaySoundVC: UICollectionViewDelegate {
             self.soundItem = soundSelected
             self.setupUI(with: soundSelected)
             self.startSoundSmoothlyIfNeed()
+            self.isRotating = true
         } else if collectionView == self.funnyCollectionView {
             guard let navigationController = self.navigationController else {
                 return
@@ -531,6 +536,7 @@ extension PlaySoundVC: UICollectionViewDelegate {
                 self.soundItem = soundSelected
                 self.setupUI(with: soundSelected)
                 self.startSoundSmoothlyIfNeed()
+                self.isRotating = true
             }
         }
     }
