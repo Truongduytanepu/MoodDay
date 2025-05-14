@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlaySoundVC" customModule="FanNoise" customModuleProvider="target">
             <connections>
+                <outlet property="bannerContainView" destination="tdc-mh-onC" id="wgf-ai-SEe"/>
+                <outlet property="bannerContentView" destination="Rkd-Ib-8fM" id="XOb-Ir-JQX"/>
                 <outlet property="fanView" destination="DfM-Bc-sem" id="03h-qQ-yQZ"/>
                 <outlet property="firstFanImageView" destination="yDP-q0-g1l" id="lBL-N9-hMe"/>
                 <outlet property="funnyCollectionView" destination="oDV-4Q-IJn" id="62k-t0-gaP"/>
@@ -21,7 +23,7 @@
                 <outlet property="likeTitleLabel" destination="9Pj-bL-NrS" id="ikh-uh-1zk"/>
                 <outlet property="nameSoundLabel" destination="UEQ-BV-Oxb" id="gMW-ut-dQb"/>
                 <outlet property="otherTitleLabel" destination="K9p-pJ-kl4" id="nd0-Qo-zVl"/>
-                <outlet property="othersCollectionView" destination="kva-Bi-sRV" id="S9V-Vh-ZO5"/>
+                <outlet property="othersCollectionView" destination="kva-Bi-sRV" id="vSY-mk-fcm"/>
                 <outlet property="playButton" destination="147-eh-gUG" id="vZL-he-Adu"/>
                 <outlet property="secondFanImageView" destination="Stc-p9-8yy" id="7Pp-vL-mOz"/>
                 <outlet property="setTimerBtn" destination="5Vf-yN-G7h" id="02A-U8-nSr"/>
@@ -36,7 +38,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QyT-8s-YvP">
-                    <rect key="frame" x="0.0" y="59" width="393" height="793"/>
+                    <rect key="frame" x="0.0" y="118" width="393" height="616.00000000000023"/>
                     <subviews>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DxL-ox-xZ8">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="1205.3333333333333"/>
@@ -348,7 +350,7 @@
                     </constraints>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UBU-9V-rVY">
-                    <rect key="frame" x="0.0" y="59" width="393" height="28"/>
+                    <rect key="frame" x="0.0" y="118" width="393" height="28"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hb8-FM-7ua">
                             <rect key="frame" x="16" y="2" width="24" height="24"/>
@@ -371,17 +373,40 @@
                         <constraint firstItem="hb8-FM-7ua" firstAttribute="leading" secondItem="UBU-9V-rVY" secondAttribute="leading" constant="16" id="oQL-vg-Z4l"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tdc-mh-onC">
+                    <rect key="frame" x="0.0" y="734" width="393" height="118"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rkd-Ib-8fM">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="73x-9L-hvP"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="r8w-uk-ffj"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="r8w-uk-ffj" firstAttribute="trailing" secondItem="Rkd-Ib-8fM" secondAttribute="trailing" id="PaX-zd-c2S"/>
+                        <constraint firstItem="Rkd-Ib-8fM" firstAttribute="leading" secondItem="r8w-uk-ffj" secondAttribute="leading" id="UWy-xt-oqs"/>
+                        <constraint firstItem="Rkd-Ib-8fM" firstAttribute="top" secondItem="tdc-mh-onC" secondAttribute="top" id="fb2-UH-RBx"/>
+                        <constraint firstItem="r8w-uk-ffj" firstAttribute="bottom" secondItem="Rkd-Ib-8fM" secondAttribute="bottom" id="qdM-U9-g2t"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="0.9882352941176471" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="UBU-9V-rVY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="2ut-ZJ-s1X"/>
+                <constraint firstItem="tdc-mh-onC" firstAttribute="top" secondItem="QyT-8s-YvP" secondAttribute="bottom" id="60R-lq-s7I"/>
                 <constraint firstItem="QyT-8s-YvP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="F9O-ls-RNS"/>
                 <constraint firstItem="UBU-9V-rVY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="I8U-ss-jok"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="UBU-9V-rVY" secondAttribute="trailing" id="OgX-KR-ORf"/>
-                <constraint firstAttribute="bottom" secondItem="QyT-8s-YvP" secondAttribute="bottom" id="e15-wW-9sK"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tdc-mh-onC" secondAttribute="trailing" id="Zlr-NX-vnr"/>
+                <constraint firstItem="tdc-mh-onC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ogP-jC-uJA"/>
                 <constraint firstItem="QyT-8s-YvP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="u5c-8J-nV4"/>
                 <constraint firstItem="DxL-ox-xZ8" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="vQK-iz-2vk"/>
+                <constraint firstAttribute="bottom" secondItem="tdc-mh-onC" secondAttribute="bottom" id="wim-WQ-094"/>
                 <constraint firstItem="DxL-ox-xZ8" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" priority="999" id="xR2-7b-967"/>
                 <constraint firstItem="QyT-8s-YvP" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="zvc-7V-fvB"/>
             </constraints>

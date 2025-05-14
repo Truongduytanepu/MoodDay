@@ -6,17 +6,23 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 private struct Const {
     static let TimeInterval = 0.02
 }
 
-class SplashVC: BaseVC<SplashPresenter, SplashView> {
+class SplashVC: UIViewController {
     
     @IBOutlet private weak var progressView: UIProgressView!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var loadingLabel: UILabel!
+    
+    private var appOpenAd: AppOpenAd?
+    private var loadAdStartTime: Date?
+    private var loadAdTimeoutTimer: Timer?
+    private var isNetworkAvailable = true
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -84,7 +90,7 @@ class SplashVC: BaseVC<SplashPresenter, SplashView> {
             guard let self = self else { return }
             if progress >= 1.0 {
                 timer.invalidate()
-                self.navigateNextScreen()
+                self.checkNetworkConnection()
             } else {
                 progress += 0.01
                 self.updateProgress(to: progress)
@@ -108,7 +114,110 @@ class SplashVC: BaseVC<SplashPresenter, SplashView> {
             tabbarCoordinator.start()
         }
     }
+    
+    private func checkNetworkConnection() {
+        // Kiểm tra kết nối mạng
+        let reachability = try? Reachability()
+        self.isNetworkAvailable = reachability?.connection != .unavailable
+        
+        let block = {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+                guard let self = self else { return }
+                self.navigateNextScreen()
+            }
+        }
+        
+        if self.isNetworkAvailable {
+            RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnAoaSplash) { [weak self] isOn in
+                guard let self = self else { return }
+                if !isOn {
+                    block()
+                    return
+                } else {
+                    self.loadAppOpenAd()
+                    self.startLoadAdTimeoutTimer()
+                }
+            }
+        } else {
+            block()
+        }
+    }
+    
+    private func startLoadAdTimeoutTimer() {
+        // Timer 10 giây
+        self.loadAdTimeoutTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { [weak self] _ in
+            guard let self = self else { return }
+            print("Load AOA timeout after 10 seconds")
+            self.navigateNextScreen()
+        }
+    }
+    
+    private func loadAppOpenAd() {
+        self.loadAdStartTime = Date()
+        
+        let request = Request()
+        AppOpenAd.load(with: UtilsADS.keyAoaSplash, request: request) { [weak self] ads, error in
+            
+            guard let self = self else { return }
+            
+            // Hủy timer khi nhận được kết quả
+            self.loadAdTimeoutTimer?.invalidate()
+            self.loadAdTimeoutTimer = nil
+            
+            if let error = error {
+                print("Load AOA failed: \(error.localizedDescription)")
+                self.navigateNextScreen()
+                return
+            }
+            
+            self.appOpenAd = ads
+            self.appOpenAd?.fullScreenContentDelegate = self
+            self.tryToPresentAd()
+        }
+    }
+    
+    private func tryToPresentAd() {
+        guard let appOpenAd = self.appOpenAd,
+              let rootViewController = UIApplication.shared.windows.first?.rootViewController else {
+            self.navigateNextScreen()
+            return
+        }
+        
+        appOpenAd.present(from: rootViewController)
+    }
 }
+
+extension SplashVC: FullScreenContentDelegate {
+    func adDidDismissFullScreenContent(_ ads: FullScreenPresentingAd) {
+        self.navigateNextScreen()
+    }
+    
+    func ad(_ ads: FullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        self.navigateNextScreen()
+    }
+}
+
+enum Connection {
+    case unavailable
+    case wifi
+    case cellular
+}
+
+class Reachability {
+    var connection: Connection = .wifi
+    init() throws {}
+}
+
+extension UIApplication {
+    func getKeyWindow() -> UIWindow? {
+        return UIApplication.shared.connectedScenes
+            .filter { $0.activationState == .foregroundActive }
+            .first(where: { $0 is UIWindowScene })
+            .flatMap { $0 as? UIWindowScene }?.windows
+            .first(where: \.isKeyWindow)
+    }
+}
+
 extension SplashVC: SplashView {
     
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -78,12 +78,13 @@
                     <real key="value" value="12"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                    <real key="value" value="1"/>
+                    <real key="value" value="0.0"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="checkImageView" destination="ovx-6z-dvH" id="bx3-lo-zpq"/>
                 <outlet property="languageNameLabel" destination="9kl-3K-Xlh" id="jR1-DA-C2Z"/>
+                <outlet property="languageView" destination="uai-Pa-o4G" id="NLF-s2-dlF"/>
                 <outlet property="nationalFlagImageView" destination="3GL-KN-WJH" id="saP-fE-FkY"/>
             </connections>
             <point key="canvasLocation" x="206.10687022900763" y="-9.8591549295774659"/>

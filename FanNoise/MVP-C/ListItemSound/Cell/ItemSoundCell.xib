@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -57,9 +57,11 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="F1X-vO-L9m" firstAttribute="top" secondItem="dSp-IF-2T7" secondAttribute="bottom" constant="12" id="01x-T8-x8J"/>
                             <constraint firstItem="Qy8-30-5hH" firstAttribute="leading" secondItem="ZRn-Um-Ic8" secondAttribute="leading" constant="30" id="9gO-v4-dBW"/>
                             <constraint firstAttribute="trailing" secondItem="dSp-IF-2T7" secondAttribute="trailing" constant="15" id="ADv-ER-S8e"/>
                             <constraint firstItem="F1X-vO-L9m" firstAttribute="top" secondItem="dSp-IF-2T7" secondAttribute="bottom" constant="12" id="BVZ-tH-A75"/>
+                            <constraint firstItem="Qy8-30-5hH" firstAttribute="top" secondItem="F1X-vO-L9m" secondAttribute="bottom" constant="8" id="CUL-WC-Eav"/>
                             <constraint firstAttribute="trailing" secondItem="Qy8-30-5hH" secondAttribute="trailing" constant="30" id="HVl-aV-cwO"/>
                             <constraint firstItem="F1X-vO-L9m" firstAttribute="centerX" secondItem="ZRn-Um-Ic8" secondAttribute="centerX" id="KUA-SC-WVB"/>
                             <constraint firstItem="dSp-IF-2T7" firstAttribute="top" secondItem="ZRn-Um-Ic8" secondAttribute="top" constant="12" id="Uf6-vS-nfP"/>
@@ -97,7 +99,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

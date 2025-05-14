@@ -38,11 +38,14 @@ target 'FanNoise' do
   pod 'RealmSwift', '~> 10.32.3'
   pod 'TLLogging'
   pod 'YYImage'
-  pod 'Firebase/Crashlytics'
-  pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics', '~> 10.7.0'
+  pod 'Firebase/Analytics', '~> 10.7.0'
+  pod 'Firebase/RemoteConfig', '~> 10.7.0'
   pod 'Alamofire', '4.9.1'
   pod 'SDWebImage'
   pod 'SVProgressHUD'
-  pod 'WheelPicker'
+  pod 'Google-Mobile-Ads-SDK', '~> 12.2.0'
+  pod 'SwiftyStoreKit', '~> 0.16.1'
+  pod 'Adjust', '~> 5.0.2'
 
 end

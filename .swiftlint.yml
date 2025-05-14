@@ -8,19 +8,22 @@ disabled_rules:
   - computed_accessors_order
   - switch_case_alignment
   - cyclomatic_complexity
+
 opt_in_rules:
   - empty_count
-  
+
 excluded:
   - Carthage
   - Pods/
   - fastlane
   - FanNoise/Common/Extensions
+  - build
+
 analyzer_rules:
   - explicit_self
 
-
 force_cast: warning
+
 force_try:
   severity: warning
 
@@ -35,6 +38,7 @@ type_name:
   max_length:
     warning: 40
     error: 50
+
 identifier_name:
   min_length:
     warning: 2
@@ -53,10 +57,12 @@ custom_rules:
     regex: "(?i)(^[\ ]+\\}\n[ ]*[a-z]+)"
     message: "After code block must be constain a newline"
     severity: error
+
   close_breaket_trailing:
     included: ".*\\.swift"
-    name: "Close breaket trailing"
+    name: "Close bracket trailing"
     regex: "(?i)(\\}\n([\ ]*\n[\ ]*)[\ ]*\\})"
-    message: "After close braket can not have a newline"
+    message: "After a closing bracket, extra newlines are not allowed."
     severity: error
+
 reporter: "xcode"

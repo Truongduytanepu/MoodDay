@@ -19,7 +19,7 @@ class SplashCoordinator: Coordinator {
         if !started {
             started = true
         
-            let controller = SplashVC.factory()
+            let controller = SplashVC()
             let nav = BaseNavigationController.init(rootViewController: controller)
             self.window?.rootViewController = nav
         }

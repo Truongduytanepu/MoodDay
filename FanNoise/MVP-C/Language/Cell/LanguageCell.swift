@@ -12,6 +12,7 @@ class LanguageCell: UICollectionViewCell {
     @IBOutlet private weak var nationalFlagImageView: UIImageView!
     @IBOutlet private weak var languageNameLabel: UILabel!
     @IBOutlet private weak var checkImageView: UIImageView!
+    @IBOutlet private weak var languageView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,6 +22,12 @@ class LanguageCell: UICollectionViewCell {
     private func config() {
         self.setupFont()
         self.setupCheckImageView()
+        self.setupUI()
+    }
+    
+    private func setupUI() {
+        self.languageView.borderColor = .clear
+        self.languageView.borderWidth = 0
     }
     
     private func setupFont() {
@@ -29,7 +36,6 @@ class LanguageCell: UICollectionViewCell {
     
     private func setupCheckImageView() {
         self.checkImageView.isHidden = true
-        self.contentView.borderColor = .clear
     }
     
     func config(language: Language) {
@@ -39,11 +45,13 @@ class LanguageCell: UICollectionViewCell {
     
     func select() {
         self.checkImageView.isHidden = false
-        self.contentView.borderColor = UIColor(rgb: 0x2D2C2B)
+        self.languageView.borderColor = UIColor(rgb: 0x2D2C2B)
+        self.languageView.borderWidth = 1
     }
     
     func deselect() {
         self.checkImageView.isHidden = true
-        self.contentView.borderColor = .clear
+        self.languageView.borderColor = .clear
+        self.languageView.borderWidth = 0
     }
 }

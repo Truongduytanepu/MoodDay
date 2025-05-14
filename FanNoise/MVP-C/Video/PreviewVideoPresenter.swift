@@ -6,20 +6,24 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 protocol PreviewVideoPresenter {
     func loadData(idCategory: String)
-    func getNumberOfItems() -> Int
+    func getNumberOfItems(adsStep: Int) -> Int
     func getVideo(at index: Int) -> Video
     func updateData(name: String)
     func getAllVideo()
     func getVideocategory() -> [SoundCategory]
     func updateDataListVideo(videos: [Video])
+    func updateListNativeAds(listNativeAd: [NativeAd])
+    func getListNativeAd() -> [NativeAd]
 }
 
 class PreviewVideoPresenterImpl: BasePresenter<PreviewVideoView>, PreviewVideoPresenter {
     
     private var videoCategoryList: [Video] = []
+    private var listNativeAd: [NativeAd] = []
     
     func loadData(idCategory: String) {
         self.videoCategoryList = HomeCategoryManager.shared.getVideoCategory(idCategory: idCategory)
@@ -34,7 +38,11 @@ class PreviewVideoPresenterImpl: BasePresenter<PreviewVideoView>, PreviewVideoPr
         self.view?.updateUI()
     }
     
-    func getNumberOfItems() -> Int {
+    func getNumberOfItems(adsStep: Int) -> Int {
+        if listNativeAd.isEmpty {
+            return self.videoCategoryList.count + self.videoCategoryList.count / adsStep
+        }
+        
         return self.videoCategoryList.count
     }
     
@@ -48,5 +56,13 @@ class PreviewVideoPresenterImpl: BasePresenter<PreviewVideoView>, PreviewVideoPr
     
     func updateDataListVideo(videos: [Video]) {
         self.videoCategoryList = videos
+    }
+    
+    func updateListNativeAds(listNativeAd: [NativeAd]) {
+        self.listNativeAd = listNativeAd
+    }
+    
+    func getListNativeAd() -> [NativeAd] {
+        return self.listNativeAd
     }
 }

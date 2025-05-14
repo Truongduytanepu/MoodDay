@@ -118,20 +118,41 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
 extension HomeVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Chỉ xử lý khi chọn cell thứ 2 hoặc 3 (index 1 hoặc 2)
+        let action: () -> Void
         
         if indexPath.row == 1 || indexPath.row == 2 {
-            guard let navigationController = self.navigationController else { return }
-            self.startNaturalSoundWhiteNoiseCoordinator(navigationController: navigationController,homeCategory: homeCategories[indexPath.row])
+            action = { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                guard let navigationController = self.navigationController else {
+                    return
+                }
+                
+                self.startNaturalSoundWhiteNoiseCoordinator(navigationController: navigationController,homeCategory: homeCategories[indexPath.row])
+            }
         } else {
-            guard let navigationController = self.navigationController else { return }
-            let categoryID = self.homeCategories[indexPath.row].id ?? ""
-            let sound = self.presenter.getSoundByCategoryId(categoryId: categoryID)
-            let video = self.presenter.getVideoByCategoryId(categoryId: categoryID)
-            self.startListItemSound(navigationController: navigationController,
-                                    sound: sound,
-                                    video: video,
-                                    categoryID: categoryID)
+            action = { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                guard let navigationController = self.navigationController else {
+                    return
+                }
+                
+                let categoryID = self.homeCategories[indexPath.row].id ?? ""
+                let sound = self.presenter.getSoundByCategoryId(categoryId: categoryID)
+                let video = self.presenter.getVideoByCategoryId(categoryId: categoryID)
+                self.startListItemSound(navigationController: navigationController,
+                                        sound: sound,
+                                        video: video,
+                                        categoryID: categoryID)
+            }
         }
+        
+        self.executeWithAdCheck(action)
     }
 }
 

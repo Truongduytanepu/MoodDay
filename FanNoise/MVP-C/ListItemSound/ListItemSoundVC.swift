@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 private struct Const {
     static let insetLeftRightSound: CGFloat = 13
@@ -17,6 +18,7 @@ private struct Const {
     static let numberColumsSound: CGFloat = 2
     static let insetForSectionAt = UIEdgeInsets(top: 0, left: 13, bottom: 0, right: 13)
     static let spacingTopLeft : CGFloat = 8
+    static let adsStep = 4
 }
 
 enum MediaType {
@@ -26,6 +28,7 @@ enum MediaType {
 
 class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     
+    @IBOutlet private weak var bannerContainView: UIView!
     @IBOutlet private weak var videoCollectionView: UICollectionView!
     @IBOutlet private weak var videoButton: UIButton!
     @IBOutlet private weak var soundButton: UIButton!
@@ -34,12 +37,15 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     @IBOutlet private weak var soundCollectionView: UICollectionView!
     @IBOutlet private weak var videoView: UIView!
     @IBOutlet private weak var soundView: UIView!
+    @IBOutlet private weak var bannerContentView: UIView!
     
     var coordinator : ListItemSoundCoordinator!
     var sounds: [Sound] = []
     var videos: [Video] = []
     var categoryID: String = ""
     private var mediaType: MediaType = .sound
+    private var bannerView: BannerView!
+    private var nativeAdsLoader = SLNativeAdsLoader()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -53,18 +59,17 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
         self.setupTabbar()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     // MARK: - Config
     private func config() {
+        self.configNativeAdsLoader()
         self.setupHashTagCollectionView()
         self.setupSoundCollectionView()
         self.setupVideoCollectionView()
         self.setupFont()
+        self.configBannerView()
+        self.setupAdaptiveBanner()
     }
-    
+
     private func setupFont() {
         self.videoButton.titleLabel?.font = AppFont.font(.mPLUS2Bold, size: 10)
         self.soundButton.titleLabel?.font = AppFont.font(.mPLUS2Bold, size: 10)
@@ -79,6 +84,7 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     
     private func setupSoundCollectionView() {
         self.soundCollectionView.registerCell(type: ItemSoundCell.self)
+        self.soundCollectionView.registerCell(type: AdsSoundCell.self)
         self.soundCollectionView.delegate = self
         self.soundCollectionView.dataSource = self
         self.soundCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -86,6 +92,7 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     
     private func setupVideoCollectionView() {
         self.videoCollectionView.registerCell(type: VideoCell.self)
+        self.videoCollectionView.registerCell(type: AdsVideoCell.self)
         self.videoCollectionView.delegate = self
         self.videoCollectionView.dataSource = self
         self.videoCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -124,8 +131,135 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
         playVideo.start()
     }
     
+    private func configNativeAdsLoader() {
+        self.nativeAdsLoader.delegate = self
+        
+        if !UtilsADS.shared.getPurchase(key: KEY_ENCODE.isPremium) {
+            self.nativeAdsLoader.loadNativeAd(key: UtilsADS.keyNativeListSound, rootViewController: self)
+            return
+        }
+
+        self.presenter.updateListNativeAds(listNativeAd: [])
+    }
+    
+    private func setupAdaptiveBanner() {
+        let adaptiveSize = adSizeFor(cgSize: CGSize(width: UIScreen.main.bounds.width, height: 50))
+        self.bannerView = BannerView(adSize: adaptiveSize)
+        self.addBannerViewToView(bannerView)
+    }
+    
+    private func addBannerViewToView(_ bannerView: BannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        self.bannerContentView.addSubview(bannerView)
+    }
+    
+    private func configBannerView() {
+        RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnBanner) { [weak self] isOn in
+            guard let self = self else { return }
+            if !isOn {
+                self.bannerContentView.heightConstraint()?.constant = 0
+                self.bannerContainView.isHidden = true
+                return
+            }
+            
+            self.bannerContainView.isHidden = false
+            self.bannerView.delegate = self
+            self.bannerView.rootViewController = self
+            self.bannerView.adUnitID = UtilsADS.keyBanner
+            self.loadBannerAds()
+        }
+    }
+    
+    private func loadBannerAds() {
+        let request = InterstitialHelper.makeCollapsibleBannerRequest()
+        self.bannerView.load(request)
+    }
+    
+    private func isAdsPosition(at indexPath: IndexPath) -> Bool {
+        return (indexPath.row % Const.adsStep == 0) && indexPath.row > 0
+    }
+
+    private func calculateAdjustedIndex(for indexPath: IndexPath) -> Int {
+        return indexPath.row - (indexPath.row / Const.adsStep)
+    }
+    
+    private func configureHashtagCell(at indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = hashtagCollectionView.dequeueCell(type: ItemHashtagCell.self, indexPath: indexPath) else {
+            return UICollectionViewCell()
+        }
+        
+        let hashtagString = self.presenter.getHashtag(sound: sounds)
+        if indexPath.row < hashtagString.count {
+            cell.configure(hashtag: hashtagString[indexPath.row])
+        }
+        
+        return cell
+    }
+
+    private func configureAdsVideoCell(at indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueCell(type: AdsVideoCell.self, indexPath: indexPath) else {
+            return UICollectionViewCell()
+        }
+        
+        let adsIndex = (indexPath.row / Const.adsStep) - 1
+        let listNativeAds = self.presenter.getListNativeAd()
+        
+        if adsIndex < listNativeAds.count {
+            cell.bind(nativeAd: listNativeAds[adsIndex])
+        }
+        
+        return cell
+    }
+    
+    private func configureAdsSoundCell(at indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueCell(type: AdsSoundCell.self, indexPath: indexPath) else {
+            return UICollectionViewCell()
+        }
+        
+        let adsIndex = (indexPath.row / Const.adsStep) - 1
+        let listNativeAds = self.presenter.getListNativeAd()
+        
+        if adsIndex < listNativeAds.count {
+            cell.bind(nativeAd: listNativeAds[adsIndex])
+        }
+        
+        return cell
+    }
+
+    private func configureSoundCell(at adjustedIndex: Int, indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = soundCollectionView.dequeueCell(type: ItemSoundCell.self, indexPath: indexPath) else {
+            return UICollectionViewCell()
+        }
+        
+        if adjustedIndex < sounds.count {
+            sounds[adjustedIndex].assignRandomColorsIfNeeded()
+            cell.configure(sound: sounds[adjustedIndex])
+        }
+        
+        return cell
+    }
+
+    private func configureVideoCell(at adjustedIndex: Int, indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = videoCollectionView.dequeueCell(type: VideoCell.self, indexPath: indexPath) else {
+            return UICollectionViewCell()
+        }
+        
+        if adjustedIndex < videos.count {
+            videos[adjustedIndex].assignRandomHashtagIfNeeded()
+            cell.configure(video: videos[adjustedIndex])
+        }
+        
+        return cell
+    }
+    
     @IBAction private func backButtonDidTap(_ sender: Any) {
-        self.coordinator.stop()
+        let action = { [weak self] in
+            guard let self = self else {return}
+            
+            self.coordinator.stop()
+        }
+        
+        self.executeWithAdCheck(action)
     }
     
     @IBAction private func soundButonDidTap(_ sender: Any) {
@@ -151,29 +285,46 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
 
 extension ListItemSoundVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let action: () -> Void
+        
         if collectionView == self.hashtagCollectionView {
-            guard let navigationController = self.navigationController else { return }
-            let nameHashtag = self.presenter.getHashtag(sound: sounds)[indexPath.row]
-            self.startListItemSoundByHashtag(navigationController: navigationController,
-                                             nameHastag: nameHashtag,
-                                             videos: self.videos)
-            
-        } else {
-            switch self.mediaType {
-            case .sound:
-                guard let navigationController = self.navigationController else { return }
+            action = { [weak self] in
+                guard let self = self,
+                      let navigationController = self.navigationController else { return }
                 
-                self.startPlaySound(navigationController: navigationController,
-                                    sound: sounds[indexPath.row],
-                                    sounds: sounds,
-                                    videos: videos)
-            case .video:
-                guard let navigationController = self.navigationController else { return }
-                self.startPlayVideo(navigationController: navigationController,
-                                    categoryID: self.categoryID,
-                                    targetIndexPath: indexPath)
+                let nameHashtag = self.presenter.getHashtag(sound: self.sounds)[indexPath.row]
+                self.startListItemSoundByHashtag(
+                    navigationController: navigationController,
+                    nameHastag: nameHashtag,
+                    videos: self.videos
+                )
+            }
+        } else if self.mediaType == .sound {
+            action = { [weak self] in
+                guard let self = self,
+                      let navigationController = self.navigationController else { return }
+                
+                self.startPlaySound(
+                    navigationController: navigationController,
+                    sound: self.sounds[indexPath.row],
+                    sounds: self.sounds,
+                    videos: self.videos
+                )
+            }
+        } else {
+            action = { [weak self] in
+                guard let self = self,
+                      let navigationController = self.navigationController else { return }
+                
+                self.startPlayVideo(
+                    navigationController: navigationController,
+                    categoryID: self.categoryID,
+                    targetIndexPath: indexPath
+                )
             }
         }
+        
+        self.executeWithAdCheck(action)
     }
 }
 
@@ -182,9 +333,11 @@ extension ListItemSoundVC: UICollectionViewDataSource {
         if collectionView == self.hashtagCollectionView {
             return self.presenter.getHashtag(sound: sounds).count
         } else if collectionView == self.soundCollectionView {
-            return self.sounds.count
+            return self.presenter.numberOfSoundCategories(sounds: self.sounds,
+                                                          adsStep: Const.adsStep)
         } else if collectionView == self.videoCollectionView {
-            return self.videos.count
+            return self.presenter.numberOfVideoCategories(videos: self.videos,
+                                                          adsStep: Const.adsStep)
         } else {
             return 0
         }
@@ -192,34 +345,28 @@ extension ListItemSoundVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.hashtagCollectionView {
-            guard let cell = collectionView.dequeueCell(type: ItemHashtagCell.self, indexPath: indexPath) else {
-                return UICollectionViewCell()
-            }
-            
-            let hashtagString = self.presenter.getHashtag(sound: sounds)
-            cell.configure(hashtag: hashtagString[indexPath.row])
-            return cell
-        } else if collectionView == self.soundCollectionView {
-            guard let cell = collectionView.dequeueCell(type: ItemSoundCell.self, indexPath: indexPath) else {
-                return UICollectionViewCell()
-            }
-            
-            self.sounds[indexPath.row].assignRandomColorsIfNeeded()
-            
-            cell.configure(sound: sounds[indexPath.row])
-            return cell
-            
-        } else if collectionView == self.videoCollectionView {
-            guard let cell = collectionView.dequeueCell(type: VideoCell.self, indexPath: indexPath) else {
-                return UICollectionViewCell()
-            }
-            
-            self.videos[indexPath.row].assignRandomHashtagIfNeeded()
-            cell.configure(video: videos[indexPath.row])
-            return cell
-        } else {
-            return UICollectionViewCell()
+            return self.configureHashtagCell(at: indexPath)
         }
+        
+        if collectionView == self.soundCollectionView {
+            if self.isAdsPosition(at: indexPath) {
+                return configureAdsSoundCell(at: indexPath, in: collectionView)
+            }
+        } else if collectionView == self.videoCollectionView {
+            if self.isAdsPosition(at: indexPath) {
+                return configureAdsVideoCell(at: indexPath, in: collectionView)
+            }
+        }
+        
+        let adjustedIndex = self.calculateAdjustedIndex(for: indexPath)
+        
+        if collectionView == self.soundCollectionView {
+            return self.configureSoundCell(at: adjustedIndex, indexPath: indexPath)
+        } else if collectionView == self.videoCollectionView {
+            return self.configureVideoCell(at: adjustedIndex, indexPath: indexPath)
+        }
+        
+        return UICollectionViewCell()
     }
 }
 extension ListItemSoundVC: UICollectionViewDelegateFlowLayout {
@@ -261,6 +408,33 @@ extension ListItemSoundVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return Const.insetForSectionAt
+    }
+}
+
+extension ListItemSoundVC: BannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: BannerView) {
+        self.bannerView.isHidden = false
+    }
+
+    func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
+        print("Load ads for banner error: \(error)")
+        self.bannerView.isHidden = true
+        self.bannerContentView.heightConstraint()?.constant = 0
+    }
+
+    func bannerViewWillDismissScreen(_ bannerView: BannerView) {
+    }
+}
+
+extension ListItemSoundVC: SLNativeAdsLoaderDelegate {
+    func slNativeAdsLoader(_ loader: SLNativeAdsLoader, didFinishLoading nativeAds: [NativeAd]) {
+        self.presenter.updateListNativeAds(listNativeAd: nativeAds)
+        DispatchQueue.main.async {
+            self.soundCollectionView.collectionViewLayout.invalidateLayout()
+            self.soundCollectionView.reloadData()
+            self.videoCollectionView.collectionViewLayout.invalidateLayout()
+            self.videoCollectionView.reloadData()
+        }
     }
 }
 

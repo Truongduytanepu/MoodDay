@@ -7,6 +7,7 @@
 
 import UIKit
 import YYImage
+import GoogleMobileAds
 
 private struct Const {
     static let dotPageViewSize = CGSize(width: 6, height: 6)
@@ -17,6 +18,7 @@ private struct Const {
 }
 
 class IntroVC: BaseVC<IntroPresenter, IntroView> {
+    @IBOutlet private weak var nativeView: UIView!
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var continueButton: UIButton!
@@ -30,6 +32,9 @@ class IntroVC: BaseVC<IntroPresenter, IntroView> {
     
     var coordinator: IntroCoordinator!
     
+    private var nativeAdLoader = NativeAdLoader()
+    private var gadNativeAdView: NativeAdView!
+    private var nativeAdsView: UIView!
     private let titles = [
         "Find the perfect fan sound",
         "Not just a sound, but experience",
@@ -43,16 +48,63 @@ class IntroVC: BaseVC<IntroPresenter, IntroView> {
         self.config()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.loadNativeAds()
+    }
+    
     // MARK: - Config
     private func config() {
         self.setupFont()
         self.setupPageControl()
         self.setupScrollView()
+        self.configNativeAdsView()
     }
     
     private func setupFont() {
         self.continueButton.titleLabel?.font = AppFont.font(.mPLUS2Bold, size: 16)
         self.titleLabel.font = AppFont.font(.mPLUS2Bold, size: 20)
+    }
+    
+    private func configNativeAdsView() {
+        self.nativeAdsView = UIView()
+        self.nativeAdsView.backgroundColor = .white
+        self.nativeAdsView.translatesAutoresizingMaskIntoConstraints = false
+        self.nativeView.addSubview(self.nativeAdsView)
+        self.nativeAdsView.fitSuperviewConstraint()
+        
+        self.gadNativeAdView = Bundle.main.loadNibNamed("MainNativeAdIntro", owner: nil, options: nil)!.first as! NativeAdView
+        self.gadNativeAdView.translatesAutoresizingMaskIntoConstraints = false
+        self.nativeAdsView.addSubview(self.gadNativeAdView)
+        self.gadNativeAdView.fitSuperviewConstraint()
+    }
+    
+    private func loadNativeAds() {
+        self.nativeAdLoader.loadNativeAd(adCnt: 1, viewController: self) { [weak self] in
+            guard let self else { return }
+            if !self.nativeAdLoader.nativeAds.isEmpty {
+                DispatchQueue.main.async {
+                    self.bindNativeAds(gadNativeAdView: self.gadNativeAdView, nativeAd: self.nativeAdLoader.nativeAds[0])
+                }
+            }
+        }
+    }
+    
+    private func bindNativeAds(gadNativeAdView: NativeAdView, nativeAd: NativeAd) {
+        gadNativeAdView.nativeAd = nativeAd
+        (gadNativeAdView.headlineView as? UILabel)?.text = nativeAd.headline
+        gadNativeAdView.mediaView?.mediaContent = nativeAd.mediaContent
+        
+        (gadNativeAdView.bodyView as? UILabel)?.text = nativeAd.body
+        gadNativeAdView.bodyView?.isHidden = nativeAd.body == nil
+
+        (gadNativeAdView.iconView as? UIImageView)?.image = nativeAd.icon?.image
+        gadNativeAdView.iconView?.isHidden = nativeAd.icon == nil
+
+        (gadNativeAdView.advertiserView as? UILabel)?.text = nativeAd.advertiser
+        gadNativeAdView.advertiserView?.isHidden = nativeAd.advertiser == nil
+
+        gadNativeAdView.callToActionView?.isUserInteractionEnabled = false
     }
     
     private func setupScrollView() {
@@ -140,8 +192,10 @@ extension IntroVC: UIScrollViewDelegate {
         
         if currentPage == 1 || currentPage == 3 {
             self.applyCollapsedAdLayout()
+            self.nativeAdsView.alpha = 0
         } else {
             self.applyExpandedAdLayout()
+            self.nativeAdsView.alpha = 1
         }
     }
 }

@@ -6,12 +6,19 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 protocol ListItemSoundPresenter {
     func getHashtag(sound: [Sound]) -> [String]
+    func numberOfSoundCategories(sounds: [Sound], adsStep: Int) -> Int
+    func numberOfVideoCategories(videos: [Video], adsStep: Int) -> Int
+    func updateListNativeAds(listNativeAd: [NativeAd])
+    func getListNativeAd() -> [NativeAd]
 }
 
 class ListItemSoundPresenterImpl: BasePresenter<ListItemSoundView>, ListItemSoundPresenter {
+    
+    private var listNativeAd: [NativeAd] = []
     
     func getHashtag(sound: [Sound]) -> [String] {
         var hashtags: [String] = []
@@ -37,5 +44,29 @@ class ListItemSoundPresenterImpl: BasePresenter<ListItemSoundView>, ListItemSoun
         }
         
         return uniqueHashtags
+    }
+    
+    func numberOfSoundCategories(sounds: [Sound], adsStep: Int) -> Int {
+        if listNativeAd.isEmpty {
+            return sounds.count
+        }
+        
+        return sounds.count + sounds.count / adsStep
+    }
+    
+    func numberOfVideoCategories(videos: [Video], adsStep: Int) -> Int {
+        if listNativeAd.isEmpty {
+            return videos.count
+        }
+        
+        return videos.count + videos.count / adsStep
+    }
+    
+    func updateListNativeAds(listNativeAd: [NativeAd]) {
+        self.listNativeAd = listNativeAd
+    }
+    
+    func getListNativeAd() -> [NativeAd] {
+        return self.listNativeAd
     }
 }

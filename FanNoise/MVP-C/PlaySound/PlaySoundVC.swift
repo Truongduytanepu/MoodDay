@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import GoogleMobileAds
 
 private struct Const {
     static let likeRatioCell: CGFloat = 138 / 111
@@ -34,6 +35,8 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     @IBOutlet private weak var likeCollectionView: UICollectionView!
     @IBOutlet private weak var funnyCollectionView: UICollectionView!
     @IBOutlet private weak var othersCollectionView: UICollectionView!
+    @IBOutlet private weak var bannerContainView: UIView!
+    @IBOutlet private weak var bannerContentView: UIView!
     
     private var isRotating = false
     private var isButtonDisabled = false
@@ -49,6 +52,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     private var isOn: Bool = false
     private var audioPlayer: AVPlayer?
     private var timer: Timer?
+    private var bannerView: BannerView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -71,6 +75,8 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     
     // MARK: - Config
     private func config() {
+        self.configBannerView()
+        self.setupAdaptiveBanner()
         self.setupFont()
         self.setupFirtCollectionView()
         self.setupSecondCollectionView()
@@ -448,9 +454,54 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         }
     }
     
+    private func setupAdaptiveBanner() {
+        let adaptiveSize = adSizeFor(cgSize: CGSize(width: UIScreen.main.bounds.width, height: 50))
+        self.bannerView = BannerView(adSize: adaptiveSize)
+        self.addBannerViewToView(bannerView)
+    }
+    
+    private func addBannerViewToView(_ bannerView: BannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        self.bannerContentView.addSubview(bannerView)
+    }
+    
+    private func configBannerView() {
+        RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnBanner) { [weak self] isOn in
+            guard let self = self else { return }
+            if !isOn {
+                self.bannerContentView.heightConstraint()?.constant = 0
+                self.bannerContainView.isHidden = true
+                return
+            }
+            
+            self.bannerContainView.isHidden = false
+            self.bannerView.delegate = self
+            self.bannerView.rootViewController = self
+            self.bannerView.adUnitID = UtilsADS.keyBanner
+            self.loadBannerAds()
+        }
+    }
+    
+    private func loadBannerAds() {
+        let request = InterstitialHelper.makeCollapsibleBannerRequest()
+        self.bannerView.load(request)
+    }
+    
     @IBAction private func backButtonDidTap(_ sender: Any) {
         self.stopSoundIfNeed()
         self.coordinator.stop()
+        self.showInterstitialHelperAdsWithCapping {
+            let action = { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                self.coordinator.stop()
+                self.stopSoundSmoothlyIfNeed()
+            }
+            
+            self.executeWithAdCheck(action)
+        }
     }
     
     @IBAction private func setTimeButtonDidTap(_ sender: Any) {
@@ -499,36 +550,55 @@ extension PlaySoundVC: UICollectionViewDelegate {
             return
         }
         
+        let action: () -> Void
+        
         if collectionView == self.likeCollectionView {
-            self.stopSoundIfNeed()
-            self.setupObservers()
-            
-            let soundSelected = self.presenter.getLikeSound()[indexPath.row]
-            self.soundItem = soundSelected
-            self.setupUI(with: soundSelected)
-            self.startSoundSmoothlyIfNeed()
-            self.isRotating = true
-        } else if collectionView == self.funnyCollectionView {
-            guard let navigationController = self.navigationController else {
-                return
+            action = { [weak self] in
+                guard let self = self else { return }
+                
+                // 1. Reset current sound item
+                self.stopSoundIfNeed()
+                self.setupObservers()
+                
+                // 2. Get selected sound from like list
+                let soundSelected = self.presenter.getLikeSound()[indexPath.row]
+                
+                // 3. Assign new sound and update UI
+                self.soundItem = soundSelected
+                self.setupUI(with: soundSelected)
+                self.startSoundSmoothlyIfNeed()
+                self.isRotating = true
             }
-            
-            self.stopSoundIfNeed()
-            self.setupObservers()
-            
-            self.startPreviewVideo(navigationController: navigationController,
-                                   videos: self.presenter.getFunVideo(),
-                                   targetIndexPath: indexPath)
+        } else if collectionView == self.funnyCollectionView {
+            action = { [weak self] in
+                guard let self = self,
+                      let navigationController = self.navigationController else { return }
+                
+                self.stopSoundIfNeed()
+                
+                self.startPreviewVideo(
+                    navigationController: navigationController,
+                    videos: self.presenter.getFunVideo(),
+                    targetIndexPath: indexPath
+                )
+            }
         } else {
-            self.stopSoundIfNeed()
-            self.setupObservers()
-            
-            let soundSelected = self.presenter.getOtherSound()[indexPath.row]
-            self.soundItem = soundSelected
-            self.setupUI(with: soundSelected)
-            self.startSoundSmoothlyIfNeed()
-            self.isRotating = true
+            action = { [weak self] in
+                guard let self = self else { return }
+                
+                self.stopSoundIfNeed()
+                self.setupObservers()
+                
+                let soundSelected = self.presenter.getOtherSound()[indexPath.row]
+                
+                self.soundItem = soundSelected
+                self.setupUI(with: soundSelected)
+                self.startSoundSmoothlyIfNeed()
+                self.isRotating = true
+            }
         }
+        
+        self.executeWithAdCheck(action)
     }
 }
 
@@ -603,6 +673,21 @@ extension PlaySoundVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return Const.cellInset
+    }
+}
+
+extension PlaySoundVC: BannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: BannerView) {
+        self.bannerView.isHidden = false
+    }
+
+    func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
+        print("Load ads for banner error: \(error)")
+        self.bannerView.isHidden = true
+        self.bannerContentView.heightConstraint()?.constant = 0
+    }
+
+    func bannerViewWillDismissScreen(_ bannerView: BannerView) {
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 private struct Const {
     static let ratioCell: CGFloat = 336 / 99
@@ -15,6 +16,8 @@ private struct Const {
 
 class NaturalSoundWhiteNoiseVC: BaseVC<NaturalSoundWhiteNoisePresenter, NaturalSoundWhiteNoiseView> {
     
+    @IBOutlet private weak var bannerContentView: UIView!
+    @IBOutlet private weak var bannerContainView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var collectionView: UICollectionView!
     
@@ -22,7 +25,9 @@ class NaturalSoundWhiteNoiseVC: BaseVC<NaturalSoundWhiteNoisePresenter, NaturalS
     var categoryName : String = ""
     var categoryId : String = ""
     private var soundData: [SoundCategory] = []
+    private var bannerView: BannerView!
     var coordinator: NaturalSoundWhiteNoiseCoordinator!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.config()
@@ -33,6 +38,8 @@ class NaturalSoundWhiteNoiseVC: BaseVC<NaturalSoundWhiteNoisePresenter, NaturalS
         self.configConllectionView()
         self.setupTitleLabel()
         self.loadData()
+        self.configBannerView()
+        self.setupAdaptiveBanner()
     }
 
     private func configConllectionView() {
@@ -62,21 +69,67 @@ class NaturalSoundWhiteNoiseVC: BaseVC<NaturalSoundWhiteNoisePresenter, NaturalS
           listItemSoundCoordinator.start()
     }
     
+    private func setupAdaptiveBanner() {
+        let adaptiveSize = adSizeFor(cgSize: CGSize(width: UIScreen.main.bounds.width, height: 50))
+        self.bannerView = BannerView(adSize: adaptiveSize)
+        self.addBannerViewToView(bannerView)
+    }
+    
+    private func addBannerViewToView(_ bannerView: BannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        self.bannerContentView.addSubview(bannerView)
+    }
+    
+    private func configBannerView() {
+        RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnBanner) { [weak self] isOn in
+            guard let self = self else { return }
+            if !isOn {
+                self.bannerContainView.isHidden = true
+                return
+            }
+            
+            self.bannerContainView.isHidden = false
+            self.bannerView.delegate = self
+            self.bannerView.rootViewController = self
+            self.bannerView.adUnitID = UtilsADS.keyBanner
+            self.loadBannerAds()
+        }
+    }
+    
+    private func loadBannerAds() {
+        let request = InterstitialHelper.makeCollapsibleBannerRequest()
+        self.bannerView.load(request)
+    }
+    
     @IBAction private func backButtonDidTap(_ sender: Any) {
-        self.coordinator.stop()
+        let action = { [weak self] in
+            guard let self = self else {return}
+            
+            self.coordinator.stop()
+        }
+        
+        self.executeWithAdCheck(action)
     }
 }
 
 extension NaturalSoundWhiteNoiseVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let navigationController = self.navigationController else { return }
-        let sounds = self.soundData[indexPath.row]
-        let soundByName = self.presenter.getSoundByCategoryName(nameCategory: sounds.name ?? "")
-        let videoByName = self.presenter.getVideoByCategoryName(nameCategory: sounds.name ?? "")
-        self.startListItemSound(navigationController: navigationController,
-                                sound: soundByName,
-                                video: videoByName,
-                                categoryID: self.categoryId)
+        let action = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            guard let navigationController = self.navigationController else { return }
+            let sounds = self.soundData[indexPath.row]
+            let soundByName = self.presenter.getSoundByCategoryName(nameCategory: sounds.name ?? "")
+            let videoByName = self.presenter.getVideoByCategoryName(nameCategory: sounds.name ?? "")
+            self.startListItemSound(navigationController: navigationController,
+                                    sound: soundByName,
+                                    video: videoByName,
+                                    categoryID: self.categoryId)
+        }
+
+        self.executeWithAdCheck(action)
     }
 }
 
@@ -108,6 +161,19 @@ extension NaturalSoundWhiteNoiseVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return Const.insetForSectionAt
+    }
+}
+
+extension NaturalSoundWhiteNoiseVC: BannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: BannerView) {        self.bannerContainView.isHidden = false
+    }
+
+    func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
+        print("Load ads for banner error: \(error)")
+        self.bannerContainView.isHidden = true
+    }
+
+    func bannerViewWillDismissScreen(_ bannerView: BannerView) {
     }
 }
 
