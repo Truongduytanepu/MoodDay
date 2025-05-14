@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 private struct Const {
     static let loopCount = 100
@@ -21,6 +22,7 @@ private struct Const {
 class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
     // MARK: - Lifecycle
 
+    @IBOutlet private weak var nativeView: UIView!
     @IBOutlet private weak var switchView: UIView!
     @IBOutlet private weak var offLbl: UILabel!
     @IBOutlet private weak var onLbl: UILabel!
@@ -43,6 +45,9 @@ class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
     private let minLabel = UILabel()
     private let secLabel = UILabel()
     private var isSwitchOn: Bool = true
+    private var nativeAdLoader = NativeAdLoader()
+    private var gadNativeAdView: NativeAdView!
+    private var nativeAdsView: UIView!
     
     var onTimeSelected: ((Int, Int, Bool) -> Void)?
     
@@ -57,7 +62,13 @@ class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
         self.setUpFont()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.loadNativeAds()
+    }
+    
     private func config() {
+        self.configNativeAdsView()
         self.setupTimerData()
         self.setupPickerView()
         self.scrollToValue(minute: Const.minuteDefault,
@@ -71,6 +82,47 @@ class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
             self.minutesData += self.baseMinutes
             self.secondsData += self.baseSeconds
         }
+    }
+    
+    private func configNativeAdsView() {
+        self.nativeAdsView = UIView()
+        self.nativeAdsView.backgroundColor = .white
+        self.nativeAdsView.translatesAutoresizingMaskIntoConstraints = false
+        self.nativeView.addSubview(self.nativeAdsView)
+        self.nativeAdsView.fitSuperviewConstraint()
+        
+        self.gadNativeAdView = Bundle.main.loadNibNamed("MainNativeAdIntro", owner: nil, options: nil)!.first as! NativeAdView
+        self.gadNativeAdView.translatesAutoresizingMaskIntoConstraints = false
+        self.nativeAdsView.addSubview(self.gadNativeAdView)
+        self.gadNativeAdView.fitSuperviewConstraint()
+    }
+    
+    private func loadNativeAds() {
+        self.nativeAdLoader.loadNativeAd(adCnt: 1, viewController: self) { [weak self] in
+            guard let self else { return }
+            if !self.nativeAdLoader.nativeAds.isEmpty {
+                DispatchQueue.main.async {
+                    self.bindNativeAds(gadNativeAdView: self.gadNativeAdView, nativeAd: self.nativeAdLoader.nativeAds[0])
+                }
+            }
+        }
+    }
+    
+    private func bindNativeAds(gadNativeAdView: NativeAdView, nativeAd: NativeAd) {
+        gadNativeAdView.nativeAd = nativeAd
+        (gadNativeAdView.headlineView as? UILabel)?.text = nativeAd.headline
+        gadNativeAdView.mediaView?.mediaContent = nativeAd.mediaContent
+        
+        (gadNativeAdView.bodyView as? UILabel)?.text = nativeAd.body
+        gadNativeAdView.bodyView?.isHidden = nativeAd.body == nil
+
+        (gadNativeAdView.iconView as? UIImageView)?.image = nativeAd.icon?.image
+        gadNativeAdView.iconView?.isHidden = nativeAd.icon == nil
+
+        (gadNativeAdView.advertiserView as? UILabel)?.text = nativeAd.advertiser
+        gadNativeAdView.advertiserView?.isHidden = nativeAd.advertiser == nil
+
+        gadNativeAdView.callToActionView?.isUserInteractionEnabled = false
     }
     
     private func setupPickerView() {
