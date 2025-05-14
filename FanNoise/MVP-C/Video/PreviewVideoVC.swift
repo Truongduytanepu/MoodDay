@@ -47,14 +47,12 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.scrollToIndexPath()
         self.autoPlayVideo()
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self, name: Notification.Name.didChangeConnectNetworkActivity, object: nil)
     }
-    
     
     override func viewDidFirstAppear() {
         super.viewDidFirstAppear()
@@ -155,10 +153,9 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     }
     
     private func scrollToIndexPath() {
-        if let indexPath = self.targetIndexPath {
-            self.collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-            self.collectionView.isHidden = false
-        }
+        guard let initialIndexPath = self.targetIndexPath else { return }
+        self.collectionView.scrollToItem(at: initialIndexPath, at: .top, animated: false)
+        self.collectionView.isHidden = false
     }
     
     func stopVideo() {
@@ -230,29 +227,35 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
             self.nativeAdsLoader.loadNativeAd(key: UtilsADS.keyNativeListSound, rootViewController: self)
         } else {
             self.presenter.updateListNativeAds(listNativeAd: [])
+            DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                        self.collectionView.performBatchUpdates(nil) { _ in
+                            self.scrollToIndexPath()
+                        }
+                    }
         }
     }
     
     private func configureAdsCell(at indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueCell(type: AdsVideoCell.self, indexPath: indexPath) else {
-                return UICollectionViewCell()
-            }
-            
-            let adsIndex: Int
-            switch videoCategoryType {
-            case .trending:
-                adsIndex = (indexPath.row / (Const.swipeCountToShowTopic + 1)) - 1
-            case .filtered(_), .listVideo(_):
-                adsIndex = (indexPath.row / Const.adsStep) - 1
-            }
-            
-            let listNativeAds = self.presenter.getListNativeAd()
-            if adsIndex >= 0 && adsIndex < listNativeAds.count {
-                cell.bind(nativeAd: listNativeAds[adsIndex])
-            }
-            
-            return cell
+        guard let cell = collectionView.dequeueCell(type: AdsVideoCell.self, indexPath: indexPath) else {
+            return UICollectionViewCell()
         }
+        
+        let adsIndex: Int
+        switch videoCategoryType {
+        case .trending:
+            adsIndex = (indexPath.row + 1) / (Const.swipeCountToShowTopic + 1) - 1
+        case .filtered(_), .listVideo(_):
+            adsIndex = (indexPath.row + 1) / (Const.adsStep + 1) - 1
+        }
+        
+        let listNativeAds = self.presenter.getListNativeAd()
+        if adsIndex >= 0 && adsIndex < listNativeAds.count {
+            cell.bind(nativeAd: listNativeAds[adsIndex])
+        }
+        
+        return cell
+    }
     
     private func setupAdaptiveBanner() {
         let adaptiveSize = adSizeFor(cgSize: CGSize(width: UIScreen.main.bounds.width, height: 50))
@@ -287,8 +290,20 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         self.bannerView.load(request)
     }
     
+    private func isAdsPosition(at indexPath: IndexPath) -> Bool {
+        return (indexPath.row + 1) % (Const.adsStep + 1) == 0
+    }
+    
     @IBAction func closeBtnTapped(_ sender: Any) {
-        self.coordinator.stop()
+        let action = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            self.coordinator.stop()
+        }
+        
+        self.executeWithAdCheck(action)
     }
 }
 
@@ -313,6 +328,11 @@ extension PreviewVideoVC: UICollectionViewDelegate {
 extension PreviewVideoVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
+        
+        if self.isAdsPosition(at: indexPath) {
+            return
+        }
+        
         let video = self.presenter.getVideo(at: indexPath.row)
         if video.isPlay {
             self.stopVideo()
@@ -342,11 +362,27 @@ extension PreviewVideoVC: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch self.videoCategoryType {
         case .trending:
-            let adjustedIndex = indexPath.row
+            let index = indexPath.row
+            let groupSize = Const.adsStep + 2
+            let positionInGroup = index % groupSize
+            let groupIndex = index / groupSize
             
-            if (adjustedIndex + 1) % (Const.swipeCountToShowTopic + 1) == 0 && adjustedIndex > 0 {
+            if positionInGroup < Const.adsStep {
+                let videoIndex = groupIndex * Const.adsStep + positionInGroup
+                
+                guard let cell = collectionView.dequeueCell(type: ItemVideoCell.self, indexPath: indexPath) else {
+                    return UICollectionViewCell()
+                }
+                
+                let video = self.presenter.getVideo(at: videoIndex)
+                cell.configure(with: video.source ?? "", video: video)
+                cell.setUpCategoryType(videoCategoryType: self.videoCategoryType)
+                return cell
+                
+            } else if positionInGroup == Const.adsStep {
                 return configureAdsCell(at: indexPath)
-            } else if adjustedIndex % (Const.swipeCountToShowTopic + 1) == 0 && adjustedIndex > 0 {
+                
+            } else {
                 guard let cell = collectionView.dequeueCell(type: TopicSuggestVideoCell.self, indexPath: indexPath) else {
                     return UICollectionViewCell()
                 }
@@ -359,31 +395,21 @@ extension PreviewVideoVC: UICollectionViewDataSource {
                 }
                 
                 return cell
+            }
+            
+        case .filtered(_), .listVideo(_):
+            if self.isAdsPosition(at: indexPath) {
+                return self.configureAdsCell(at: indexPath)
             } else {
-                let videoIndex = adjustedIndex - (adjustedIndex / (Const.swipeCountToShowTopic + 1)) - (adjustedIndex / (Const.swipeCountToShowTopic + 1))
-                
+
                 guard let cell = collectionView.dequeueCell(type: ItemVideoCell.self, indexPath: indexPath) else {
                     return UICollectionViewCell()
                 }
                 
+                let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
+                let videoIndex = indexPath.row - adCountBefore
                 let video = self.presenter.getVideo(at: videoIndex)
-                cell.configure(with: video.source ?? "", video: video)
-                cell.setUpCategoryType(videoCategoryType: self.videoCategoryType)
-                return cell
-            }
-            
-        case .filtered(_), .listVideo(_):
-            if (indexPath.row + 1) % Const.adsStep == 0 && indexPath.row > 0 {
-                return self.configureAdsCell(at: indexPath)
-            } else {
-                let videoIndex = indexPath.row - (indexPath.row / Const.adsStep)
                 
-                guard let cell = collectionView.dequeueCell(type: ItemVideoCell.self,
-                                                            indexPath: indexPath) else {
-                    return UICollectionViewCell()
-                }
-                
-                let video = self.presenter.getVideo(at: videoIndex)
                 cell.setUpCategoryType(videoCategoryType: self.videoCategoryType)
                 cell.configure(with: video.source ?? "", video: video)
                 return cell
@@ -448,6 +474,10 @@ extension PreviewVideoVC: SLNativeAdsLoaderDelegate {
         DispatchQueue.main.async {
             self.collectionView.collectionViewLayout.invalidateLayout()
             self.collectionView.reloadData()
+            
+            self.collectionView.performBatchUpdates(nil) { _ in
+                        self.scrollToIndexPath()
+                    }
         }
     }
 }

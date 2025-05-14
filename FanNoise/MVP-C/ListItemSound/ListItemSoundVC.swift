@@ -126,7 +126,7 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     
     private func startPlayVideo(navigationController: UINavigationController, categoryID: String, targetIndexPath: IndexPath) {
         let playVideo = PreviewVideoCoordinator(navigation: navigationController,
-                                                videoCategoryType: .filtered(idCategory: categoryID),
+                                                videoCategoryType: .listVideo(videos: self.videos),
                                                 targetIndexPath: targetIndexPath)
         playVideo.start()
     }
@@ -176,7 +176,7 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     }
     
     private func isAdsPosition(at indexPath: IndexPath) -> Bool {
-        return (indexPath.row % Const.adsStep == 0) && indexPath.row > 0
+        return (indexPath.row + 1) % (Const.adsStep + 1) == 0
     }
 
     private func calculateAdjustedIndex(for indexPath: IndexPath) -> Int {
@@ -226,28 +226,31 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
         return cell
     }
 
-    private func configureSoundCell(at adjustedIndex: Int, indexPath: IndexPath) -> UICollectionViewCell {
+    private func configureSoundCell(indexPath: IndexPath) -> UICollectionViewCell {
+
         guard let cell = soundCollectionView.dequeueCell(type: ItemSoundCell.self, indexPath: indexPath) else {
             return UICollectionViewCell()
         }
         
-        if adjustedIndex < sounds.count {
-            sounds[adjustedIndex].assignRandomColorsIfNeeded()
-            cell.configure(sound: sounds[adjustedIndex])
-        }
+        let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
+        let soundIndex = indexPath.row - adCountBefore
+        
+        sounds[soundIndex].assignRandomColorsIfNeeded()
+        cell.configure(sound: sounds[soundIndex])
         
         return cell
     }
 
-    private func configureVideoCell(at adjustedIndex: Int, indexPath: IndexPath) -> UICollectionViewCell {
+    private func configureVideoCell(indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = videoCollectionView.dequeueCell(type: VideoCell.self, indexPath: indexPath) else {
             return UICollectionViewCell()
         }
         
-        if adjustedIndex < videos.count {
-            videos[adjustedIndex].assignRandomHashtagIfNeeded()
-            cell.configure(video: videos[adjustedIndex])
-        }
+        let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
+        let videoIndex = indexPath.row - adCountBefore
+        
+        videos[videoIndex].assignRandomHashtagIfNeeded()
+        cell.configure(video: videos[videoIndex])
         
         return cell
     }
@@ -287,6 +290,10 @@ extension ListItemSoundVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let action: () -> Void
         
+        if isAdsPosition(at: indexPath) {
+            return
+        }
+        
         if collectionView == self.hashtagCollectionView {
             action = { [weak self] in
                 guard let self = self,
@@ -304,9 +311,12 @@ extension ListItemSoundVC: UICollectionViewDelegate {
                 guard let self = self,
                       let navigationController = self.navigationController else { return }
                 
+                let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
+                let soundIndex = indexPath.row - adCountBefore
+                
                 self.startPlaySound(
                     navigationController: navigationController,
-                    sound: self.sounds[indexPath.row],
+                    sound: self.sounds[soundIndex],
                     sounds: self.sounds,
                     videos: self.videos
                 )
@@ -315,6 +325,8 @@ extension ListItemSoundVC: UICollectionViewDelegate {
             action = { [weak self] in
                 guard let self = self,
                       let navigationController = self.navigationController else { return }
+                
+                let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
                 
                 self.startPlayVideo(
                     navigationController: navigationController,
@@ -351,21 +363,17 @@ extension ListItemSoundVC: UICollectionViewDataSource {
         if collectionView == self.soundCollectionView {
             if self.isAdsPosition(at: indexPath) {
                 return configureAdsSoundCell(at: indexPath, in: collectionView)
+            } else {
+                return self.configureSoundCell(indexPath: indexPath)
             }
         } else if collectionView == self.videoCollectionView {
             if self.isAdsPosition(at: indexPath) {
                 return configureAdsVideoCell(at: indexPath, in: collectionView)
+            } else {
+                return self.configureVideoCell(indexPath: indexPath)
             }
         }
-        
-        let adjustedIndex = self.calculateAdjustedIndex(for: indexPath)
-        
-        if collectionView == self.soundCollectionView {
-            return self.configureSoundCell(at: adjustedIndex, indexPath: indexPath)
-        } else if collectionView == self.videoCollectionView {
-            return self.configureVideoCell(at: adjustedIndex, indexPath: indexPath)
-        }
-        
+
         return UICollectionViewCell()
     }
 }

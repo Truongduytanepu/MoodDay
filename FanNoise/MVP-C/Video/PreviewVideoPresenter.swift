@@ -40,10 +40,10 @@ class PreviewVideoPresenterImpl: BasePresenter<PreviewVideoView>, PreviewVideoPr
     
     func getNumberOfItems(adsStep: Int) -> Int {
         if listNativeAd.isEmpty {
-            return self.videoCategoryList.count + self.videoCategoryList.count / adsStep
+            return self.videoCategoryList.count
         }
         
-        return self.videoCategoryList.count
+        return self.videoCategoryList.count + self.videoCategoryList.count / adsStep
     }
     
     func getVideo(at index: Int) -> Video {

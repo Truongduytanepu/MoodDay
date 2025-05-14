@@ -109,6 +109,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func configAds() {
         MobileAds.shared.start(completionHandler: nil)
-        _ = Interstitial.shared
     }
 }

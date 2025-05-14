@@ -93,7 +93,6 @@
 		842D28B92DD1A2AB00F71811 /* Reachabilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D28A82DD1A2AB00F71811 /* Reachabilities.swift */; };
 		842D28BA2DD1A2AB00F71811 /* NativeAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D28A72DD1A2AB00F71811 /* NativeAdLoader.swift */; };
 		842D28BC2DD1A2AB00F71811 /* RemoteConfigHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D28A92DD1A2AB00F71811 /* RemoteConfigHelper.swift */; };
-		842D28BD2DD1A2AB00F71811 /* Interstitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D28A32DD1A2AB00F71811 /* Interstitial.swift */; };
 		842D28BF2DD1A2AB00F71811 /* InappPurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D28A22DD1A2AB00F71811 /* InappPurchase.swift */; };
 		842D28C12DD1A2AB00F71811 /* MainNativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842D28A62DD1A2AB00F71811 /* MainNativeAdView.xib */; };
 		842D28C22DD1A2AB00F71811 /* UnderNativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842D28AC2DD1A2AB00F71811 /* UnderNativeAdView.xib */; };
@@ -286,7 +285,6 @@
 		842D28A02DD1A2AB00F71811 /* InappController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InappController.swift; sourceTree = "<group>"; };
 		842D28A12DD1A2AB00F71811 /* InappController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InappController.xib; sourceTree = "<group>"; };
 		842D28A22DD1A2AB00F71811 /* InappPurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InappPurchase.swift; sourceTree = "<group>"; };
-		842D28A32DD1A2AB00F71811 /* Interstitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interstitial.swift; sourceTree = "<group>"; };
 		842D28A42DD1A2AB00F71811 /* InterstitialAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAdManager.swift; sourceTree = "<group>"; };
 		842D28A52DD1A2AB00F71811 /* InterstitialHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialHelper.swift; sourceTree = "<group>"; };
 		842D28A62DD1A2AB00F71811 /* MainNativeAdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainNativeAdView.xib; sourceTree = "<group>"; };
@@ -702,7 +700,6 @@
 				842D28A02DD1A2AB00F71811 /* InappController.swift */,
 				842D28A12DD1A2AB00F71811 /* InappController.xib */,
 				842D28A22DD1A2AB00F71811 /* InappPurchase.swift */,
-				842D28A32DD1A2AB00F71811 /* Interstitial.swift */,
 				842D28A42DD1A2AB00F71811 /* InterstitialAdManager.swift */,
 				842D28A52DD1A2AB00F71811 /* InterstitialHelper.swift */,
 				842D28A62DD1A2AB00F71811 /* MainNativeAdView.xib */,
@@ -1163,9 +1160,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-FanNoise/Pods-FanNoise-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-FanNoise/Pods-FanNoise-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1240,9 +1241,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-FanNoise/Pods-FanNoise-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-FanNoise/Pods-FanNoise-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1267,7 +1272,6 @@
 				842D28B92DD1A2AB00F71811 /* Reachabilities.swift in Sources */,
 				842D28BA2DD1A2AB00F71811 /* NativeAdLoader.swift in Sources */,
 				842D28BC2DD1A2AB00F71811 /* RemoteConfigHelper.swift in Sources */,
-				842D28BD2DD1A2AB00F71811 /* Interstitial.swift in Sources */,
 				842D28BF2DD1A2AB00F71811 /* InappPurchase.swift in Sources */,
 				71A5614C2DA8FE8D007E8BE3 /* AVAudioPlayerNodeExtensions.swift in Sources */,
 				71A5616C2DA8FE8D007E8BE3 /* OverlayWindow.swift in Sources */,

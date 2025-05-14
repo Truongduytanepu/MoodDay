@@ -121,7 +121,7 @@ class ListItemSoundByHashtagVC: BaseVC<ListItemSoundByHashtagPresenter, ListItem
     }
     
     private func isAdsPosition(at indexPath: IndexPath) -> Bool {
-        return (indexPath.row % Const.adsStep == 0) && indexPath.row > 0
+        return (indexPath.row + 1) % (Const.adsStep + 1) == 0
     }
     
     private func calculateAdjustedIndex(for indexPath: IndexPath) -> Int {
@@ -143,17 +143,18 @@ class ListItemSoundByHashtagVC: BaseVC<ListItemSoundByHashtagPresenter, ListItem
         return cell
     }
     
-    private func configureSoundCell(at adjustedIndex: Int, indexPath: IndexPath) -> UICollectionViewCell {
+    private func configureSoundCell(indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueCell(type: ListItemSoundByHashtagCell.self, indexPath: indexPath) else {
             return UICollectionViewCell()
         }
         
+        let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
+        let soundIndex = indexPath.row - adCountBefore
         let sounds = self.presenter.getListSound()
-        if adjustedIndex < sounds.count {
-            let sound = sounds[adjustedIndex]
-            sound.assignRandomColorsIfNeeded()
-            cell.configureSound(sound: sound)
-        }
+        let sound = sounds[soundIndex]
+        
+        sound.assignRandomColorsIfNeeded()
+        cell.configureSound(sound: sound)
         
         return cell
     }
@@ -174,10 +175,11 @@ extension ListItemSoundByHashtagVC: UICollectionViewDelegate {
                   let navigationController = self.navigationController else { return }
             
             let sounds = self.presenter.getListSound()
-            let adjustedIndex = self.calculateAdjustedIndex(for: indexPath)
+            let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
+            let soundIndex = indexPath.row - adCountBefore
             
-            if adjustedIndex < sounds.count {
-                let sound = sounds[adjustedIndex]
+            if soundIndex < sounds.count {
+                let sound = sounds[soundIndex]
                 self.startPlaySound(
                     navigationController: navigationController,
                     sound: sound,
@@ -201,8 +203,7 @@ extension ListItemSoundByHashtagVC: UICollectionViewDataSource {
             return configureAdsCell(at: indexPath)
         }
         
-        let adjustedIndex = calculateAdjustedIndex(for: indexPath)
-        return configureSoundCell(at: adjustedIndex, indexPath: indexPath)
+        return configureSoundCell(indexPath: indexPath)
     }
 }
 

@@ -30,7 +30,7 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
     
     var presenter: Presenter!
     var isShow = false
-
+    
     static func factory() -> Self {
         let viewController = Self()
         viewController.injectPresenter()
@@ -43,18 +43,18 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
         self.configNotificationCenter()
         self.configLoadingView()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         isShow = true
         self.isDisplaying = true
-
+        
         if !viewWillAppeared {
             viewWillAppeared = true
             self.viewWillFirstAppear()
         }
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if !viewDidAppeared {
@@ -68,13 +68,13 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
         self.isDisplaying = false
         isShow = false
     }
-
+    
     func viewWillFirstAppear() {
-
+        
     }
-
+    
     func viewDidFirstAppear() {
-
+        
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -131,17 +131,17 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
     // MARK: - Alert
     func showAlert(title: String = "", message: String = "", titleButtons: [String] = ["OK"], destructiveIndexs: [Int] = [], action: ((Int) -> Void)? = nil) {
         let alert = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-
+        
         titleButtons.forEach { (titleButton) in
             let index = titleButtons.firstIndex(of: titleButton)!
             let style = destructiveIndexs.contains(index) ? UIAlertAction.Style.destructive : UIAlertAction.Style.default
             let alertAction = UIAlertAction.init(title: titleButton, style: style, handler: { (_) in
                 action?(index)
             })
-
+            
             alert.addAction(alertAction)
         }
-
+        
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -167,6 +167,11 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
     }
     
     public func showInterstitialHelperAdsWithCapping(adsBlock: @escaping () -> Void) {
+        if Reachabilities.isConnectedToNetwork() == false {
+            adsBlock()
+            return
+        }
+        
         RemoteConfigHelper.shared.getRemoteConfigWithTimeCapping(key: RemoteConfigKey.keyTimeCapping) { capping in
             let showingAdsLastTime = UserDefaults.standard.double(forKey: "showingAdsLastTime")
             let now = Date().timeIntervalSince1970
@@ -211,6 +216,10 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
             self.dismissLoadingView()
             rootVC.dismiss(animated: true, completion: nil)
             
+            if Reachabilities.isConnectedToNetwork() == false {
+                return
+            }
+            
             RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnAoaResume) { [weak self] isOn in
                 guard let self = self else { return }
                 if !isOn {
@@ -253,7 +262,7 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
         
         appOpenAd.present(from: rootViewController)
     }
-
+    
     func adDidDismissFullScreenContent(_ ads: FullScreenPresentingAd) {
         print("AOA dismissed")
         self.isPresentAOA = false
