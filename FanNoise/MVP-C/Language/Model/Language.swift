@@ -8,14 +8,14 @@
 import Foundation
 
 enum Language: Int, CaseIterable {
-  case brazil
+  case usa
   case china
   case croatia
   case france
   case germany
   case japan
   case korea
-  case usa
+  case brazil
   case vietnam
   
   var code: String {
@@ -35,7 +35,7 @@ enum Language: Int, CaseIterable {
     case .korea:
       return "ko"
     case .usa:
-      return "en-US"
+      return "en_US"
     case .vietnam:
       return "vi"
     }

@@ -29,6 +29,7 @@ class LanguageCell: UICollectionViewCell {
     
     private func setupCheckImageView() {
         self.checkImageView.isHidden = true
+        self.contentView.borderColor = .clear
     }
     
     func config(language: Language) {
@@ -43,6 +44,6 @@ class LanguageCell: UICollectionViewCell {
     
     func deselect() {
         self.checkImageView.isHidden = true
-        self.contentView.layer.borderColor = UIColor.clear.cgColor
+        self.contentView.borderColor = .clear
     }
 }
