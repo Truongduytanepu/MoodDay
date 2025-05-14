@@ -14,7 +14,7 @@ private struct Const {
     static let minimumLineSpacingSound: CGFloat = 16
     static let ratioCellSound: CGFloat = 160 / 215
     static let numberColumsSound: CGFloat = 2
-    static let insetForSectionAt = UIEdgeInsets(top: 0, left: 13, bottom: 0, right: 13)
+    static let insetForSectionAt = UIEdgeInsets(top: 0, left: 13, bottom: 10, right: 13)
     static let adsStep = 4
 }
 
