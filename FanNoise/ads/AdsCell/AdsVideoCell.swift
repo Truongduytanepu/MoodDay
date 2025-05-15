@@ -16,7 +16,7 @@ class AdsVideoCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        nativeAdView = Bundle.main.loadNibNamed("MainNativeAdVideo", owner: nil, options: nil)!.first as! NativeAdView
+        nativeAdView = Bundle.main.loadNibNamed("VideoNativeAd", owner: nil, options: nil)!.first as! NativeAdView
         self.containerView.addSubview(self.nativeAdView)
         self.nativeAdView.fitSuperviewConstraint()
     }

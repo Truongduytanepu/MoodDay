@@ -11,6 +11,7 @@ import GoogleMobileAds
 import AppTrackingTransparency
 import AdjustSdk
 import AdSupport
+import FirebaseAnalytics
 
 private struct Const {
     static let dotPageViewSize = CGSize(width: 6, height: 6)
@@ -81,7 +82,7 @@ class IntroVC: BaseVC<IntroPresenter, IntroView> {
         self.nativeView.addSubview(self.nativeAdsView)
         self.nativeAdsView.fitSuperviewConstraint()
         
-        self.gadNativeAdView = Bundle.main.loadNibNamed("MainNativeAdIntro", owner: nil, options: nil)!.first as! NativeAdView
+        self.gadNativeAdView = Bundle.main.loadNibNamed("IntroNativeAd", owner: nil, options: nil)!.first as! NativeAdView
         self.gadNativeAdView.translatesAutoresizingMaskIntoConstraints = false
         self.nativeAdsView.addSubview(self.gadNativeAdView)
         self.gadNativeAdView.fitSuperviewConstraint()
@@ -221,7 +222,12 @@ extension IntroVC: UIScrollViewDelegate {
         
         // Tính toán currentPage dựa trên vị trí scroll
         let currentPage = Int(round(scrollView.contentOffset.x / scrollView.frame.width))
+        let introIndex = currentPage + 1
         self.pageControl.currentPage = currentPage
+        
+        Analytics.logEvent("Intro", parameters: [
+            "name": "Intro_\(introIndex)"
+        ])
         
         if currentPage < self.titles.count {
             self.titleLabel.text = self.titles[currentPage]

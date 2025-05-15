@@ -7,6 +7,7 @@
 
 import UIKit
 import SVProgressHUD
+import FirebaseAnalytics
 
 private struct Const {
     static let insetLeftRight: CGFloat = 12
@@ -117,8 +118,11 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
 
 extension HomeVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Chỉ xử lý khi chọn cell thứ 2 hoặc 3 (index 1 hoặc 2)
         let action: () -> Void
+        
+        Analytics.logEvent("Home", parameters: [
+            "name": "Home_Category_\(homeCategories[indexPath.row].name ?? "")"
+        ])
         
         if indexPath.row == 1 || indexPath.row == 2 {
             action = { [weak self] in

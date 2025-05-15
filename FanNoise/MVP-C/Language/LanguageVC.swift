@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 private struct Const {
     static let sizeHeight: Float = 48
@@ -54,6 +55,10 @@ class LanguageVC: BaseVC<LanguagePresenter, LanguageView> {
     // MARK: - Action
     @IBAction private func acceptButtonDidTap(_ sender: Any) {
         UserDefaults.standard.set(true, forKey: "isFirstShowLanguageScreen")
+        
+        Analytics.logEvent("Language", parameters: [
+            "value": "Language_\(self.choseLanguage?.name ?? "")"
+        ])
         
         if let choseLanguage = choseLanguage {
             LanguageManager.shared.setChoseLanguage(choseLanguage)

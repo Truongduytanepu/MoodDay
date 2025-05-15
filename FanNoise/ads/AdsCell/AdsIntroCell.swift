@@ -16,7 +16,7 @@ class AdsIntroCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        nativeAdView = Bundle.main.loadNibNamed("MainNativeAdIntro", owner: nil, options: nil)!.first as! NativeAdView
+        nativeAdView = Bundle.main.loadNibNamed("IntroNativeAd", owner: nil, options: nil)!.first as! NativeAdView
         self.containerView.addSubview(self.nativeAdView)
         self.nativeAdView.fitSuperviewConstraint()
     }

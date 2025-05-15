@@ -8,6 +8,7 @@ import UIKit
 import AVKit
 import YYImage
 import GoogleMobileAds
+import FirebaseAnalytics
 
 private struct Const {
     static let lineSpace: CGFloat = 0
@@ -90,6 +91,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         case .trending:
             self.navigationView.isHidden = true
             self.bannerContainView.isHidden = true
+            self.bannerContentView.heightConstraint()?.constant = 0
             self.collectionView.isHidden = false
             self.presenter.getAllVideo()
         case .filtered(let idCategory):
@@ -307,9 +309,37 @@ extension PreviewVideoVC: UICollectionViewDelegate {
                         forItemAt indexPath: IndexPath) {
         if let cell = cell as? ItemVideoCell {
             cell.stopVideo()
+
+            var video: Video?
+
+            switch self.videoCategoryType {
+            case .trending:
+                let index = indexPath.row
+                let groupSize = Const.adsStep + 2
+                let positionInGroup = index % groupSize
+                let groupIndex = index / groupSize
+                
+                if positionInGroup < Const.adsStep {
+                    let videoIndex = groupIndex * Const.adsStep + positionInGroup
+                    video = self.presenter.getVideo(at: videoIndex)
+                }
+
+            case .filtered(_), .listVideo(_):
+                if !self.isAdsPosition(at: indexPath) {
+                    let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
+                    let videoIndex = indexPath.row - adCountBefore
+                    video = self.presenter.getVideo(at: videoIndex)
+                }
+            }
+
+            if let video = video {
+                Analytics.logEvent("Preview Video", parameters: [
+                    "name": "PV_\(video.name ?? "")"
+                ])
+            }
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
@@ -323,15 +353,40 @@ extension PreviewVideoVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         
-        if self.isAdsPosition(at: indexPath) {
+        switch self.videoCategoryType {
+        case .trending:
+            let index = indexPath.row
+            let groupSize = Const.adsStep + 2
+            let positionInGroup = index % groupSize
+            let groupIndex = index / groupSize
+
+            if positionInGroup < Const.adsStep {
+                let videoIndex = groupIndex * Const.adsStep + positionInGroup
+                let video = self.presenter.getVideo(at: videoIndex)
+
+                if video.isPlay {
+                    self.stopVideo()
+                } else {
+                    self.startVideo()
+                }
+            }
+            
             return
-        }
-        
-        let video = self.presenter.getVideo(at: indexPath.row)
-        if video.isPlay {
-            self.stopVideo()
-        } else {
-            self.startVideo()
+
+        case .filtered(_), .listVideo(_):
+            if self.isAdsPosition(at: indexPath) {
+                return
+            }
+            
+            let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
+            let videoIndex = indexPath.row - adCountBefore
+            let video = self.presenter.getVideo(at: videoIndex)
+
+            if video.isPlay {
+                self.stopVideo()
+            } else {
+                self.startVideo()
+            }
         }
     }
     
@@ -374,7 +429,7 @@ extension PreviewVideoVC: UICollectionViewDataSource {
                 return cell
                 
             } else if positionInGroup == Const.adsStep {
-                return configureAdsCell(at: indexPath)
+                return self.configureAdsCell(at: indexPath)
                 
             } else {
                 guard let cell = collectionView.dequeueCell(type: TopicSuggestVideoCell.self, indexPath: indexPath) else {
@@ -385,6 +440,10 @@ extension PreviewVideoVC: UICollectionViewDataSource {
                 cell.cofigData(videoCategories: videoCategory)
                 
                 cell.callBackUpdateData = { [weak self] name in
+                    Analytics.logEvent("Preview Video", parameters: [
+                        "name": "PV_Select_\(name)"
+                    ])
+                    
                     self?.presenter.updateData(name: name)
                 }
                 

@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleMobileAds
+import FirebaseAnalytics
 
 private struct Const {
     static let ratioCell: CGFloat = 336 / 99
@@ -120,9 +121,15 @@ extension NaturalSoundWhiteNoiseVC: UICollectionViewDelegate {
             }
             
             guard let navigationController = self.navigationController else { return }
+            
             let sounds = self.soundData[indexPath.row]
             let soundByName = self.presenter.getSoundByCategoryName(nameCategory: sounds.name ?? "")
             let videoByName = self.presenter.getVideoByCategoryName(nameCategory: sounds.name ?? "")
+            
+            Analytics.logEvent("Natural Sound White Noise", parameters: [
+                "name": "NSWN_Category_\(sounds.name ?? "")"
+            ])
+            
             self.startListItemSound(navigationController: navigationController,
                                     sound: soundByName,
                                     video: videoByName,

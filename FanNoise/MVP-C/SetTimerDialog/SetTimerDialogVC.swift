@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleMobileAds
+import FirebaseAnalytics
 
 private struct Const {
     static let loopCount = 100
@@ -91,7 +92,7 @@ class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
         self.nativeView.addSubview(self.nativeAdsView)
         self.nativeAdsView.fitSuperviewConstraint()
         
-        self.gadNativeAdView = Bundle.main.loadNibNamed("MainNativeAdIntro", owner: nil, options: nil)!.first as! NativeAdView
+        self.gadNativeAdView = Bundle.main.loadNibNamed("DialogNativeAd", owner: nil, options: nil)!.first as! NativeAdView
         self.gadNativeAdView.translatesAutoresizingMaskIntoConstraints = false
         self.nativeAdsView.addSubview(self.gadNativeAdView)
         self.gadNativeAdView.fitSuperviewConstraint()
@@ -212,6 +213,10 @@ class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
     }
     
     @IBAction private func doneBtnTapped(_ sender: Any) {
+        Analytics.logEvent("Dialog Set Timer", parameters: [
+            "name": "SetTimer_\(self.isSwitchOn ? "On" : "Off")"
+        ])
+        
         let selectedMinute = self.minutesData[self.timePickerView.selectedRow(inComponent: 0)]
         let selectedSecond = self.secondsData[self.timePickerView.selectedRow(inComponent: 1)]
         

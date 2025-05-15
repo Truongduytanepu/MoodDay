@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleMobileAds
+import FirebaseAnalytics
 
 private struct Const {
     static let insetLeftRightSound: CGFloat = 13
@@ -166,7 +167,7 @@ class ListItemSoundByHashtagVC: BaseVC<ListItemSoundByHashtagPresenter, ListItem
 
 extension ListItemSoundByHashtagVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if isAdsPosition(at: indexPath) {
+        if self.isAdsPosition(at: indexPath) {
             return
         }
         
@@ -180,6 +181,11 @@ extension ListItemSoundByHashtagVC: UICollectionViewDelegate {
             
             if soundIndex < sounds.count {
                 let sound = sounds[soundIndex]
+                
+                Analytics.logEvent("List Item Sound By Hash Tag", parameters: [
+                    "name": "LISBHT_Category_\(sound.name ?? "")"
+                ])
+                
                 self.startPlaySound(
                     navigationController: navigationController,
                     sound: sound,
@@ -199,11 +205,11 @@ extension ListItemSoundByHashtagVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if isAdsPosition(at: indexPath) {
-            return configureAdsCell(at: indexPath)
+        if self.isAdsPosition(at: indexPath) {
+            return self.configureAdsCell(at: indexPath)
         }
         
-        return configureSoundCell(indexPath: indexPath)
+        return self.configureSoundCell(indexPath: indexPath)
     }
 }
 

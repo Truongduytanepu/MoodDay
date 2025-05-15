@@ -16,7 +16,7 @@ class AdsSoundCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        nativeAdView = Bundle.main.loadNibNamed("MainNativeAdSound", owner: nil, options: nil)!.first as! NativeAdView
+        nativeAdView = Bundle.main.loadNibNamed("SoundNativeAd", owner: nil, options: nil)!.first as! NativeAdView
         self.containerView.addSubview(self.nativeAdView)
         self.nativeAdView.fitSuperviewConstraint()
     }

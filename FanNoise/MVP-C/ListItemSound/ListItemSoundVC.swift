@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleMobileAds
+import FirebaseAnalytics
 
 private struct Const {
     static let insetLeftRightSound: CGFloat = 13
@@ -285,8 +286,10 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
 extension ListItemSoundVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let action: () -> Void
+        let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
+        let index = indexPath.row - adCountBefore
         
-        if isAdsPosition(at: indexPath) {
+        if self.isAdsPosition(at: indexPath) {
             return
         }
         
@@ -296,6 +299,11 @@ extension ListItemSoundVC: UICollectionViewDelegate {
                       let navigationController = self.navigationController else { return }
                 
                 let nameHashtag = self.presenter.getHashtag(sound: self.sounds)[indexPath.row]
+                
+                Analytics.logEvent("List Item Sound", parameters: [
+                    "name": "LIS_HashTag_\(nameHashtag)"
+                ])
+                
                 self.startListItemSoundByHashtag(
                     navigationController: navigationController,
                     nameHastag: nameHashtag,
@@ -307,12 +315,13 @@ extension ListItemSoundVC: UICollectionViewDelegate {
                 guard let self = self,
                       let navigationController = self.navigationController else { return }
                 
-                let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
-                let soundIndex = indexPath.row - adCountBefore
+                Analytics.logEvent("List Item Sound", parameters: [
+                    "name": "LIS_Sound_\(self.sounds[index].name ?? "")"
+                ])
                 
                 self.startPlaySound(
                     navigationController: navigationController,
-                    sound: self.sounds[soundIndex],
+                    sound: self.sounds[index],
                     sounds: self.sounds,
                     videos: self.videos
                 )
@@ -322,7 +331,9 @@ extension ListItemSoundVC: UICollectionViewDelegate {
                 guard let self = self,
                       let navigationController = self.navigationController else { return }
                 
-                let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
+                Analytics.logEvent("List Item Sound", parameters: [
+                    "name": "LIS_Video_\(self.videos[index].name ?? "")"
+                ])
                 
                 self.startPlayVideo(
                     navigationController: navigationController,

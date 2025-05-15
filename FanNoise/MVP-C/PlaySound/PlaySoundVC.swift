@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import GoogleMobileAds
+import FirebaseAnalytics
 
 private struct Const {
     static let likeRatioCell: CGFloat = 138 / 111
@@ -442,7 +443,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
             }
             
             self.resetTimer()
-            self.timeDialogLbl.text = "\(minute):\(second)"
+            self.timeDialogLbl.text = "\(minute):\(String(format: "%02d", second))"
             self.setTimerView.backgroundColor = UIColor(rgb: 0xFFC300)
             self.minute = minute
             self.second = second
@@ -613,6 +614,10 @@ extension PlaySoundVC: UICollectionViewDelegate {
                 
                 let soundSelected = self.presenter.getLikeSound()[index]
                 
+                Analytics.logEvent("Play Sound", parameters: [
+                    "name": "PS_Click_\(soundSelected.name ?? "")"
+                ])
+                
                 self.soundItem = soundSelected
                 self.setupUI(with: soundSelected)
                 self.startSoundSmoothlyIfNeed()
@@ -625,10 +630,16 @@ extension PlaySoundVC: UICollectionViewDelegate {
                 
                 self.stopSoundIfNeed()
                 
+                let videos = self.presenter.getFunVideo()
+                
+                Analytics.logEvent("Play Sound", parameters: [
+                    "name": "PS_Click_\(videos[index].name ?? "")"
+                ])
+                
                 self.startPreviewVideo(
                     navigationController: navigationController,
-                    videos: self.presenter.getFunVideo(),
-                    targetIndexPath: IndexPath(row: index, section: 0)
+                    videos: videos,
+                    targetIndexPath: indexPath
                 )
             }
         } else {
@@ -639,6 +650,10 @@ extension PlaySoundVC: UICollectionViewDelegate {
                 self.setupObservers()
                 
                 let soundSelected = self.presenter.getOtherSound()[index]
+                
+                Analytics.logEvent("Play Sound", parameters: [
+                    "name": "PS_Click_\(soundSelected.name ?? "")"
+                ])
                 
                 self.soundItem = soundSelected
                 self.setupUI(with: soundSelected)

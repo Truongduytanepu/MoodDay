@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="fNp-yu-K4i" customClass="GADMediaView">
-                    <rect key="frame" x="12" y="25" width="351" height="562"/>
+                    <rect key="frame" x="12" y="25" width="351" height="607"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lp1-oz-XOs">
                     <rect key="frame" x="0.0" y="0.0" width="30" height="25"/>
@@ -41,12 +41,12 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5w-YA-UY8">
-                    <rect key="frame" x="16" y="597" width="343" height="40"/>
+                    <rect key="frame" x="50" y="637" width="275" height="25"/>
                     <color key="backgroundColor" red="0.23921568627450979" green="0.38431372549019605" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="UQR-o3-hjy"/>
+                        <constraint firstAttribute="height" constant="25" id="UQR-o3-hjy"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="19"/>
+                    <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="14"/>
                     <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                     <state key="normal" title="Install">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -61,13 +61,13 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="E5w-YA-UY8" firstAttribute="top" secondItem="fNp-yu-K4i" secondAttribute="bottom" constant="10" id="29S-wf-YZv"/>
+                <constraint firstItem="E5w-YA-UY8" firstAttribute="top" secondItem="fNp-yu-K4i" secondAttribute="bottom" constant="5" id="29S-wf-YZv"/>
                 <constraint firstItem="fNp-yu-K4i" firstAttribute="top" secondItem="lp1-oz-XOs" secondAttribute="bottom" id="5R0-VB-jYF"/>
-                <constraint firstAttribute="trailing" secondItem="E5w-YA-UY8" secondAttribute="trailing" constant="16" id="CZS-IF-n2W"/>
-                <constraint firstAttribute="bottom" secondItem="E5w-YA-UY8" secondAttribute="bottom" constant="30" id="MoK-TQ-4uu"/>
+                <constraint firstAttribute="trailing" secondItem="E5w-YA-UY8" secondAttribute="trailing" constant="50" id="CZS-IF-n2W"/>
+                <constraint firstAttribute="bottom" secondItem="E5w-YA-UY8" secondAttribute="bottom" constant="5" id="MoK-TQ-4uu"/>
                 <constraint firstAttribute="trailing" secondItem="fNp-yu-K4i" secondAttribute="trailing" constant="12" id="Z2K-TM-u14"/>
                 <constraint firstItem="lp1-oz-XOs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ZzA-vZ-cfe"/>
-                <constraint firstItem="E5w-YA-UY8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="kaw-2f-wgQ"/>
+                <constraint firstItem="E5w-YA-UY8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="kaw-2f-wgQ"/>
                 <constraint firstItem="fNp-yu-K4i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="mvm-H8-5Uz"/>
                 <constraint firstItem="lp1-oz-XOs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rep-vn-sg4"/>
             </constraints>

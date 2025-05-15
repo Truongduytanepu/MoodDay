@@ -132,15 +132,6 @@
                                                         <constraint firstAttribute="bottom" secondItem="lz9-Mk-jCX" secondAttribute="bottom" id="wSv-vg-DsK"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Vf-yN-G7h">
-                                                    <rect key="frame" x="0.0" y="0.0" width="113" height="24"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <connections>
-                                                        <action selector="setTimeButtonDidTap:" destination="-1" eventType="touchUpInside" id="cum-l5-nmf"/>
-                                                    </connections>
-                                                </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WVo-KJ-odw">
                                                     <rect key="frame" x="0.0" y="0.0" width="34" height="24"/>
                                                     <subviews>
@@ -163,8 +154,6 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="BsV-lo-Rnf" secondAttribute="bottom" id="5AR-UW-mhx"/>
-                                                <constraint firstItem="5Vf-yN-G7h" firstAttribute="top" secondItem="N7U-6L-TOw" secondAttribute="top" id="5Gl-N6-xkZ"/>
-                                                <constraint firstAttribute="trailing" secondItem="5Vf-yN-G7h" secondAttribute="trailing" id="9b2-Dc-BGs"/>
                                                 <constraint firstItem="WVo-KJ-odw" firstAttribute="top" secondItem="N7U-6L-TOw" secondAttribute="top" id="DWV-W8-7dS"/>
                                                 <constraint firstItem="BsV-lo-Rnf" firstAttribute="top" secondItem="N7U-6L-TOw" secondAttribute="top" id="OMl-oe-vjs"/>
                                                 <constraint firstAttribute="bottom" secondItem="WVo-KJ-odw" secondAttribute="bottom" id="Pgd-eL-6pQ"/>
@@ -172,8 +161,6 @@
                                                 <constraint firstItem="BsV-lo-Rnf" firstAttribute="leading" secondItem="WVo-KJ-odw" secondAttribute="trailing" id="Xs1-ci-P5a"/>
                                                 <constraint firstAttribute="trailing" secondItem="BsV-lo-Rnf" secondAttribute="trailing" id="Y3R-sP-wgr"/>
                                                 <constraint firstAttribute="height" constant="24" id="gFW-i6-tLC"/>
-                                                <constraint firstItem="5Vf-yN-G7h" firstAttribute="leading" secondItem="N7U-6L-TOw" secondAttribute="leading" id="lmy-Lx-x5v"/>
-                                                <constraint firstAttribute="bottom" secondItem="5Vf-yN-G7h" secondAttribute="bottom" id="nPO-xh-EW7"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -183,6 +170,9 @@
                                                     <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="setTimeButtonDidTap:" destination="-1" eventType="touchUpInside" id="vR9-qK-Lfz"/>
+                                            </connections>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

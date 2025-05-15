@@ -10,7 +10,6 @@
 		0540F83BEB096543D2084041 /* Pods_FanNoise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB40C219C19C92489D6358C5 /* Pods_FanNoise.framework */; };
 		2679A8702DD3BE0C00191363 /* AdsIntroCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2679A86D2DD3BE0C00191363 /* AdsIntroCell.swift */; };
 		2679A8712DD3BE0C00191363 /* AdsIntroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2679A86E2DD3BE0C00191363 /* AdsIntroCell.xib */; };
-		2679A8742DD3BEB500191363 /* MainNativeAdIntro.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2679A8732DD3BEB500191363 /* MainNativeAdIntro.xib */; };
 		71A560BF2DA8F812007E8BE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A560BE2DA8F812007E8BE3 /* AppDelegate.swift */; };
 		71A560C32DA8F812007E8BE3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A560C22DA8F812007E8BE3 /* ViewController.swift */; };
 		71A560C82DA8F813007E8BE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71A560C72DA8F813007E8BE3 /* Assets.xcassets */; };
@@ -113,10 +112,12 @@
 		8458FEE82DD33EFA0035BD95 /* AdsSoundCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8458FEE72DD33EFA0035BD95 /* AdsSoundCell.xib */; };
 		8458FEE92DD33EFA0035BD95 /* AdsSoundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458FEE62DD33EFA0035BD95 /* AdsSoundCell.swift */; };
 		8458FEEB2DD343390035BD95 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8458FEEA2DD343390035BD95 /* GoogleService-Info.plist */; };
-		8458FEED2DD343BF0035BD95 /* MainNativeAdSound.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8458FEEC2DD343BF0035BD95 /* MainNativeAdSound.xib */; };
+		8458FEED2DD343BF0035BD95 /* SoundNativeAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8458FEEC2DD343BF0035BD95 /* SoundNativeAd.xib */; };
 		8458FEF02DD348F70035BD95 /* AdsVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458FEEE2DD348F70035BD95 /* AdsVideoCell.swift */; };
 		8458FEF12DD348F70035BD95 /* AdsVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8458FEEF2DD348F70035BD95 /* AdsVideoCell.xib */; };
-		8458FEF32DD349350035BD95 /* MainNativeAdVideo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8458FEF22DD349350035BD95 /* MainNativeAdVideo.xib */; };
+		8458FEF32DD349350035BD95 /* VideoNativeAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8458FEF22DD349350035BD95 /* VideoNativeAd.xib */; };
+		848534F22DD59AB90069E6C9 /* DialogNativeAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848534F12DD59AB90069E6C9 /* DialogNativeAd.xib */; };
+		848534F42DD5C8180069E6C9 /* IntroNativeAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = 848534F32DD5C8180069E6C9 /* IntroNativeAd.xib */; };
 		849FCAC02DBF26680006817F /* TopicSuggestVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849FCABF2DBF26680006817F /* TopicSuggestVideoCell.xib */; };
 		849FCAC12DBF26680006817F /* TopicSuggestVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849FCABE2DBF26680006817F /* TopicSuggestVideoCell.swift */; };
 		84D4F74B2DBF2B2D00328766 /* ItemTopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D4F74A2DBF2B2D00328766 /* ItemTopicCell.xib */; };
@@ -210,7 +211,6 @@
 /* Begin PBXFileReference section */
 		2679A86D2DD3BE0C00191363 /* AdsIntroCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsIntroCell.swift; sourceTree = "<group>"; };
 		2679A86E2DD3BE0C00191363 /* AdsIntroCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsIntroCell.xib; sourceTree = "<group>"; };
-		2679A8732DD3BEB500191363 /* MainNativeAdIntro.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainNativeAdIntro.xib; sourceTree = "<group>"; };
 		71A560BB2DA8F812007E8BE3 /* FanNoise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FanNoise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71A560BE2DA8F812007E8BE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71A560C22DA8F812007E8BE3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -322,10 +322,12 @@
 		8458FEE62DD33EFA0035BD95 /* AdsSoundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsSoundCell.swift; sourceTree = "<group>"; };
 		8458FEE72DD33EFA0035BD95 /* AdsSoundCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsSoundCell.xib; sourceTree = "<group>"; };
 		8458FEEA2DD343390035BD95 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8458FEEC2DD343BF0035BD95 /* MainNativeAdSound.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainNativeAdSound.xib; sourceTree = "<group>"; };
+		8458FEEC2DD343BF0035BD95 /* SoundNativeAd.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SoundNativeAd.xib; sourceTree = "<group>"; };
 		8458FEEE2DD348F70035BD95 /* AdsVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsVideoCell.swift; sourceTree = "<group>"; };
 		8458FEEF2DD348F70035BD95 /* AdsVideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsVideoCell.xib; sourceTree = "<group>"; };
-		8458FEF22DD349350035BD95 /* MainNativeAdVideo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainNativeAdVideo.xib; sourceTree = "<group>"; };
+		8458FEF22DD349350035BD95 /* VideoNativeAd.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoNativeAd.xib; sourceTree = "<group>"; };
+		848534F12DD59AB90069E6C9 /* DialogNativeAd.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DialogNativeAd.xib; sourceTree = "<group>"; };
+		848534F32DD5C8180069E6C9 /* IntroNativeAd.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntroNativeAd.xib; sourceTree = "<group>"; };
 		849FCABE2DBF26680006817F /* TopicSuggestVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSuggestVideoCell.swift; sourceTree = "<group>"; };
 		849FCABF2DBF26680006817F /* TopicSuggestVideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopicSuggestVideoCell.xib; sourceTree = "<group>"; };
 		84D4F7492DBF2B2D00328766 /* ItemTopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTopicCell.swift; sourceTree = "<group>"; };
@@ -777,10 +779,11 @@
 				84F8F5CE2DD49FC10055D5C6 /* AdsNativePlayCell.xib */,
 				8458FEEE2DD348F70035BD95 /* AdsVideoCell.swift */,
 				8458FEEF2DD348F70035BD95 /* AdsVideoCell.xib */,
-				8458FEEC2DD343BF0035BD95 /* MainNativeAdSound.xib */,
+				8458FEEC2DD343BF0035BD95 /* SoundNativeAd.xib */,
 				84F8F5CB2DD49F680055D5C6 /* MainNativePlayAd.xib */,
-				8458FEF22DD349350035BD95 /* MainNativeAdVideo.xib */,
-				2679A8732DD3BEB500191363 /* MainNativeAdIntro.xib */,
+				8458FEF22DD349350035BD95 /* VideoNativeAd.xib */,
+				848534F12DD59AB90069E6C9 /* DialogNativeAd.xib */,
+				848534F32DD5C8180069E6C9 /* IntroNativeAd.xib */,
 			);
 			path = AdsCell;
 			sourceTree = "<group>";
@@ -1114,11 +1117,11 @@
 				71A5617E2DA8FF09007E8BE3 /* MPLUS2-ExtraBold.ttf in Resources */,
 				84F8F5CA2DD49C750055D5C6 /* PreviewVideoAdView.xib in Resources */,
 				71A560C82DA8F813007E8BE3 /* Assets.xcassets in Resources */,
-				2679A8742DD3BEB500191363 /* MainNativeAdIntro.xib in Resources */,
-				8458FEED2DD343BF0035BD95 /* MainNativeAdSound.xib in Resources */,
+				8458FEED2DD343BF0035BD95 /* SoundNativeAd.xib in Resources */,
 				874314052DBF7D620042243C /* NaturalSoundWhiteNoiseCell.xib in Resources */,
 				8458FEE82DD33EFA0035BD95 /* AdsSoundCell.xib in Resources */,
 				8799A0E62DCAF5C000C4D6AE /* ItemSoundCell.xib in Resources */,
+				848534F42DD5C8180069E6C9 /* IntroNativeAd.xib in Resources */,
 				874313FD2DBF7CCE0042243C /* NaturalSoundWhiteNoiseVC.xib in Resources */,
 				71A5617C2DA8FF09007E8BE3 /* MPLUS2-Bold.ttf in Resources */,
 				71A561822DA8FF09007E8BE3 /* MPLUS2-Black.ttf in Resources */,
@@ -1147,12 +1150,13 @@
 				71A5617D2DA8FF09007E8BE3 /* MPLUS2-Thin.ttf in Resources */,
 				8761EFE42DC4CBA700AB4F8D /* ListItemSoundByHashtagCell.xib in Resources */,
 				8743139F2DBB67800042243C /* TabbarVC.xib in Resources */,
-				8458FEF32DD349350035BD95 /* MainNativeAdVideo.xib in Resources */,
+				8458FEF32DD349350035BD95 /* VideoNativeAd.xib in Resources */,
 				71A561842DA8FF09007E8BE3 /* MPLUS2-Medium.ttf in Resources */,
 				8458FEF12DD348F70035BD95 /* AdsVideoCell.xib in Resources */,
 				84F8F5C22DD34BFE0055D5C6 /* AdsPreviewVideoCell.xib in Resources */,
 				874313BE2DBB98C30042243C /* CategoryCell.xib in Resources */,
 				8757BFE22DB7A06600951211 /* LanguageCell.xib in Resources */,
+				848534F22DD59AB90069E6C9 /* DialogNativeAd.xib in Resources */,
 				874313B72DBB98180042243C /* HomeVC.xib in Resources */,
 				8799A0E22DCAF5B200C4D6AE /* ItemHashtagCell.xib in Resources */,
 				8456635C2DCC568D00C33944 /* Lexend-SemiBold.ttf in Resources */,
