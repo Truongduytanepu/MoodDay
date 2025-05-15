@@ -29,6 +29,8 @@ class IntroVC: BaseVC<IntroPresenter, IntroView> {
     @IBOutlet private weak var introFirstView: UIView!
     @IBOutlet private weak var introSecondView: UIView!
     @IBOutlet private weak var introThirdView: UIView!
+    @IBOutlet private weak var introFourthView: UIView!
+    @IBOutlet private weak var introFifthView: UIView!
     @IBOutlet private weak var introLastView: UIView!
     @IBOutlet private weak var bottomConstraintContinue: NSLayoutConstraint!
     @IBOutlet private weak var heightConstraintAds: NSLayoutConstraint!
@@ -42,7 +44,9 @@ class IntroVC: BaseVC<IntroPresenter, IntroView> {
         "Find the perfect fan sound",
         "Not just a sound, but experience",
         "Find the perfect sleep sound",
-        "Explore the soothing, sound of fans"
+        "Explore the soothing, sound of fans",
+        "Melt stress away with white noise",
+        "Relax Your Mind"
     ]
     
     // MARK: - Life Cycle
@@ -115,7 +119,7 @@ class IntroVC: BaseVC<IntroPresenter, IntroView> {
         self.scrollView.delegate = self
         
         // Sắp xếp các introView cạnh nhau
-        let introViews = [self.introFirstView, self.introSecondView, self.introThirdView, self.introLastView]
+        let introViews = [self.introFirstView, self.introSecondView, self.introThirdView, self.introFourthView, self.introFifthView, self.introLastView]
         for (index, view) in introViews.enumerated() {
             view?.frame.origin.x = CGFloat(index) * self.scrollView.frame.width
         }
@@ -223,7 +227,7 @@ extension IntroVC: UIScrollViewDelegate {
             self.titleLabel.text = self.titles[currentPage]
         }
         
-        if currentPage == 1 || currentPage == 3 {
+        if currentPage == 1 || currentPage == 3 || currentPage == 5 {
             self.applyCollapsedAdLayout()
             self.nativeAdsView.alpha = 0
         } else {
