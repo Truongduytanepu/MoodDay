@@ -289,6 +289,8 @@ extension ListItemSoundVC: UICollectionViewDelegate {
         let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
         let index = indexPath.row - adCountBefore
         
+        self.view.disableInteractiveFor(seconds: 1)
+
         if self.isAdsPosition(at: indexPath) {
             return
         }
@@ -301,7 +303,7 @@ extension ListItemSoundVC: UICollectionViewDelegate {
                 let nameHashtag = self.presenter.getHashtag(sound: self.sounds)[indexPath.row]
                 
                 Analytics.logEvent("List Item Sound", parameters: [
-                    "name": "LIS_HashTag_\(nameHashtag)"
+                    "name": "LIS_HashTag_\(nameHashtag.replaceSpaceAnalytics())"
                 ])
                 
                 self.startListItemSoundByHashtag(
@@ -316,7 +318,7 @@ extension ListItemSoundVC: UICollectionViewDelegate {
                       let navigationController = self.navigationController else { return }
                 
                 Analytics.logEvent("List Item Sound", parameters: [
-                    "name": "LIS_Sound_\(self.sounds[index].name ?? "")"
+                    "name": "LIS_Sound_\(self.sounds[index].name?.replaceSpaceAnalytics() ?? "")"
                 ])
                 
                 self.startPlaySound(
@@ -332,7 +334,7 @@ extension ListItemSoundVC: UICollectionViewDelegate {
                       let navigationController = self.navigationController else { return }
                 
                 Analytics.logEvent("List Item Sound", parameters: [
-                    "name": "LIS_Video_\(self.videos[index].name ?? "")"
+                    "name": "LIS_Video_\(self.videos[index].name?.replaceSpaceAnalytics() ?? "")"
                 ])
                 
                 self.startPlayVideo(

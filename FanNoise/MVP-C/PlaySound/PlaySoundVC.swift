@@ -91,15 +91,15 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     }
     
     @objc private func notificationNetwork() {
-        if !self.isShow { return }
-        
-        if !MonitorNetwork.shared.isConnectedNetwork() {
+        if MonitorNetwork.shared.isConnectedNetwork() {
+            self.startSoundSmoothlyIfNeed()
+        } else {
             self.stopSoundIfNeed()
-            self.postAlert("Notification", message: "No Interner")
-            return
+            self.postAlert("Notification", message: "No Internet") { [weak self] in
+                guard let self = self else {return}
+                self.notificationNetwork()
+            }
         }
-        
-        self.startSoundSmoothlyIfNeed()
     }
     
     private func setupObservers() {
@@ -595,6 +595,8 @@ extension PlaySoundVC: UICollectionViewDelegate {
         let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
         let index = indexPath.row - adCountBefore
         
+        self.view.disableInteractiveFor(seconds: 1)
+
         if !MonitorNetwork.shared.isConnectedNetwork() {
             self.stopSoundIfNeed()
             self.postAlert("Notification", message: "No Interner")
@@ -615,7 +617,7 @@ extension PlaySoundVC: UICollectionViewDelegate {
                 let soundSelected = self.presenter.getLikeSound()[index]
                 
                 Analytics.logEvent("Play Sound", parameters: [
-                    "name": "PS_Click_\(soundSelected.name ?? "")"
+                    "name": "PS_Click_\(soundSelected.name?.replaceSpaceAnalytics() ?? "")"
                 ])
                 
                 self.soundItem = soundSelected
@@ -633,7 +635,7 @@ extension PlaySoundVC: UICollectionViewDelegate {
                 let videos = self.presenter.getFunVideo()
                 
                 Analytics.logEvent("Play Sound", parameters: [
-                    "name": "PS_Click_\(videos[index].name ?? "")"
+                    "name": "PS_Click_\(videos[index].name?.replaceSpaceAnalytics() ?? "")"
                 ])
                 
                 self.startPreviewVideo(
@@ -652,7 +654,7 @@ extension PlaySoundVC: UICollectionViewDelegate {
                 let soundSelected = self.presenter.getOtherSound()[index]
                 
                 Analytics.logEvent("Play Sound", parameters: [
-                    "name": "PS_Click_\(soundSelected.name ?? "")"
+                    "name": "PS_Click_\(soundSelected.name?.replaceSpaceAnalytics() ?? "")"
                 ])
                 
                 self.soundItem = soundSelected

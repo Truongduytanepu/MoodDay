@@ -7,6 +7,9 @@
 
 import UIKit
 import GoogleMobileAds
+import AppTrackingTransparency
+import AdjustSdk
+import AdSupport
 
 private struct Const {
     static let TimeInterval = 0.02
@@ -33,17 +36,16 @@ class SplashVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.setupGradient()
+        self.requestPermissionATTracking()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         self.customProgressView()
     }
     
     // MARK: - Config
     private func config() {
-        self.startLoading()
         self.setupFont()
     }
     
@@ -51,6 +53,48 @@ class SplashVC: UIViewController {
         self.loadingLabel.font = AppFont.font(.mPLUS2Regular, size: 9)
         self.titleLabel.font = AppFont.font(.mPLUS2Bold, size: 24)
         self.descriptionLabel.font = AppFont.font(.mPLUS2Regular, size: 13)
+    }
+    
+    private func requestPermissionATTracking() {
+        ATTrackingManager.requestTrackingAuthorization {[weak self] (status) in
+            guard let self = self else {return}
+            switch status {
+            case .denied:
+                DispatchQueue.main.async {
+                    self.startLoading()
+                    self.configAdj()
+                }
+                
+            case .notDetermined:
+                self.configAdj()
+            case .restricted:
+                self.configAdj()
+            case .authorized:
+                DispatchQueue.main.async {
+                    self.startLoading()
+                    self.configAdj(token: self.getDeviceIdentifier()?.uuidString ?? "96h0y7wnhmo0")
+                }
+                
+            @unknown default:
+                fatalError("Invalid authorization status")
+            }
+        }
+    }
+    
+    private func getDeviceIdentifier() -> UUID? {
+        // Lấy IDFA nếu được phép
+        if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
+            return ASIdentifierManager.shared().advertisingIdentifier
+        }
+        
+        // Fallback: IDFV + Keychain
+        return UIDevice.current.identifierForVendor
+    }
+    
+    private func configAdj(token: String = "96h0y7wnhmo0") {
+        let yourAppToken = token
+        let event = ADJEvent(eventToken: yourAppToken)
+        Adjust.trackEvent(event)
     }
     
     private func setupGradient() {
@@ -148,7 +192,6 @@ class SplashVC: UIViewController {
         self.loadAdTimeoutTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { [weak self] _ in
             guard let self = self else { return }
             print("Load AOA timeout after 10 seconds")
-            self.navigateNextScreen()
         }
     }
     

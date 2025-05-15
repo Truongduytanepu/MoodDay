@@ -76,14 +76,14 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     }
     
     @objc private func notificationNetwork() {
-        if !self.isShow { return }
-        
-        if !MonitorNetwork.shared.isConnectedNetwork() {
-            self.postAlert("Notification", message: "No Interner")
-            return
+        if MonitorNetwork.shared.isConnectedNetwork() {
+            self.collectionView.reloadData()
+        } else {
+            self.postAlert("Notification", message: "No Internet") { [weak self] in
+                guard let self = self else {return}
+                self.notificationNetwork()
+            }
         }
-        
-        self.collectionView.reloadData()
     }
     
     private func setUpData() {
@@ -334,7 +334,7 @@ extension PreviewVideoVC: UICollectionViewDelegate {
 
             if let video = video {
                 Analytics.logEvent("Preview Video", parameters: [
-                    "name": "PV_\(video.name ?? "")"
+                    "name": "PV_\(video.name?.replaceSpaceAnalytics() ?? "")"
                 ])
             }
         }
@@ -441,7 +441,7 @@ extension PreviewVideoVC: UICollectionViewDataSource {
                 
                 cell.callBackUpdateData = { [weak self] name in
                     Analytics.logEvent("Preview Video", parameters: [
-                        "name": "PV_Select_\(name)"
+                        "name": "PV_Select_\(name.replaceSpaceAnalytics())"
                     ])
                     
                     self?.presenter.updateData(name: name)

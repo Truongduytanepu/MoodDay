@@ -36,6 +36,7 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.configNetwork()
         self.setupGradient()
     }
     
@@ -48,18 +49,17 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
         self.setupFont()
         self.setupCollectionview()
         self.loadCategory()
-        self.configNetwork()
     }
     
     @objc private func notificationNetwork() {
-        if !self.isShow { return }
-        
-        if !MonitorNetwork.shared.isConnectedNetwork() {
-            self.postAlert("Notification", message: "No Internet")
-            return
+        if MonitorNetwork.shared.isConnectedNetwork() {
+            self.loadCategory()
+        } else {
+            self.postAlert("Notification", message: "No Internet") { [weak self] in
+                guard let self = self else {return}
+                self.notificationNetwork()
+            }
         }
-        
-        self.loadCategory()
     }
     
     private func configNetwork() {
@@ -119,6 +119,7 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
 extension HomeVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let action: () -> Void
+        self.view.disableInteractiveFor(seconds: 1)
         
         Analytics.logEvent("Home", parameters: [
             "name": "Home_Category_\(homeCategories[indexPath.row].name ?? "")"
@@ -133,7 +134,7 @@ extension HomeVC: UICollectionViewDelegate {
                 guard let navigationController = self.navigationController else {
                     return
                 }
-                
+                                
                 self.startNaturalSoundWhiteNoiseCoordinator(navigationController: navigationController,homeCategory: homeCategories[indexPath.row])
             }
         } else {
@@ -149,6 +150,7 @@ extension HomeVC: UICollectionViewDelegate {
                 let categoryID = self.homeCategories[indexPath.row].id ?? ""
                 let sound = self.presenter.getSoundByCategoryId(categoryId: categoryID)
                 let video = self.presenter.getVideoByCategoryId(categoryId: categoryID)
+                
                 self.startListItemSound(navigationController: navigationController,
                                         sound: sound,
                                         video: video,

@@ -171,6 +171,8 @@ extension ListItemSoundByHashtagVC: UICollectionViewDelegate {
             return
         }
         
+        self.view.disableInteractiveFor(seconds: 1)
+
         let action = { [weak self] in
             guard let self = self,
                   let navigationController = self.navigationController else { return }
@@ -183,7 +185,7 @@ extension ListItemSoundByHashtagVC: UICollectionViewDelegate {
                 let sound = sounds[soundIndex]
                 
                 Analytics.logEvent("List Item Sound By Hash Tag", parameters: [
-                    "name": "LISBHT_Category_\(sound.name ?? "")"
+                    "name": "LISBHT_Category_\(sound.name?.replaceSpaceAnalytics() ?? "")"
                 ])
                 
                 self.startPlaySound(

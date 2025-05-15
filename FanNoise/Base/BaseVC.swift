@@ -230,7 +230,7 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
             }
         }
     }
-    
+
     private func loadAppOpenAd() {
         self.isPresentAOA = true
         self.showLoadingView()

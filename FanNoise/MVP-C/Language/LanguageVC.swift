@@ -7,10 +7,12 @@
 
 import UIKit
 import FirebaseAnalytics
+import GoogleMobileAds
 
 private struct Const {
     static let sizeHeight: Float = 48
     static let minimumInteritemSpacing: CGFloat = 12
+    static let insetCollection: CGFloat = 15
 }
 
 class LanguageVC: BaseVC<LanguagePresenter, LanguageView> {
@@ -18,9 +20,13 @@ class LanguageVC: BaseVC<LanguagePresenter, LanguageView> {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var acceptButton: UIButton!
     @IBOutlet private weak var navigationLabel: UILabel!
+    @IBOutlet private weak var nativeView: UIView!
     
     var coordinator : LanguageCoordinator!
     private var choseLanguage: Language?
+    private var nativeAdLoader = NativeAdLoader()
+    private var gadNativeAdView: NativeAdView!
+    private var nativeAdsView: UIView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -28,11 +34,17 @@ class LanguageVC: BaseVC<LanguagePresenter, LanguageView> {
         self.config()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.loadNativeAds()
+    }
+    
     // MARK: - Config
     private func config() {
         self.choseLanguage = LanguageManager.shared.getChoseLanguage()
         self.setupCollectionView()
         self.setupFont()
+        self.configNativeAdsView()
     }
     
     private func setupFont() {
@@ -50,6 +62,47 @@ class LanguageVC: BaseVC<LanguagePresenter, LanguageView> {
             let tabbarCoordinator = TabbarCoordinator(navigation: navigationController)
             tabbarCoordinator.start()
         }
+    }
+    
+    private func configNativeAdsView() {
+        self.nativeAdsView = UIView()
+        self.nativeAdsView.backgroundColor = .white
+        self.nativeAdsView.translatesAutoresizingMaskIntoConstraints = false
+        self.nativeView.addSubview(self.nativeAdsView)
+        self.nativeAdsView.fitSuperviewConstraint()
+        
+        self.gadNativeAdView = Bundle.main.loadNibNamed("IntroNativeAd", owner: nil, options: nil)!.first as! NativeAdView
+        self.gadNativeAdView.translatesAutoresizingMaskIntoConstraints = false
+        self.nativeAdsView.addSubview(self.gadNativeAdView)
+        self.gadNativeAdView.fitSuperviewConstraint()
+    }
+    
+    private func loadNativeAds() {
+        self.nativeAdLoader.loadNativeAd(adCnt: 1, viewController: self) { [weak self] in
+            guard let self else { return }
+            if !self.nativeAdLoader.nativeAds.isEmpty {
+                DispatchQueue.main.async {
+                    self.bindNativeAds(gadNativeAdView: self.gadNativeAdView, nativeAd: self.nativeAdLoader.nativeAds[0])
+                }
+            }
+        }
+    }
+    
+    private func bindNativeAds(gadNativeAdView: NativeAdView, nativeAd: NativeAd) {
+        gadNativeAdView.nativeAd = nativeAd
+        (gadNativeAdView.headlineView as? UILabel)?.text = nativeAd.headline
+        gadNativeAdView.mediaView?.mediaContent = nativeAd.mediaContent
+        
+        (gadNativeAdView.bodyView as? UILabel)?.text = nativeAd.body
+        gadNativeAdView.bodyView?.isHidden = nativeAd.body == nil
+
+        (gadNativeAdView.iconView as? UIImageView)?.image = nativeAd.icon?.image
+        gadNativeAdView.iconView?.isHidden = nativeAd.icon == nil
+
+        (gadNativeAdView.advertiserView as? UILabel)?.text = nativeAd.advertiser
+        gadNativeAdView.advertiserView?.isHidden = nativeAd.advertiser == nil
+
+        gadNativeAdView.callToActionView?.isUserInteractionEnabled = false
     }
     
     // MARK: - Action
@@ -112,11 +165,18 @@ extension LanguageVC: UICollectionViewDataSource {
 extension LanguageVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: CGFloat(Const.sizeHeight))
+        return CGSize(width: collectionView.bounds.width - Const.insetCollection * 2, height: CGFloat(Const.sizeHeight))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return Const.minimumInteritemSpacing
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0,
+                            left: Const.insetCollection,
+                            bottom: Const.insetCollection,
+                            right: Const.insetCollection)
     }
 }
 

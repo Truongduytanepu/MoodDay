@@ -91,6 +91,10 @@ extension String {
     func replaceSpace() -> String {
         return self.replacingOccurrences(of: ".", with: "") .replacingOccurrences(of: "×", with: "").replacingOccurrences(of: " ", with: "_")
     }
+    
+    func replaceSpaceAnalytics() -> String {
+        return self.replacingOccurrences(of: " ", with: "_")
+    }
 }
 
 extension String {

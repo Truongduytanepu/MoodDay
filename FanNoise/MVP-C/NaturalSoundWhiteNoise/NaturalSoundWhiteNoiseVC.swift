@@ -115,6 +115,8 @@ class NaturalSoundWhiteNoiseVC: BaseVC<NaturalSoundWhiteNoisePresenter, NaturalS
 
 extension NaturalSoundWhiteNoiseVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.view.disableInteractiveFor(seconds: 1)
+
         let action = { [weak self] in
             guard let self = self else {
                 return
@@ -127,7 +129,7 @@ extension NaturalSoundWhiteNoiseVC: UICollectionViewDelegate {
             let videoByName = self.presenter.getVideoByCategoryName(nameCategory: sounds.name ?? "")
             
             Analytics.logEvent("Natural Sound White Noise", parameters: [
-                "name": "NSWN_Category_\(sounds.name ?? "")"
+                "name": "NSWN_Category_\(sounds.name?.replaceSpaceAnalytics() ?? "")"
             ])
             
             self.startListItemSound(navigationController: navigationController,

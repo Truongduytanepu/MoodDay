@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,15 +12,16 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroVC" customModule="FanNoise" customModuleProvider="target">
             <connections>
                 <outlet property="bottomConstraintContinue" destination="PXf-u2-kNC" id="ckX-er-XjA"/>
+                <outlet property="containAdsView" destination="awJ-BP-Ajg" id="bUO-I6-7NX"/>
                 <outlet property="continueButton" destination="Xff-JN-IN7" id="b5N-yn-vcM"/>
-                <outlet property="heightConstraintAds" destination="6YX-so-KBX" id="kXG-gj-sIe"/>
+                <outlet property="heightConstraintAds" destination="PLc-YR-3dw" id="IuT-rl-D9t"/>
                 <outlet property="introFifthView" destination="J55-BS-0Nm" id="Iil-eK-3TN"/>
                 <outlet property="introFirstView" destination="U0s-ks-uM8" id="ViD-fb-yPV"/>
                 <outlet property="introFourthView" destination="a6M-mm-jJq" id="ULh-7R-Hco"/>
                 <outlet property="introLastView" destination="mhh-08-bjv" id="zWz-dU-Ujs"/>
                 <outlet property="introSecondView" destination="30U-mS-jQa" id="kGl-KL-sp9"/>
                 <outlet property="introThirdView" destination="JNJ-1V-E6H" id="b6H-GY-HUZ"/>
-                <outlet property="nativeView" destination="awJ-BP-Ajg" id="r69-dY-7iN"/>
+                <outlet property="nativeView" destination="uUw-Um-5dq" id="mrk-GT-Hr5"/>
                 <outlet property="pageControl" destination="aAe-SF-CuF" id="Csu-uG-j2t"/>
                 <outlet property="scrollView" destination="UlC-IO-NSt" id="gDo-5z-KnV"/>
                 <outlet property="titleLabel" destination="qZG-WF-vTM" id="BSX-uY-MD8"/>
@@ -165,7 +166,7 @@
                     </constraints>
                 </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xff-JN-IN7">
-                    <rect key="frame" x="10" y="587" width="373" height="38"/>
+                    <rect key="frame" x="10" y="519" width="373" height="38"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="38" id="GnR-ni-QXt"/>
                     </constraints>
@@ -177,15 +178,28 @@
                         <action selector="continueButtonDidTap:" destination="-1" eventType="touchUpInside" id="c6d-od-TWd"/>
                     </connections>
                 </button>
-                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="awJ-BP-Ajg">
-                    <rect key="frame" x="0.0" y="652" width="393" height="200"/>
-                    <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="awJ-BP-Ajg">
+                    <rect key="frame" x="0.0" y="584" width="393" height="268"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUw-Um-5dq">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="200"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="200" id="PLc-YR-3dw"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="ebr-dx-spO"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="200" id="6YX-so-KBX"/>
+                        <constraint firstItem="uUw-Um-5dq" firstAttribute="leading" secondItem="ebr-dx-spO" secondAttribute="leading" id="3ny-Zc-xUJ"/>
+                        <constraint firstItem="ebr-dx-spO" firstAttribute="trailing" secondItem="uUw-Um-5dq" secondAttribute="trailing" id="4Wm-gs-rU1"/>
+                        <constraint firstItem="ebr-dx-spO" firstAttribute="bottom" secondItem="uUw-Um-5dq" secondAttribute="bottom" id="S3f-QU-TY2"/>
+                        <constraint firstItem="uUw-Um-5dq" firstAttribute="top" secondItem="ebr-dx-spO" secondAttribute="top" id="p9V-5d-G0z"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZG-WF-vTM">
-                    <rect key="frame" x="10" y="523.33333333333337" width="373" height="28"/>
+                    <rect key="frame" x="10" y="455.33333333333331" width="373" height="28"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="28" id="4CB-H9-3CT"/>
                     </constraints>
@@ -194,7 +208,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="6" currentPage="3" translatesAutoresizingMaskIntoConstraints="NO" id="aAe-SF-CuF">
-                    <rect key="frame" x="133.66666666666666" y="556.33333333333337" width="125.99999999999997" height="25.666666666666629"/>
+                    <rect key="frame" x="133.66666666666666" y="488.33333333333331" width="125.99999999999997" height="25.666666666666686"/>
                 </pageControl>
             </subviews>
             <viewLayoutGuide key="safeArea" id="e0H-VE-CwZ"/>
