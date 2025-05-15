@@ -102,7 +102,7 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
         self.titleLabel = UILabel()
         self.titleLabel.text = "Welcome back"
         self.titleLabel.textColor = .black
-        self.titleLabel.font = UIFont(name: "Dosis-Bold", size: 35)
+        self.titleLabel.font = AppFont.font(.mPLUS2Bold, size: 35)
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.loadingView.addSubview(self.titleLabel)
         NSLayoutConstraint.activate([

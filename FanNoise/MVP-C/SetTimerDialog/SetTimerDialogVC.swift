@@ -10,8 +10,6 @@ import GoogleMobileAds
 
 private struct Const {
     static let loopCount = 100
-    static let minuteDefault = 5
-    static let secondDefault = 30
     static let marginMinute: CGFloat = 20
     static let marginSecond: CGFloat = 25
     static let widthMinuteAndSecond: CGFloat = 40
@@ -41,6 +39,8 @@ class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
     
     var minutesData: [Int] = []
     var secondsData: [Int] = []
+    var minuteDefault = 5
+    var secondDefault = 30
     
     private let minLabel = UILabel()
     private let secLabel = UILabel()
@@ -71,8 +71,8 @@ class SetTimerDialogVC: BaseVC<SetTimerDialogPresenter, SetTimerDialogView> {
         self.configNativeAdsView()
         self.setupTimerData()
         self.setupPickerView()
-        self.scrollToValue(minute: Const.minuteDefault,
-                           second: Const.secondDefault)
+        self.scrollToValue(minute: self.minuteDefault,
+                           second: self.secondDefault)
         self.setupUnitLabels()
         self.setupOnSwitch()
     }

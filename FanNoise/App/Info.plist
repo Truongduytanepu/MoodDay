@@ -471,6 +471,8 @@
 		<string>MPLUS2-Medium.ttf</string>
 		<string>Lexend-SemiBold.ttf</string>
 	</array>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>App need to accept your permission to collect and enhance user experience</string>
 	<key>UIFileSharingEnabled</key>
 	<false/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>

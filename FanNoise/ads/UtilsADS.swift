@@ -63,7 +63,7 @@ class UtilsADS: NSObject {
 
     // MARK: - Key test
     static let keyBanner = "ca-app-pub-3940256099942544/2934735716"
-    static let keyNativeFull = "ca-app-pub-3940256099942544/4411468910"
+    static let keyNativeFull = "ca-app-pub-3940256099942544/3986624511"
     static let keyReward = "ca-app-pub-3940256099942544/1712485313"
     static let keyNativeListVideo = "ca-app-pub-3940256099942544/3986624511"
     static let keyNativeListSound = "ca-app-pub-3940256099942544/3986624511"

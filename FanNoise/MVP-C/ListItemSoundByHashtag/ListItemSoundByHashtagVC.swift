@@ -88,7 +88,7 @@ class ListItemSoundByHashtagVC: BaseVC<ListItemSoundByHashtagPresenter, ListItem
     
     private func setupCollectionView() {
         self.collectionView.registerCell(type: ListItemSoundByHashtagCell.self)
-        self.collectionView.registerCell(type: AdsCell.self)
+        self.collectionView.registerCell(type: AdsSoundCell.self)
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -129,7 +129,7 @@ class ListItemSoundByHashtagVC: BaseVC<ListItemSoundByHashtagPresenter, ListItem
     }
     
     private func configureAdsCell(at indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueCell(type: AdsCell.self, indexPath: indexPath) else {
+        guard let cell = collectionView.dequeueCell(type: AdsSoundCell.self, indexPath: indexPath) else {
             return UICollectionViewCell()
         }
         

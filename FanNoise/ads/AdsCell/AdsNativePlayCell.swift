@@ -1,5 +1,5 @@
 //
-//  AdsPreviewVideoCell.swift
+//  AdsNativePlayCell.swift
 //  FanNoise
 //
 //  Created by ADMIN on 5/13/25.
@@ -8,7 +8,7 @@
 import UIKit
 import GoogleMobileAds
 
-class AdsPreviewVideoCell: UICollectionViewCell {
+class AdsNativePlayCell: UICollectionViewCell {
 
     @IBOutlet private weak var containerView: UIView!
 
@@ -16,7 +16,7 @@ class AdsPreviewVideoCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        nativeAdView = Bundle.main.loadNibNamed("PreviewVideoAdView", owner: nil, options: nil)!.first as! NativeAdView
+        nativeAdView = Bundle.main.loadNibNamed("MainNativePlayAd", owner: nil, options: nil)!.first as! NativeAdView
         self.containerView.addSubview(self.nativeAdView)
         self.nativeAdView.fitSuperviewConstraint()
     }

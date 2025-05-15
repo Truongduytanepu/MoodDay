@@ -10,9 +10,6 @@
         <array key="Dosis-Bold.ttf">
             <string>Dosis-Bold</string>
         </array>
-        <array key="Dosis-SemiBold.ttf">
-            <string>Dosis-SemiBold</string>
-        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -21,14 +18,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Headline" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beR-eV-DX1">
-                    <rect key="frame" x="15" y="613.5" width="345" height="12"/>
-                    <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="10"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Headline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beR-eV-DX1">
+                    <rect key="frame" x="15" y="647" width="345" height="12"/>
+                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="11"/>
                     <color key="textColor" systemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="fNp-yu-K4i" customClass="GADMediaView">
-                    <rect key="frame" x="15" y="25" width="345" height="576.5"/>
+                    <rect key="frame" x="15" y="25" width="345" height="610"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lp1-oz-XOs">
                     <rect key="frame" x="0.0" y="0.0" width="30" height="25"/>
@@ -46,33 +43,22 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Body that is really really long and can take up to two lines or sometimes even more." lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEQ-D9-2Vv">
-                    <rect key="frame" x="15" y="633.5" width="345" height="23.5"/>
-                    <fontDescription key="fontDescription" name="Dosis-SemiBold" family="Dosis" pointSize="10"/>
-                    <color key="textColor" systemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="PEQ-D9-2Vv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="1kG-9D-rQO"/>
                 <constraint firstItem="lp1-oz-XOs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4Fv-Tb-e40"/>
-                <constraint firstAttribute="bottom" secondItem="PEQ-D9-2Vv" secondAttribute="bottom" constant="10" id="8bb-sz-YZU"/>
+                <constraint firstAttribute="bottom" secondItem="beR-eV-DX1" secondAttribute="bottom" constant="8" id="5HO-Fj-LcU"/>
                 <constraint firstItem="fNp-yu-K4i" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9bs-M3-soC"/>
                 <constraint firstAttribute="trailing" secondItem="beR-eV-DX1" secondAttribute="trailing" constant="15" id="ACu-mQ-mbh"/>
-                <constraint firstItem="fNp-yu-K4i" firstAttribute="top" secondItem="lp1-oz-XOs" secondAttribute="bottom" id="H4S-Bp-rqZ"/>
-                <constraint firstItem="fNp-yu-K4i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="HGi-5i-fbi"/>
+                <constraint firstAttribute="trailing" secondItem="fNp-yu-K4i" secondAttribute="trailing" constant="15" id="CEL-r0-0wd"/>
                 <constraint firstItem="beR-eV-DX1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="Ihm-yU-GwN"/>
                 <constraint firstItem="lp1-oz-XOs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Kap-sZ-4AY"/>
-                <constraint firstItem="PEQ-D9-2Vv" firstAttribute="centerX" secondItem="beR-eV-DX1" secondAttribute="centerX" id="OIk-AD-5sc"/>
                 <constraint firstItem="beR-eV-DX1" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="QeR-Z1-Hjf"/>
-                <constraint firstAttribute="trailing" secondItem="fNp-yu-K4i" secondAttribute="trailing" constant="15" id="Zgj-6l-6h8"/>
-                <constraint firstAttribute="trailing" secondItem="PEQ-D9-2Vv" secondAttribute="trailing" constant="15" id="Zp1-LH-hmC"/>
                 <constraint firstItem="beR-eV-DX1" firstAttribute="top" secondItem="fNp-yu-K4i" secondAttribute="bottom" constant="12" id="fwU-Jf-Wcg"/>
-                <constraint firstItem="PEQ-D9-2Vv" firstAttribute="top" secondItem="beR-eV-DX1" secondAttribute="bottom" constant="8" id="jVF-fm-x8E"/>
+                <constraint firstItem="fNp-yu-K4i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="jmP-iD-dAl"/>
+                <constraint firstItem="fNp-yu-K4i" firstAttribute="top" secondItem="lp1-oz-XOs" secondAttribute="bottom" id="zGB-gy-Q8g"/>
             </constraints>
             <connections>
-                <outlet property="bodyView" destination="PEQ-D9-2Vv" id="Gpd-Q6-Byv"/>
                 <outlet property="headlineView" destination="beR-eV-DX1" id="d1E-ed-yel"/>
                 <outlet property="mediaView" destination="fNp-yu-K4i" id="624-ZP-L04"/>
             </connections>

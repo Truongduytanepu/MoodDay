@@ -28,7 +28,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="fNp-yu-K4i" customClass="GADMediaView">
-                    <rect key="frame" x="15" y="12" width="345" height="589.5"/>
+                    <rect key="frame" x="15" y="25" width="345" height="576.5"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lp1-oz-XOs">
                     <rect key="frame" x="0.0" y="0.0" width="30" height="25"/>
@@ -69,7 +69,7 @@
                 <constraint firstItem="beR-eV-DX1" firstAttribute="top" secondItem="fNp-yu-K4i" secondAttribute="bottom" constant="12" id="fwU-Jf-Wcg"/>
                 <constraint firstItem="PEQ-D9-2Vv" firstAttribute="top" secondItem="beR-eV-DX1" secondAttribute="bottom" constant="8" id="jVF-fm-x8E"/>
                 <constraint firstItem="fNp-yu-K4i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="jmP-iD-dAl"/>
-                <constraint firstItem="fNp-yu-K4i" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="wWU-7I-P06"/>
+                <constraint firstItem="fNp-yu-K4i" firstAttribute="top" secondItem="lp1-oz-XOs" secondAttribute="bottom" id="y4y-3D-pQc"/>
             </constraints>
             <connections>
                 <outlet property="bodyView" destination="PEQ-D9-2Vv" id="Gpd-Q6-Byv"/>

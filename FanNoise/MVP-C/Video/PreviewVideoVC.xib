@@ -42,7 +42,7 @@
                         <constraint firstItem="4T4-XP-Kki" firstAttribute="leading" secondItem="sYb-wr-iA9" secondAttribute="leading" id="iDZ-dP-vKK"/>
                     </constraints>
                 </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="dN6-I0-jFk">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="dN6-I0-jFk">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="734"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nC6-Al-CGv">
@@ -53,12 +53,12 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1PO-QD-e4b">
-                    <rect key="frame" x="0.0" y="118" width="393" height="30"/>
+                    <rect key="frame" x="0.0" y="118" width="393" height="50"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WE7-PM-K55">
-                            <rect key="frame" x="12" y="3" width="24" height="24"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WE7-PM-K55">
+                            <rect key="frame" x="345" y="9" width="32" height="32"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="24" id="6sp-Wn-kBW"/>
+                                <constraint firstAttribute="width" constant="32" id="6sp-Wn-kBW"/>
                                 <constraint firstAttribute="width" secondItem="WE7-PM-K55" secondAttribute="height" id="NZL-nh-fCq"/>
                             </constraints>
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -72,9 +72,9 @@
                     <viewLayoutGuide key="safeArea" id="nlC-Ov-sRa"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="Bxr-J8-ZBQ"/>
+                        <constraint firstAttribute="height" constant="50" id="Bxr-J8-ZBQ"/>
                         <constraint firstItem="WE7-PM-K55" firstAttribute="centerY" secondItem="nlC-Ov-sRa" secondAttribute="centerY" id="lbb-cs-NVU"/>
-                        <constraint firstItem="WE7-PM-K55" firstAttribute="leading" secondItem="nlC-Ov-sRa" secondAttribute="leading" constant="12" id="o1n-GU-4bq"/>
+                        <constraint firstItem="nlC-Ov-sRa" firstAttribute="trailing" secondItem="WE7-PM-K55" secondAttribute="trailing" constant="16" id="tzB-x3-vcS"/>
                     </constraints>
                 </view>
             </subviews>

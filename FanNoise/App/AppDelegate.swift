@@ -9,9 +9,6 @@ import UIKit
 import FirebaseCore
 import SVProgressHUD
 import GoogleMobileAds
-import AppTrackingTransparency
-import AdjustSdk
-import AdSupport
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,39 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.configSVProgressHUD()
         self.fetch()
         self.configAds()
-        self.requestPermissionATTracking()
         return true
     }
     
-    private func requestPermissionATTracking() {
-        ATTrackingManager.requestTrackingAuthorization { (status) in
-            switch status {
-            case .denied, .notDetermined, .restricted:
-                self.configAdj()
-            case .authorized:
-                self.configAdj(token: self.getDeviceIdentifier()?.uuidString ?? "96h0y7wnhmo0")
-            @unknown default:
-                fatalError("Invalid authorization status")
-            }
-        }
-    }
-    
-    private func getDeviceIdentifier() -> UUID? {
-        // Lấy IDFA nếu được phép
-        if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
-            return ASIdentifierManager.shared().advertisingIdentifier
-        }
-        
-        // Fallback: IDFV + Keychain
-        return UIDevice.current.identifierForVendor
-    }
-    
-    private func configAdj(token: String = "96h0y7wnhmo0") {
-        let yourAppToken = token
-        let event = ADJEvent(eventToken: yourAppToken)
-        Adjust.trackEvent(event)
-    }
-
     private func fetch() {
         LanguageManager.shared.fetchChoseLanguage()
     }

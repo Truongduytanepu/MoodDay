@@ -99,6 +99,14 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
         self.mainView.addSubview(previewVideoVC.view)
         previewVideoVC.didMove(toParent: self)
         
+        previewVideoVC.completion = { [weak self] hasDominantAdsCell in
+            guard let self = self else {
+                    return
+            }
+            
+            self.bannerContentView.alpha = hasDominantAdsCell ? 0 : 1
+        }
+        
         UIView.animate(withDuration: Const.durationAnimate) {
             previewVideoVC.view.alpha = 1
         }
@@ -173,8 +181,9 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
     }
     
     @IBAction private func homeButtonDidTap(_ sender: Any) {
+        guard self.currentTab != .home else { return }
+        
         let adsBlock = {
-            guard self.currentTab != .home else { return }
             self.currentTab = .home
             
             self.removeTrendingViewController()
@@ -182,14 +191,16 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
             self.homeImageView.image = UIImage(named: "ic_tabbar_home_enable")
             self.trendingImageView.image = UIImage(named: "ic_tabbar_trending_disable")
             self.tabbarView.backgroundColor = .white
+            self.bannerContentView.alpha = 1
         }
         
         self.executeWithAdCheck(adsBlock)
     }
     
     @IBAction private func trendingButtonDidTap(_ sender: Any) {
+        guard self.currentTab != .trending else { return }
+        
         let adsBlock = {
-            guard self.currentTab != .trending else { return }
             self.currentTab = .trending
             
             self.removeHomeViewController()

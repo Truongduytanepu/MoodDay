@@ -1,5 +1,5 @@
 //
-//  AdsPreviewVideoCell.swift
+//  AdsIntroCell.swift
 //  FanNoise
 //
 //  Created by ADMIN on 5/13/25.

@@ -8,11 +8,14 @@
 import UIKit
 import YYImage
 import GoogleMobileAds
+import AppTrackingTransparency
+import AdjustSdk
+import AdSupport
 
 private struct Const {
     static let dotPageViewSize = CGSize(width: 6, height: 6)
-    static let longBottomConstraintContinue: CGFloat = 70
-    static let shortBottomConstraintContinue: CGFloat  = 27
+    static let longBottomConstraintContinue: CGFloat = 112
+    static let shortBottomConstraintContinue: CGFloat  = 49
     static let longHeightConstraintAds: CGFloat = 188
     static let shortHeightConstraintAds: CGFloat = 0
 }
@@ -55,6 +58,7 @@ class IntroVC: BaseVC<IntroPresenter, IntroView> {
     
     // MARK: - Config
     private func config() {
+        self.requestPermissionATTracking()
         self.setupFont()
         self.setupPageControl()
         self.setupScrollView()
@@ -146,6 +150,35 @@ class IntroVC: BaseVC<IntroPresenter, IntroView> {
     private func applyExpandedAdLayout() {
         self.heightConstraintAds.constant = Const.longHeightConstraintAds
         self.bottomConstraintContinue.constant = Const.shortHeightConstraintAds
+    }
+    
+    private func requestPermissionATTracking() {
+        ATTrackingManager.requestTrackingAuthorization { (status) in
+            switch status {
+            case .denied, .notDetermined, .restricted:
+                self.configAdj()
+            case .authorized:
+                self.configAdj(token: self.getDeviceIdentifier()?.uuidString ?? "96h0y7wnhmo0")
+            @unknown default:
+                fatalError("Invalid authorization status")
+            }
+        }
+    }
+    
+    private func getDeviceIdentifier() -> UUID? {
+        // Lấy IDFA nếu được phép
+        if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
+            return ASIdentifierManager.shared().advertisingIdentifier
+        }
+        
+        // Fallback: IDFV + Keychain
+        return UIDevice.current.identifierForVendor
+    }
+    
+    private func configAdj(token: String = "96h0y7wnhmo0") {
+        let yourAppToken = token
+        let event = ADJEvent(eventToken: yourAppToken)
+        Adjust.trackEvent(event)
     }
     
     // Xử lý khi nhấn nút Continue

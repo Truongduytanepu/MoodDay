@@ -178,10 +178,6 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     private func isAdsPosition(at indexPath: IndexPath) -> Bool {
         return (indexPath.row + 1) % (Const.adsStep + 1) == 0
     }
-
-    private func calculateAdjustedIndex(for indexPath: IndexPath) -> Int {
-        return indexPath.row - (indexPath.row / Const.adsStep)
-    }
     
     private func configureHashtagCell(at indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = hashtagCollectionView.dequeueCell(type: ItemHashtagCell.self, indexPath: indexPath) else {

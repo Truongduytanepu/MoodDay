@@ -131,6 +131,10 @@
 		84EDED252DCB088100EF672D /* SetTimerDialogVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EDED1F2DCB088100EF672D /* SetTimerDialogVC.xib */; };
 		84F8F5C12DD34BFE0055D5C6 /* AdsPreviewVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8F5BF2DD34BFE0055D5C6 /* AdsPreviewVideoCell.swift */; };
 		84F8F5C22DD34BFE0055D5C6 /* AdsPreviewVideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F8F5C02DD34BFE0055D5C6 /* AdsPreviewVideoCell.xib */; };
+		84F8F5CA2DD49C750055D5C6 /* PreviewVideoAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F8F5C92DD49C750055D5C6 /* PreviewVideoAdView.xib */; };
+		84F8F5CC2DD49F690055D5C6 /* MainNativePlayAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F8F5CB2DD49F680055D5C6 /* MainNativePlayAd.xib */; };
+		84F8F5CF2DD49FC10055D5C6 /* AdsNativePlayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8F5CD2DD49FC10055D5C6 /* AdsNativePlayCell.swift */; };
+		84F8F5D02DD49FC10055D5C6 /* AdsNativePlayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F8F5CE2DD49FC10055D5C6 /* AdsNativePlayCell.xib */; };
 		8727B79B2DC7B8EC00F0B2CE /* ItemLikeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727B7992DC7B8EC00F0B2CE /* ItemLikeCell.swift */; };
 		8727B79C2DC7B8EC00F0B2CE /* ItemLikeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8727B79A2DC7B8EC00F0B2CE /* ItemLikeCell.xib */; };
 		8727B79F2DC7B91000F0B2CE /* ItemFunnyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727B79D2DC7B91000F0B2CE /* ItemFunnyCell.swift */; };
@@ -336,6 +340,10 @@
 		84EDED202DCB088100EF672D /* SetTimerDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTimerDialogView.swift; sourceTree = "<group>"; };
 		84F8F5BF2DD34BFE0055D5C6 /* AdsPreviewVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsPreviewVideoCell.swift; sourceTree = "<group>"; };
 		84F8F5C02DD34BFE0055D5C6 /* AdsPreviewVideoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsPreviewVideoCell.xib; sourceTree = "<group>"; };
+		84F8F5C92DD49C750055D5C6 /* PreviewVideoAdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreviewVideoAdView.xib; sourceTree = "<group>"; };
+		84F8F5CB2DD49F680055D5C6 /* MainNativePlayAd.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainNativePlayAd.xib; sourceTree = "<group>"; };
+		84F8F5CD2DD49FC10055D5C6 /* AdsNativePlayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsNativePlayCell.swift; sourceTree = "<group>"; };
+		84F8F5CE2DD49FC10055D5C6 /* AdsNativePlayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsNativePlayCell.xib; sourceTree = "<group>"; };
 		8727B7992DC7B8EC00F0B2CE /* ItemLikeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemLikeCell.swift; sourceTree = "<group>"; };
 		8727B79A2DC7B8EC00F0B2CE /* ItemLikeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemLikeCell.xib; sourceTree = "<group>"; };
 		8727B79D2DC7B91000F0B2CE /* ItemFunnyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemFunnyCell.swift; sourceTree = "<group>"; };
@@ -708,6 +716,7 @@
 				842D28A92DD1A2AB00F71811 /* RemoteConfigHelper.swift */,
 				842D28AA2DD1A2AB00F71811 /* RoundPageControl.swift */,
 				842D28AB2DD1A2AB00F71811 /* SLNativeAdsLoader.swift */,
+				84F8F5C92DD49C750055D5C6 /* PreviewVideoAdView.xib */,
 				842D28AC2DD1A2AB00F71811 /* UnderNativeAdView.xib */,
 				842D28AD2DD1A2AB00F71811 /* UnderNativeController.swift */,
 				842D28AE2DD1A2AB00F71811 /* UnifiedNativeAdView.xib */,
@@ -764,9 +773,12 @@
 				2679A86E2DD3BE0C00191363 /* AdsIntroCell.xib */,
 				8458FEE62DD33EFA0035BD95 /* AdsSoundCell.swift */,
 				8458FEE72DD33EFA0035BD95 /* AdsSoundCell.xib */,
+				84F8F5CD2DD49FC10055D5C6 /* AdsNativePlayCell.swift */,
+				84F8F5CE2DD49FC10055D5C6 /* AdsNativePlayCell.xib */,
 				8458FEEE2DD348F70035BD95 /* AdsVideoCell.swift */,
 				8458FEEF2DD348F70035BD95 /* AdsVideoCell.xib */,
 				8458FEEC2DD343BF0035BD95 /* MainNativeAdSound.xib */,
+				84F8F5CB2DD49F680055D5C6 /* MainNativePlayAd.xib */,
 				8458FEF22DD349350035BD95 /* MainNativeAdVideo.xib */,
 				2679A8732DD3BEB500191363 /* MainNativeAdIntro.xib */,
 			);
@@ -1100,6 +1112,7 @@
 				71A560CB2DA8F813007E8BE3 /* LaunchScreen.storyboard in Resources */,
 				849FCAC02DBF26680006817F /* TopicSuggestVideoCell.xib in Resources */,
 				71A5617E2DA8FF09007E8BE3 /* MPLUS2-ExtraBold.ttf in Resources */,
+				84F8F5CA2DD49C750055D5C6 /* PreviewVideoAdView.xib in Resources */,
 				71A560C82DA8F813007E8BE3 /* Assets.xcassets in Resources */,
 				2679A8742DD3BEB500191363 /* MainNativeAdIntro.xib in Resources */,
 				8458FEED2DD343BF0035BD95 /* MainNativeAdSound.xib in Resources */,
@@ -1123,6 +1136,7 @@
 				8761EFC12DC4C83C00AB4F8D /* PlaySoundVC.xib in Resources */,
 				8727B7A02DC7B91000F0B2CE /* ItemFunnyCell.xib in Resources */,
 				71A561832DA8FF09007E8BE3 /* MPLUS2-ExtraLight.ttf in Resources */,
+				84F8F5D02DD49FC10055D5C6 /* AdsNativePlayCell.xib in Resources */,
 				8736A3E52DB5F2B6009A07A2 /* SplashVC.xib in Resources */,
 				84EDED252DCB088100EF672D /* SetTimerDialogVC.xib in Resources */,
 				845663512DCC3EF100C33944 /* Localizable.strings in Resources */,
@@ -1143,6 +1157,7 @@
 				8799A0E22DCAF5B200C4D6AE /* ItemHashtagCell.xib in Resources */,
 				8456635C2DCC568D00C33944 /* Lexend-SemiBold.ttf in Resources */,
 				8727B79C2DC7B8EC00F0B2CE /* ItemLikeCell.xib in Resources */,
+				84F8F5CC2DD49F690055D5C6 /* MainNativePlayAd.xib in Resources */,
 				874313F22DBCE2B20042243C /* ListItemSoundVC.xib in Resources */,
 				71A561812DA8FF09007E8BE3 /* MPLUS2-SemiBold.ttf in Resources */,
 				873366042DB757B900DFEC83 /* IntroVC.xib in Resources */,
@@ -1283,6 +1298,7 @@
 				71A561502DA8FE8D007E8BE3 /* URLRequestExtensions.swift in Sources */,
 				71A561582DA8FE8D007E8BE3 /* UIImageExtensions.swift in Sources */,
 				71A5616F2DA8FE8D007E8BE3 /* HightlightableButton.swift in Sources */,
+				84F8F5CF2DD49FC10055D5C6 /* AdsNativePlayCell.swift in Sources */,
 				2679A8702DD3BE0C00191363 /* AdsIntroCell.swift in Sources */,
 				71A561972DA8FFB9007E8BE3 /* Coordinator.swift in Sources */,
 				8458FEE92DD33EFA0035BD95 /* AdsSoundCell.swift in Sources */,
