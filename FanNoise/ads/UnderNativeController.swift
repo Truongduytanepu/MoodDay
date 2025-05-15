@@ -109,6 +109,9 @@ class UnderNativeController: UIViewController {
     private func loadNativeAds() {
         self.nativeAdLoader.loadNativeAd(adCnt: 1, viewController: self) { [weak self] in
             guard let self else { return }
+            
+            self.showNativeAdsView()
+            
             if !self.nativeAdLoader.nativeAds.isEmpty {
                 DispatchQueue.main.async {
                     self.bindNativeAds(gadNativeAdView: self.gadNativeAdView, nativeAd: self.nativeAdLoader.nativeAds[0])
@@ -148,7 +151,7 @@ class UnderNativeController: UIViewController {
     }
     
     private func showNativeAdsView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             guard let self else { return }
             self.nativeAdsView.alpha = 1
         }
@@ -157,28 +160,14 @@ class UnderNativeController: UIViewController {
     // MARK: - Inter Ads
     public func showInterstitialHelperAds(adsBlock: @escaping () -> Void) {
         UtilsADS.shared.isShowAds = true
+        self.showLoadingView(title: "Loading Ads")
         
-        if UtilsADS.shared.getPurchase(key: KEY_ENCODE.isPremium) {
-            adsBlock()
-            UtilsADS.shared.isShowAds = false
-            return
-        }
-        
-        RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnNativeFull) { isOn in
-            if !isOn {
+        InterstitialHelper().loadAds { [weak self] in
+            guard let self = self else { return }
+            self.dismissLoadingView()
+            self.loadNativeAds()
+            InterstitialHelper().showAdsNow(viewController: self) {
                 adsBlock()
-                UtilsADS.shared.isShowAds = false
-                return
-            } else {
-                self.showLoadingView(title: "Loading Ads")
-                InterstitialHelper().loadAds { [weak self] in
-                    guard let self = self else { return }
-                    self.dismissLoadingView()
-                    self.showNativeAdsView()
-                    InterstitialHelper().showAdsNow(viewController: self) {
-                        adsBlock()
-                    }
-                }
             }
         }
     }

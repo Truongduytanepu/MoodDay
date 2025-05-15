@@ -17,6 +17,7 @@ excluded:
   - Pods/
   - fastlane
   - FanNoise/Common/Extensions
+  - FanNoise/ads
   - build
 
 analyzer_rules:
@@ -45,6 +46,7 @@ identifier_name:
     error: 3
   excluded:
     - id
+    - ad
 
 function_body_length:
   warning: 50

@@ -166,24 +166,38 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
         self.present(alert, animated: true, completion: nil)
     }
     
+    // MARK: - ShowInterstitialHelperAdsWithCapping
     public func showInterstitialHelperAdsWithCapping(adsBlock: @escaping () -> Void) {
         if Reachabilities.isConnectedToNetwork() == false {
             adsBlock()
             return
         }
         
-        RemoteConfigHelper.shared.getRemoteConfigWithTimeCapping(key: RemoteConfigKey.keyTimeCapping) { capping in
+        if UtilsADS.shared.getPurchase(key: KEY_ENCODE.isPremium) {
+            adsBlock()
+            return
+        }
+        
+        RemoteConfigHelper.shared.getRemoteConfigWithTimeCapping(key: RemoteConfigKey.keyTimeCapping) { [weak self] capping in
+            guard let self = self else  { return }
             let showingAdsLastTime = UserDefaults.standard.double(forKey: "showingAdsLastTime")
             let now = Date().timeIntervalSince1970
             if now - showingAdsLastTime >= capping {
-                UserDefaults.standard.setValue(now, forKey: "showingAdsLastTime")
-                let underNativeController = UnderNativeController()
-                underNativeController.modalTransitionStyle = .crossDissolve
-                underNativeController.modalPresentationStyle = .overFullScreen
-                self.present(underNativeController, animated: true)
                 
-                underNativeController.showInterstitialHelperAds {
-                    adsBlock()
+                RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnNativeFull) { isOn in
+                    if !isOn {
+                        adsBlock()
+                    } else {
+                        UserDefaults.standard.setValue(now, forKey: "showingAdsLastTime")
+                        let underNativeController = UnderNativeController()
+                        underNativeController.modalTransitionStyle = .crossDissolve
+                        underNativeController.modalPresentationStyle = .overFullScreen
+                        self.present(underNativeController, animated: true)
+                        
+                        underNativeController.showInterstitialHelperAds {
+                            adsBlock()
+                        }
+                    }
                 }
             } else {
                 adsBlock()
@@ -231,22 +245,25 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
         }
     }
 
+    // MARK: - AOA
     private func loadAppOpenAd() {
         self.isPresentAOA = true
         self.showLoadingView()
         
         let request = Request()
-        AppOpenAd.load(with: UtilsADS.keyAoaResume, request: request) { [weak self] ads, error in
+        AppOpenAd.load(with: UtilsADS.keyAoaResume, request: request) { [weak self] ad, error in
             guard let self = self else { return }
             
             self.indicatorView.stopAnimating()
             
             if let error = error {
                 print("🔴 Failed to load AOA: \(error.localizedDescription)")
+                self.isPresentAOA = false
+                self.dismissLoadingView()
                 return
             }
             
-            self.appOpenAd = ads
+            self.appOpenAd = ad
             self.appOpenAd?.fullScreenContentDelegate = self
             print("🟢 AOA loaded successfully")
             

@@ -17,24 +17,16 @@ class NativeAdLoader: NSObject, AdLoaderDelegate, NativeAdLoaderDelegate {
 
         self.completion = completion
         
-        RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnNativeFull) { [weak self] isOn in
-            guard let self = self else { return }
-            if !isOn {
-                completion?()
-                return
-            } else {
-                let multipleAdsOptions = MultipleAdsAdLoaderOptions()
-                multipleAdsOptions.numberOfAds = adCnt
-                let nativeOptions = VideoOptions()
-                nativeOptions.shouldStartMuted = true
-                self.adLoader = AdLoader(adUnitID: UtilsADS.keyNativeFull,
-                                            rootViewController: viewController,
-                                            adTypes: [.native],
-                                            options: [multipleAdsOptions, nativeOptions])
-                self.adLoader.delegate = self
-                self.adLoader.load(Request())
-            }
-        }
+        let multipleAdsOptions = MultipleAdsAdLoaderOptions()
+        multipleAdsOptions.numberOfAds = adCnt
+        let nativeOptions = VideoOptions()
+        nativeOptions.shouldStartMuted = true
+        self.adLoader = AdLoader(adUnitID: UtilsADS.keyNativeFull,
+                                    rootViewController: viewController,
+                                    adTypes: [.native],
+                                    options: [multipleAdsOptions, nativeOptions])
+        self.adLoader.delegate = self
+        self.adLoader.load(Request())
     }
     
     func adLoader(_ adLoader: AdLoader, didFailToReceiveAdWithError error: Error) {
