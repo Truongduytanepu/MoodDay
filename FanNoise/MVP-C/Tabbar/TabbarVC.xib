@@ -13,7 +13,6 @@
             <connections>
                 <outlet property="bannerContainView" destination="bE5-oX-Jxc" id="fgc-ok-tzD"/>
                 <outlet property="bannerContentView" destination="GlM-A9-DDT" id="v0N-T7-i1X"/>
-                <outlet property="bottomTabbarViewConstraint" destination="Jkd-Up-32O" id="oW7-7z-JSC"/>
                 <outlet property="homeImageView" destination="gqp-rV-D7w" id="hVg-7n-YUl"/>
                 <outlet property="homeTabbarView" destination="AE7-va-nMR" id="ONM-xE-b4O"/>
                 <outlet property="mainView" destination="Ovc-WO-ydV" id="gXP-Ra-39u"/>
@@ -28,30 +27,35 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ovc-WO-ydV">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fNo-YP-75r">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bE5-oX-Jxc">
-                    <rect key="frame" x="0.0" y="734" width="393" height="118"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GlM-A9-DDT">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ovc-WO-ydV">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="734"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bE5-oX-Jxc">
+                            <rect key="frame" x="0.0" y="734" width="393" height="118"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GlM-A9-DDT">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="ZX3-Cn-bpG"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <viewLayoutGuide key="safeArea" id="FZk-FY-nGC"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="50" id="ZX3-Cn-bpG"/>
+                                <constraint firstItem="GlM-A9-DDT" firstAttribute="leading" secondItem="FZk-FY-nGC" secondAttribute="leading" id="9IN-nr-E2U"/>
+                                <constraint firstItem="FZk-FY-nGC" firstAttribute="trailing" secondItem="GlM-A9-DDT" secondAttribute="trailing" id="AOX-UX-xFQ"/>
+                                <constraint firstItem="FZk-FY-nGC" firstAttribute="bottom" secondItem="GlM-A9-DDT" secondAttribute="bottom" id="JsW-2v-QOf"/>
+                                <constraint firstItem="GlM-A9-DDT" firstAttribute="top" secondItem="bE5-oX-Jxc" secondAttribute="top" id="NNT-f5-T0c"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <viewLayoutGuide key="safeArea" id="FZk-FY-nGC"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="GlM-A9-DDT" firstAttribute="leading" secondItem="FZk-FY-nGC" secondAttribute="leading" id="9IN-nr-E2U"/>
-                        <constraint firstItem="FZk-FY-nGC" firstAttribute="trailing" secondItem="GlM-A9-DDT" secondAttribute="trailing" id="AOX-UX-xFQ"/>
-                        <constraint firstItem="FZk-FY-nGC" firstAttribute="bottom" secondItem="GlM-A9-DDT" secondAttribute="bottom" id="JsW-2v-QOf"/>
-                        <constraint firstItem="GlM-A9-DDT" firstAttribute="top" secondItem="bE5-oX-Jxc" secondAttribute="top" id="NNT-f5-T0c"/>
-                    </constraints>
-                </view>
+                </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aW6-9u-HSG">
                     <rect key="frame" x="0.0" y="680" width="393" height="44"/>
                     <subviews>
@@ -131,17 +135,13 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Ovc-WO-ydV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4Bv-Oi-hrd"/>
-                <constraint firstItem="bE5-oX-Jxc" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="GKh-Q9-osb"/>
-                <constraint firstItem="bE5-oX-Jxc" firstAttribute="top" secondItem="aW6-9u-HSG" secondAttribute="bottom" constant="10" id="Jkd-Up-32O"/>
-                <constraint firstAttribute="bottom" secondItem="bE5-oX-Jxc" secondAttribute="bottom" id="Sll-89-Spz"/>
-                <constraint firstAttribute="bottom" secondItem="Ovc-WO-ydV" secondAttribute="bottom" id="WFf-K2-p5K"/>
+                <constraint firstItem="fNo-YP-75r" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="9xM-qf-I5A"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="aW6-9u-HSG" secondAttribute="bottom" constant="60" id="Kgp-C9-yNl"/>
+                <constraint firstItem="fNo-YP-75r" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Rpa-mG-qPm"/>
+                <constraint firstItem="fNo-YP-75r" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YXI-Ei-iHO"/>
                 <constraint firstItem="aW6-9u-HSG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="bom-jh-Mxr"/>
-                <constraint firstItem="Ovc-WO-ydV" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="f6Q-l1-NBD"/>
-                <constraint firstItem="Ovc-WO-ydV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gG8-cL-UQj"/>
+                <constraint firstAttribute="bottom" secondItem="fNo-YP-75r" secondAttribute="bottom" id="dmT-H3-LTK"/>
                 <constraint firstItem="aW6-9u-HSG" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="k7t-4j-bfA"/>
-                <constraint firstAttribute="bottom" secondItem="Ovc-WO-ydV" secondAttribute="bottom" id="owX-bI-bfk"/>
-                <constraint firstItem="bE5-oX-Jxc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="rkr-rI-LCl"/>
             </constraints>
             <point key="canvasLocation" x="-8.3969465648854964" y="-12.67605633802817"/>
         </view>

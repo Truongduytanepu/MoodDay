@@ -29,7 +29,8 @@ class SetTimerDialogCoordinator: Coordinator {
     
     func presentSetTimerDialog(completion: @escaping (Int, Int, Bool) -> Void) {
         let setTimerDialogVC = SetTimerDialogVC.factory()
-        setTimerDialogVC.modalPresentationStyle = .overCurrentContext
+        setTimerDialogVC.modalPresentationStyle = .overFullScreen
+        setTimerDialogVC.modalTransitionStyle = .crossDissolve
         setTimerDialogVC.minuteDefault = self.minute
         setTimerDialogVC.secondDefault = self.second
         

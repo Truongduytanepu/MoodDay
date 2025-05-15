@@ -24,8 +24,7 @@
                 <outlet property="othersCollectionView" destination="kva-Bi-sRV" id="vSY-mk-fcm"/>
                 <outlet property="playButton" destination="147-eh-gUG" id="vZL-he-Adu"/>
                 <outlet property="secondFanImageView" destination="Stc-p9-8yy" id="7Pp-vL-mOz"/>
-                <outlet property="setTimerBtn" destination="5Vf-yN-G7h" id="02A-U8-nSr"/>
-                <outlet property="setTimerView" destination="N7U-6L-TOw" id="grz-dM-mQF"/>
+                <outlet property="setTimerView" destination="N7U-6L-TOw" id="YRG-jM-Xdk"/>
                 <outlet property="timeDialogLbl" destination="lz9-Mk-jCX" id="DsJ-WR-1f4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -109,7 +108,7 @@
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N7U-6L-TOw">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N7U-6L-TOw" customClass="DimableView" customModule="FanNoise" customModuleProvider="target">
                                             <rect key="frame" x="16" y="40" width="113" height="24"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BsV-lo-Rnf">

@@ -20,9 +20,9 @@ private struct Const {
 
 class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     
-    @IBOutlet private weak var setTimerBtn: UIButton!
     @IBOutlet private weak var firstFanImageView: UIImageView!
     @IBOutlet private weak var secondFanImageView: UIImageView!
+    @IBOutlet private weak var setTimerView: DimableView!
     @IBOutlet private weak var lastFanImageView: UIImageView!
     @IBOutlet private weak var playButton: UIButton!
     @IBOutlet private weak var fanView: UIView!
@@ -30,7 +30,6 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     @IBOutlet private weak var hashtagLabel: UILabel!
     @IBOutlet private weak var likeTitleLabel: UILabel!
     @IBOutlet private weak var funnyTitleLabel: UILabel!
-    @IBOutlet private weak var setTimerView: UIView!
     @IBOutlet private weak var otherTitleLabel: UILabel!
     @IBOutlet private weak var timeDialogLbl: UILabel!
     @IBOutlet private weak var likeCollectionView: UICollectionView!
@@ -570,7 +569,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         guard !isButtonDisabled else { return }
         
         self.playButton.isEnabled = false
-        self.setTimerBtn.isEnabled = false
+        self.setTimerView.isUserInteractionEnabled = false
         
         if self.isRotating {
             self.stopSoundSmoothlyIfNeed()
@@ -583,7 +582,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.playButton.isEnabled = true
-            self.setTimerBtn.isEnabled = true
+            self.setTimerView.isUserInteractionEnabled = true
         }
     }
 }
@@ -629,7 +628,7 @@ extension PlaySoundVC: UICollectionViewDelegate {
                 self.startPreviewVideo(
                     navigationController: navigationController,
                     videos: self.presenter.getFunVideo(),
-                    targetIndexPath: indexPath
+                    targetIndexPath: IndexPath(row: index, section: 0)
                 )
             }
         } else {
