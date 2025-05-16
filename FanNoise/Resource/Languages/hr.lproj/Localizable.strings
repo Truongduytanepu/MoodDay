@@ -1,7 +1,7 @@
-fanNoiseSplash = "Zvuk ventilatora";
+fanNoiseSplash = "Ventilator za san";
 descriptionSplash = "Spavajte dublje, sanjajte bolje uz umirujući zvuk ventilatora!";
 chooseLanguage = "Odaberite jezik";
-fanNoiseHome = "Zvuk ventilatora";
+fanNoiseHome = "Ventilator za san";
 descriptionHome = "Bolji san počinje s umirujućim zvukom ventilatora.";
 labelHomeCell = "Ljetna briza, bilo kada.";
 setTimer = "Postavite timer";

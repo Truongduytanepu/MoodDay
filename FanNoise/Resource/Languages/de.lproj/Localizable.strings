@@ -1,7 +1,7 @@
-fanNoiseSplash = "Fan-Geräusch";
+fanNoiseSplash = "Schlafventilator";
 descriptionSplash = "Schlafe tiefer, träume besser mit dem beruhigenden Geräusch von Ventilatoren!";
 chooseLanguage = "Sprache wählen";
-fanNoiseHome = "Fan-Geräusch";
+fanNoiseHome = "Schlafventilator";
 descriptionHome = "Besserer Schlaf beginnt mit beruhigendem Fan-Geräusch.";
 labelHomeCell = "Ein Sommerbrise, jederzeit.";
 setTimer = "Timer einstellen";

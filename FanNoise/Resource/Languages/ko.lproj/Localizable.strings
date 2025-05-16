@@ -1,7 +1,7 @@
-fanNoiseSplash = "팬 노이즈";
+fanNoiseSplash = "취침용 선풍기: 백색소음 보조 도구";
 descriptionSplash = "선풍기의 부드러운 소리로 더 깊은 잠을 자고, 더 나은 꿈을 꾸세요!";
 chooseLanguage = "언어 선택";
-fanNoiseHome = "팬 노이즈";
+fanNoiseHome = "취침용 선풍기: 백색소음 보조 도구";
 descriptionHome = "편안한 선풍기 소리로 더 나은 잠을 시작하세요.";
 labelHomeCell = "언제든지 여름 바람을 느껴보세요.";
 setTimer = "타이머 설정";

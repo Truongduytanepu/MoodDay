@@ -1,7 +1,7 @@
-fanNoiseSplash = "Bruit du ventilateur";
+fanNoiseSplash = "Ventilateur Sommeil";
 descriptionSplash = "Dormez plus profondément, rêvez mieux avec le bruit apaisant des ventilateurs !";
 chooseLanguage = "Choisir la langue";
-fanNoiseHome = "Bruit du ventilateur";
+fanNoiseHome = "Ventilateur Sommeil";
 descriptionHome = "Un meilleur sommeil commence avec le bruit apaisant des ventilateurs.";
 labelHomeCell = "Une brise d'été, à tout moment.";
 setTimer = "Réglage du minuteur";

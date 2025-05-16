@@ -1,7 +1,7 @@
-fanNoiseSplash = "ファンノイズ";
+fanNoiseSplash = "就寝用ファン：ホワイトノイズ補助";
 descriptionSplash = "ファンの穏やかな音で、より深い眠りと、より良い夢を見ましょう！";
 chooseLanguage = "言語を選択";
-fanNoiseHome = "ファンノイズ";
+fanNoiseHome = "就寝用ファン：ホワイトノイズ補助";
 descriptionHome = "より良い睡眠は、穏やかなファンの音から始まります。";
 labelHomeCell = "いつでも夏の風を感じてください。";
 setTimer = "タイマーを設定";
