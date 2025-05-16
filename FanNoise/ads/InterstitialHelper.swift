@@ -24,27 +24,23 @@ class InterstitialHelper {
     }
     
     func loadAds(processingBlock: @escaping () -> Void) {
-        RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnInter) { isOn in
-            if !isOn {
+        if !UtilsADS.shared.isRemoteConfigInter {
+            processingBlock()
+            return
+        } else {
+            InterstitialAdManager.shared.loadAd {
                 processingBlock()
-                return
-            } else {
-                InterstitialAdManager.shared.loadAd {
-                    processingBlock()
-                }
             }
         }
     }
     
     func showAdsNow(viewController: UIViewController, processingBlock: @escaping () -> Void) {
-        RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnInter) { isOn in
-            if !isOn {
+        if !UtilsADS.shared.isRemoteConfigInter {
+            processingBlock()
+            return
+        } else {
+            InterstitialAdManager.shared.showAd(from: viewController) {
                 processingBlock()
-                return
-            } else {
-                InterstitialAdManager.shared.showAd(from: viewController) {
-                    processingBlock()
-                }
             }
         }
     }

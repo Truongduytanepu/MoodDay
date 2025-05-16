@@ -24,11 +24,6 @@ class UnderNativeController: UIViewController {
         self.config()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.loadNativeAds()
-    }
-    
     // MARK: - Config
     private func config() {
         self.configUI()
@@ -106,11 +101,11 @@ class UnderNativeController: UIViewController {
     }
     
     // MARK: - Native Ads
-    private func loadNativeAds() {
+    private func loadNativeAds(completion: (() -> Void)? = nil) {
         self.nativeAdLoader.loadNativeAd(adCnt: 1, viewController: self) { [weak self] in
             guard let self else { return }
             
-            self.showNativeAdsView()
+            completion?()
             
             if !self.nativeAdLoader.nativeAds.isEmpty {
                 DispatchQueue.main.async {
@@ -151,23 +146,42 @@ class UnderNativeController: UIViewController {
     }
     
     private func showNativeAdsView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            guard let self else { return }
-            self.nativeAdsView.alpha = 1
-        }
+        self.nativeAdsView.alpha = 1
     }
     
-    // MARK: - Inter Ads
-    public func showInterstitialHelperAds(adsBlock: @escaping () -> Void) {
+    // MARK: - Inter And Native Full Ads
+    public func showNativeFullAndInterstitialHelperAds(adsBlock: @escaping () -> Void) {
+        self.loadViewIfNeeded()
         UtilsADS.shared.isShowAds = true
         self.showLoadingView(title: "Loading Ads")
         
         InterstitialHelper().loadAds { [weak self] in
             guard let self = self else { return }
             self.dismissLoadingView()
-            self.loadNativeAds()
+            
+            self.loadNativeAds { [weak self] in
+                guard let self = self else { return }
+                self.showNativeAdsView()
+            }
+            
             InterstitialHelper().showAdsNow(viewController: self) {
                 adsBlock()
+            }
+        }
+    }
+    
+    public func showOnlyInterstitialHelperAds(adsBlock: @escaping () -> Void) {
+        self.loadViewIfNeeded()
+        UtilsADS.shared.isShowAds = true
+        self.showLoadingView(title: "Loading Ads")
+        
+        InterstitialHelper().loadAds { [weak self] in
+            guard let self = self else { return }
+            self.dismissLoadingView()
+            InterstitialHelper().showAdsNow(viewController: self) {
+                adsBlock()
+                UtilsADS.shared.isShowAds = false
+                self.dismiss(animated: true)
             }
         }
     }

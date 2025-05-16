@@ -185,17 +185,32 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
             if now - showingAdsLastTime >= capping {
                 
                 RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnNativeFull) { isOn in
-                    if !isOn {
-                        adsBlock()
-                    } else {
+                    if isOn {
                         UserDefaults.standard.setValue(now, forKey: "showingAdsLastTime")
                         let underNativeController = UnderNativeController()
                         underNativeController.modalTransitionStyle = .crossDissolve
                         underNativeController.modalPresentationStyle = .overFullScreen
                         self.present(underNativeController, animated: true)
                         
-                        underNativeController.showInterstitialHelperAds {
+                        underNativeController.showNativeFullAndInterstitialHelperAds {
                             adsBlock()
+                        }
+                    } else {
+                        RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnInter) { isOn in
+                            UtilsADS.shared.isRemoteConfigInter = isOn
+                            if !isOn {
+                                adsBlock()
+                            } else {
+                                UserDefaults.standard.setValue(now, forKey: "showingAdsLastTime")
+                                let underNativeController = UnderNativeController()
+                                underNativeController.modalTransitionStyle = .crossDissolve
+                                underNativeController.modalPresentationStyle = .overFullScreen
+                                self.present(underNativeController, animated: true)
+                                
+                                underNativeController.showOnlyInterstitialHelperAds {
+                                    adsBlock()
+                                }
+                            }
                         }
                     }
                 }
