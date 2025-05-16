@@ -206,6 +206,8 @@ extension HomeVC: HomeView {
     
     func onError(_ error: Error) {
         SVProgressHUD.dismiss()
-        self.postAlert("Notification", message: "No Internet")
+        self.postAlert("Notification", message: "No Internet") {
+            self.notificationNetwork()
+        }
     }
 }

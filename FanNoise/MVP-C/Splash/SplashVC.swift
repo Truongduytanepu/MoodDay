@@ -60,18 +60,16 @@ class SplashVC: UIViewController {
         ATTrackingManager.requestTrackingAuthorization {[weak self] (status) in
             guard let self = self else {return}
             switch status {
-            case .denied:
+            case .denied, .notDetermined, .restricted:
                 DispatchQueue.main.async {
+                    self.checkNetworkConnection()
                     self.startLoading()
                     self.configAdj()
                 }
                 
-            case .notDetermined:
-                self.configAdj()
-            case .restricted:
-                self.configAdj()
             case .authorized:
                 DispatchQueue.main.async {
+                    self.checkNetworkConnection()
                     self.startLoading()
                     self.configAdj(token: self.getDeviceIdentifier()?.uuidString ?? "96h0y7wnhmo0")
                 }
@@ -135,7 +133,6 @@ class SplashVC: UIViewController {
             guard let self = self else { return }
             if progress >= 1.0 {
                 timer.invalidate()
-                self.checkNetworkConnection()
             } else {
                 progress += 0.01
                 self.updateProgress(to: progress)
@@ -165,18 +162,11 @@ class SplashVC: UIViewController {
         let reachability = try? Reachability()
         self.isNetworkAvailable = reachability?.connection != .unavailable
         
-        let block = {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-                guard let self = self else { return }
-                self.navigateNextScreen()
-            }
-        }
-        
         if self.isNetworkAvailable {
             RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnAoaSplash) { [weak self] isOn in
                 guard let self = self else { return }
                 if !isOn {
-                    block()
+                    self.navigateNextScreen()
                     return
                 } else {
                     self.loadAppOpenAd()
@@ -184,7 +174,7 @@ class SplashVC: UIViewController {
                 }
             }
         } else {
-            block()
+            self.navigateNextScreen()
         }
     }
     
@@ -199,7 +189,7 @@ class SplashVC: UIViewController {
     private func configEEA() {
         let parameters = RequestParameters()
         parameters.isTaggedForUnderAgeOfConsent = false
-
+        
         ConsentInformation.shared.requestConsentInfoUpdate(
             with: parameters,
             completionHandler: { error in
@@ -209,11 +199,13 @@ class SplashVC: UIViewController {
                     let formStatus = ConsentInformation.shared.formStatus
                     if formStatus == FormStatus.available {
                         self.loadForm()
+                    } else {
+                        self.requestPermissionATTracking()
                     }
                 }
             })
     }
-
+    
     func loadForm() {
         ConsentForm.load(with: { form, loadError in
             if loadError != nil {

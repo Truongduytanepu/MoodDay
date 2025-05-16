@@ -531,6 +531,15 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         return (indexPath.row + 1) % (Const.adsStep + 1) == 0
     }
     
+    private func checkNetworkPlayTapped() {
+        if !MonitorNetwork.shared.isConnectedNetwork() {
+            self.stopSoundIfNeed()
+            self.postAlert("Notification", message: "No Internet") {
+                self.checkNetworkPlayTapped()
+            }
+        }
+    }
+    
     @IBAction private func backButtonDidTap(_ sender: Any) {
         self.stopSoundIfNeed()
         self.coordinator.stop()
@@ -557,12 +566,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     }
     
     @IBAction private func playButtonDidTap(_ sender: Any) {
-        if !MonitorNetwork.shared.isConnectedNetwork() {
-            self.stopSoundIfNeed()
-            self.postAlert("Notification", message: "No Interner")
-            return
-        }
-        
+        self.checkNetworkPlayTapped()
         guard !isButtonDisabled else { return }
         
         self.playButton.isEnabled = false
@@ -591,11 +595,7 @@ extension PlaySoundVC: UICollectionViewDelegate {
         
         self.view.disableInteractiveFor(seconds: 1)
 
-        if !MonitorNetwork.shared.isConnectedNetwork() {
-            self.stopSoundIfNeed()
-            self.postAlert("Notification", message: "No Interner")
-            return
-        }
+        self.checkNetworkPlayTapped()
         
         if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
             return
