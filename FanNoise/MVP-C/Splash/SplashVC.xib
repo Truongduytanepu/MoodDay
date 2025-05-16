@@ -35,10 +35,10 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="m8X-BA-R4E">
-                    <rect key="frame" x="20" y="520" width="353" height="85"/>
+                    <rect key="frame" x="0.0" y="520" width="393" height="85"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bedtime fan: white noise aid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgn-vr-9do">
-                            <rect key="frame" x="0.0" y="0.0" width="353" height="35"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="JVg-9s-SrF"/>
                             </constraints>
@@ -50,7 +50,7 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VwO-gh-ohl">
-                            <rect key="frame" x="73.666666666666686" y="43" width="206" height="42"/>
+                            <rect key="frame" x="93.666666666666686" y="43" width="206" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="206" id="ac2-zy-oon"/>
                                 <constraint firstAttribute="height" constant="42" id="f6Q-UB-hvG"/>
@@ -101,11 +101,11 @@ with the soothing sound of fans!</string>
                 <constraint firstItem="m8X-BA-R4E" firstAttribute="top" secondItem="pnP-0F-VaH" secondAttribute="bottom" constant="32" id="9F3-pD-Cbs"/>
                 <constraint firstItem="UPL-ed-BBn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="K33-Hg-OLT"/>
                 <constraint firstItem="UPL-ed-BBn" firstAttribute="top" secondItem="7Xa-CP-aou" secondAttribute="bottom" constant="8" id="LXE-QV-2he"/>
-                <constraint firstItem="m8X-BA-R4E" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="NOs-w8-QA8"/>
+                <constraint firstItem="m8X-BA-R4E" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NOs-w8-QA8"/>
                 <constraint firstItem="7Xa-CP-aou" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UZG-M0-Mlg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="7Xa-CP-aou" secondAttribute="bottom" constant="96" id="aiC-JX-Ma7"/>
                 <constraint firstItem="pnP-0F-VaH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="270" id="j8j-mu-bPa"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="m8X-BA-R4E" secondAttribute="trailing" constant="20" id="kcD-pB-ckB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="m8X-BA-R4E" secondAttribute="trailing" id="kcD-pB-ckB"/>
             </constraints>
             <point key="canvasLocation" x="30" y="-11"/>
         </view>
