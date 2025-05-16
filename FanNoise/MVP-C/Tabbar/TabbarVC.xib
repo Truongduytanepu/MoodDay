@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="bannerContainView" destination="bE5-oX-Jxc" id="fgc-ok-tzD"/>
                 <outlet property="bannerContentView" destination="GlM-A9-DDT" id="v0N-T7-i1X"/>
+                <outlet property="bottomTabbarConstraint" destination="Kgp-C9-yNl" id="7SG-1L-Iyw"/>
                 <outlet property="homeImageView" destination="gqp-rV-D7w" id="hVg-7n-YUl"/>
                 <outlet property="homeTabbarView" destination="AE7-va-nMR" id="ONM-xE-b4O"/>
                 <outlet property="mainView" destination="Ovc-WO-ydV" id="gXP-Ra-39u"/>

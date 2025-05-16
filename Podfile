@@ -47,5 +47,6 @@ target 'FanNoise' do
   pod 'Google-Mobile-Ads-SDK', '~> 12.2.0'
   pod 'SwiftyStoreKit', '~> 0.16.1'
   pod 'Adjust', '~> 5.0.2'
+  pod 'GoogleUserMessagingPlatform'
 
 end

@@ -118,7 +118,6 @@ class HomeVC: BaseVC<HomePresenter, HomeView> {
 
 extension HomeVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let action: () -> Void
         self.view.disableInteractiveFor(seconds: 1)
         
         Analytics.logEvent("Home", parameters: [
@@ -126,24 +125,16 @@ extension HomeVC: UICollectionViewDelegate {
         ])
         
         if indexPath.row == 1 || indexPath.row == 2 {
-            action = { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                
-                guard let navigationController = self.navigationController else {
+            self.showInterstitialHelperAdsWithCapping { [weak self] in
+                guard let self = self, let navigationController = self.navigationController else {
                     return
                 }
                                 
-                self.startNaturalSoundWhiteNoiseCoordinator(navigationController: navigationController,homeCategory: homeCategories[indexPath.row])
+                self.startNaturalSoundWhiteNoiseCoordinator(navigationController: navigationController,homeCategory: self.homeCategories[indexPath.row])
             }
         } else {
-            action = { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                
-                guard let navigationController = self.navigationController else {
+            self.showInterstitialHelperAdsWithCapping { [weak self] in
+                guard let self = self, let navigationController = self.navigationController else {
                     return
                 }
                 
@@ -157,8 +148,6 @@ extension HomeVC: UICollectionViewDelegate {
                                         categoryID: categoryID)
             }
         }
-        
-        self.executeWithAdCheck(action)
     }
 }
 

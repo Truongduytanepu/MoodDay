@@ -492,7 +492,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         }
         
         let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
-        let soundIndex = indexPath.row - adCountBefore
+        let soundIndex = !self.presenter.getListNativeAd().isEmpty ? (indexPath.row - adCountBefore) : indexPath.row
         
         self.presenter.getLikeSound()[soundIndex].assignRandomColorsIfNeeded()
         
@@ -506,7 +506,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         }
         
         let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
-        let videoIndex = indexPath.row - adCountBefore
+        let videoIndex = !self.presenter.getListNativeAd().isEmpty ? (indexPath.row - adCountBefore) : indexPath.row
         
         cell.configure(video: self.presenter.getFunVideo()[videoIndex])
         return cell
@@ -519,7 +519,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         }
         
         let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
-        let soundIndex = indexPath.row - adCountBefore
+        let soundIndex = !self.presenter.getListNativeAd().isEmpty ? (indexPath.row - adCountBefore) : indexPath.row
         
         self.presenter.getOtherSound()[soundIndex].assignRandomColorsIfNeeded()
         cell.configure(sound: self.presenter.getOtherSound()[soundIndex])
@@ -534,17 +534,13 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
     @IBAction private func backButtonDidTap(_ sender: Any) {
         self.stopSoundIfNeed()
         self.coordinator.stop()
-        self.showInterstitialHelperAdsWithCapping {
-            let action = { [weak self] in
+        self.showInterstitialHelperAdsWithCapping { [weak self] in
                 guard let self = self else {
                     return
                 }
                 
                 self.coordinator.stop()
                 self.stopSoundSmoothlyIfNeed()
-            }
-            
-            self.executeWithAdCheck(action)
         }
     }
     
@@ -590,10 +586,8 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
 
 extension PlaySoundVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let action: () -> Void
         let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
-        let index = indexPath.row - adCountBefore
+        let index = !self.presenter.getListNativeAd().isEmpty ? (indexPath.row - adCountBefore) : indexPath.row
         
         self.view.disableInteractiveFor(seconds: 1)
 
@@ -603,12 +597,12 @@ extension PlaySoundVC: UICollectionViewDelegate {
             return
         }
         
-        if self.isAdsPosition(at: indexPath) {
+        if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
             return
         }
         
         if collectionView == self.likeCollectionView {
-            action = { [weak self] in
+            self.showInterstitialHelperAdsWithCapping { [weak self] in
                 guard let self = self else { return }
                 
                 self.stopSoundIfNeed()
@@ -626,7 +620,8 @@ extension PlaySoundVC: UICollectionViewDelegate {
                 self.isRotating = true
             }
         } else if collectionView == self.funnyCollectionView {
-            action = { [weak self] in
+            
+            self.showInterstitialHelperAdsWithCapping { [weak self] in
                 guard let self = self,
                       let navigationController = self.navigationController else { return }
                 
@@ -645,7 +640,7 @@ extension PlaySoundVC: UICollectionViewDelegate {
                 )
             }
         } else {
-            action = { [weak self] in
+            self.showInterstitialHelperAdsWithCapping { [weak self] in
                 guard let self = self else { return }
                 
                 self.stopSoundIfNeed()
@@ -663,8 +658,6 @@ extension PlaySoundVC: UICollectionViewDelegate {
                 self.isRotating = true
             }
         }
-        
-        self.executeWithAdCheck(action)
     }
 }
 
@@ -683,19 +676,19 @@ extension PlaySoundVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.likeCollectionView {
-            if self.isAdsPosition(at: indexPath) {
+            if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
                 return self.configureAdsNativePlayCell(at: indexPath, in: collectionView)
             } else {
                 return self.configureLikeSoundCell(indexPath: indexPath)
             }
         } else if collectionView == self.funnyCollectionView {
-            if self.isAdsPosition(at: indexPath) {
+            if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
                 return self.configureAdsNativePlayCell(at: indexPath, in: collectionView)
             } else {
                 return self.configureFunnyVideoCell(indexPath: indexPath)
             }
         } else if collectionView == self.othersCollectionView {
-            if self.isAdsPosition(at: indexPath) {
+            if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
                 return self.configureAdsNativePlayCell(at: indexPath, in: collectionView)
             } else {
                 return self.configureOtherSoundCell(indexPath: indexPath)

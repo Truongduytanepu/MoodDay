@@ -10,12 +10,12 @@ import GoogleMobileAds
 
 private struct Const {
     static let durationAnimate = 0.25
-    static let bottomConstraint: CGFloat = -30
+    static let bottomConstraint: CGFloat = 0
 }
 
 class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
     
-    @IBOutlet private weak var bottomTabbarViewConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var bottomTabbarConstraint: NSLayoutConstraint!
     @IBOutlet private weak var tabbarView: UIView!
     @IBOutlet private weak var homeTabbarView: DimableView!
     @IBOutlet private weak var trendingTabbarView: DimableView!
@@ -162,8 +162,8 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
         RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnBanner) { [weak self] isOn in
             guard let self = self else { return }
             if !isOn {
-                self.bottomTabbarViewConstraint.constant = Const.bottomConstraint
                 self.bannerContainView.isHidden = true
+                self.bottomTabbarConstraint.constant = Const.bottomConstraint
                 return
             }
             
@@ -183,7 +183,11 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
     @IBAction private func homeButtonDidTap(_ sender: Any) {
         guard self.currentTab != .home else { return }
         
-        let adsBlock = {
+        self.showInterstitialHelperAdsWithCapping { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
             self.currentTab = .home
             
             self.removeTrendingViewController()
@@ -193,14 +197,16 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
             self.tabbarView.backgroundColor = .white
             self.bannerContentView.alpha = 1
         }
-        
-        self.executeWithAdCheck(adsBlock)
     }
     
     @IBAction private func trendingButtonDidTap(_ sender: Any) {
         guard self.currentTab != .trending else { return }
         
-        let adsBlock = {
+        self.showInterstitialHelperAdsWithCapping { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
             self.currentTab = .trending
             
             self.removeHomeViewController()
@@ -210,8 +216,6 @@ class TabbarVC: BaseVC<TabbarPresenter, TabbarView> {
             self.trendingImageView.image = UIImage(named: "ic_tabbar_trending_enable")
             self.tabbarView.backgroundColor = .black
         }
-        
-        self.executeWithAdCheck(adsBlock)
     }
 }
 
@@ -222,7 +226,7 @@ extension TabbarVC: BannerViewDelegate {
 
     func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
         print("Load ads for banner error: \(error)")
-        self.bottomTabbarViewConstraint.constant = Const.bottomConstraint
+        self.bottomTabbarConstraint.constant = Const.bottomConstraint
         self.bannerContainView.isHidden = true
     }
 

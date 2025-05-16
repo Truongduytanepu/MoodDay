@@ -21,7 +21,6 @@ class UtilsADS: NSObject {
     static var shared = UtilsADS()
     
     var isShowAds = false
-    var isRemoteConfigInter = true
     var didPurchasePremiumSubject = ReplaySubject<Bool>.create(bufferSize: 1)
     
     override init() {

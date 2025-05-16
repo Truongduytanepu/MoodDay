@@ -164,6 +164,7 @@ DEPENDENCIES:
   - Firebase/Crashlytics (~> 10.7.0)
   - Firebase/RemoteConfig (~> 10.7.0)
   - Google-Mobile-Ads-SDK (~> 12.2.0)
+  - GoogleUserMessagingPlatform
   - RealmSwift (~> 10.32.3)
   - RxSwift (~> 5.1)
   - SDWebImage
@@ -241,6 +242,6 @@ SPEC CHECKSUMS:
   TLLogging: 636a4873bf1aaa9d60c4b938433b17e3ce33cb51
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 6e9bd48173476dc997f671add0822428755bcd98
+PODFILE CHECKSUM: ff571576dd442a101c89a75d8b945dbeb69ab1e7
 
 COCOAPODS: 1.16.2

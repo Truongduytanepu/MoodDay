@@ -10,6 +10,7 @@ import GoogleMobileAds
 import AppTrackingTransparency
 import AdjustSdk
 import AdSupport
+import UserMessagingPlatform
 
 private struct Const {
     static let TimeInterval = 0.02
@@ -36,7 +37,6 @@ class SplashVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.setupGradient()
-        self.requestPermissionATTracking()
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,6 +47,7 @@ class SplashVC: UIViewController {
     // MARK: - Config
     private func config() {
         self.setupFont()
+        self.configEEA()
     }
     
     private func setupFont() {
@@ -193,6 +194,42 @@ class SplashVC: UIViewController {
             guard let self = self else { return }
             print("Load AOA timeout after 10 seconds")
         }
+    }
+    
+    private func configEEA() {
+        let parameters = RequestParameters()
+        parameters.isTaggedForUnderAgeOfConsent = false
+
+        ConsentInformation.shared.requestConsentInfoUpdate(
+            with: parameters,
+            completionHandler: { error in
+                if error != nil {
+                    self.requestPermissionATTracking()
+                } else {
+                    let formStatus = ConsentInformation.shared.formStatus
+                    if formStatus == FormStatus.available {
+                        self.loadForm()
+                    }
+                }
+            })
+    }
+
+    func loadForm() {
+        ConsentForm.load(with: { form, loadError in
+            if loadError != nil {
+                self.requestPermissionATTracking()
+            } else {
+                if ConsentInformation.shared.consentStatus == ConsentStatus.required {
+                    form?.present(
+                        from: UIApplication.shared.getKeyWindow()?.rootViewController ?? self,
+                        completionHandler: { dismissError in
+                            self.requestPermissionATTracking()
+                        })
+                } else {
+                    self.requestPermissionATTracking()
+                }
+            }
+        })
     }
     
     private func loadAppOpenAd() {

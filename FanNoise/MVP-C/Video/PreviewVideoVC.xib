@@ -22,36 +22,41 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryU-d7-8Fi">
-                    <rect key="frame" x="0.0" y="734" width="393" height="118"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Jfp-MM-W33">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4T4-XP-Kki">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="dN6-I0-jFk">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="734"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nC6-Al-CGv">
+                                <size key="itemSize" width="128" height="128"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryU-d7-8Fi">
+                            <rect key="frame" x="0.0" y="734" width="393" height="118"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4T4-XP-Kki">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="gHG-LX-Aqp"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <viewLayoutGuide key="safeArea" id="sYb-wr-iA9"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="50" id="gHG-LX-Aqp"/>
+                                <constraint firstItem="sYb-wr-iA9" firstAttribute="bottom" secondItem="4T4-XP-Kki" secondAttribute="bottom" id="OU7-Df-JY0"/>
+                                <constraint firstItem="sYb-wr-iA9" firstAttribute="trailing" secondItem="4T4-XP-Kki" secondAttribute="trailing" id="ReO-b4-AfA"/>
+                                <constraint firstItem="4T4-XP-Kki" firstAttribute="top" secondItem="sYb-wr-iA9" secondAttribute="top" id="dvg-GJ-FQg"/>
+                                <constraint firstItem="4T4-XP-Kki" firstAttribute="leading" secondItem="sYb-wr-iA9" secondAttribute="leading" id="iDZ-dP-vKK"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <viewLayoutGuide key="safeArea" id="sYb-wr-iA9"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="sYb-wr-iA9" firstAttribute="bottom" secondItem="4T4-XP-Kki" secondAttribute="bottom" id="OU7-Df-JY0"/>
-                        <constraint firstItem="sYb-wr-iA9" firstAttribute="trailing" secondItem="4T4-XP-Kki" secondAttribute="trailing" id="ReO-b4-AfA"/>
-                        <constraint firstItem="4T4-XP-Kki" firstAttribute="top" secondItem="sYb-wr-iA9" secondAttribute="top" id="dvg-GJ-FQg"/>
-                        <constraint firstItem="4T4-XP-Kki" firstAttribute="leading" secondItem="sYb-wr-iA9" secondAttribute="leading" id="iDZ-dP-vKK"/>
-                    </constraints>
-                </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="dN6-I0-jFk">
-                    <rect key="frame" x="0.0" y="0.0" width="393" height="734"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nC6-Al-CGv">
-                        <size key="itemSize" width="128" height="128"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                </collectionView>
+                </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1PO-QD-e4b">
                     <rect key="frame" x="0.0" y="118" width="393" height="50"/>
                     <subviews>
@@ -83,13 +88,10 @@
             <constraints>
                 <constraint firstItem="1PO-QD-e4b" firstAttribute="top" secondItem="c2O-tg-A2x" secondAttribute="top" id="378-vI-tXL"/>
                 <constraint firstItem="1PO-QD-e4b" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7Pq-2u-GiJ"/>
-                <constraint firstItem="dN6-I0-jFk" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CdR-xG-zCj"/>
-                <constraint firstItem="ryU-d7-8Fi" firstAttribute="trailing" secondItem="c2O-tg-A2x" secondAttribute="trailing" id="KpD-T5-Run"/>
-                <constraint firstItem="ryU-d7-8Fi" firstAttribute="top" secondItem="dN6-I0-jFk" secondAttribute="bottom" id="MSi-VK-jml"/>
-                <constraint firstItem="dN6-I0-jFk" firstAttribute="leading" secondItem="c2O-tg-A2x" secondAttribute="leading" id="ZRQ-2T-peu"/>
-                <constraint firstItem="c2O-tg-A2x" firstAttribute="trailing" secondItem="dN6-I0-jFk" secondAttribute="trailing" id="erX-1B-3yQ"/>
-                <constraint firstItem="ryU-d7-8Fi" firstAttribute="leading" secondItem="c2O-tg-A2x" secondAttribute="leading" id="p6k-xg-xoY"/>
-                <constraint firstAttribute="bottom" secondItem="ryU-d7-8Fi" secondAttribute="bottom" id="w3Q-JZ-pMw"/>
+                <constraint firstItem="Jfp-MM-W33" firstAttribute="leading" secondItem="c2O-tg-A2x" secondAttribute="leading" id="RaN-4q-ZXP"/>
+                <constraint firstAttribute="trailing" secondItem="Jfp-MM-W33" secondAttribute="trailing" id="fOa-uf-zBZ"/>
+                <constraint firstAttribute="bottom" secondItem="Jfp-MM-W33" secondAttribute="bottom" id="fb6-tf-cMO"/>
+                <constraint firstItem="Jfp-MM-W33" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="p6O-22-1fW"/>
                 <constraint firstAttribute="trailing" secondItem="1PO-QD-e4b" secondAttribute="trailing" id="wBz-vx-8jN"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-11.267605633802818"/>

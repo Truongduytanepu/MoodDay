@@ -172,10 +172,9 @@ extension ListItemSoundByHashtagVC: UICollectionViewDelegate {
         }
         
         self.view.disableInteractiveFor(seconds: 1)
-
-        let action = { [weak self] in
-            guard let self = self,
-                  let navigationController = self.navigationController else { return }
+        
+        self.showInterstitialHelperAdsWithCapping { [weak self] in
+            guard let self = self, let navigationController = self.navigationController else { return }
             
             let sounds = self.presenter.getListSound()
             let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
@@ -196,8 +195,6 @@ extension ListItemSoundByHashtagVC: UICollectionViewDelegate {
                 )
             }
         }
-        
-        self.executeWithAdCheck(action)
     }
 }
 

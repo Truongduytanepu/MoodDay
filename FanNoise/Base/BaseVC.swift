@@ -81,16 +81,6 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
         return .portrait
     }
     
-    func executeWithAdCheck(_ action: @escaping () -> Void) {
-        if UtilsADS.shared.getPurchase(key: KEY_ENCODE.isPremium) {
-            action()
-        } else {
-            self.showInterstitialHelperAdsWithCapping {
-                action()
-            }
-        }
-    }
-    
     private func configLoadingView() {
         self.loadingView = UIView()
         self.loadingView.backgroundColor = .white
@@ -197,7 +187,6 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
                         }
                     } else {
                         RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnInter) { isOn in
-                            UtilsADS.shared.isRemoteConfigInter = isOn
                             if !isOn {
                                 adsBlock()
                             } else {

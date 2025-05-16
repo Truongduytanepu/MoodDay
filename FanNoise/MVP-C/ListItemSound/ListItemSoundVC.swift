@@ -253,13 +253,13 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
     }
     
     @IBAction private func backButtonDidTap(_ sender: Any) {
-        let action = { [weak self] in
-            guard let self = self else {return}
+        self.showInterstitialHelperAdsWithCapping { [weak self] in
+            guard let self = self else {
+                return
+            }
             
             self.coordinator.stop()
         }
-        
-        self.executeWithAdCheck(action)
     }
     
     @IBAction private func soundButonDidTap(_ sender: Any) {
@@ -285,14 +285,13 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
 
 extension ListItemSoundVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let action: () -> Void
         let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
         let index = !self.presenter.getListNativeAd().isEmpty ? (indexPath.row - adCountBefore) : indexPath.row
         
         self.view.disableInteractiveFor(seconds: 1)
         
         if collectionView == self.hashtagCollectionView {
-            action = { [weak self] in
+            self.showInterstitialHelperAdsWithCapping { [weak self] in
                 guard let self = self,
                       let navigationController = self.navigationController else { return }
                 
@@ -309,7 +308,7 @@ extension ListItemSoundVC: UICollectionViewDelegate {
                 )
             }
         } else if self.mediaType == .sound {
-            action = { [weak self] in
+            self.showInterstitialHelperAdsWithCapping { [weak self] in
                 guard let self = self,
                       let navigationController = self.navigationController else { return }
                 
@@ -329,7 +328,7 @@ extension ListItemSoundVC: UICollectionViewDelegate {
                 )
             }
         } else {
-            action = { [weak self] in
+            self.showInterstitialHelperAdsWithCapping { [weak self] in
                 guard let self = self,
                       let navigationController = self.navigationController else { return }
                 
@@ -348,8 +347,6 @@ extension ListItemSoundVC: UICollectionViewDelegate {
                 )
             }
         }
-        
-        self.executeWithAdCheck(action)
     }
 }
 

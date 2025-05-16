@@ -103,13 +103,10 @@ class NaturalSoundWhiteNoiseVC: BaseVC<NaturalSoundWhiteNoisePresenter, NaturalS
     }
     
     @IBAction private func backButtonDidTap(_ sender: Any) {
-        let action = { [weak self] in
+        self.showInterstitialHelperAdsWithCapping { [weak self] in
             guard let self = self else {return}
-            
             self.coordinator.stop()
         }
-        
-        self.executeWithAdCheck(action)
     }
 }
 
@@ -117,7 +114,7 @@ extension NaturalSoundWhiteNoiseVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.view.disableInteractiveFor(seconds: 1)
 
-        let action = { [weak self] in
+        self.showInterstitialHelperAdsWithCapping { [weak self] in
             guard let self = self else {
                 return
             }
@@ -137,8 +134,6 @@ extension NaturalSoundWhiteNoiseVC: UICollectionViewDelegate {
                                     video: videoByName,
                                     categoryID: self.categoryId)
         }
-
-        self.executeWithAdCheck(action)
     }
 }
 

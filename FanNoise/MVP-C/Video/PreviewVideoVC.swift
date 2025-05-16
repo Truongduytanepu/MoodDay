@@ -63,12 +63,12 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     
     private func config() {
         self.configBannerView()
+        self.setupAdaptiveBanner()
         self.showIntroGIF()
-        self.setUpData()
         self.setupCollectionView()
         self.setUpNotification()
         self.configNetwork()
-        self.setupAdaptiveBanner()
+        self.setUpData()
     }
     
     private func configNetwork() {
@@ -91,18 +91,17 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         case .trending:
             self.navigationView.isHidden = true
             self.bannerContainView.isHidden = true
-            self.bannerContentView.heightConstraint()?.constant = 0
             self.collectionView.isHidden = false
             self.presenter.getAllVideo()
         case .filtered(let idCategory):
             self.navigationView.isHidden = false
             self.bannerContainView.isHidden = false
-            self.collectionView.isHidden = true
+            self.collectionView.alpha = 0
             self.presenter.loadData(idCategory: idCategory)
         case .listVideo(videos: let videos):
             self.bannerContainView.isHidden = false
             self.navigationView.isHidden = false
-            self.collectionView.isHidden = true
+            self.collectionView.alpha = 0
             self.presenter.updateDataListVideo(videos: videos)
         }
     }
@@ -111,7 +110,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         switch self.videoCategoryType {
         case .trending:
             self.startVideo()
-        case .filtered(_), .listVideo(_):
+       case .filtered(idCategory: _), .listVideo(videos: _):
             break
         }
     }
@@ -151,7 +150,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     private func scrollToIndexPath() {
         guard let initialIndexPath = self.targetIndexPath else { return }
         self.collectionView.scrollToItem(at: initialIndexPath, at: .top, animated: false)
-        self.collectionView.isHidden = false
+        self.collectionView.alpha = 1
     }
     
     func stopVideo() {
@@ -249,7 +248,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         switch videoCategoryType {
         case .trending:
             adsIndex = (indexPath.row + 1) / (Const.swipeCountToShowTopic + 1) - 1
-        case .filtered(_), .listVideo(_):
+       case .filtered(idCategory: _), .listVideo(videos: _):
             adsIndex = (indexPath.row + 1) / (Const.adsStep + 1) - 1
         }
         
@@ -276,7 +275,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnBanner) { [weak self] isOn in
             guard let self = self else { return }
             if !isOn {
-                self.bannerContentView.isHidden = true
+                self.bannerContainView.isHidden = true
                 self.collectionView.reloadData()
                 return
             }
@@ -299,15 +298,13 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
     }
     
     @IBAction func closeBtnTapped(_ sender: Any) {
-        let action = { [weak self] in
+        self.showInterstitialHelperAdsWithCapping { [weak self] in
             guard let self = self else {
                 return
             }
             
             self.coordinator.stop()
         }
-        
-        self.executeWithAdCheck(action)
     }
 }
 
@@ -332,7 +329,7 @@ extension PreviewVideoVC: UICollectionViewDelegate {
                     video = self.presenter.getVideo(at: videoIndex)
                 }
 
-            case .filtered(_), .listVideo(_):
+           case .filtered(idCategory: _), .listVideo(videos: _):
                 if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
                     return
                 }
@@ -383,7 +380,7 @@ extension PreviewVideoVC: UICollectionViewDataSource {
             
                 return
 
-        case .filtered(_), .listVideo(_):
+       case .filtered(idCategory: _), .listVideo(videos: _):
             if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
                 return
             }
@@ -457,7 +454,7 @@ extension PreviewVideoVC: UICollectionViewDataSource {
                 return cell
             }
             
-        case .filtered(_), .listVideo(_):
+       case .filtered(idCategory: _), .listVideo(videos: _):
             if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
                 return self.configureAdsCell(at: indexPath)
             } else {
@@ -514,12 +511,16 @@ extension PreviewVideoVC: PreviewVideoView {
 
 extension PreviewVideoVC: BannerViewDelegate {
     func bannerViewDidReceiveAd(_ bannerView: BannerView) {
-        self.bannerContentView.isHidden = false
+        switch self.videoCategoryType {
+        case .trending:
+            self.bannerContainView.isHidden = true
+        case .filtered(idCategory: _), .listVideo(videos: _):
+            self.bannerContainView.isHidden = false
+        }
     }
     
     func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
-        self.bannerContentView.isHidden = true
-        self.bannerContentView.heightConstraint()?.constant = 0
+        self.bannerContainView.isHidden = true
         self.collectionView.reloadData()
     }
     

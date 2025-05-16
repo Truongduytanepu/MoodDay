@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,14 +23,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="pnP-0F-VaH">
-                    <rect key="frame" x="146.66666666666666" y="329" width="100" height="100"/>
+                    <rect key="frame" x="146.66666666666666" y="388" width="100" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="Y4E-90-2Zv"/>
                         <constraint firstAttribute="height" constant="100" id="uDj-Jc-m3c"/>
                     </constraints>
                 </imageView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="m8X-BA-R4E">
-                    <rect key="frame" x="93.666666666666686" y="461" width="206" height="85"/>
+                    <rect key="frame" x="93.666666666666686" y="520" width="206" height="85"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fan Noise" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgn-vr-9do">
                             <rect key="frame" x="0.0" y="0.0" width="206" height="35"/>
@@ -64,7 +63,7 @@ with the soothing sound of fans!</string>
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Xa-CP-aou">
-                    <rect key="frame" x="109.66666666666669" y="718" width="174" height="4"/>
+                    <rect key="frame" x="109.66666666666669" y="684" width="174" height="4"/>
                     <subviews>
                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IbQ-cV-b5g">
                             <rect key="frame" x="0.0" y="0.0" width="174" height="4"/>
@@ -79,15 +78,15 @@ with the soothing sound of fans!</string>
                         <constraint firstAttribute="trailing" secondItem="IbQ-cV-b5g" secondAttribute="trailing" id="pY2-mt-31E"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loading 50%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPL-ed-BBn">
-                    <rect key="frame" x="167.66666666666666" y="730" width="57.666666666666657" height="11"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="loading 0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPL-ed-BBn">
+                    <rect key="frame" x="170.66666666666666" y="696" width="51.666666666666657" height="11"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="9"/>
                     <color key="textColor" red="0.1764705882352941" green="0.17254901960784313" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemRedColor"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="pnP-0F-VaH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0Bc-DZ-Vsj"/>
                 <constraint firstItem="m8X-BA-R4E" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7cH-96-DWe"/>
@@ -103,8 +102,5 @@ with the soothing sound of fans!</string>
     </objects>
     <resources>
         <image name="ic_splash_logo" width="301" height="301"/>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>
