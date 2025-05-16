@@ -20,10 +20,11 @@ class SLNativeAdsLoader: NSObject {
 
     weak var delegate: SLNativeAdsLoaderDelegate?
 
-    func loadNativeAd(key: String, adCnt: Int = 5, rootViewController: UIViewController) {
+    func loadNativeAd(key: String, adCnt: Int = 5, rootViewController: UIViewController, completion: @escaping () -> ()) {
         RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnNative) { [weak self] isOn in
             guard let self = self else { return }
             if !isOn {
+                completion()
                 return
             } else {
                 self.nativeAds = []

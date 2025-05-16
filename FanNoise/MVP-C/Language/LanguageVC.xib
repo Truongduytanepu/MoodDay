@@ -82,7 +82,7 @@
                                 </view>
                             </subviews>
                             <viewLayoutGuide key="safeArea" id="GH3-DE-7O3"/>
-                            <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="DtW-yv-8tv" firstAttribute="leading" secondItem="v1f-Qg-7tL" secondAttribute="leading" id="4qB-m2-smH"/>
                                 <constraint firstItem="DtW-yv-8tv" firstAttribute="top" secondItem="v1f-Qg-7tL" secondAttribute="top" id="EJS-uM-b45"/>

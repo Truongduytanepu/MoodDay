@@ -463,7 +463,7 @@ class PlaySoundVC: BaseVC<PlaySoundPresenter, PlaySoundView> {
         self.nativeAdsLoader.delegate = self
         
         if !UtilsADS.shared.getPurchase(key: KEY_ENCODE.isPremium) {
-            self.nativeAdsLoader.loadNativeAd(key: UtilsADS.keyNativeListSound, rootViewController: self)
+            self.nativeAdsLoader.loadNativeAd(key: UtilsADS.keyNativeListSound, rootViewController: self){}
             return
         }
 

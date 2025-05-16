@@ -220,14 +220,22 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         self.nativeAdsLoader.delegate = self
         
         if !UtilsADS.shared.getPurchase(key: KEY_ENCODE.isPremium) {
-            self.nativeAdsLoader.loadNativeAd(key: UtilsADS.keyNativeListSound, rootViewController: self)
+            self.nativeAdsLoader.loadNativeAd(key: UtilsADS.keyNativeListSound, rootViewController: self) { [weak self] in
+                guard let self = self else {return}
+                
+                self.scrollInMainThread()
+            }
         } else {
             self.presenter.updateListNativeAds(listNativeAd: [])
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.collectionView.performBatchUpdates(nil) { _ in
-                    self.scrollToIndexPath()
-                }
+            self.scrollInMainThread()
+        }
+    }
+    
+    private func scrollInMainThread() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+            self.collectionView.performBatchUpdates(nil) { _ in
+                self.scrollToIndexPath()
             }
         }
     }
@@ -325,11 +333,13 @@ extension PreviewVideoVC: UICollectionViewDelegate {
                 }
 
             case .filtered(_), .listVideo(_):
-                if !self.isAdsPosition(at: indexPath) {
-                    let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
-                    let videoIndex = indexPath.row - adCountBefore
-                    video = self.presenter.getVideo(at: videoIndex)
+                if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
+                    return
                 }
+                
+                let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
+                let videoIndex = !self.presenter.getListNativeAd().isEmpty ? (indexPath.row - adCountBefore) : indexPath.row
+                video = self.presenter.getVideo(at: videoIndex)
             }
 
             if let video = video {
@@ -355,31 +365,31 @@ extension PreviewVideoVC: UICollectionViewDataSource {
         
         switch self.videoCategoryType {
         case .trending:
-            let index = indexPath.row
-            let groupSize = Const.adsStep + 2
-            let positionInGroup = index % groupSize
-            let groupIndex = index / groupSize
+                let hasAds = !presenter.getListNativeAd().isEmpty
+                let groupSize = Const.adsStep + (hasAds ? 2 : 1)
+                let positionInGroup = indexPath.row % groupSize
+                let groupIndex = indexPath.row / groupSize
+                
+                if positionInGroup < Const.adsStep {
+                    let videoIndex = groupIndex * Const.adsStep + positionInGroup
+                    let video = self.presenter.getVideo(at: videoIndex)
 
-            if positionInGroup < Const.adsStep {
-                let videoIndex = groupIndex * Const.adsStep + positionInGroup
-                let video = self.presenter.getVideo(at: videoIndex)
-
-                if video.isPlay {
-                    self.stopVideo()
-                } else {
-                    self.startVideo()
+                    if video.isPlay {
+                        self.stopVideo()
+                    } else {
+                        self.startVideo()
+                    }
                 }
-            }
             
-            return
+                return
 
         case .filtered(_), .listVideo(_):
-            if self.isAdsPosition(at: indexPath) {
+            if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
                 return
             }
             
             let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
-            let videoIndex = indexPath.row - adCountBefore
+            let videoIndex = !self.presenter.getListNativeAd().isEmpty ? (indexPath.row - adCountBefore) : indexPath.row
             let video = self.presenter.getVideo(at: videoIndex)
 
             if video.isPlay {
@@ -398,9 +408,7 @@ extension PreviewVideoVC: UICollectionViewDataSource {
         switch self.videoCategoryType {
         case .trending:
             topicCells = totalItems / Const.swipeCountToShowTopic
-        case .filtered(idCategory: _):
-            topicCells = 0
-        case .listVideo(videos: _):
+        case .filtered(idCategory: _), .listVideo(videos: _):
             topicCells = 0
         }
         
@@ -411,39 +419,38 @@ extension PreviewVideoVC: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch self.videoCategoryType {
         case .trending:
-            let index = indexPath.row
-            let groupSize = Const.adsStep + 2
-            let positionInGroup = index % groupSize
-            let groupIndex = index / groupSize
+            let hasAds = !presenter.getListNativeAd().isEmpty
+            let groupSize = Const.adsStep + (hasAds ? 2 : 1)
+            let positionInGroup = indexPath.row % groupSize
+            let groupIndex      = indexPath.row / groupSize
             
             if positionInGroup < Const.adsStep {
                 let videoIndex = groupIndex * Const.adsStep + positionInGroup
-                
-                guard let cell = collectionView.dequeueCell(type: ItemVideoCell.self, indexPath: indexPath) else {
+                guard let cell = collectionView.dequeueCell(type: ItemVideoCell.self,
+                                                            indexPath: indexPath) else {
                     return UICollectionViewCell()
                 }
                 
-                let video = self.presenter.getVideo(at: videoIndex)
+                let video = presenter.getVideo(at: videoIndex)
                 cell.configure(with: video.source ?? "", video: video)
-                cell.setUpCategoryType(videoCategoryType: self.videoCategoryType)
+                cell.setUpCategoryType(videoCategoryType: videoCategoryType)
                 return cell
                 
-            } else if positionInGroup == Const.adsStep {
-                return self.configureAdsCell(at: indexPath)
+            } else if hasAds && positionInGroup == Const.adsStep {
+                return configureAdsCell(at: indexPath)
                 
             } else {
-                guard let cell = collectionView.dequeueCell(type: TopicSuggestVideoCell.self, indexPath: indexPath) else {
+                guard let cell = collectionView.dequeueCell(type: TopicSuggestVideoCell.self,
+                                                            indexPath: indexPath) else {
                     return UICollectionViewCell()
                 }
                 
-                let videoCategory = self.presenter.getVideocategory()
-                cell.cofigData(videoCategories: videoCategory)
-                
+                let cats = presenter.getVideocategory()
+                cell.cofigData(videoCategories: cats)
                 cell.callBackUpdateData = { [weak self] name in
                     Analytics.logEvent("Preview Video", parameters: [
                         "name": "PV_Select_\(name.replaceSpaceAnalytics())"
                     ])
-                    
                     self?.presenter.updateData(name: name)
                 }
                 
@@ -451,16 +458,15 @@ extension PreviewVideoVC: UICollectionViewDataSource {
             }
             
         case .filtered(_), .listVideo(_):
-            if self.isAdsPosition(at: indexPath) {
+            if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
                 return self.configureAdsCell(at: indexPath)
             } else {
-                
                 guard let cell = collectionView.dequeueCell(type: ItemVideoCell.self, indexPath: indexPath) else {
                     return UICollectionViewCell()
                 }
                 
                 let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
-                let videoIndex = indexPath.row - adCountBefore
+                let videoIndex = !self.presenter.getListNativeAd().isEmpty ? (indexPath.row - adCountBefore) : indexPath.row
                 let video = self.presenter.getVideo(at: videoIndex)
                 
                 cell.setUpCategoryType(videoCategoryType: self.videoCategoryType)

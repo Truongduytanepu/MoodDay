@@ -136,7 +136,7 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
         self.nativeAdsLoader.delegate = self
         
         if !UtilsADS.shared.getPurchase(key: KEY_ENCODE.isPremium) {
-            self.nativeAdsLoader.loadNativeAd(key: UtilsADS.keyNativeListSound, rootViewController: self)
+            self.nativeAdsLoader.loadNativeAd(key: UtilsADS.keyNativeListSound, rootViewController: self){}
             return
         }
 
@@ -230,10 +230,10 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
         }
         
         let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
-        let soundIndex = indexPath.row - adCountBefore
+        let soundIndex = !self.presenter.getListNativeAd().isEmpty ? (indexPath.row - adCountBefore) : indexPath.row
         
-        sounds[soundIndex].assignRandomColorsIfNeeded()
-        cell.configure(sound: sounds[soundIndex])
+        self.sounds[soundIndex].assignRandomColorsIfNeeded()
+        cell.configure(sound: self.sounds[soundIndex])
         
         return cell
     }
@@ -244,10 +244,10 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
         }
         
         let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
-        let videoIndex = indexPath.row - adCountBefore
+        let videoIndex = !self.presenter.getListNativeAd().isEmpty ? (indexPath.row - adCountBefore) : indexPath.row
         
-        videos[videoIndex].assignRandomHashtagIfNeeded()
-        cell.configure(video: videos[videoIndex])
+        self.videos[videoIndex].assignRandomHashtagIfNeeded()
+        cell.configure(video: self.videos[videoIndex])
         
         return cell
     }
@@ -287,13 +287,9 @@ extension ListItemSoundVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let action: () -> Void
         let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
-        let index = indexPath.row - adCountBefore
+        let index = !self.presenter.getListNativeAd().isEmpty ? (indexPath.row - adCountBefore) : indexPath.row
         
         self.view.disableInteractiveFor(seconds: 1)
-
-        if self.isAdsPosition(at: indexPath) {
-            return
-        }
         
         if collectionView == self.hashtagCollectionView {
             action = { [weak self] in
@@ -321,6 +317,10 @@ extension ListItemSoundVC: UICollectionViewDelegate {
                     "name": "LIS_Sound_\(self.sounds[index].name?.replaceSpaceAnalytics() ?? "")"
                 ])
                 
+                if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
+                    return
+                }
+                
                 self.startPlaySound(
                     navigationController: navigationController,
                     sound: self.sounds[index],
@@ -336,6 +336,10 @@ extension ListItemSoundVC: UICollectionViewDelegate {
                 Analytics.logEvent("List Item Sound", parameters: [
                     "name": "LIS_Video_\(self.videos[index].name?.replaceSpaceAnalytics() ?? "")"
                 ])
+                
+                if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
+                    return
+                }
                 
                 self.startPlayVideo(
                     navigationController: navigationController,
@@ -370,13 +374,13 @@ extension ListItemSoundVC: UICollectionViewDataSource {
         }
         
         if collectionView == self.soundCollectionView {
-            if self.isAdsPosition(at: indexPath) {
+            if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
                 return configureAdsSoundCell(at: indexPath, in: collectionView)
             } else {
                 return self.configureSoundCell(indexPath: indexPath)
             }
         } else if collectionView == self.videoCollectionView {
-            if self.isAdsPosition(at: indexPath) {
+            if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
                 return configureAdsVideoCell(at: indexPath, in: collectionView)
             } else {
                 return self.configureVideoCell(indexPath: indexPath)

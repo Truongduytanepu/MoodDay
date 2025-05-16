@@ -115,7 +115,7 @@ class ListItemSoundByHashtagVC: BaseVC<ListItemSoundByHashtagPresenter, ListItem
         self.nativeAdsLoader.delegate = self
         
         if !UtilsADS.shared.getPurchase(key: KEY_ENCODE.isPremium) {
-            self.nativeAdsLoader.loadNativeAd(key: UtilsADS.keyNativeListSound, rootViewController: self)
+            self.nativeAdsLoader.loadNativeAd(key: UtilsADS.keyNativeListSound, rootViewController: self){}
         } else {
             self.presenter.updateListNativeAds(listNativeAd: [])
         }
@@ -150,7 +150,7 @@ class ListItemSoundByHashtagVC: BaseVC<ListItemSoundByHashtagPresenter, ListItem
         }
         
         let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
-        let soundIndex = indexPath.row - adCountBefore
+        let soundIndex = !self.presenter.getListNativeAd().isEmpty ? (indexPath.row - adCountBefore) : indexPath.row
         let sounds = self.presenter.getListSound()
         let sound = sounds[soundIndex]
         
@@ -167,7 +167,7 @@ class ListItemSoundByHashtagVC: BaseVC<ListItemSoundByHashtagPresenter, ListItem
 
 extension ListItemSoundByHashtagVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if self.isAdsPosition(at: indexPath) {
+        if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
             return
         }
         
@@ -179,7 +179,7 @@ extension ListItemSoundByHashtagVC: UICollectionViewDelegate {
             
             let sounds = self.presenter.getListSound()
             let adCountBefore = (indexPath.row + 1) / (Const.adsStep + 1)
-            let soundIndex = indexPath.row - adCountBefore
+            let soundIndex = !self.presenter.getListNativeAd().isEmpty ? (indexPath.row - adCountBefore) : indexPath.row
             
             if soundIndex < sounds.count {
                 let sound = sounds[soundIndex]
@@ -207,7 +207,7 @@ extension ListItemSoundByHashtagVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if self.isAdsPosition(at: indexPath) {
+        if self.isAdsPosition(at: indexPath) && !self.presenter.getListNativeAd().isEmpty {
             return self.configureAdsCell(at: indexPath)
         }
         
