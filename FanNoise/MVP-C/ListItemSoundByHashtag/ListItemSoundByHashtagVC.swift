@@ -115,7 +115,7 @@ class ListItemSoundByHashtagVC: BaseVC<ListItemSoundByHashtagPresenter, ListItem
         self.nativeAdsLoader.delegate = self
         
         if !UtilsADS.shared.getPurchase(key: KEY_ENCODE.isPremium) {
-            self.nativeAdsLoader.loadNativeAd(key: UtilsADS.keyNativeListSound, rootViewController: self){}
+            self.nativeAdsLoader.loadNativeAd(key: UtilsADS.keyNativeListSoundAndVideo, rootViewController: self){}
         } else {
             self.presenter.updateListNativeAds(listNativeAd: [])
         }

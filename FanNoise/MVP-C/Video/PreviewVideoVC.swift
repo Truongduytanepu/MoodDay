@@ -219,7 +219,7 @@ class PreviewVideoVC: BaseVC<PreviewVideoPresenter, PreviewVideoView> {
         self.nativeAdsLoader.delegate = self
         
         if !UtilsADS.shared.getPurchase(key: KEY_ENCODE.isPremium) {
-            self.nativeAdsLoader.loadNativeAd(key: UtilsADS.keyNativeListSound, rootViewController: self) { [weak self] in
+            self.nativeAdsLoader.loadNativeAd(key: UtilsADS.keyNativeListTrending, rootViewController: self) { [weak self] in
                 guard let self = self else {return}
                 
                 self.scrollInMainThread()

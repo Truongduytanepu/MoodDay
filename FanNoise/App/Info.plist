@@ -12,7 +12,7 @@
 		</dict>
 	</array>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-6799331595407402~6914205518</string>
+	<string>ca-app-pub-6799331595407402~6331886276</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -471,8 +471,6 @@
 		<string>MPLUS2-Medium.ttf</string>
 		<string>Lexend-SemiBold.ttf</string>
 	</array>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>App need to accept your permission to collect and enhance user experience</string>
 	<key>UIFileSharingEnabled</key>
 	<false/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>

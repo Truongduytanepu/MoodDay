@@ -53,23 +53,22 @@ class UtilsADS: NSObject {
     static let POLICYURL = "https://docs.google.com/document/d/1UagFunvfwnTP6PrVWGoy7lzXdmGTNw8Xn6zTiYSBMp0"
 
     // MARK: - Key thật
-//    static let keyAoaResume = "ca-app-pub-6799331595407402/4891125758"
-//    static let keyAoaSplash = "ca-app-pub-6799331595407402/3059169334"
-//    static let keyBanner = "ca-app-pub-6799331595407402/3863008753"
-//    static let keyInter = "ca-app-pub-6799331595407402/6998414346"
-//    static let keyNativeFull = "ca-app-pub-6799331595407402/3578044086"
-//    static let keyNativeListVideo = "ca-app-pub-6799331595407402/9951880742"
-//    static let keyNativeListSound = "ca-app-pub-6799331595407402/1755720160"
+    static let keyBanner = "ca-app-pub-6799331595407402/3630827041"
+    static let keyNativeFull = "ca-app-pub-6799331595407402/2317745371"
+    static let keyNativeListTrending = "ca-app-pub-6799331595407402/8179320416"
+    static let keyNativeListSoundAndVideo = "ca-app-pub-6799331595407402/5553157076"
+    static let keyInter = "ca-app-pub-6799331595407402/2593604204"
+    static let keyAoaResume = "ca-app-pub-6799331595407402/6341277520"
+    static let keyAoaSplash = "ca-app-pub-6799331595407402/9490185042"
 
     // MARK: - Key test
-    static let keyBanner = "ca-app-pub-3940256099942544/2934735716"
-    static let keyNativeFull = "ca-app-pub-3940256099942544/3986624511"
-    static let keyReward = "ca-app-pub-3940256099942544/1712485313"
-    static let keyNativeListVideo = "ca-app-pub-3940256099942544/3986624511"
-    static let keyNativeListSound = "ca-app-pub-3940256099942544/3986624511"
-    static let keyInter = "ca-app-pub-3940256099942544/4411468910"
-    static let keyAoaResume = "ca-app-pub-3940256099942544/5575463023"
-    static let keyAoaSplash = "ca-app-pub-3940256099942544/5575463023"
+//    static let keyBanner = "ca-app-pub-3940256099942544/2934735716"
+//    static let keyNativeFull = "ca-app-pub-3940256099942544/3986624511"
+//    static let keyNativeListTrending = "ca-app-pub-3940256099942544/3986624511"
+//    static let keyNativeListSoundAndVideo = "ca-app-pub-3940256099942544/3986624511"
+//    static let keyInter = "ca-app-pub-3940256099942544/4411468910"
+//    static let keyAoaResume = "ca-app-pub-3940256099942544/5575463023"
+//    static let keyAoaSplash = "ca-app-pub-3940256099942544/5575463023"
 }
 
 struct KEY_ENCODE {
