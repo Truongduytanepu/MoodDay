@@ -84,7 +84,6 @@
 		842D28B12DD1A2AB00F71811 /* UtilsADS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D28AF2DD1A2AB00F71811 /* UtilsADS.swift */; };
 		842D28B22DD1A2AB00F71811 /* RoundPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D28AA2DD1A2AB00F71811 /* RoundPageControl.swift */; };
 		842D28B32DD1A2AB00F71811 /* AdsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D289B2DD1A2AB00F71811 /* AdsCell.swift */; };
-		842D28B42DD1A2AB00F71811 /* InappController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D28A02DD1A2AB00F71811 /* InappController.swift */; };
 		842D28B52DD1A2AB00F71811 /* UnderNativeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D28AD2DD1A2AB00F71811 /* UnderNativeController.swift */; };
 		842D28B62DD1A2AB00F71811 /* InterstitialHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D28A52DD1A2AB00F71811 /* InterstitialHelper.swift */; };
 		842D28B72DD1A2AB00F71811 /* InterstitialAdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D28A42DD1A2AB00F71811 /* InterstitialAdManager.swift */; };
@@ -97,7 +96,6 @@
 		842D28C22DD1A2AB00F71811 /* UnderNativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842D28AC2DD1A2AB00F71811 /* UnderNativeAdView.xib */; };
 		842D28C32DD1A2AB00F71811 /* UnifiedNativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842D28AE2DD1A2AB00F71811 /* UnifiedNativeAdView.xib */; };
 		842D28C42DD1A2AB00F71811 /* AdsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842D289C2DD1A2AB00F71811 /* AdsCell.xib */; };
-		842D28C52DD1A2AB00F71811 /* InappController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842D28A12DD1A2AB00F71811 /* InappController.xib */; };
 		844AB8F62DBB660000A82556 /* PreviewVideoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844AB8F32DBB660000A82556 /* PreviewVideoVC.swift */; };
 		844AB8F72DBB660000A82556 /* PreviewVideoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844AB8F12DBB660000A82556 /* PreviewVideoCoordinator.swift */; };
 		844AB8F82DBB660000A82556 /* PreviewVideoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844AB8F22DBB660000A82556 /* PreviewVideoPresenter.swift */; };
@@ -286,8 +284,6 @@
 		71A561922DA8FFB9007E8BE3 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		842D289B2DD1A2AB00F71811 /* AdsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsCell.swift; sourceTree = "<group>"; };
 		842D289C2DD1A2AB00F71811 /* AdsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsCell.xib; sourceTree = "<group>"; };
-		842D28A02DD1A2AB00F71811 /* InappController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InappController.swift; sourceTree = "<group>"; };
-		842D28A12DD1A2AB00F71811 /* InappController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InappController.xib; sourceTree = "<group>"; };
 		842D28A22DD1A2AB00F71811 /* InappPurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InappPurchase.swift; sourceTree = "<group>"; };
 		842D28A42DD1A2AB00F71811 /* InterstitialAdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAdManager.swift; sourceTree = "<group>"; };
 		842D28A52DD1A2AB00F71811 /* InterstitialHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialHelper.swift; sourceTree = "<group>"; };
@@ -707,8 +703,6 @@
 				8458FEE52DD33EC30035BD95 /* AdsCell */,
 				842D289B2DD1A2AB00F71811 /* AdsCell.swift */,
 				842D289C2DD1A2AB00F71811 /* AdsCell.xib */,
-				842D28A02DD1A2AB00F71811 /* InappController.swift */,
-				842D28A12DD1A2AB00F71811 /* InappController.xib */,
 				842D28A22DD1A2AB00F71811 /* InappPurchase.swift */,
 				842D28A42DD1A2AB00F71811 /* InterstitialAdManager.swift */,
 				842D28A52DD1A2AB00F71811 /* InterstitialHelper.swift */,
@@ -1134,7 +1128,6 @@
 				842D28C32DD1A2AB00F71811 /* UnifiedNativeAdView.xib in Resources */,
 				842D28C42DD1A2AB00F71811 /* AdsCell.xib in Resources */,
 				2679A8712DD3BE0C00191363 /* AdsIntroCell.xib in Resources */,
-				842D28C52DD1A2AB00F71811 /* InappController.xib in Resources */,
 				844AB8FF2DBB675500A82556 /* ItemVideoCell.xib in Resources */,
 				8761EFC12DC4C83C00AB4F8D /* PlaySoundVC.xib in Resources */,
 				8727B7A02DC7B91000F0B2CE /* ItemFunnyCell.xib in Resources */,
@@ -1283,7 +1276,6 @@
 				842D28B12DD1A2AB00F71811 /* UtilsADS.swift in Sources */,
 				842D28B22DD1A2AB00F71811 /* RoundPageControl.swift in Sources */,
 				842D28B32DD1A2AB00F71811 /* AdsCell.swift in Sources */,
-				842D28B42DD1A2AB00F71811 /* InappController.swift in Sources */,
 				842D28B52DD1A2AB00F71811 /* UnderNativeController.swift in Sources */,
 				842D28B62DD1A2AB00F71811 /* InterstitialHelper.swift in Sources */,
 				842D28B72DD1A2AB00F71811 /* InterstitialAdManager.swift in Sources */,
@@ -1593,7 +1585,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FanNoise/App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Bedtime fan: white noise aid";
+				INFOPLIST_KEY_CFBundleDisplayName = "White noise aid";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "App need to accept your permission to collect and enhance user experience";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1634,7 +1626,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FanNoise/App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Bedtime fan: white noise aid";
+				INFOPLIST_KEY_CFBundleDisplayName = "White noise aid";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "App need to accept your permission to collect and enhance user experience";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

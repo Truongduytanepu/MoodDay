@@ -1,8 +1,10 @@
 import UIKit
+import AdjustSdk
 import Contacts
 import ContactsUI
 import EventKitUI
 import RxSwift
+import FirebaseAnalytics
 
 // MARK: - Key remote config Firebase
 class RemoteConfigKey: NSObject {
@@ -46,6 +48,21 @@ class UtilsADS: NSObject {
     func removePurchase(key: String) {
         let defaults = UserDefaults.standard
         return defaults.removeObject(forKey: key)
+    }
+    
+    func logEventCC(adFormat: String, revenue: Double) { // adFormat: collapsible, inter, app_open, native, reward, banner
+        Analytics.logEvent("ad_revenue_sdk", parameters: [
+          AnalyticsParameterAdFormat: adFormat,
+          AnalyticsParameterValue: revenue / 1_000_000,
+          AnalyticsParameterCurrency: "USD",
+        ])
+        logRevAdjust(revenue: revenue)
+    }
+    
+    func logRevAdjust(revenue: Double) {
+        guard let adRevenue = ADJAdRevenue(source: "admob_sdk") else { return }
+        adRevenue.setRevenue(revenue/1_000_000, currency: "USD")
+        Adjust.trackAdRevenue(adRevenue)
     }
     
     static let REVIEWURL = "itms-apps://itunes.apple.com/us/app/itunes-u/id%@?action=write-review"

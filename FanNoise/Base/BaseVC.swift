@@ -281,6 +281,10 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
             return
         }
         
+        appOpenAd.paidEventHandler = { adValue in
+            UtilsADS.shared.logEventCC(adFormat: "app_open", revenue:adValue.value.doubleValue)
+        }
+        
         appOpenAd.present(from: rootViewController)
     }
     

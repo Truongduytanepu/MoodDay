@@ -93,6 +93,10 @@ class NaturalSoundWhiteNoiseVC: BaseVC<NaturalSoundWhiteNoisePresenter, NaturalS
             self.bannerView.delegate = self
             self.bannerView.rootViewController = self
             self.bannerView.adUnitID = UtilsADS.keyBanner
+            self.bannerView.paidEventHandler = { adValue in
+                UtilsADS.shared.logEventCC(adFormat: "collapsible", revenue:adValue.value.doubleValue)
+            }
+            
             self.loadBannerAds()
         }
     }
@@ -169,7 +173,8 @@ extension NaturalSoundWhiteNoiseVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension NaturalSoundWhiteNoiseVC: BannerViewDelegate {
-    func bannerViewDidReceiveAd(_ bannerView: BannerView) {        self.bannerContainView.isHidden = false
+    func bannerViewDidReceiveAd(_ bannerView: BannerView) {
+        self.bannerContainView.isHidden = false
     }
 
     func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {

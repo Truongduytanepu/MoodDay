@@ -7,10 +7,6 @@
 
 import UIKit
 import GoogleMobileAds
-import AppTrackingTransparency
-import AdjustSdk
-import AdSupport
-import UserMessagingPlatform
 
 private struct Const {
     static let TimeInterval = 0.02
@@ -47,53 +43,14 @@ class SplashVC: UIViewController {
     // MARK: - Config
     private func config() {
         self.setupFont()
-        self.configEEA()
+        self.checkNetworkConnection()
+        self.startLoading()
     }
     
     private func setupFont() {
         self.loadingLabel.font = AppFont.font(.mPLUS2Regular, size: 9)
         self.titleLabel.font = AppFont.font(.mPLUS2Bold, size: 24)
         self.descriptionLabel.font = AppFont.font(.mPLUS2Regular, size: 13)
-    }
-    
-    private func requestPermissionATTracking() {
-        ATTrackingManager.requestTrackingAuthorization {[weak self] (status) in
-            guard let self = self else {return}
-            switch status {
-            case .denied, .notDetermined, .restricted:
-                DispatchQueue.main.async {
-                    self.checkNetworkConnection()
-                    self.startLoading()
-                    self.configAdj()
-                }
-                
-            case .authorized:
-                DispatchQueue.main.async {
-                    self.checkNetworkConnection()
-                    self.startLoading()
-                    self.configAdj(token: self.getDeviceIdentifier()?.uuidString ?? "96h0y7wnhmo0")
-                }
-                
-            @unknown default:
-                fatalError("Invalid authorization status")
-            }
-        }
-    }
-    
-    private func getDeviceIdentifier() -> UUID? {
-        // Lấy IDFA nếu được phép
-        if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
-            return ASIdentifierManager.shared().advertisingIdentifier
-        }
-        
-        // Fallback: IDFV + Keychain
-        return UIDevice.current.identifierForVendor
-    }
-    
-    private func configAdj(token: String = "96h0y7wnhmo0") {
-        let yourAppToken = token
-        let event = ADJEvent(eventToken: yourAppToken)
-        Adjust.trackEvent(event)
     }
     
     private func setupGradient() {
@@ -186,44 +143,6 @@ class SplashVC: UIViewController {
         }
     }
     
-    private func configEEA() {
-        let parameters = RequestParameters()
-        parameters.isTaggedForUnderAgeOfConsent = false
-        
-        ConsentInformation.shared.requestConsentInfoUpdate(
-            with: parameters,
-            completionHandler: { error in
-                if error != nil {
-                    self.requestPermissionATTracking()
-                } else {
-                    let formStatus = ConsentInformation.shared.formStatus
-                    if formStatus == FormStatus.available {
-                        self.loadForm()
-                    } else {
-                        self.requestPermissionATTracking()
-                    }
-                }
-            })
-    }
-    
-    func loadForm() {
-        ConsentForm.load(with: { form, loadError in
-            if loadError != nil {
-                self.requestPermissionATTracking()
-            } else {
-                if ConsentInformation.shared.consentStatus == ConsentStatus.required {
-                    form?.present(
-                        from: UIApplication.shared.getKeyWindow()?.rootViewController ?? self,
-                        completionHandler: { dismissError in
-                            self.requestPermissionATTracking()
-                        })
-                } else {
-                    self.requestPermissionATTracking()
-                }
-            }
-        })
-    }
-    
     private func loadAppOpenAd() {
         self.loadAdStartTime = Date()
         
@@ -253,6 +172,10 @@ class SplashVC: UIViewController {
               let rootViewController = UIApplication.shared.windows.first?.rootViewController else {
             self.navigateNextScreen()
             return
+        }
+        
+        appOpenAd.paidEventHandler = { adValue in
+            UtilsADS.shared.logEventCC(adFormat: "app_open", revenue:adValue.value.doubleValue)
         }
         
         appOpenAd.present(from: rootViewController)

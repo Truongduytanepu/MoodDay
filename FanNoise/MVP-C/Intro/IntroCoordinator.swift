@@ -18,7 +18,7 @@ class IntroCoordinator: Coordinator {
     func start() {
         if !started {
             started = true
-            let controller = IntroVC.factory()
+            let controller = IntroVC()
             controller.coordinator = self
             self.navigation?.pushViewController(controller, animated: true)
         }

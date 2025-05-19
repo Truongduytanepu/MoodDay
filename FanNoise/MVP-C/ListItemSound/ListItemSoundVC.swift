@@ -167,6 +167,10 @@ class ListItemSoundVC: BaseVC<ListItemSoundPresenter, ListItemSoundView> {
             self.bannerView.delegate = self
             self.bannerView.rootViewController = self
             self.bannerView.adUnitID = UtilsADS.keyBanner
+            self.bannerView.paidEventHandler = { adValue in
+                UtilsADS.shared.logEventCC(adFormat: "collapsible", revenue:adValue.value.doubleValue)
+            }
+            
             self.loadBannerAds()
         }
     }

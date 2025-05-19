@@ -18,7 +18,7 @@ private struct Const {
     static let shortHeightConstraintAds: CGFloat = 0
 }
 
-class IntroVC: BaseVC<IntroPresenter, IntroView> {
+class IntroVC: UIViewController {
     @IBOutlet private weak var nativeView: UIView!
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var titleLabel: UILabel!

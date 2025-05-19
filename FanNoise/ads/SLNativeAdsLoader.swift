@@ -50,6 +50,10 @@ extension SLNativeAdsLoader: NativeAdLoaderDelegate, NativeAdDelegate {
 
     func adLoader(_ adLoader: AdLoader, didReceive nativeAd: NativeAd) {
         self.nativeAds.append(nativeAd)
+        nativeAd.paidEventHandler = { adValue in
+            UtilsADS.shared.logEventCC(adFormat: "native", revenue:adValue.value.doubleValue)
+        }
+        
         delegate?.slNativeAdsLoader?(self, didReceive: nativeAd)
     }
 

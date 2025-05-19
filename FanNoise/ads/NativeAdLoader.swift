@@ -34,6 +34,10 @@ class NativeAdLoader: NSObject, AdLoaderDelegate, NativeAdLoaderDelegate {
     }
     
     func adLoader(_ adLoader: AdLoader, didReceive nativeAd: NativeAd) {
+        nativeAd.paidEventHandler = { adValue in
+            UtilsADS.shared.logEventCC(adFormat: "native", revenue:adValue.value.doubleValue)
+        }
+        
         self.nativeAds.append(nativeAd)
     }
     

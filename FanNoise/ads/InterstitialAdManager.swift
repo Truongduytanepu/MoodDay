@@ -44,6 +44,9 @@ class InterstitialAdManager: NSObject {
         self.adDismissedHandler = onDismiss
         do {
             try ad.canPresent(from: viewController)
+            ad.paidEventHandler = { adValue in
+                UtilsADS.shared.logEventCC(adFormat: "inter", revenue:adValue.value.doubleValue)
+            }
             ad.present(from: viewController)
         } catch {
             print("Failed to present interstitial ad: \(error.localizedDescription)")
