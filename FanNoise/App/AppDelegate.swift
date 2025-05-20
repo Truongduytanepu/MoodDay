@@ -56,7 +56,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             appToken: yourAppToken,
             environment: environment)
         adjustConfig?.enableSendingInBackground()
+        adjustConfig?.externalDeviceId = self.getDeviceIdentifier()
         Adjust.initSdk(adjustConfig)
+    }
+    
+    private func getDeviceIdentifier() -> String? {
+        // Lấy IDFA nếu được phép
+        if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
+            return ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        }
+        
+        // Fallback: IDFV + Keychain
+        return UIDevice.current.identifierForVendor?.uuidString
     }
     
     private func configEEA() {
