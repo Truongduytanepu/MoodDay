@@ -17,7 +17,7 @@ targets:
           - $(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)
     preBuildScripts:
       - name: SwiftLint
-        script: "${PODS_ROOT}/SwiftLint/swiftlint" lint
+        script: '"${PODS_ROOT}/SwiftLint/swiftlint" lint'
     settings:
       base:
         CODE_SIGN_IDENTITY: iPhone Developer
