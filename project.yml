@@ -1,0 +1,41 @@
+name: FanNoise
+options:
+  postGenCommand: pod install
+settings:
+  base:
+    OTHER_LDFLAGS:
+      - "-ld64"
+targets:
+  FanNoise:
+    deploymentTarget: '14.0'
+    platform: iOS
+    postBuildScripts:
+      - name: Firebase
+        script: '"${PODS_ROOT}/FirebaseCrashlytics/run"'
+        inputFiles:
+          - ${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}
+          - $(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)
+    preBuildScripts:
+      - name: SwiftLint
+        script: "${PODS_ROOT}/SwiftLint/swiftlint" lint
+    settings:
+      base:
+        CODE_SIGN_IDENTITY: iPhone Developer
+        CODE_SIGN_STYLE: Manual
+        DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+        ENABLE_BITCODE: 'NO'
+        INFOPLIST_FILE: FanNoise/App/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.solar.FanNoise
+        PROVISIONING_PROFILE_SPECIFIER: Solar dev
+        SWIFT_VERSION: 5
+        TARGETED_DEVICE_FAMILY: 1
+      configs:
+        debug:
+          DEVELOPMENT_TEAM: 4ND3FKVSPM
+          PRODUCT_BUNDLE_IDENTIFIER: com.solar.FanNoise
+          PROVISIONING_PROFILE_SPECIFIER: Solar dev
+    sources:
+      - path: FanNoise
+        createIntermediateGroups: true
+    type: application
+
