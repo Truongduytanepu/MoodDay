@@ -176,7 +176,6 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
                 
                 RemoteConfigHelper.shared.getRemoteConfigWithKey(key: RemoteConfigKey.keyIsOnNativeFull) { isOn in
                     if isOn {
-                        UserDefaults.standard.setValue(now, forKey: "showingAdsLastTime")
                         let underNativeController = UnderNativeController()
                         underNativeController.modalTransitionStyle = .crossDissolve
                         underNativeController.modalPresentationStyle = .overFullScreen
@@ -190,7 +189,6 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
                             if !isOn {
                                 adsBlock()
                             } else {
-                                UserDefaults.standard.setValue(now, forKey: "showingAdsLastTime")
                                 let underNativeController = UnderNativeController()
                                 underNativeController.modalTransitionStyle = .crossDissolve
                                 underNativeController.modalPresentationStyle = .overFullScreen

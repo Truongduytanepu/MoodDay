@@ -96,6 +96,7 @@ class UnderNativeController: UIViewController {
     }
     
     @objc private func cancelNativeButtonDidTap(_ sender: UIButton) {
+        UserDefaults.standard.setValue(Date().timeIntervalSince1970, forKey: "showingAdsLastTime")
         UtilsADS.shared.isShowAds = false
         self.dismiss(animated: true)
     }
@@ -180,6 +181,7 @@ class UnderNativeController: UIViewController {
             self.dismissLoadingView()
             InterstitialHelper().showAdsNow(viewController: self) {
                 adsBlock()
+                UserDefaults.standard.setValue(Date().timeIntervalSince1970, forKey: "showingAdsLastTime")
                 UtilsADS.shared.isShowAds = false
                 self.dismiss(animated: true)
             }
