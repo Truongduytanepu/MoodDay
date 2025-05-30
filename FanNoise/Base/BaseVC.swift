@@ -19,7 +19,6 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
     public var isPresentAOA: Bool = false
     
     private var loadingView: UIView!
-    private var indicatorView: UIActivityIndicatorView!
     private var titleLabel: UILabel!
     private var loadingIcon: UIImageView!
     
@@ -334,8 +333,6 @@ class BaseVC<Presenter, View>: UIViewController, BaseView, FullScreenContentDele
         let request = Request()
         AppOpenAd.load(with: UtilsADS.keyAoaResume, request: request) { [weak self] ad, error in
             guard let self = self else { return }
-            
-            self.indicatorView.stopAnimating()
             
             if let error = error {
                 print("🔴 Failed to load AOA: \(error.localizedDescription)")
