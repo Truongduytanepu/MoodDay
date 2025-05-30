@@ -11,8 +11,8 @@ import GoogleMobileAds
 class UnderNativeController: UIViewController {
     
     private var loadingView: UIView!
-    private var indicatorView: UIActivityIndicatorView!
     private var titleLabel: UILabel!
+    private var loadingIcon: UIImageView!
     
     private var nativeAdLoader = NativeAdLoader()
     private var gadNativeAdView: NativeAdView!
@@ -43,27 +43,78 @@ class UnderNativeController: UIViewController {
         self.view.addSubview(self.loadingView)
         self.loadingView.fitSuperviewConstraint()
         
+        let loadingBGImageView = UIImageView(image: UIImage(named: "bg_splash"))
+        loadingBGImageView.backgroundColor = .clear
+        loadingBGImageView.contentMode = .scaleAspectFill
+        loadingBGImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingView.addSubview(loadingBGImageView)
+        loadingBGImageView.fitSuperviewConstraint()
+        
         self.titleLabel = UILabel()
         self.titleLabel.text = "Welcome back"
-        self.titleLabel.textColor = .black
-        self.titleLabel.font = AppFont.font(.mPLUS2Bold, size: 35)
+        self.titleLabel.textColor = UIColor(rgb: 0x007AFF)
+        self.titleLabel.font = AppFont.font(.mPLUS2Bold, size: 20)
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         self.loadingView.addSubview(self.titleLabel)
         NSLayoutConstraint.activate([
             self.titleLabel.centerXAnchor.constraint(equalTo: self.loadingView.centerXAnchor),
-            self.titleLabel.centerYAnchor.constraint(equalTo: self.loadingView.centerYAnchor)
+            self.titleLabel.bottomAnchor.constraint(equalTo: self.loadingView.bottomAnchor, constant: -40)
         ])
         
-        self.indicatorView = UIActivityIndicatorView()
-        self.indicatorView.color = .black
-        self.indicatorView.style = .large
-        self.indicatorView.translatesAutoresizingMaskIntoConstraints = false
-        self.loadingView.addSubview(self.indicatorView)
+        self.loadingIcon = UIImageView(image: UIImage(named: "ic_loading_splash"))
+        self.loadingIcon.backgroundColor = .clear
+        self.loadingIcon.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingView.addSubview(self.loadingIcon)
         NSLayoutConstraint.activate([
-            self.indicatorView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 20),
-            self.indicatorView.centerXAnchor.constraint(equalTo: self.loadingView.centerXAnchor),
-            self.indicatorView.widthAnchor.constraint(equalToConstant: 40),
-            self.indicatorView.heightAnchor.constraint(equalToConstant: 40)
+            self.loadingIcon.bottomAnchor.constraint(equalTo: self.titleLabel.topAnchor, constant: -10),
+            self.loadingIcon.centerXAnchor.constraint(equalTo: self.loadingView.centerXAnchor),
+            self.loadingIcon.widthAnchor.constraint(equalToConstant: 32),
+            self.loadingIcon.heightAnchor.constraint(equalToConstant: 32)
+        ])
+        
+        let loadingLogo = UIImageView(image: UIImage(named: "ic_splash_logo"))
+        loadingLogo.backgroundColor = .clear
+        loadingLogo.contentMode = .scaleAspectFit
+        loadingLogo.translatesAutoresizingMaskIntoConstraints = false
+        loadingLogo.cornerRadius = 29
+        self.loadingView.addSubview(loadingLogo)
+
+        NSLayoutConstraint.activate([
+            loadingLogo.topAnchor.constraint(equalTo: self.loadingView.safeAreaLayoutGuide.topAnchor, constant: 270),
+            loadingLogo.centerXAnchor.constraint(equalTo: self.loadingView.centerXAnchor),
+            loadingLogo.widthAnchor.constraint(equalToConstant: 100),
+            loadingLogo.heightAnchor.constraint(equalToConstant: 100)
+        ])
+        
+        let subTitleLabel = UILabel()
+        subTitleLabel.text = "Bedtime fan: white noise aid"
+        subTitleLabel.textColor = .black
+        subTitleLabel.font = AppFont.font(.mPLUS2Bold, size: 24)
+        subTitleLabel.textAlignment = .center
+        subTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingView.addSubview(subTitleLabel)
+
+        NSLayoutConstraint.activate([
+            subTitleLabel.topAnchor.constraint(equalTo: loadingLogo.bottomAnchor, constant: 38),
+            subTitleLabel.leadingAnchor.constraint(equalTo: self.loadingView.leadingAnchor, constant: 0),
+            subTitleLabel.trailingAnchor.constraint(equalTo: self.loadingView.trailingAnchor, constant: 0),
+            subTitleLabel.centerXAnchor.constraint(equalTo: self.loadingView.centerXAnchor)
+        ])
+
+        let descLabel = UILabel()
+        descLabel.text = "Sleep deeper, dream better with the soothing sound of fans!"
+        descLabel.textColor = .black
+        descLabel.font = AppFont.font(.mPLUS2Regular, size: 13)
+        descLabel.textAlignment = .center
+        descLabel.numberOfLines = 0
+        descLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.loadingView.addSubview(descLabel)
+
+        NSLayoutConstraint.activate([
+            descLabel.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 8),
+            descLabel.leadingAnchor.constraint(equalTo: self.loadingView.leadingAnchor, constant: 85),
+            descLabel.trailingAnchor.constraint(equalTo: self.loadingView.trailingAnchor, constant: -85),
+            descLabel.centerXAnchor.constraint(equalTo: self.loadingView.centerXAnchor)
         ])
     }
     
@@ -138,16 +189,40 @@ class UnderNativeController: UIViewController {
         self.titleLabel.text = title
         self.view.bringSubviewToFront(self.loadingView)
         self.loadingView.alpha = 1
-        self.indicatorView.startAnimating()
+        
+        DispatchQueue.main.async {
+            self.startLoadingAnimation()
+        }
     }
     
     private func dismissLoadingView() {
-        self.indicatorView.stopAnimating()
         self.loadingView.alpha = 0
     }
     
     private func showNativeAdsView() {
         self.nativeAdsView.alpha = 1
+    }
+    
+    private func startLoadingAnimation() {
+        UIView.animateKeyframes(withDuration: 1, delay: 0, options: [.repeat]) { [weak self] in
+            guard let self else { return }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.25) {
+                self.loadingIcon.transform = CGAffineTransform(rotationAngle: .pi / 2)
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.25) {
+                self.loadingIcon.transform = CGAffineTransform(rotationAngle: .pi)
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.25) {
+                self.loadingIcon.transform = CGAffineTransform(rotationAngle: .pi / 2 * 3)
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.25) {
+                self.loadingIcon.transform = CGAffineTransform(rotationAngle: .pi * 2)
+            }
+        }
     }
     
     // MARK: - Inter And Native Full Ads

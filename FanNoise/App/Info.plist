@@ -491,5 +491,7 @@
         <false/>
         <key>UIViewControllerBasedStatusBarAppearance</key>
         <true/>
+        <key>NSUserTrackingUsageDescription</key>
+        <string>This app requires tracking permission to deliver personalized ads.</string>
 </dict>
 </plist>
